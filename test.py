@@ -67,7 +67,7 @@ while running:
         pygame.time.wait(2000)
         screen.blit(bg, (0, 0))
         flag_switch = False
-
+    screen.blit(bg, (0, 0))
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
