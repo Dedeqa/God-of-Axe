@@ -2,8 +2,6 @@ import pygame
 
 pygame.init()
 
-
-
 WIDTH = 700
 HEIGHT = 500
 FPS = 10
@@ -23,7 +21,7 @@ icon = pygame.image.load('images/icon_axe.png').convert_alpha()
 
 my_font = pygame.font.Font('fonts/Jfwildwood-ldYZ.ttf', 90)
 
-#------------- Меню -------------
+# ------------- Меню -------------
 play = pygame.image.load('images/play.jpg').convert_alpha()
 active_play = pygame.image.load('images/play_active.jpg').convert_alpha()
 options = pygame.image.load('images/options.jpg').convert_alpha()
@@ -33,22 +31,23 @@ active_quite = pygame.image.load('images/quite_active.jpg').convert_alpha()
 
 menu_bg = pygame.image.load('images/bg_6.jpg').convert_alpha()
 menu_title = my_font.render("God of Axe", True, (224, 153, 9))
-#--------------------------------
+# --------------------------------
 
 pygame.display.set_icon(icon)
-
 
 
 class Button:
     flag = False
     """класс кнопок меню"""
+
     def __init__(self, screen, y, btn_type):
         """инициализация кнопки"""
         self.screen = screen
         mouse = pygame.mouse.get_pos()
         click = pygame.mouse.get_pressed()
 
-        if (current_size[0] // 2 - 111 <= mouse[0] <= current_size[0] // 2 + 111) and (y <= mouse[1] <= y + 96) and (click[0] == True):
+        if (current_size[0] // 2 - 111 <= mouse[0] <= current_size[0] // 2 + 111) and (y <= mouse[1] <= y + 96) and (
+                click[0] == True):
             file = f"images/{btn_type}_active.jpg"
             self.flag = True
             y += 12
@@ -68,8 +67,6 @@ class Button:
             self.music = pygame.mixer.Sound('Music/tick.mp3')
         else:
             screen.blit(self.image, self.rect)
-
-
 
 
 running = True
