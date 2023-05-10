@@ -1,5 +1,6 @@
 import pygame
-
+import config
+import func
 pygame.init()
 
 WIDTH = 700
@@ -73,31 +74,31 @@ running = True
 is_menu = True
 
 
-def quite_game():
-    global running, is_menu
-    running = False
-    is_menu = False
+# def quite_game():
+#     global running, is_menu
+#     running = False
+#     is_menu = False
 
 
 def start_game():
     global running, screen, is_menu
     is_menu = False
-    while running:
+    while config.running:
         clock.tick(FPS)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                running = False
+                config.running = False
                 quit()
 
         pygame.display.flip()
 
 
-while is_menu:
+while config.is_menu:
 
     clock.tick(FPS)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            running = False
+            config.running = False
             quit()
 
     screen.blit(menu_bg, (0, 0))
@@ -106,6 +107,6 @@ while is_menu:
     Play.draw()
     Options = Button(screen, 420, "options", None)
     Options.draw()
-    Quite = Button(screen, 540, "quite", quite_game)
+    Quite = Button(screen, 540, "quite", func.quite_game)
     Quite.draw()
     pygame.display.flip()
