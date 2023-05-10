@@ -3,6 +3,7 @@ import pygame
 pygame.init()
 
 
+
 WIDTH = 700
 HEIGHT = 500
 FPS = 10
