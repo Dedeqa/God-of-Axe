@@ -2,7 +2,6 @@ import pygame
 
 pygame.init()
 
-
 WIDTH = 700
 HEIGHT = 500
 FPS = 60
@@ -41,7 +40,7 @@ class Button:
     flag = False
     """класс кнопок меню"""
 
-    def __init__(self, screen, y, btn_type):
+    def __init__(self, screen, y, btn_type, action=None):
         """инициализация кнопки"""
         self.screen = screen
         mouse = pygame.mouse.get_pos()
@@ -50,7 +49,7 @@ class Button:
         if (current_size[0] // 2 - 111 <= mouse[0] <= current_size[0] // 2 + 111) and (y <= mouse[1] <= y + 96) and (
                 click[0] == True):
             file = f"images/{btn_type}_active.jpg"
-            self.flag = True
+            action()
             y += 12
         else:
             file = f"images/{btn_type}.jpg"
@@ -73,12 +72,42 @@ class Button:
 running = True
 is_menu = True
 
-while running:
+
+def quite_game():
+    global running, is_menu
+    running = False
+    is_menu = False
+
+
+def start_game():
+    global running, is_fullscreen, current_size, last_size, screen
+    while running:
+        clock.tick(FPS)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+                quit()
+            elif event.type == pygame.VIDEORESIZE:
+                current_size = event.size
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_F10:
+                    is_fullscreen = not is_fullscreen
+                    if is_fullscreen:
+                        last_size = current_size
+                        current_size = FULLSCREEN_SIZE
+                        screen = pygame.display.set_mode(current_size, pygame.FULLSCREEN)
+                    else:
+                        current_size = last_size
+                        screen = pygame.display.set_mode(current_size, pygame.RESIZABLE)
+
+        pygame.display.flip()
+
+
+while is_menu:
     clock.tick(FPS)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-            print(current_size)
             quit()
         elif event.type == pygame.VIDEORESIZE:
             current_size = event.size
@@ -92,16 +121,12 @@ while running:
                 else:
                     current_size = last_size
                     screen = pygame.display.set_mode(current_size, pygame.RESIZABLE)
-
-    if is_menu:
-        screen.blit(menu_bg, (0, 0))
-        screen.blit(menu_title, (650, 80))
-        Play = Button(screen, 300, "play")
-
-        Play.draw()
-        Options = Button(screen, 420, "options")
-        Options.draw()
-        Quite = Button(screen, 540, "quite")
-        Quite.draw()
-
+    screen.blit(menu_bg, (0, 0))
+    screen.blit(menu_title, (650, 80))
+    Play = Button(screen, 300, "play", start_game)
+    Play.draw()
+    Options = Button(screen, 420, "options", action=None)
+    Options.draw()
+    Quite = Button(screen, 540, "quite", quite_game)
+    Quite.draw()
     pygame.display.flip()
