@@ -9,9 +9,8 @@ FPS = 60
 info = pygame.display.Info()
 
 FULLSCREEN_SIZE = (info.current_w, info.current_h)
-is_fullscreen = False
 
-screen = pygame.display.set_mode((WIDTH, HEIGHT), pygame.RESIZABLE)
+screen = pygame.display.set_mode(FULLSCREEN_SIZE)
 current_size = screen.get_size()
 last_size = current_size
 
@@ -49,8 +48,9 @@ class Button:
         if (current_size[0] // 2 - 111 <= mouse[0] <= current_size[0] // 2 + 111) and (y <= mouse[1] <= y + 96) and (
                 click[0] == True):
             file = f"images/{btn_type}_active.jpg"
-            action()
             y += 12
+            action()
+
         else:
             file = f"images/{btn_type}.jpg"
 
@@ -80,7 +80,8 @@ def quite_game():
 
 
 def start_game():
-    global running, is_fullscreen, current_size, last_size, screen
+    global running, is_fullscreen, current_size, last_size, screen, is_menu
+    is_menu = False
     while running:
         clock.tick(FPS)
         for event in pygame.event.get():
@@ -104,6 +105,7 @@ def start_game():
 
 
 while is_menu:
+
     clock.tick(FPS)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -111,21 +113,12 @@ while is_menu:
             quit()
         elif event.type == pygame.VIDEORESIZE:
             current_size = event.size
-        elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_F10:
-                is_fullscreen = not is_fullscreen
-                if is_fullscreen:
-                    last_size = current_size
-                    current_size = FULLSCREEN_SIZE
-                    screen = pygame.display.set_mode(current_size, pygame.FULLSCREEN)
-                else:
-                    current_size = last_size
-                    screen = pygame.display.set_mode(current_size, pygame.RESIZABLE)
+
     screen.blit(menu_bg, (0, 0))
     screen.blit(menu_title, (650, 80))
     Play = Button(screen, 300, "play", start_game)
     Play.draw()
-    Options = Button(screen, 420, "options", action=None)
+    Options = Button(screen, 420, "options", None)
     Options.draw()
     Quite = Button(screen, 540, "quite", quite_game)
     Quite.draw()
