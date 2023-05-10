@@ -11,3 +11,4 @@ last_size = current_size
 info = pygame.display.Info()
 FULLSCREEN_SIZE = (info.current_w, info.current_h)
 screen = pygame.display.set_mode(FULLSCREEN_SIZE)
+clock = pygame.time.Clock()

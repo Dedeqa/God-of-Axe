@@ -68,28 +68,6 @@ class Button:
             screen.blit(self.image, self.rect)
 
 
-
-
-
-# def quite_game():
-#     global running, is_menu
-#     running = False
-#     is_menu = False
-
-
-def start_game():
-    global running, screen, is_menu
-    config.is_menu = False
-    while config.running:
-        clock.tick(FPS)
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                config.running = False
-                quit()
-
-        pygame.display.flip()
-
-
 while config.is_menu:
 
     clock.tick(FPS)
@@ -100,7 +78,7 @@ while config.is_menu:
 
     screen.blit(menu_bg, (0, 0))
     screen.blit(menu_title, (650, 80))
-    Play = Button(screen, 300, "play", start_game)
+    Play = Button(screen, 300, "play", func.start_game)
     Play.draw()
     Options = Button(screen, 420, "options", None)
     Options.draw()
