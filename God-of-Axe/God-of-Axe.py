@@ -80,7 +80,7 @@ def quite_game():
 
 
 def start_game():
-    global running, is_fullscreen, current_size, last_size, screen, is_menu
+    global running, screen, is_menu
     is_menu = False
     while running:
         clock.tick(FPS)
@@ -88,18 +88,6 @@ def start_game():
             if event.type == pygame.QUIT:
                 running = False
                 quit()
-            elif event.type == pygame.VIDEORESIZE:
-                current_size = event.size
-            elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_F10:
-                    is_fullscreen = not is_fullscreen
-                    if is_fullscreen:
-                        last_size = current_size
-                        current_size = FULLSCREEN_SIZE
-                        screen = pygame.display.set_mode(current_size, pygame.FULLSCREEN)
-                    else:
-                        current_size = last_size
-                        screen = pygame.display.set_mode(current_size, pygame.RESIZABLE)
 
         pygame.display.flip()
 
@@ -111,8 +99,6 @@ while is_menu:
         if event.type == pygame.QUIT:
             running = False
             quit()
-        elif event.type == pygame.VIDEORESIZE:
-            current_size = event.size
 
     screen.blit(menu_bg, (0, 0))
     screen.blit(menu_title, (650, 80))
