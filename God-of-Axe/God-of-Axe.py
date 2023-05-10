@@ -5,7 +5,7 @@ pygame.init()
 
 WIDTH = 700
 HEIGHT = 500
-FPS = 10
+FPS = 60
 
 info = pygame.display.Info()
 
@@ -30,7 +30,7 @@ active_options = pygame.image.load('images/options_active.jpg').convert_alpha()
 quite = pygame.image.load('images/quite.jpg').convert_alpha()
 active_quite = pygame.image.load('images/quite_active.jpg').convert_alpha()
 
-menu_bg = pygame.image.load('images/bg_6.jpg').convert_alpha()
+menu_bg = pygame.image.load('images/final_bg_menu.jpg').convert_alpha()
 menu_title = my_font.render("God of Axe", True, (224, 153, 9))
 # --------------------------------
 
@@ -78,6 +78,7 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+            print(current_size)
             quit()
         elif event.type == pygame.VIDEORESIZE:
             current_size = event.size
@@ -94,13 +95,13 @@ while running:
 
     if is_menu:
         screen.blit(menu_bg, (0, 0))
-        screen.blit(menu_title, (440, 20))
-        Play = Button(screen, 200, "play")
+        screen.blit(menu_title, (650, 80))
+        Play = Button(screen, 300, "play")
 
         Play.draw()
-        Options = Button(screen, 320, "options")
+        Options = Button(screen, 420, "options")
         Options.draw()
-        Quite = Button(screen, 440, "quite")
+        Quite = Button(screen, 540, "quite")
         Quite.draw()
 
     pygame.display.flip()
