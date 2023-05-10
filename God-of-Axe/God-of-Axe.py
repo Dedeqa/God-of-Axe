@@ -3,14 +3,12 @@ import config
 import func
 pygame.init()
 
-WIDTH = 700
-HEIGHT = 500
+
 FPS = 60
-
 info = pygame.display.Info()
-
 FULLSCREEN_SIZE = (info.current_w, info.current_h)
 
+print(info)
 screen = pygame.display.set_mode(FULLSCREEN_SIZE)
 current_size = screen.get_size()
 last_size = current_size
@@ -70,8 +68,7 @@ class Button:
             screen.blit(self.image, self.rect)
 
 
-running = True
-is_menu = True
+
 
 
 # def quite_game():
@@ -82,7 +79,7 @@ is_menu = True
 
 def start_game():
     global running, screen, is_menu
-    is_menu = False
+    config.is_menu = False
     while config.running:
         clock.tick(FPS)
         for event in pygame.event.get():
