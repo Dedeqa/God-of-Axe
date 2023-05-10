@@ -15,6 +15,7 @@ screen = pygame.display.set_mode((WIDTH, HEIGHT), pygame.RESIZABLE)
 current_size = screen.get_size()
 last_size = current_size
 
+
 pygame.display.set_caption("God of Axe")
 clock = pygame.time.Clock()
 icon = pygame.image.load('images/icon_axe.png').convert_alpha()
