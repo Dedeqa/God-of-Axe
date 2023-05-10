@@ -21,6 +21,7 @@ icon = pygame.image.load('images/icon_axe.png').convert_alpha()
 
 my_font = pygame.font.Font('fonts/Jfwildwood-ldYZ.ttf', 90)
 
+
 #------------- Меню -------------
 play = pygame.image.load('images/play.jpg').convert_alpha()
 active_play = pygame.image.load('images/play_active.jpg').convert_alpha()
