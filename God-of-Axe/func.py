@@ -57,6 +57,7 @@ def menu():
         else:
             config.screen.blit(config.play_transform, config.play_rect)
 
+
         if (config.options_rect.left <= mouse[0] <= config.options_rect.right) and (
                 config.options_rect.top <= mouse[1] <= config.options_rect.bottom) and click[0]:
             if start2 > 2:
