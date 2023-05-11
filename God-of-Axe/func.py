@@ -18,7 +18,7 @@ def start_game():
 
 
 def menu():
-    music = pygame.mixer.Sound(r'Music\tick.mp3')
+    music = pygame.mixer.Sound(r'Music\zipclick.flac')
     start1, start2, start3 = 0, 0, 0
     while True:
         mouse = pygame.mouse.get_pos()
