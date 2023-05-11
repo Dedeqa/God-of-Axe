@@ -1,5 +1,6 @@
 import pygame
 import func
+import config
 
 pygame.init()
 
@@ -14,6 +15,6 @@ pygame.display.set_caption("God of Axe")
 
 # ---------------------------- Иконка игры -----------------------------
 
-pygame.display.set_icon(icon)
+pygame.display.set_icon(config.icon)
 
 func.menu()
