@@ -60,7 +60,7 @@ music_label_rect = music_label.get_rect()
 music_label_rect.center = (size[0] // 2, 300)
 
 # Scale1 (шкала громкости музыки) -----------------------------------------------------------------
-scale1 = pygame.image.load('Images/Scale1.png')
+scale1 = pygame.image.load('Images/scale1.png')
 scale1_rect = scale1.get_rect()
 scale1_rect.center = (size[0] // 2, 360)
 
@@ -70,9 +70,19 @@ sounds_label_rect = sounds_label.get_rect()
 sounds_label_rect.center = (size[0] // 2, 420)
 
 # Scale2 (шкала громкости звуков) -----------------------------------------------------------------
-scale2 = pygame.image.load('Images/Scale2.png')
+scale2 = pygame.image.load('Images/scale2.png')
 scale2_rect = scale2.get_rect()
 scale2_rect.center = (size[0] // 2, 480)
+
+# Point1 (ползунок изменения громкости музыки) ----------------------------------------------------
+point1 = pygame.image.load('Images/point1.png')
+point1_rect = point1.get_rect()
+point1_rect.center = (scale1_rect.right, scale1_rect.centery)
+
+# Point2 (ползунок изменения громкости звуков) ----------------------------------------------------
+point2 = pygame.image.load('Images/point2.png')
+point2_rect = point2.get_rect()
+point2_rect.center = (scale2_rect.right, scale2_rect.centery)
 
 # -------------------------------------------------------------------------------------------------
 # Установка шрифта --------------------------------------------------------------------------------
@@ -89,11 +99,14 @@ menu_title_rect.bottomleft = (0, size[1])
 
 # Фоновая музыка для меню -------------------------------------------------------------------------
 pygame.mixer.music.load(
-    r'Music/Piano Fantasia - Song for Denise (Wide Walking Extended Version) (mp3cut.net).mp3')
+    r'Music/Piano Fantasia - Song for Denise (Wide Walking Extended Version).mp3')
 
 # Фоновая музыка для игры -------------------------------------------------------------------------
-play_music = pygame.mixer.Sound(r'Music/Bad Piggies Theme - Piano Tutorial (256  kbps).mp3')
+play_music = pygame.mixer.Sound(r'Music/Bad Piggies Theme - Piano Tutorial.mp3')
 
 # Звук нажатия кнопок меню ------------------------------------------------------------------------
 click = pygame.mixer.Sound(r'Music\zipclick.flac')
-click.set_volume(0.3)
+
+
+volume_music = 1.0
+volume_sounds = 1.0

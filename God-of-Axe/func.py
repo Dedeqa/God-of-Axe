@@ -6,7 +6,7 @@ pygame.mixer.pre_init(44100, -16, 1, 512)
 
 
 def start_game():
-    config.play_music.set_volume(0.009)
+    config.play_music.set_volume(config.volume)
     config.play_music.play(-1)
     while True:
         config.clock.tick(config.FPS)
@@ -25,7 +25,6 @@ def start_game():
 
 def menu():
     if config.menu_flag:
-        pygame.mixer.music.set_volume(0.07)
         pygame.mixer.music.play(-1)
         config.menu_flag = False
 
@@ -87,11 +86,12 @@ def menu():
 
 
 def options():
+    FPS = 120
     while True:
         mouse = pygame.mouse.get_pos()
         click = pygame.mouse.get_pressed()
 
-        config.clock.tick(config.FPS)
+        config.clock.tick(FPS)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 quit()
@@ -100,6 +100,17 @@ def options():
                     config.play_music.stop()
                     pygame.mixer.music.unpause()
                     menu()
+            if click[0] and (config.point1_rect.collidepoint(mouse[0], mouse[1])) and (
+                    config.scale1_rect.left <= mouse[0] <= config.scale1_rect.right):
+                config.point1_rect.center = (mouse[0], config.scale1_rect.centery)
+                config.volume_music = 0.01 * ((config.point1_rect.centerx - config.scale1_rect.left) / 3)
+                pygame.mixer.music.set_volume(config.volume_music)
+
+            if click[0] and (config.point2_rect.collidepoint(mouse[0], mouse[1])) and (
+                    config.scale2_rect.left <= mouse[0] <= config.scale2_rect.right):
+                config.point2_rect.center = (mouse[0], config.scale2_rect.centery)
+                config.volume_sounds = 0.01 * ((config.point2_rect.centerx - config.scale2_rect.left) / 3)
+                config.click.set_volume(config.volume_sounds)
 
         config.screen.blit(config.menu_bg, (0, 0))
         config.screen.blit(config.menu_title, config.menu_title_rect)
@@ -108,5 +119,7 @@ def options():
         config.screen.blit(config.scale1, config.scale1_rect)
         config.screen.blit(config.sounds_label, config.sounds_label_rect)
         config.screen.blit(config.scale2, config.scale2_rect)
+        config.screen.blit(config.point1, config.point1_rect)
+        config.screen.blit(config.point2, config.point2_rect)
 
         pygame.display.flip()
