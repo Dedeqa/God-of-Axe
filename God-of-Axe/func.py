@@ -1,5 +1,6 @@
 import config
 import pygame
+import time
 
 
 def quite_game():
@@ -29,7 +30,7 @@ def start_game():
 def menu():
     is_menu = True
 
-    # music = pygame.mixer.Sound(r'Music\tick.mp3')
+    music = pygame.mixer.Sound(r'Music\tick.mp3')
     start1, start2, start3 = 0, 0, 0
     while is_menu:
         mouse = pygame.mouse.get_pos()
@@ -49,10 +50,12 @@ def menu():
                 click[0]:
 
             config.screen.blit(config.active_play_transform, config.active_play_rect)
+
             if start1 > 3:
+                music.play()
                 start1 = 0
+                time.sleep(0.2)
                 start_game()
-                # music.play()
             start1 += 1
 
         else:
@@ -61,8 +64,9 @@ def menu():
         if (config.options_rect.left <= mouse[0] <= config.options_rect.right) and (
                 config.options_rect.top <= mouse[1] <= config.options_rect.bottom) and click[0]:
             if start2 > 3:
+                music.play()
                 start2 = 0
-                # music.play()
+                time.sleep(0.2)
             start2 += 1
             config.screen.blit(config.active_options, config.active_options_rect)
 
@@ -74,7 +78,9 @@ def menu():
                 click[0]:
             config.screen.blit(config.active_quite, config.active_quite_rect)
             if start3 > 3:
+                music.play()
                 start3 = 0
+                time.sleep(0.2)
                 quite_game()
             start3 += 1
         else:

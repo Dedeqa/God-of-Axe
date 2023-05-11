@@ -39,7 +39,7 @@ quite = pygame.image.load('Images/quite.jpg').convert_alpha()
 quite_rect = quite.get_rect()
 quite_rect.center = (size[0] // 2, 476)
 
-active_quite = pygame.image.load('Images/quite.jpg').convert_alpha()
+active_quite = pygame.image.load('Images/quite_active.jpg').convert_alpha()
 active_quite_rect = active_quite.get_rect()
 active_quite_rect.center = (size[0] // 2, 482)
 
