@@ -10,36 +10,29 @@ def quite_game():
 
 
 def start_game():
-    config.is_menu = False
-    while config.running:
+    while True:
         config.clock.tick(config.FPS)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                config.running = False
                 quit()
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     menu()
-                    config.running = False
-                    print("ESC")
 
         config.screen.fill((255, 22, 123))
         pygame.display.flip()
 
 
 def menu():
-    is_menu = True
-
     music = pygame.mixer.Sound(r'Music\tick.mp3')
     start1, start2, start3 = 0, 0, 0
-    while is_menu:
+    while True:
         mouse = pygame.mouse.get_pos()
         click = pygame.mouse.get_pressed()
 
         config.clock.tick(config.FPS)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                config.running = False
                 quit()
 
         config.screen.blit(config.menu_bg, (0, 0))
@@ -51,7 +44,7 @@ def menu():
 
             config.screen.blit(config.active_play_transform, config.active_play_rect)
 
-            if start1 > 3:
+            if start1 > 2:
                 music.play()
                 start1 = 0
                 time.sleep(0.2)
@@ -63,7 +56,7 @@ def menu():
 
         if (config.options_rect.left <= mouse[0] <= config.options_rect.right) and (
                 config.options_rect.top <= mouse[1] <= config.options_rect.bottom) and click[0]:
-            if start2 > 3:
+            if start2 > 2:
                 music.play()
                 start2 = 0
                 time.sleep(0.2)
@@ -77,7 +70,7 @@ def menu():
                 config.quite_rect.top <= mouse[1] <= config.quite_rect.bottom) and \
                 click[0]:
             config.screen.blit(config.active_quite, config.active_quite_rect)
-            if start3 > 3:
+            if start3 > 2:
                 music.play()
                 start3 = 0
                 time.sleep(0.2)
@@ -86,6 +79,3 @@ def menu():
         else:
             config.screen.blit(config.quite, config.quite_rect)
         pygame.display.flip()
-
-
-menu()
