@@ -1,6 +1,7 @@
-
 import config
 import pygame
+
+
 def quite_game():
     config.running = False
     config.is_menu = False
@@ -15,7 +16,5 @@ def start_game():
                 config.running = False
                 quit()
 
+
         pygame.display.flip()
-
-
-
