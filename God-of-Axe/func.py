@@ -15,7 +15,7 @@ def start_game():
                 if event.key == pygame.K_ESCAPE:
                     menu()
 
-        config.screen.fill((255, 22, 123))
+        config.screen.blit(config.game_bg, (0, 0))
         pygame.display.flip()
 
 

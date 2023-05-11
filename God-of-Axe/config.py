@@ -53,6 +53,8 @@ my_font = pygame.font.Font('Fonts/Jfwildwood-ldYZ.ttf', 100)
 # Фон меню ----------------------------------------------------------------------------------------
 menu_bg = pygame.image.load('Images/bg_menu.jpg').convert_alpha()
 
+
+game_bg = pygame.image.load('Images/game_field.png').convert_alpha()
 # Надпись God of Axe в Меню -----------------------------------------------------------------------
 menu_title = my_font.render("God of Axe", True, (224, 153, 9))
 menu_title_rect = menu_title.get_rect()
