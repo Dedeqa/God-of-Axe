@@ -6,6 +6,8 @@ pygame.mixer.pre_init(44100, -16, 1, 512)
 
 
 def start_game():
+    config.play_music.set_volume(0.009)
+    config.play_music.play(-1)
     while True:
         config.clock.tick(config.FPS)
         for event in pygame.event.get():
@@ -13,6 +15,8 @@ def start_game():
                 quit()
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
+                    config.play_music.stop()
+                    pygame.mixer.music.unpause()
                     menu()
 
         config.screen.blit(config.game_bg, (0, 0))
@@ -20,8 +24,11 @@ def start_game():
 
 
 def menu():
-    pygame.mixer.music.set_volume(0.07)
-    pygame.mixer.music.play(-1)
+    if config.menu_flag:
+        pygame.mixer.music.set_volume(0.07)
+        pygame.mixer.music.play(-1)
+        config.menu_flag = False
+
     start1, start2, start3 = 0, 0, 0
     while True:
         mouse = pygame.mouse.get_pos()
@@ -40,7 +47,7 @@ def menu():
                 click[0]:
 
             config.screen.blit(config.active_play_transform, config.active_play_rect)
-
+            pygame.mixer.music.pause()
             if start1 > 2:
                 config.click.play()
                 start1 = 0
@@ -57,6 +64,7 @@ def menu():
                 config.click.play()
                 start2 = 0
                 time.sleep(0.2)
+                options()
             start2 += 1
             config.screen.blit(config.active_options, config.active_options_rect)
 
@@ -75,4 +83,30 @@ def menu():
             start3 += 1
         else:
             config.screen.blit(config.quite, config.quite_rect)
+        pygame.display.flip()
+
+
+def options():
+    while True:
+        mouse = pygame.mouse.get_pos()
+        click = pygame.mouse.get_pressed()
+
+        config.clock.tick(config.FPS)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                quit()
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    config.play_music.stop()
+                    pygame.mixer.music.unpause()
+                    menu()
+
+        config.screen.blit(config.menu_bg, (0, 0))
+        config.screen.blit(config.menu_title, config.menu_title_rect)
+        config.screen.blit(config.tablet, config.tablet_rect)
+        config.screen.blit(config.music_label, config.music_label_rect)
+        config.screen.blit(config.scale1, config.scale1_rect)
+        config.screen.blit(config.sounds_label, config.sounds_label_rect)
+        config.screen.blit(config.scale2, config.scale2_rect)
+
         pygame.display.flip()
