@@ -3,12 +3,6 @@ import pygame
 import time
 
 
-def quite_game():
-    config.running = False
-    config.is_menu = False
-    quit()
-
-
 def start_game():
     while True:
         config.clock.tick(config.FPS)
@@ -74,7 +68,7 @@ def menu():
                 music.play()
                 start3 = 0
                 time.sleep(0.2)
-                quite_game()
+                quit()
             start3 += 1
         else:
             config.screen.blit(config.quite, config.quite_rect)

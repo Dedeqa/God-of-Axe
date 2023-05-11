@@ -14,8 +14,8 @@ screen = pygame.display.set_mode((WIDTH, HEIGHT))
 size = screen.get_size()
 
 # Иконка игры--------------------------------------------------------------------------------------
-
 icon = pygame.image.load('Images/icon_axe.png').convert_alpha()
+
 # Все кнопки меню ---------------------------------------------------------------------------------
 # Кнопка Play -------------------------------------------------------------------------------------
 play = pygame.image.load('Images/play.jpg').convert_alpha()
