@@ -6,7 +6,7 @@ pygame.mixer.pre_init(44100, -16, 1, 512)
 
 
 def start_game():
-    config.play_music.set_volume(config.volume)
+    config.play_music.set_volume(config.volume_music)
     config.play_music.play(-1)
     while True:
         config.clock.tick(config.FPS)
