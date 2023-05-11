@@ -6,8 +6,6 @@ WIDTH = 1920
 HEIGHT = 1080
 FPS = 60
 
-running = True
-is_menu = True
 clock = pygame.time.Clock()
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
