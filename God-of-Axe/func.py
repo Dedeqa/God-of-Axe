@@ -2,6 +2,8 @@ import config
 import pygame
 import time
 
+pygame.mixer.pre_init(44100, -16, 1, 512)
+
 
 def start_game():
     while True:
@@ -18,8 +20,8 @@ def start_game():
 
 
 def menu():
-    music = pygame.mixer.Sound(r'Music\zipclick.flac')
-    music.set_volume(0.3)
+    pygame.mixer.music.set_volume(0.07)
+    pygame.mixer.music.play(-1)
     start1, start2, start3 = 0, 0, 0
     while True:
         mouse = pygame.mouse.get_pos()
@@ -40,7 +42,7 @@ def menu():
             config.screen.blit(config.active_play_transform, config.active_play_rect)
 
             if start1 > 2:
-                music.play()
+                config.click.play()
                 start1 = 0
                 time.sleep(0.2)
                 start_game()
@@ -52,7 +54,7 @@ def menu():
         if (config.options_rect.left <= mouse[0] <= config.options_rect.right) and (
                 config.options_rect.top <= mouse[1] <= config.options_rect.bottom) and click[0]:
             if start2 > 2:
-                music.play()
+                config.click.play()
                 start2 = 0
                 time.sleep(0.2)
             start2 += 1
@@ -66,7 +68,7 @@ def menu():
                 click[0]:
             config.screen.blit(config.active_quite, config.active_quite_rect)
             if start3 > 2:
-                music.play()
+                config.click.play()
                 start3 = 0
                 time.sleep(0.2)
                 quit()

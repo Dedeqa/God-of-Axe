@@ -57,3 +57,8 @@ menu_bg = pygame.image.load('Images/bg_menu.jpg').convert_alpha()
 menu_title = my_font.render("God of Axe", True, (224, 153, 9))
 menu_title_rect = menu_title.get_rect()
 menu_title_rect.bottomleft = (0, size[1])
+
+menu_music = pygame.mixer.music.load(r'Music/Piano Fantasia - Song for Denise (Wide Walking Extended Version) (mp3cut.net).mp3')
+
+click = pygame.mixer.Sound(r'Music\zipclick.flac')
+click.set_volume(0.3)
