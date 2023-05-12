@@ -4,21 +4,21 @@ import config as cfg
 
 
 class Unit:
-    def __init__(self, nm, hp, width, height):
+    def __init__(self, nm, hp, posx, posy):
         self.name = nm
         self.hp = hp
-        self.width = width
-        self.height = height
+        self.posx = posx
+        self.posy = posy
 
 
 class Player(Unit, pygame.sprite.Sprite):
-    def __init__(self, nm, hp, width, height):
-        Unit.__init__(self, nm, hp, width, height)
+    def __init__(self, nm, hp, posx, posy):
+        Unit.__init__(self, nm, hp, posx, posy)
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.Surface((50, 50))
         self.image.fill('Black')
         self.rect = self.image.get_rect()
-        self.rect.center = (width / 2, height / 2)
+        self.rect.center = (posx / 2, posy / 2)
         self.weapon = Weapon(10)
         self.speedx = 0
         self.speedy = 0
