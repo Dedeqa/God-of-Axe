@@ -1,16 +1,19 @@
 import pygame
 import func
+import config as cfg
 
 
 class Unit:
-    def __init__(self, nm, hp):
+    def __init__(self, nm, hp, width, height):
         self.name = nm
         self.hp = hp
+        self.width = width
+        self.height = height
 
 
 class Player(Unit, pygame.sprite.Sprite):
-    def __init__(self, nm, width, height):
-        Unit.__init__(self, nm, 100)
+    def __init__(self, nm, hp, width, height):
+        Unit.__init__(self, nm, hp, width, height)
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.Surface((50, 50))
         self.image.fill('Black')
@@ -21,44 +24,37 @@ class Player(Unit, pygame.sprite.Sprite):
         self.speedy = 0
 
     def update(self):
-        global i
         self.speedx = 0
         self.speedy = 0
 
         keystate = pygame.key.get_pressed()
         if not (keystate[pygame.K_a] and keystate[pygame.K_d]):
             if keystate[pygame.K_a]:
-                self.speedx = -5
-                # self.image = walk_left[i]
-                # if i == 4:
-                #     i = 0
-                # else:
-                #     i += 1
+                if self.rect[0] >= 50:
+                    self.speedx = -5
+                elif cfg.bg_x < 1920:
+                    cfg.bg_x += 5
             if keystate[pygame.K_d]:
-                self.speedx = 5
-                # self.image = walk_right[i]
-                # if i == 4:
-                #     i = 0
-                # else:
-                #     i += 1
+                if self.rect[0] <= 1820:
+                    self.speedx = 5
+                elif cfg.bg_x > -1920:
+                    cfg.bg_x -= 5
+                    print(cfg.bg_x)
         if not (keystate[pygame.K_w] and keystate[pygame.K_s]):
             if keystate[pygame.K_w]:
-                self.speedy = -5
-                # self.image = walk_back[i]
-                # if i == 4:
-                #     i = 0
-                # else:
-                #     i += 1
-            elif keystate[pygame.K_s]:
-                self.speedy = 5
-                # self.image = walk_forward[i]
-                # if i == 4:
-                #     i = 0
-                # else:
-                #     i += 1
+                if self.rect[1] >= 50:
+                    self.speedy = -5
+                elif cfg.bg_y < 1080:
+                    cfg.bg_y += 5
+            if keystate[pygame.K_s]:
+                if self.rect[1] <= 980:
+                    self.speedy = 5
+                elif cfg.bg_y > -1080:
+                    cfg.bg_y -= 5
         self.rect.x += self.speedx
         self.rect.y += self.speedy
-    # def attack(self):
+
+    # # def attack(self):
 
 
 class Weapon:
@@ -68,3 +64,9 @@ class Weapon:
 
     def dmg_up(self):
         self.damage += 5
+
+
+# Экземпляр класса Player() -----------------------------------------------------------------------
+all_sprites = pygame.sprite.Group()
+player = Player("Albert", 100, cfg.WIDTH, cfg.HEIGHT)
+all_sprites.add(player)

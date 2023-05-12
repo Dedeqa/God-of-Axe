@@ -1,12 +1,13 @@
 import pygame
 import func
-import config
+import config as cfg
+import classes
 
 pygame.mixer.pre_init(44100, -16, 1, 512)
 pygame.init()
 
-screen = pygame.display.set_mode(config.size)
+screen = pygame.display.set_mode(cfg.size)
 pygame.display.set_caption("God of Axe")
-pygame.display.set_icon(config.icon)
+pygame.display.set_icon(cfg.icon)
 
 func.menu()

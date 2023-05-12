@@ -1,6 +1,7 @@
 import config as cfg
 import pygame
 import time
+import classes
 
 pygame.mixer.pre_init(44100, -16, 1, 512)
 
@@ -18,9 +19,17 @@ def start_game():
                     cfg.play_music.stop()
                     pygame.mixer.music.unpause()
                     menu()
-        cfg.screen.blit(cfg.game_bg, (0, 0))
-        cfg.all_sprites.update()
-        cfg.all_sprites.draw(cfg.screen)
+        cfg.screen.blit(cfg.game_bg, (-1920 + cfg.bg_x, -1080 + cfg.bg_y))  # 1 зона
+        cfg.screen.blit(cfg.game_bg, (0 + cfg.bg_x, -1080 + cfg.bg_y))  # 2 зона
+        cfg.screen.blit(cfg.game_bg, (1920 + cfg.bg_x, -1080 + cfg.bg_y))  # 3 зона
+        cfg.screen.blit(cfg.game_bg, (-1920 + cfg.bg_x, 0 + cfg.bg_y))  # 4 зона
+        cfg.screen.blit(cfg.game_bg, (0 + cfg.bg_x, 0 + cfg.bg_y))  # 5 зона
+        cfg.screen.blit(cfg.game_bg, (1920 + cfg.bg_x, 0 + cfg.bg_y))  # 6 зона
+        cfg.screen.blit(cfg.game_bg, (-1920 + cfg.bg_x, 1080 + cfg.bg_y))  # 7 зона
+        cfg.screen.blit(cfg.game_bg, (0 + cfg.bg_x, 1080 + cfg.bg_y))  # 8 зона
+        cfg.screen.blit(cfg.game_bg, (1920 + cfg.bg_x, 1080 + cfg.bg_y))  # 9 зона
+        classes.all_sprites.update()
+        classes.all_sprites.draw(cfg.screen)
         pygame.display.flip()
 
 

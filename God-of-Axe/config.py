@@ -1,5 +1,4 @@
 import pygame
-import classes
 
 pygame.init()
 
@@ -111,7 +110,10 @@ click = pygame.mixer.Sound(r'Music\zipclick.flac')
 volume_music = 1.0
 volume_sounds = 1.0
 
-# Экземпляр класса Player() -----------------------------------------------------------------------
-all_sprites = pygame.sprite.Group()
-player = classes.Player("Albert", WIDTH, HEIGHT)
-all_sprites.add(player)
+# Координаты для перемещения фона------------------------------------------------------------------
+bg_x = 0
+bg_y = 0
+
+
+
+
