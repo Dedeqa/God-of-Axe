@@ -39,7 +39,6 @@ class Player(Unit, pygame.sprite.Sprite):
                     self.speedx = 5
                 elif cfg.bg_x > -1920:
                     cfg.bg_x -= 5
-                    print(cfg.bg_x)
         if not (keystate[pygame.K_w] and keystate[pygame.K_s]):
             if keystate[pygame.K_w]:
                 if self.rect[1] >= 50:
@@ -54,7 +53,7 @@ class Player(Unit, pygame.sprite.Sprite):
         self.rect.x += self.speedx
         self.rect.y += self.speedy
 
-    # # def attack(self):
+    # def attack(self):
 
 
 class Weapon:
@@ -70,3 +69,4 @@ class Weapon:
 all_sprites = pygame.sprite.Group()
 player = Player("Albert", 100, cfg.WIDTH, cfg.HEIGHT)
 all_sprites.add(player)
+

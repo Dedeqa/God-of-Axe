@@ -9,6 +9,8 @@ FPS = 60
 clock = pygame.time.Clock()
 
 menu_flag = True
+start_game_flag = True
+
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 size = screen.get_size()
 
@@ -51,28 +53,29 @@ active_quite_rect.center = (size[0] // 2, 482)
 # Объекты в Options --------------------------------------------------------------------------------
 # Tablet (табличка) --------------------------------------------------------------------------------
 tablet = pygame.image.load('Images/Tablet.png')
-tablet_rect = tablet.get_rect()
-tablet_rect.center = (size[0] // 2, 400)
+tablet_transform = pygame.transform.scale(tablet, (500, 264))
+tablet_rect = tablet_transform.get_rect()
+tablet_rect.center = (size[0] // 2, 375)
 
 # Music_label (надпись music) ---------------------------------------------------------------------
 music_label = pygame.image.load('Images/music_label.png')
 music_label_rect = music_label.get_rect()
-music_label_rect.center = (size[0] // 2, 300)
+music_label_rect.center = (size[0] // 2, 275)
 
 # Scale1 (шкала громкости музыки) -----------------------------------------------------------------
 scale1 = pygame.image.load('Images/scale1.png')
 scale1_rect = scale1.get_rect()
-scale1_rect.center = (size[0] // 2, 360)
+scale1_rect.center = (size[0] // 2, 335)
 
 # Sounds_label (надпись sounds) -------------------------------------------------------------------
 sounds_label = pygame.image.load('Images/sounds_label.png')
 sounds_label_rect = sounds_label.get_rect()
-sounds_label_rect.center = (size[0] // 2, 420)
+sounds_label_rect.center = (size[0] // 2, 395)
 
 # Scale2 (шкала громкости звуков) -----------------------------------------------------------------
 scale2 = pygame.image.load('Images/scale2.png')
 scale2_rect = scale2.get_rect()
-scale2_rect.center = (size[0] // 2, 480)
+scale2_rect.center = (size[0] // 2, 455)
 
 # Point1 (ползунок изменения громкости музыки) ----------------------------------------------------
 point1 = pygame.image.load('Images/point1.png')
@@ -114,6 +117,43 @@ volume_sounds = 1.0
 bg_x = 0
 bg_y = 0
 
+# Кнопки паузы ------------------------------------------------------------------------------------
+# Надпись Pause -----------------------------------------------------------------------------------
+pause_label = pygame.image.load('Images/pause_label.png')
+pause_label_transform = pygame.transform.scale(pause_label, (400, 113))
+pause_label_rect = pause_label_transform.get_rect()
+pause_label_rect.center = (size[0] // 2, 100)
 
+# Кнопка Continue ---------------------------------------------------------------------------------
+continue_ = pygame.image.load('Images/continue.png').convert_alpha()
+continue_rect = continue_.get_rect()
+continue_rect.center = (size[0] // 2, 300)
 
+# Нажатая кнопка Continue -------------------------------------------------------------------------
+continue_active = pygame.image.load('Images/continue_active.png').convert_alpha()
+continue_active_rect = continue_active.get_rect()
+continue_active_rect.center = (size[0] // 2, 306)
 
+# Кнопка Options ----------------------------------------------------------------------------------
+Options = pygame.image.load('Images/options.png').convert_alpha()
+Options_rect = Options.get_rect()
+Options_rect.center = (size[0] // 2, 426)
+
+# Нажатая кнопка Options --------------------------------------------------------------------------
+Options_active = pygame.image.load('Images/options_active.png').convert_alpha()
+Options_active_rect = Options_active.get_rect()
+Options_active_rect.center = (size[0] // 2, 432)
+
+# Кнопка Menu -------------------------------------------------------------------------------------
+menu = pygame.image.load('Images/menu.png').convert_alpha()
+menu_rect = menu.get_rect()
+menu_rect.center = (size[0] // 2, 552)
+
+#  Нажатая кнопка Menu ----------------------------------------------------------------------------
+menu_active = pygame.image.load('Images/menu_active.png').convert_alpha()
+menu_active_rect = menu_active.get_rect()
+menu_active_rect.center = (size[0] // 2, 558)
+
+# Серый фон для паузы -----------------------------------------------------------------------------
+bg_pause_new = pygame.image.load('Images/pause_bg_new.jpeg')
+# -------------------------------------------------------------------------------------------------
