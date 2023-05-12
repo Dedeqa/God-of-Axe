@@ -165,7 +165,6 @@ def options_menu():
     while True:
         mouse = pygame.mouse.get_pos()
         click = pygame.mouse.get_pressed()
-
         cfg.clock.tick(200)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
