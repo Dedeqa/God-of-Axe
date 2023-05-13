@@ -19,6 +19,9 @@ def start_game():
                 quit()
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
+                    print(classes.tree.rect.bottomleft)
+                    print(classes.tree.line_left)
+
                     pause()
 
                     # pygame.mixer.music.unpause()
