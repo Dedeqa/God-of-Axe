@@ -16,7 +16,6 @@ class Player(Unit, pygame.sprite.Sprite):
         Unit.__init__(self, nm, hp, posx, posy)
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.image.load('Images/minotaur-N-stand.png').convert_alpha()
-        # self.image.fill("Orange")
 
         self.rect = self.image.get_rect()
         self.rect.center = (posx / 2, posy / 2)
@@ -63,7 +62,8 @@ class Player(Unit, pygame.sprite.Sprite):
         cfg.screen.fill("blue", tree.line_bottom)
 
 
-# # def attack(self):
+
+
 
 
 class Weapon:
@@ -91,19 +91,19 @@ class Tree(Unit, pygame.sprite.Sprite):
         self.image = pygame.image.load("Images/Trees/Tree1.png").convert_alpha()
         # self.image.fill("red")
         self.rect = self.image.get_rect()
-        self.line_left_x = posx + self.rect[2]/3
-        self.line_left_y = posy + self.rect[3] / 6 * 5
-        self.line_right_x = self.line_left_x + self.rect[2]/3
-        self.line_right_y = posy + self.rect[3] / 6 * 5
-        self.line_top_x = self.line_left_x
-        self.line_top_y = self.line_left_y
+        self.line_left_x = posx + self.rect[2] / 3
+        self.line_left_y = posy + self.rect[3] / 6 * 5 + 3
+        self.line_right_x = self.line_left_x + self.rect[2] / 3
+        self.line_right_y = posy + self.rect[3] / 6 * 5 + 3
+        self.line_top_x = posx + self.rect[2] / 3 + 3
+        self.line_top_y = posy + self.rect[3] / 6 * 5
         self.line_bottom_x = self.line_top_x
-        self.line_bottom_y = self.line_left_y + self.rect[3] / 9
+        self.line_bottom_y = posy + self.rect[3] / 6 * 5 + self.rect[3] / 9
 
-        self.line_left = pygame.Rect(self.line_left_x, self.line_left_y, 1, self.rect[3] / 9)
-        self.line_right = pygame.Rect(self.line_right_x, self.line_right_y, 1, self.rect[3] / 9)
-        self.line_top = pygame.Rect(self.line_top_x, self.line_top_y, self.rect[2]/3, 1)
-        self.line_bottom = pygame.Rect(self.line_bottom_x, self.line_bottom_y, self.rect[2]/3, 1)
+        self.line_left = pygame.Rect(self.line_left_x, self.line_left_y, 1, self.rect[3] / 9 - 8)
+        self.line_right = pygame.Rect(self.line_right_x, self.line_right_y, 1, self.rect[3] / 9 - 8)
+        self.line_top = pygame.Rect(self.line_top_x, self.line_top_y, self.rect[2] / 3 - 8, 1)
+        self.line_bottom = pygame.Rect(self.line_bottom_x, self.line_bottom_y, self.rect[2] / 3 - 8, 1)
 
     def update(self):
         self.rect.x = cfg.bg_x + self.posx
