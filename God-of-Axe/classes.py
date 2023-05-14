@@ -91,30 +91,31 @@ class Tree(Unit, pygame.sprite.Sprite):
         self.image = pygame.image.load("Images/Trees/Tree1.png").convert_alpha()
         # self.image.fill("red")
         self.rect = self.image.get_rect()
-        self.line_width = self.rect[2]
-        self.line_height = self.rect[3]/6
-        self.rect.topleft = (posx, posy)
-        # self.rect_ph = pygame.Rect(posx, (self.rect.bottomleft[1] - posy) / 4 * 3 + posy, self.rect[2], self.rect[3]/6)
-        self.line_left = pygame.Rect(posx, self.rect.bottomleft[1] - self.line_height, 1, self.line_height)
+        self.line_left_x = posx + self.rect[2]/3
+        self.line_left_y = posy + self.rect[3] / 6 * 5
+        self.line_right_x = self.line_left_x + self.rect[2]/3
+        self.line_right_y = posy + self.rect[3] / 6 * 5
+        self.line_top_x = self.line_left_x
+        self.line_top_y = self.line_left_y
+        self.line_bottom_x = self.line_top_x
+        self.line_bottom_y = self.line_left_y + self.rect[3] / 9
 
-        self.line_right = pygame.Rect(posx + self.rect[2], (self.rect.bottomleft[1] - posy) / 4 * 3 + posy, 1,
-                                      self.rect[3] / 6)
-        self.line_top = pygame.Rect(posx, (self.rect.bottomleft[1] - posy) / 4 * 3 + posy, self.rect[2], 1)
-        self.line_bottom = pygame.Rect(posx, (self.rect.bottomleft[1] - posy) / 4 * 3 + posy + self.rect[3] / 6,
-                                       self.rect[2],
-                                       1)
+        self.line_left = pygame.Rect(self.line_left_x, self.line_left_y, 1, self.rect[3] / 9)
+        self.line_right = pygame.Rect(self.line_right_x, self.line_right_y, 1, self.rect[3] / 9)
+        self.line_top = pygame.Rect(self.line_top_x, self.line_top_y, self.rect[2]/3, 1)
+        self.line_bottom = pygame.Rect(self.line_bottom_x, self.line_bottom_y, self.rect[2]/3, 1)
 
     def update(self):
         self.rect.x = cfg.bg_x + self.posx
         self.rect.y = cfg.bg_y + self.posy
-        # self.line_left[0] = cfg.bg_x + self.posx
-        # self.line_left[1] = cfg.bg_y + self.rect.y
-        # self.line_right[0] += cfg.bg_x
-        # self.line_right[1] += cfg.bg_y
-        # self.line_top[0] += cfg.bg_x
-        # self.line_top[1] += cfg.bg_y
-        # self.line_bottom[0] += cfg.bg_x
-        # self.line_bottom[1] += cfg.bg_y
+        self.line_left[0] = cfg.bg_x + self.line_left_x
+        self.line_left[1] = cfg.bg_y + self.line_left_y
+        self.line_right[0] = cfg.bg_x + self.line_right_x
+        self.line_right[1] = cfg.bg_y + self.line_right_y
+        self.line_top[0] = cfg.bg_x + self.line_top_x
+        self.line_top[1] = cfg.bg_y + self.line_top_y
+        self.line_bottom[0] = cfg.bg_x + self.line_bottom_x
+        self.line_bottom[1] = cfg.bg_y + self.line_bottom_y
 
     def take_dmg(self, dmg):
         self.hp -= dmg
