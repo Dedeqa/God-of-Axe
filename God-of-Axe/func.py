@@ -20,7 +20,10 @@ def start_game():
                 quit()
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
+                    print(classes.player.image.get_rect())
+
                     pause()
+
 
                     # pygame.mixer.music.unpause()
 

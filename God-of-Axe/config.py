@@ -161,4 +161,12 @@ menu_active_rect.center = (size[0] // 2, 558)
 # Серый фон для паузы -----------------------------------------------------------------------------
 bg_pause_new = pygame.image.load('Images/backgrounds/pause_bg_new.jpeg')
 # -------------------------------------------------------------------------------------------------
-blank = 0
+woodcutter_walk_right = [
+    pygame.image.load('Images/Player/Woodcutter_walk_right/Woodcutter_walk1.png'),
+    pygame.image.load('Images/Player/Woodcutter_walk_right/Woodcutter_walk2.png'),
+    pygame.image.load('Images/Player/Woodcutter_walk_right/Woodcutter_walk3.png'),
+    pygame.image.load('Images/Player/Woodcutter_walk_right/Woodcutter_walk4.png'),
+    pygame.image.load('Images/Player/Woodcutter_walk_right/Woodcutter_walk5.png'),
+    pygame.image.load('Images/Player/Woodcutter_walk_right/Woodcutter_walk6.png'),
+
+]

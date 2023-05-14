@@ -1,7 +1,7 @@
 import pygame
 import func
 import config as cfg
-
+import time
 
 class Unit:
     def __init__(self, nm, hp, posx, posy):
@@ -15,14 +15,14 @@ class Player(Unit, pygame.sprite.Sprite):
     def __init__(self, nm, hp, posx, posy):
         Unit.__init__(self, nm, hp, posx, posy)
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.image.load('Images/monsters/minotaur-N-stand.png').convert_alpha()
-
+        self.image = pygame.image.load('Images/Player/Woodcutter.png').convert_alpha()
+        self.image.fill("Blue")
         self.rect = self.image.get_rect()
         self.rect.center = (posx / 2, posy / 2)
         self.weapon = Weapon(100, 1000)
         self.speedx = 0
         self.speedy = 0
-
+        self.i = 0
     def update(self):
         self.speedx = 0
         self.speedy = 0
@@ -36,6 +36,11 @@ class Player(Unit, pygame.sprite.Sprite):
                         cfg.bg_x += 5
             if keystate[pygame.K_d]:
                 if not (self.rect.colliderect(tree.line_left)):
+                    if self.i == 5:
+                        self.i = 0
+                    self.image = cfg.woodcutter_walk_right[self.i]
+                    self.i += 1
+                    time.sleep(0.1)
                     if self.rect.x <= 1820:
                         self.speedx = 5
                     elif cfg.bg_x > -1920:
