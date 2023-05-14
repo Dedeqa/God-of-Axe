@@ -15,7 +15,7 @@ class Player(Unit, pygame.sprite.Sprite):
     def __init__(self, nm, hp, posx, posy):
         Unit.__init__(self, nm, hp, posx, posy)
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.image.load('Images/minotaur-N-stand.png').convert_alpha()
+        self.image = pygame.image.load('Images/monsters/minotaur-N-stand.png').convert_alpha()
 
         self.rect = self.image.get_rect()
         self.rect.center = (posx / 2, posy / 2)
@@ -56,10 +56,10 @@ class Player(Unit, pygame.sprite.Sprite):
                     cfg.bg_y -= 5
         self.rect.x += self.speedx
         self.rect.y += self.speedy
-        cfg.screen.fill("blue", tree.line_left)
-        cfg.screen.fill("blue", tree.line_right)
-        cfg.screen.fill("blue", tree.line_top)
-        cfg.screen.fill("blue", tree.line_bottom)
+        #cfg.screen.fill("blue", tree.line_left)
+        #cfg.screen.fill("blue", tree.line_right)
+        #cfg.screen.fill("blue", tree.line_top)
+        #cfg.screen.fill("blue", tree.line_bottom)
 
 
 
@@ -80,7 +80,6 @@ class Weapon:
 all_sprites = pygame.sprite.Group()
 player = Player("Albert", 100, cfg.WIDTH, cfg.HEIGHT)
 all_sprites.add(player)
-
 
 # --------------------------------------------------------------------------------------------------
 

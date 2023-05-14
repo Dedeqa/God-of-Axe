@@ -2,6 +2,7 @@ import config as cfg
 import pygame
 import time
 import classes
+import random
 
 pygame.mixer.pre_init(44100, -16, 1, 512)
 
@@ -237,3 +238,18 @@ def options_game():
         cfg.screen.blit(cfg.point2, cfg.point2_rect)
 
         pygame.display.flip()
+
+
+# def random_trees(n):
+#     tree_array_x = set()
+#     tree_array_y = set()
+#     count = 0
+#     while count < n:
+#         x = random.randint(-3740, 3740)
+#         y = random.randint(-2060, 2060)
+#         if x not in tree_array_x and y not in tree_array_y:
+#             tree_array_y.add(y)
+#             tree_array_x.add(x)
+#             count += 1
+#     for elem in tree_array_x:
+#
