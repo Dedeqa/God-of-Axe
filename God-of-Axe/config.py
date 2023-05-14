@@ -194,3 +194,5 @@ woodcutter_run_left = [
     pygame.image.load('Images/Player/Woodcutter_run_left/Woodcutter_run5.png'),
     pygame.image.load('Images/Player/Woodcutter_run_left/Woodcutter_run6.png')
 ]
+
+vector = ''
