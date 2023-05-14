@@ -30,6 +30,11 @@ class Player(Unit, pygame.sprite.Sprite):
         if not (keystate[pygame.K_a] and keystate[pygame.K_d]):
             if keystate[pygame.K_a]:
                 if not (self.rect.colliderect(tree.line_right)):
+                    if self.i == 5:
+                        self.i = 0
+                    self.image = cfg.woodcutter_walk_left[self.i]
+                    self.i += 1
+                    time.sleep(0.1)
                     if self.rect.x >= 50:
                         self.speedx = -5
                     elif cfg.bg_x < 1920:

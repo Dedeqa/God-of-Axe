@@ -170,3 +170,12 @@ woodcutter_walk_right = [
     pygame.image.load('Images/Player/Woodcutter_walk_right/Woodcutter_walk6.png'),
 
 ]
+woodcutter_walk_left = [
+    pygame.image.load('Images/Player/Woodcutter_walk_right/Woodcutter_walk1.png'),
+    pygame.image.load('Images/Player/Woodcutter_walk_right/Woodcutter_walk2.png'),
+    pygame.image.load('Images/Player/Woodcutter_walk_right/Woodcutter_walk3.png'),
+    pygame.image.load('Images/Player/Woodcutter_walk_right/Woodcutter_walk4.png'),
+    pygame.image.load('Images/Player/Woodcutter_walk_right/Woodcutter_walk5.png'),
+    pygame.image.load('Images/Player/Woodcutter_walk_right/Woodcutter_walk6.png'),
+
+]
