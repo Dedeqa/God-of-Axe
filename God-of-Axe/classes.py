@@ -3,6 +3,7 @@ import func
 import config as cfg
 import time
 
+
 class Unit:
     def __init__(self, nm, hp, posx, posy):
         self.name = nm
@@ -16,13 +17,13 @@ class Player(Unit, pygame.sprite.Sprite):
         Unit.__init__(self, nm, hp, posx, posy)
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.image.load('Images/Player/Woodcutter.png').convert_alpha()
-        self.image.fill("Blue")
         self.rect = self.image.get_rect()
         self.rect.center = (posx / 2, posy / 2)
         self.weapon = Weapon(100, 1000)
         self.speedx = 0
         self.speedy = 0
         self.i = 0
+
     def update(self):
         self.speedx = 0
         self.speedy = 0
@@ -30,26 +31,46 @@ class Player(Unit, pygame.sprite.Sprite):
         if not (keystate[pygame.K_a] and keystate[pygame.K_d]):
             if keystate[pygame.K_a]:
                 if not (self.rect.colliderect(tree.line_right)):
-                    if self.i == 5:
-                        self.i = 0
-                    self.image = cfg.woodcutter_walk_left[self.i]
-                    self.i += 1
-                    time.sleep(0.1)
-                    if self.rect.x >= 50:
-                        self.speedx = -5
-                    elif cfg.bg_x < 1920:
-                        cfg.bg_x += 5
+                    if keystate[pygame.K_LSHIFT]:
+                        if self.i == 5:
+                            self.i = 0
+                        self.image = cfg.woodcutter_run_left[self.i]
+                        self.i += 1
+                        time.sleep(0.05)
+                        if self.rect.x >= 50:
+                            self.speedx = -10
+                        elif cfg.bg_x < 1920:
+                            cfg.bg_x += 10
+                    else:
+                        if self.i == 5:
+                            self.i = 0
+                        self.image = cfg.woodcutter_walk_left[self.i]
+                        self.i += 1
+                        time.sleep(0.05)
+                        if self.rect.x >= 50:
+                            self.speedx = -5
+                        elif cfg.bg_x < 1920:
+                            cfg.bg_x += 5
             if keystate[pygame.K_d]:
                 if not (self.rect.colliderect(tree.line_left)):
-                    if self.i == 5:
-                        self.i = 0
-                    self.image = cfg.woodcutter_walk_right[self.i]
-                    self.i += 1
-                    time.sleep(0.1)
+                    if keystate[pygame.K_LSHIFT]:
+                        if self.i == 5:
+                            self.i = 0
+                        self.image = cfg.woodcutter_run_right[self.i]
+                        self.i += 1
+                        time.sleep(0.05)
+                        sx = 10
+                    else:
+                        if self.i == 5:
+                            self.i = 0
+                        self.image = cfg.woodcutter_walk_right[self.i]
+                        self.i += 1
+                        time.sleep(0.05)
+                        sx = 5
                     if self.rect.x <= 1820:
-                        self.speedx = 5
+                        self.speedx = sx
                     elif cfg.bg_x > -1920:
-                        cfg.bg_x -= 5
+                        cfg.bg_x -= sx
 
         if not (keystate[pygame.K_w] and keystate[pygame.K_s]):
             if keystate[pygame.K_w]:
@@ -66,14 +87,10 @@ class Player(Unit, pygame.sprite.Sprite):
                     cfg.bg_y -= 5
         self.rect.x += self.speedx
         self.rect.y += self.speedy
-        #cfg.screen.fill("blue", tree.line_left)
-        #cfg.screen.fill("blue", tree.line_right)
-        #cfg.screen.fill("blue", tree.line_top)
-        #cfg.screen.fill("blue", tree.line_bottom)
-
-
-
-
+        # cfg.screen.fill("blue", tree.line_left)
+        # cfg.screen.fill("blue", tree.line_right)
+        # cfg.screen.fill("blue", tree.line_top)
+        # cfg.screen.fill("blue", tree.line_bottom)
 
 
 class Weapon:
@@ -90,6 +107,7 @@ class Weapon:
 all_sprites = pygame.sprite.Group()
 player = Player("Albert", 100, cfg.WIDTH, cfg.HEIGHT)
 all_sprites.add(player)
+
 
 # --------------------------------------------------------------------------------------------------
 
