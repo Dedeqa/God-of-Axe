@@ -19,6 +19,7 @@ def start_game():
                 quit()
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
+                    print(classes.tree.hp)
                     pause()
 
         cfg.screen.blit(cfg.game_bg, (-1920 + cfg.bg_x, -1080 + cfg.bg_y))  # 1 зона

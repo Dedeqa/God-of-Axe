@@ -25,6 +25,8 @@ class Player(Unit, pygame.sprite.Sprite):
         self.i = 0
         self.at = 0
         self.flag = False
+        self.rect_attack = pygame.Rect(self.rect[0] + self.rect[2] / 4 * 3, self.rect[1], self.rect[2] / 2,
+                                           self.rect[3])
 
     def update(self):
         self.speedx = 0
@@ -128,26 +130,14 @@ class Player(Unit, pygame.sprite.Sprite):
         if keystate[pygame.K_e]:
             self.flag = True
         self.attack()
-        # if self.flag:
-        #     if cfg.vector == "right":
-        #         self.image = cfg.woodcutter_attack_right[self.at]
-        #         self.at += 1
-        #         if self.at == 6:
-        #             self.at = 0
-        #             self.flag = False
-        #     else:
-        #         self.image = cfg.woodcutter_attack_left[self.at]
-        #         self.at += 1
-        #         if self.at == 6:
-        #             self.at = 0
-        #             self.flag = False
-
         self.rect.x += self.speedx
         self.rect.y += self.speedy
-        # cfg.screen.fill("blue", tree.line_left)
-        # cfg.screen.fill("blue", tree.line_right)
-        # cfg.screen.fill("blue", tree.line_top)
-        # cfg.screen.fill("blue", tree.line_bottom)
+        cfg.screen.fill("blue", tree.line_left)
+        cfg.screen.fill("blue", tree.line_right)
+        cfg.screen.fill("blue", tree.line_top)
+        cfg.screen.fill("blue", tree.line_bottom)
+        cfg.screen.fill("blue", self.rect_attack)
+
         pygame.time.delay(60)
 
     def attack(self):
@@ -157,13 +147,26 @@ class Player(Unit, pygame.sprite.Sprite):
                 self.at += 1
                 if self.at == 6:
                     self.at = 0
+                    for elem in list:
+                        if self.rect_attack.colliderect(elem):
+                            elem.take_dmg(self.weapon.damage)
                     self.flag = False
             else:
                 self.image = cfg.woodcutter_attack_left[self.at]
                 self.at += 1
                 if self.at == 6:
                     self.at = 0
+                    for elem in list:
+                        if self.rect_attack.colliderect(elem):
+                            elem.take_dmg(self.weapon.damage)
                     self.flag = False
+            if cfg.vector == 'right':
+                self.rect_attack = pygame.Rect(self.rect[0] + self.rect[2] / 4 * 3, self.rect[1], self.rect[2] / 2,
+                                           self.rect[3])
+            else:
+                self.rect_attack = pygame.Rect(self.rect[0] - self.rect[2] / 4, self.rect[1], self.rect[2] / 2,
+                                               self.rect[3])
+
 
 
 class Weapon:
@@ -220,8 +223,11 @@ class Tree(Unit, pygame.sprite.Sprite):
     def take_dmg(self, dmg):
         self.hp -= dmg
         if self.hp <= 0:
-            self.kill()
+            self.remove(all_sprites)
+            list.clear()
+            print(self.posx)
 
 
-tree = Tree("Bereza", 100000, 960, 800, 5)
+tree = Tree("Bereza", 500, 960, 800, 5)
 all_sprites.add(tree)
+list = [tree]
