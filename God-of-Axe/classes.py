@@ -127,7 +127,30 @@ class Player(Unit, pygame.sprite.Sprite):
 
         if keystate[pygame.K_e]:
             self.flag = True
+        self.attack()
+        # if self.flag:
+        #     if cfg.vector == "right":
+        #         self.image = cfg.woodcutter_attack_right[self.at]
+        #         self.at += 1
+        #         if self.at == 6:
+        #             self.at = 0
+        #             self.flag = False
+        #     else:
+        #         self.image = cfg.woodcutter_attack_left[self.at]
+        #         self.at += 1
+        #         if self.at == 6:
+        #             self.at = 0
+        #             self.flag = False
 
+        self.rect.x += self.speedx
+        self.rect.y += self.speedy
+        # cfg.screen.fill("blue", tree.line_left)
+        # cfg.screen.fill("blue", tree.line_right)
+        # cfg.screen.fill("blue", tree.line_top)
+        # cfg.screen.fill("blue", tree.line_bottom)
+        pygame.time.delay(60)
+
+    def attack(self):
         if self.flag:
             if cfg.vector == "right":
                 self.image = cfg.woodcutter_attack_right[self.at]
@@ -141,23 +164,6 @@ class Player(Unit, pygame.sprite.Sprite):
                 if self.at == 6:
                     self.at = 0
                     self.flag = False
-
-        self.rect.x += self.speedx
-        self.rect.y += self.speedy
-        # cfg.screen.fill("blue", tree.line_left)
-        # cfg.screen.fill("blue", tree.line_right)
-        # cfg.screen.fill("blue", tree.line_top)
-        # cfg.screen.fill("blue", tree.line_bottom)
-        pygame.time.delay(60)
-
-    def attack(self):
-        if self.flag:
-            if self.at == 5:
-                self.at = 0
-                self.flag = False
-            if cfg.vector == "right":
-                self.image = cfg.woodcutter_attack_right[self.at]
-            self.at += 1
 
 
 class Weapon:
