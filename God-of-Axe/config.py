@@ -159,38 +159,39 @@ menu_active_rect = menu_active.get_rect()
 menu_active_rect.center = (size[0] // 2, 558)
 
 # Серый фон для паузы -----------------------------------------------------------------------------
-bg_pause_new = pygame.image.load('Images/backgrounds/pause_bg_new.jpeg')
+bg_pause_new = pygame.image.load('Images/backgrounds/pause_bg_new.jpeg').convert_alpha()
 # -------------------------------------------------------------------------------------------------
 woodcutter_walk_right = [
-    pygame.image.load('Images/Player/Woodcutter_walk_right/Woodcutter_walk1.png'),
-    pygame.image.load('Images/Player/Woodcutter_walk_right/Woodcutter_walk2.png'),
-    pygame.image.load('Images/Player/Woodcutter_walk_right/Woodcutter_walk3.png'),
-    pygame.image.load('Images/Player/Woodcutter_walk_right/Woodcutter_walk4.png'),
-    pygame.image.load('Images/Player/Woodcutter_walk_right/Woodcutter_walk5.png'),
-    pygame.image.load('Images/Player/Woodcutter_walk_right/Woodcutter_walk6.png'),
+    pygame.image.load('Images/Player/Woodcutter_walk_right/Woodcutter_walk1.png').convert_alpha(),
+    pygame.image.load('Images/Player/Woodcutter_walk_right/Woodcutter_walk2.png').convert_alpha(),
+    pygame.image.load('Images/Player/Woodcutter_walk_right/Woodcutter_walk3.png').convert_alpha(),
+    pygame.image.load('Images/Player/Woodcutter_walk_right/Woodcutter_walk4.png').convert_alpha(),
+    pygame.image.load('Images/Player/Woodcutter_walk_right/Woodcutter_walk5.png').convert_alpha(),
+    pygame.image.load('Images/Player/Woodcutter_walk_right/Woodcutter_walk6.png').convert_alpha(),
 
 ]
 woodcutter_walk_left = [
-    pygame.image.load('Images/Player/Woodcutter_walk_left/Woodcutter_walk1.png'),
-    pygame.image.load('Images/Player/Woodcutter_walk_left/Woodcutter_walk2.png'),
-    pygame.image.load('Images/Player/Woodcutter_walk_left/Woodcutter_walk3.png'),
-    pygame.image.load('Images/Player/Woodcutter_walk_left/Woodcutter_walk4.png'),
-    pygame.image.load('Images/Player/Woodcutter_walk_left/Woodcutter_walk5.png'),
-    pygame.image.load('Images/Player/Woodcutter_walk_left/Woodcutter_walk6.png')
+    pygame.image.load('Images/Player/Woodcutter_walk_left/Woodcutter_walk1.png').convert_alpha(),
+    pygame.image.load('Images/Player/Woodcutter_walk_left/Woodcutter_walk2.png').convert_alpha(),
+    pygame.image.load('Images/Player/Woodcutter_walk_left/Woodcutter_walk3.png').convert_alpha(),
+    pygame.image.load('Images/Player/Woodcutter_walk_left/Woodcutter_walk4.png').convert_alpha(),
+    pygame.image.load('Images/Player/Woodcutter_walk_left/Woodcutter_walk5.png').convert_alpha(),
+    pygame.image.load('Images/Player/Woodcutter_walk_left/Woodcutter_walk6.png').convert_alpha()
 ]
 woodcutter_run_right = [
-    pygame.image.load('Images/Player/Woodcutter_run_right/Woodcutter_run1.png'),
-    pygame.image.load('Images/Player/Woodcutter_run_right/Woodcutter_run2.png'),
-    pygame.image.load('Images/Player/Woodcutter_run_right/Woodcutter_run3.png'),
-    pygame.image.load('Images/Player/Woodcutter_run_right/Woodcutter_run4.png'),
-    pygame.image.load('Images/Player/Woodcutter_run_right/Woodcutter_run5.png'),
-    pygame.image.load('Images/Player/Woodcutter_run_right/Woodcutter_run6.png')
+    pygame.image.load('Images/Player/Woodcutter_run_right/Woodcutter_run1.png').convert_alpha(),
+    pygame.image.load('Images/Player/Woodcutter_run_right/Woodcutter_run2.png').convert_alpha(),
+    pygame.image.load('Images/Player/Woodcutter_run_right/Woodcutter_run3.png').convert_alpha(),
+    pygame.image.load('Images/Player/Woodcutter_run_right/Woodcutter_run4.png').convert_alpha(),
+    pygame.image.load('Images/Player/Woodcutter_run_right/Woodcutter_run5.png').convert_alpha(),
+    pygame.image.load('Images/Player/Woodcutter_run_right/Woodcutter_run6.png').convert_alpha()
 ]
 woodcutter_run_left = [
-    pygame.image.load('Images/Player/Woodcutter_run_left/Woodcutter_run1.png'),
-    pygame.image.load('Images/Player/Woodcutter_run_left/Woodcutter_run2.png'),
-    pygame.image.load('Images/Player/Woodcutter_run_left/Woodcutter_run3.png'),
-    pygame.image.load('Images/Player/Woodcutter_run_left/Woodcutter_run4.png'),
-    pygame.image.load('Images/Player/Woodcutter_run_left/Woodcutter_run5.png'),
-    pygame.image.load('Images/Player/Woodcutter_run_left/Woodcutter_run6.png')
+    pygame.image.load('Images/Player/Woodcutter_run_left/Woodcutter_run1.png').convert_alpha(),
+    pygame.image.load('Images/Player/Woodcutter_run_left/Woodcutter_run2.png').convert_alpha(),
+    pygame.image.load('Images/Player/Woodcutter_run_left/Woodcutter_run3.png').convert_alpha(),
+    pygame.image.load('Images/Player/Woodcutter_run_left/Woodcutter_run4.png').convert_alpha(),
+    pygame.image.load('Images/Player/Woodcutter_run_left/Woodcutter_run5.png').convert_alpha(),
+    pygame.image.load('Images/Player/Woodcutter_run_left/Woodcutter_run6.png').convert_alpha()
 ]
+vector = ''

@@ -9,7 +9,7 @@ pygame.mixer.pre_init(44100, -16, 1, 512)
 
 def start_game():
     if cfg.start_game_flag:
-        cfg.play_music.play(-1)
+        # cfg.play_music.play(-1)
         cfg.start_game_flag = False
     # cfg.play_music.set_volume(cfg.volume_music)
 
@@ -23,7 +23,6 @@ def start_game():
                     print(classes.player.image.get_rect())
 
                     pause()
-
 
                     # pygame.mixer.music.unpause()
 
@@ -45,7 +44,7 @@ def start_game():
 def menu():
     cfg.play_music.stop()
     if cfg.menu_flag:
-        pygame.mixer.music.play(-1)
+        # pygame.mixer.music.play(-1)
         cfg.menu_flag = False
 
     start1, start2, start3 = 0, 0, 0
@@ -241,7 +240,6 @@ def options_game():
         cfg.screen.blit(cfg.point2, cfg.point2_rect)
 
         pygame.display.flip()
-
 
 # def random_trees(n):
 #     tree_array_x = set()
