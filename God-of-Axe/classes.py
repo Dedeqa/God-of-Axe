@@ -37,14 +37,12 @@ class Player(Unit, pygame.sprite.Sprite):
                             self.i = 0
                         self.image = cfg.woodcutter_run_left[self.i]
                         self.i += 1
-                        time.sleep(0.05)
                         sx = 10
                     else:
                         if self.i == 5:
                             self.i = 0
                         self.image = cfg.woodcutter_walk_left[self.i]
                         self.i += 1
-                        time.sleep(0.05)
                         sx = 5
                     if self.rect.x <= 1820:
                         self.speedx = -sx
@@ -58,14 +56,12 @@ class Player(Unit, pygame.sprite.Sprite):
                             self.i = 0
                         self.image = cfg.woodcutter_run_right[self.i]
                         self.i += 1
-                        # time.sleep(0.05)
                         sx = 10
                     else:
                         if self.i == 5:
                             self.i = 0
                         self.image = cfg.woodcutter_walk_right[self.i]
                         self.i += 1
-                        # time.sleep(0.05)
                         sx = 5
                     if self.rect.x <= 1820:
                         self.speedx = sx
@@ -97,7 +93,7 @@ class Player(Unit, pygame.sprite.Sprite):
         # cfg.screen.fill("blue", tree.line_right)
         # cfg.screen.fill("blue", tree.line_top)
         # cfg.screen.fill("blue", tree.line_bottom)
-        time.sleep(0.05)
+
 
 class Weapon:
     def __init__(self, dmg, attack_speed):

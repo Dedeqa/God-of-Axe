@@ -4,7 +4,7 @@ pygame.init()
 
 WIDTH = 1920
 HEIGHT = 1080
-FPS = 120
+FPS = 10
 
 clock = pygame.time.Clock()
 
@@ -178,6 +178,7 @@ woodcutter_walk_left = [
     pygame.image.load('Images/Player/Woodcutter_walk_left/Woodcutter_walk5.png'),
     pygame.image.load('Images/Player/Woodcutter_walk_left/Woodcutter_walk6.png')
 ]
+
 woodcutter_run_right = [
     pygame.image.load('Images/Player/Woodcutter_run_right/Woodcutter_run1.png'),
     pygame.image.load('Images/Player/Woodcutter_run_right/Woodcutter_run2.png'),
