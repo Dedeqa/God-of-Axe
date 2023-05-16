@@ -194,7 +194,7 @@ woodcutter_run_left = [
     pygame.image.load('Images/Player/Woodcutter_run_left/Woodcutter_run5.png').convert_alpha(),
     pygame.image.load('Images/Player/Woodcutter_run_left/Woodcutter_run6.png').convert_alpha()
 ]
-vector = ''
+vector = 'right'
 woodcutter_attack_right = [
     pygame.image.load('Images/Player/Woodcutter_attack_right/attack_1.png').convert_alpha(),
     pygame.image.load('Images/Player/Woodcutter_attack_right/attack_2.png').convert_alpha(),

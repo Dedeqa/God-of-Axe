@@ -11,7 +11,6 @@ def start_game():
     if cfg.start_game_flag:
         # cfg.play_music.play(-1)
         cfg.start_game_flag = False
-    # cfg.play_music.set_volume(cfg.volume_music)
 
     while True:
         cfg.clock.tick(cfg.FPS)
@@ -20,11 +19,7 @@ def start_game():
                 quit()
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
-                    print(classes.player.image.get_rect())
-
                     pause()
-
-                    # pygame.mixer.music.unpause()
 
         cfg.screen.blit(cfg.game_bg, (-1920 + cfg.bg_x, -1080 + cfg.bg_y))  # 1 зона
         cfg.screen.blit(cfg.game_bg, (0 + cfg.bg_x, -1080 + cfg.bg_y))  # 2 зона
@@ -35,6 +30,7 @@ def start_game():
         cfg.screen.blit(cfg.game_bg, (-1920 + cfg.bg_x, 1080 + cfg.bg_y))  # 7 зона
         cfg.screen.blit(cfg.game_bg, (0 + cfg.bg_x, 1080 + cfg.bg_y))  # 8 зона
         cfg.screen.blit(cfg.game_bg, (1920 + cfg.bg_x, 1080 + cfg.bg_y))  # 9 зона
+
         classes.all_sprites.update()
         classes.all_sprites.draw(cfg.screen)
 
@@ -240,17 +236,3 @@ def options_game():
         cfg.screen.blit(cfg.point2, cfg.point2_rect)
 
         pygame.display.flip()
-
-# def random_trees(n):
-#     tree_array_x = set()
-#     tree_array_y = set()
-#     count = 0
-#     while count < n:
-#         x = random.randint(-3740, 3740)
-#         y = random.randint(-2060, 2060)
-#         if x not in tree_array_x and y not in tree_array_y:
-#             tree_array_y.add(y)
-#             tree_array_x.add(x)
-#             count += 1
-#     for elem in tree_array_x:
-#

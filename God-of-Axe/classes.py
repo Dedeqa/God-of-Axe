@@ -24,6 +24,7 @@ class Player(Unit, pygame.sprite.Sprite):
         self.speedy = 0
         self.i = 0
         self.at = 0
+        self.flag = False
 
     def update(self):
         self.speedx = 0
@@ -38,14 +39,12 @@ class Player(Unit, pygame.sprite.Sprite):
                             self.i = 0
                         self.image = cfg.woodcutter_run_left[self.i]
                         self.i += 1
-
                         sx = 10
                     else:
                         if self.i == 6:
                             self.i = 0
                         self.image = cfg.woodcutter_walk_left[self.i]
                         self.i += 1
-
                         sx = 5
                     if self.rect.x >= 50:
                         self.speedx = -sx
@@ -59,14 +58,12 @@ class Player(Unit, pygame.sprite.Sprite):
                             self.i = 0
                         self.image = cfg.woodcutter_run_right[self.i]
                         self.i += 1
-
                         sx = 10
                     else:
                         if self.i == 6:
                             self.i = 0
                         self.image = cfg.woodcutter_walk_right[self.i]
                         self.i += 1
-
                         sx = 5
                     if self.rect.x <= 1820:
                         self.speedx = sx
@@ -92,17 +89,11 @@ class Player(Unit, pygame.sprite.Sprite):
                         else:
                             self.image = cfg.woodcutter_walk_left[self.i]
                         self.i += 1
-
                         sy = 5
                     if self.rect.y >= 50:
                         self.speedy = -sy
                     elif cfg.bg_y < 1080:
                         cfg.bg_y += sy
-
-                    # if self.rect.y >= 50:
-                    #     self.speedy = -5
-                    # elif cfg.bg_y < 1080:
-                    #     cfg.bg_y += 5
             if keystate[pygame.K_s]:
                 if not (self.rect.colliderect(tree.line_top)):
                     if keystate[pygame.K_LSHIFT]:
@@ -122,7 +113,6 @@ class Player(Unit, pygame.sprite.Sprite):
                         else:
                             self.image = cfg.woodcutter_walk_left[self.i]
                         self.i += 1
-
                         sy = 5
                     if self.rect.y <= 980:
                         self.speedy = sy
@@ -134,8 +124,24 @@ class Player(Unit, pygame.sprite.Sprite):
                 self.image = pygame.image.load('Images/Player/Woodcutter_right.png').convert_alpha()
             elif cfg.vector == "left":
                 self.image = pygame.image.load('Images/Player/Woodcutter_left.png').convert_alpha()
+
         if keystate[pygame.K_e]:
-            self.attack()
+            self.flag = True
+
+        if self.flag:
+            if cfg.vector == "right":
+                self.image = cfg.woodcutter_attack_right[self.at]
+                self.at += 1
+                if self.at == 6:
+                    self.at = 0
+                    self.flag = False
+            else:
+                self.image = cfg.woodcutter_attack_left[self.at]
+                self.at += 1
+                if self.at == 6:
+                    self.at = 0
+                    self.flag = False
+
         self.rect.x += self.speedx
         self.rect.y += self.speedy
         # cfg.screen.fill("blue", tree.line_left)
@@ -145,14 +151,14 @@ class Player(Unit, pygame.sprite.Sprite):
         pygame.time.delay(60)
 
     def attack(self):
-
-        if cfg.vector == "right":
+        if self.flag:
+            if self.at == 5:
+                self.at = 0
+                self.flag = False
+            if cfg.vector == "right":
                 self.image = cfg.woodcutter_attack_right[self.at]
-        else:
-            self.image = cfg.woodcutter_attack_left[self.at]
-        self.at += 1
-        if self.at == 5:
-            self.at = 0
+            self.at += 1
+
 
 class Weapon:
     def __init__(self, dmg, attack_speed):
