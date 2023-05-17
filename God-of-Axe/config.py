@@ -271,3 +271,7 @@ woodcutter_attack_left = [
 tree_list_x = []
 tree_list_y = []
 trees = []
+trees_rects_right = []
+trees_rects_left = []
+trees_rects_top = []
+trees_rects_bottom = []

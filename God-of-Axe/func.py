@@ -11,7 +11,7 @@ def start_game():
     if cfg.start_game_flag:
         # cfg.play_music.play(-1)
         cfg.start_game_flag = False
-    tree_generator(50)
+    tree_generator(5)
     while True:
         cfg.clock.tick(cfg.FPS)
         print(cfg.clock.get_fps())
@@ -20,7 +20,6 @@ def start_game():
                 quit()
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
-                    print(classes.tree.hp)
                     pause()
 
         cfg.screen.blit(cfg.game_bg, (-1920 + cfg.bg_x, -1080 + cfg.bg_y))  # 1 зона
@@ -252,3 +251,7 @@ def tree_generator(n):
     cfg.trees.append(classes.tree)
     for elem in cfg.trees:
         classes.all_sprites.add(elem)
+        cfg.trees_rects_left.append(elem.line_left)
+        cfg.trees_rects_right.append(elem.line_right)
+        cfg.trees_rects_top.append(elem.line_top)
+        cfg.trees_rects_bottom.append(elem.line_bottom)

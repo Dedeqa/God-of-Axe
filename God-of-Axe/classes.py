@@ -44,7 +44,8 @@ class Player(Unit, pygame.sprite.Sprite):
 
             if keystate[pygame.K_a]:
                 cfg.vector = "left"
-                if not (tree.line_right.colliderect(self.line)):
+
+                if (self.line.collidelist(cfg.trees_rects_right)) == -1:
                     if keystate[pygame.K_LSHIFT]:
 
                         if self.i == 6:
@@ -77,7 +78,7 @@ class Player(Unit, pygame.sprite.Sprite):
                         cfg.bg_x += sx
             if keystate[pygame.K_d]:
                 cfg.vector = "right"
-                if not (tree.line_left.colliderect(self.line)):
+                if (self.line.collidelist(cfg.trees_rects_left)) == -1:
                     if keystate[pygame.K_LSHIFT]:
 
                         if self.i == 6:
@@ -110,7 +111,7 @@ class Player(Unit, pygame.sprite.Sprite):
                         cfg.bg_x -= sx
         if not (keystate[pygame.K_w] and keystate[pygame.K_s]):
             if keystate[pygame.K_w]:
-                if not (tree.line_bottom.colliderect(self.line)):
+                if (self.line.collidelist(cfg.trees_rects_bottom)) == -1:
                     if keystate[pygame.K_LSHIFT]:
 
                         if self.j == 6:
@@ -148,7 +149,7 @@ class Player(Unit, pygame.sprite.Sprite):
                     elif cfg.bg_y < 1080:
                         cfg.bg_y += sy
             if keystate[pygame.K_s]:
-                if not (tree.line_top.colliderect(self.line)):
+                if (self.line.collidelist(cfg.trees_rects_top)) == -1:
                     if keystate[pygame.K_LSHIFT]:
 
                         if self.j == 6:
@@ -201,13 +202,16 @@ class Player(Unit, pygame.sprite.Sprite):
         # self.line_y[1] += self.speedy
         self.line[0] += self.speedx
         self.line[1] += self.speedy
-        cfg.screen.fill("blue", tree.line_left)
-        cfg.screen.fill("blue", tree.line_right)
-        cfg.screen.fill("blue", tree.line_top)
-        cfg.screen.fill("blue", tree.line_bottom)
+
         # cfg.screen.fill("red", self.rect)
         # cfg.screen.fill("orange", self.rect_attack)
         cfg.screen.fill("orange", self.line)
+        for elem in cfg.trees:
+            cfg.screen.fill("blue", elem.line_right)
+            cfg.screen.fill("blue", elem.line_left)
+            cfg.screen.fill("blue", elem.line_top)
+            cfg.screen.fill("blue", elem.line_bottom)
+
 
     def attack(self):
         if self.flag:
