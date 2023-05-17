@@ -117,13 +117,12 @@ click = pygame.mixer.Sound(r'Music\zipclick.flac')
 wave = pygame.mixer.Sound(r'Music\energichnyiy-rezkiy-vzmah-razrezayuschiy-vozduh.mp3')
 
 # Звук удара о дерево --------------------------------------------------------------------------------------------------
-hit_tree = pygame.mixer.Sound(r'Music\korotkiy-gluhoy-zvuk-udara-po-derevu.mp3')
+hit_tree = pygame.mixer.Sound(r'Music\korotkiy-chtkiy-rezkiy-udar-po-derevu.mp3')
 
 volume_music = 1.0
 volume_sounds = 1.0
 volume_wave = 0.2
 volume_hit_tree = 1.0
-
 
 # Координаты для перемещения фона---------------------------------------------------------------------------------------
 bg_x = 0
@@ -276,7 +275,7 @@ woodcutter_attack_left = [
     pygame.transform.scale(
         pygame.image.load('Images/Player/Woodcutter_attack_left/attack_6.png').convert_alpha(), (50, 50)),
 ]
-
+# ----------------------------------------------------------------------------------------------------------------------
 tree_list_x = []
 tree_list_y = []
 trees = []
@@ -286,38 +285,43 @@ trees_rects_top = []
 trees_rects_bottom = []
 
 # Спрайты Минотавра ----------------------------------------------------------------------------------------------------
+
+# Хотьба вниз ----------------------------------------------------------------------------------------------------------
 minotaur_walk_bottom = [
     pygame.transform.scale(
         pygame.image.load('Images/monsters/walk_bottom/minotaur-S-stand.png').convert_alpha(), (50, 50)),
     pygame.transform.scale(
         pygame.image.load('Images/monsters/walk_bottom/minotaur-S-step1.png').convert_alpha(), (50, 50)),
-   pygame.transform.scale(
+    pygame.transform.scale(
         pygame.image.load('Images/monsters/walk_bottom/minotaur-S-step2.png').convert_alpha(), (50, 50))
 ]
 
+# Хотьба вверх ---------------------------------------------------------------------------------------------------------
 minotaur_walk_top = [
     pygame.transform.scale(
         pygame.image.load('Images/monsters/walk_top/minotaur-N-stand.png').convert_alpha(), (50, 50)),
     pygame.transform.scale(
         pygame.image.load('Images/monsters/walk_top/minotaur-N-step1.png').convert_alpha(), (50, 50)),
-   pygame.transform.scale(
+    pygame.transform.scale(
         pygame.image.load('Images/monsters/walk_top/minotaur-N-step2.png').convert_alpha(), (50, 50))
 ]
 
+# Хотьба влево ---------------------------------------------------------------------------------------------------------
 minotaur_walk_left = [
     pygame.transform.scale(
         pygame.image.load('Images/monsters/walk_left/minotaur-W-stand.png').convert_alpha(), (50, 50)),
     pygame.transform.scale(
         pygame.image.load('Images/monsters/walk_left/minotaur-W-step1.png').convert_alpha(), (50, 50)),
-   pygame.transform.scale(
+    pygame.transform.scale(
         pygame.image.load('Images/monsters/walk_left/minotaur-W-step2.png').convert_alpha(), (50, 50))
 ]
 
+# Хотьба вправо --------------------------------------------------------------------------------------------------------
 minotaur_walk_right = [
     pygame.transform.scale(
         pygame.image.load('Images/monsters/walk_right/minotaur_stand_right.png').convert_alpha(), (50, 50)),
     pygame.transform.scale(
         pygame.image.load('Images/monsters/walk_right/minotaur_step1_right.png').convert_alpha(), (50, 50)),
-   pygame.transform.scale(
+    pygame.transform.scale(
         pygame.image.load('Images/monsters/walk_right/minotaur_step2_right.png').convert_alpha(), (50, 50))
 ]
