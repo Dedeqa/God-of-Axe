@@ -29,10 +29,8 @@ class Player(Unit, pygame.sprite.Sprite):
         self.wood_amount = 0
         self.rect_attack = pygame.Rect(self.rect[0] + self.rect[2] / 4 * 3, self.rect[1], self.rect[2] / 2,
                                        self.rect[3])
-        # self.line = pygame.Rect(
-        #     (self.rect[0] + self.rect[2] / 2, self.rect[1] + self.rect[3] / 3, 5, self.rect[3] / 3 * 2))
-        self.line_x = pygame.Rect(self.rect[0] + self.rect[2] / 3, self.rect[1] + self.rect[3] / 3, self.rect[2] / 3,
-                                  self.rect[3] / 3 * 2)
+        self.line = pygame.Rect(self.rect[0] + self.rect[2] / 3, self.rect[1] + self.rect[3] / 6 - 5, self.rect[2] / 3,
+                                  self.rect[3] / 6 * 5)
 
     def update(self):
         self.speedx = 0
@@ -41,7 +39,7 @@ class Player(Unit, pygame.sprite.Sprite):
         if not (keystate[pygame.K_a] and keystate[pygame.K_d]):
             if keystate[pygame.K_a]:
                 cfg.vector = "left"
-                if not (tree.line_right.colliderect(self.line_x)):
+                if not (tree.line_right.colliderect(self.line)):
                     if keystate[pygame.K_LSHIFT]:
                         if self.i == 6:
                             self.i = 0
@@ -60,7 +58,7 @@ class Player(Unit, pygame.sprite.Sprite):
                         cfg.bg_x += sx
             if keystate[pygame.K_d]:
                 cfg.vector = "right"
-                if not (tree.line_left.colliderect(self.line_x)):
+                if not (tree.line_left.colliderect(self.line)):
                     if keystate[pygame.K_LSHIFT]:
                         if self.i == 6:
                             self.i = 0
@@ -79,7 +77,7 @@ class Player(Unit, pygame.sprite.Sprite):
                         cfg.bg_x -= sx
         if not (keystate[pygame.K_w] and keystate[pygame.K_s]):
             if keystate[pygame.K_w]:
-                if not (tree.line_bottom.colliderect(self.line_x)):
+                if not (tree.line_bottom.colliderect(self.line)):
                     if keystate[pygame.K_LSHIFT]:
                         if self.i == 6:
                             self.i = 0
@@ -103,7 +101,7 @@ class Player(Unit, pygame.sprite.Sprite):
                     elif cfg.bg_y < 1080:
                         cfg.bg_y += sy
             if keystate[pygame.K_s]:
-                if not (tree.line_top.colliderect(self.line_x)):
+                if not (tree.line_top.colliderect(self.line)):
                     if keystate[pygame.K_LSHIFT]:
                         if self.i == 6:
                             self.i = 0
@@ -140,15 +138,15 @@ class Player(Unit, pygame.sprite.Sprite):
         self.rect.y += self.speedy
         # self.line_y[0] += self.speedx
         # self.line_y[1] += self.speedy
-        self.line_x[0] += self.speedx
-        self.line_x[1] += self.speedy
+        self.line[0] += self.speedx
+        self.line[1] += self.speedy
         cfg.screen.fill("blue", tree.line_left)
         cfg.screen.fill("blue", tree.line_right)
         cfg.screen.fill("blue", tree.line_top)
         cfg.screen.fill("blue", tree.line_bottom)
         # cfg.screen.fill("red", self.rect)
         # cfg.screen.fill("orange", self.line_y)
-        cfg.screen.fill("orange", self.line_x)
+        cfg.screen.fill("orange", self.line)
 
         pygame.time.delay(80)
 
@@ -159,7 +157,7 @@ class Player(Unit, pygame.sprite.Sprite):
                 self.at += 1
                 if self.at == 6:
                     self.at = 0
-                    for elem in list:
+                    for elem in cfg.trees:
                         if self.rect_attack.colliderect(elem):
                             elem.take_dmg(self.weapon.damage)
                     self.flag = False
@@ -168,7 +166,7 @@ class Player(Unit, pygame.sprite.Sprite):
                 self.at += 1
                 if self.at == 6:
                     self.at = 0
-                    for elem in list:
+                    for elem in cfg.trees:
                         if self.rect_attack.colliderect(elem):
                             elem.take_dmg(self.weapon.damage)
                     self.flag = False
@@ -215,8 +213,8 @@ class Tree(Unit, pygame.sprite.Sprite):
         self.line_bottom_y = posy + self.rect[3] / 6 * 5 + self.rect[3] / 9
         self.bonus = bonus
 
-        self.line_left = pygame.Rect(self.line_left_x - 3, self.line_left_y + 3, 5, self.rect[3] / 9)
-        self.line_right = pygame.Rect(self.line_right_x, self.line_right_y, 5, self.rect[3] / 9)
+        self.line_left = pygame.Rect(self.line_left_x - 3, self.line_left_y + 3, 5, self.rect[3] / 9 - 5)
+        self.line_right = pygame.Rect(self.line_right_x, self.line_right_y, 5, self.rect[3] / 9 - 5)
         self.line_top = pygame.Rect(self.line_top_x, self.line_top_y, self.rect[2] / 3 - 8, 5)
         self.line_bottom = pygame.Rect(self.line_bottom_x, self.line_bottom_y, self.rect[2] / 3 - 8, 5)
 

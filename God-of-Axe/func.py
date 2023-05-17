@@ -248,7 +248,7 @@ def tree_generator(n):
             cfg.tree_list_x.append(x)
             cfg.tree_list_y.append(y)
             count += 1
-    classes.list = [classes.Tree(f'Дерево{i}', 100, cfg.tree_list_x[i], cfg.tree_list_y[i], 5) for i in range(n)]
-    classes.list.append(classes.tree)
-    for elem in classes.list:
+    cfg.trees = [classes.Tree(f'Дерево{i}', 100, cfg.tree_list_x[i], cfg.tree_list_y[i], 5) for i in range(n)]
+    cfg.trees.append(classes.tree)
+    for elem in cfg.trees:
         classes.all_sprites.add(elem)
