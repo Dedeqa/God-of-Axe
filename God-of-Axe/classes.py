@@ -27,10 +27,11 @@ class Player(Unit, pygame.sprite.Sprite):
         self.at = 0
         self.flag = False
         self.wood_amount = 0
-        self.rect_attack = pygame.Rect(self.rect[0] + self.rect[2] / 4 * 3, self.rect[1], self.rect[2] / 2,
-                                       self.rect[3])
+        self.rect_attack = pygame.Rect(self.rect[0] + self.rect[2] / 2 + 10, self.rect[1] + self.rect[3] / 3,
+                                       self.rect[2] / 3 * 2,
+                                       self.rect[3] / 3)
         self.line = pygame.Rect(self.rect[0] + self.rect[2] / 3, self.rect[1] + self.rect[3] / 6 - 5, self.rect[2] / 3,
-                                  self.rect[3] / 6 * 5)
+                                self.rect[3] / 6 * 5)
 
     def update(self):
         self.speedx = 0
@@ -136,19 +137,18 @@ class Player(Unit, pygame.sprite.Sprite):
         self.attack()
         self.rect.x += self.speedx
         self.rect.y += self.speedy
-        # self.line_y[0] += self.speedx
-        # self.line_y[1] += self.speedy
         self.line[0] += self.speedx
         self.line[1] += self.speedy
-        cfg.screen.fill("blue", tree.line_left)
-        cfg.screen.fill("blue", tree.line_right)
-        cfg.screen.fill("blue", tree.line_top)
-        cfg.screen.fill("blue", tree.line_bottom)
+        # cfg.screen.fill("blue", tree.line_left)
+        # cfg.screen.fill("blue", tree.line_right)
+        # cfg.screen.fill("blue", tree.line_top)
+        # cfg.screen.fill("blue", tree.line_bottom)
         # cfg.screen.fill("red", self.rect)
         # cfg.screen.fill("orange", self.line_y)
-        cfg.screen.fill("orange", self.line)
+        # cfg.screen.fill("orange", self.line)
+        cfg.screen.fill("orange", self.rect_attack)
 
-        pygame.time.delay(80)
+        # pygame.time.delay(80)
 
     def attack(self):
         if self.flag:
@@ -171,11 +171,13 @@ class Player(Unit, pygame.sprite.Sprite):
                             elem.take_dmg(self.weapon.damage)
                     self.flag = False
             if cfg.vector == 'right':
-                self.rect_attack = pygame.Rect(self.rect[0] + self.rect[2] / 4 * 3, self.rect[1], self.rect[2] / 2,
-                                               self.rect[3])
+                self.rect_attack = pygame.Rect(self.rect[0] + self.rect[2] / 2 + 10, self.rect[1] + self.rect[3] / 3,
+                                               self.rect[2] / 3 * 2,
+                                               self.rect[3] / 3)
             else:
-                self.rect_attack = pygame.Rect(self.rect[0] - self.rect[2] / 4, self.rect[1], self.rect[2] / 2,
-                                               self.rect[3])
+                self.rect_attack = pygame.Rect(self.rect[0] - self.rect[2] / 3, self.rect[1] + self.rect[3] / 3,
+                                               self.rect[2] / 3 * 2,
+                                               self.rect[3] / 3)
 
 
 class Weapon:

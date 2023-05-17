@@ -252,3 +252,4 @@ def tree_generator(n):
     cfg.trees.append(classes.tree)
     for elem in cfg.trees:
         classes.all_sprites.add(elem)
+
