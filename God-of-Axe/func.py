@@ -11,8 +11,7 @@ def start_game():
     if cfg.start_game_flag:
         # cfg.play_music.play(-1)
         cfg.start_game_flag = False
-    tree_generator(75)
-
+    tree_generator(50)
     while True:
         cfg.clock.tick(cfg.FPS)
         for event in pygame.event.get():
@@ -35,6 +34,7 @@ def start_game():
 
         classes.all_sprites.update()
         classes.all_sprites.draw(cfg.screen)
+
         pygame.display.flip()
 
 
@@ -239,7 +239,6 @@ def options_game():
         pygame.display.flip()
 
 
-# Генератор деревьев------------------------------------------------------
 def tree_generator(n):
     count = 0
     while count < n:
