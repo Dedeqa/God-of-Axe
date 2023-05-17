@@ -229,7 +229,7 @@ class Tree(Unit, pygame.sprite.Sprite):
         if self.hp <= 0:
             self.remove(all_sprites)
             self.kill()
-            list.clear()
+
             self.line_left[2] = 0
             self.line_left[3] = 0
             self.line_right[2] = 0
@@ -243,4 +243,4 @@ class Tree(Unit, pygame.sprite.Sprite):
 
 tree = Tree("Bereza", 500, 960, 800, 5)
 all_sprites.add(tree)
-list = [tree]
+
