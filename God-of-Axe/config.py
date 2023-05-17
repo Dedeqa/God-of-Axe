@@ -113,8 +113,17 @@ play_music = pygame.mixer.Sound(r'Music/Bad Piggies Theme - Piano Tutorial.mp3')
 # Звук нажатия кнопок меню ---------------------------------------------------------------------------------------------
 click = pygame.mixer.Sound(r'Music\zipclick.flac')
 
+# Звук взмаха топором --------------------------------------------------------------------------------------------------
+wave = pygame.mixer.Sound(r'Music\energichnyiy-rezkiy-vzmah-razrezayuschiy-vozduh.mp3')
+
+# Звук удара о дерево --------------------------------------------------------------------------------------------------
+hit_tree = pygame.mixer.Sound(r'Music\korotkiy-gluhoy-zvuk-udara-po-derevu.mp3')
+
 volume_music = 1.0
 volume_sounds = 1.0
+volume_wave = 0.2
+volume_hit_tree = 1.0
+
 
 # Координаты для перемещения фона---------------------------------------------------------------------------------------
 bg_x = 0
