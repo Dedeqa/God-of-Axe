@@ -16,7 +16,8 @@ class Player(Unit, pygame.sprite.Sprite):
     def __init__(self, nm, hp, posx, posy):
         Unit.__init__(self, nm, hp, posx, posy)
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.image.load('Images/Player/Woodcutter_right.png').convert_alpha()
+        self.image = cfg.woodcutter_stay_right
+
         self.rect = self.image.get_rect()
         self.rect.center = (posx / 2, posy / 2)
         self.weapon = Weapon(100, 1000)
@@ -124,20 +125,20 @@ class Player(Unit, pygame.sprite.Sprite):
         if not (keystate[pygame.K_w] or keystate[pygame.K_s] or keystate[pygame.K_a] or keystate[pygame.K_d] or
                 keystate[pygame.K_e]):
             if cfg.vector == "right":
-                self.image = pygame.image.load('Images/Player/Woodcutter_right.png').convert_alpha()
+                self.image = cfg.woodcutter_stay_right
             elif cfg.vector == "left":
-                self.image = pygame.image.load('Images/Player/Woodcutter_left.png').convert_alpha()
+                self.image = cfg.woodcutter_stay_left
 
         if keystate[pygame.K_e]:
             self.flag = True
         self.attack()
         self.rect.x += self.speedx
         self.rect.y += self.speedy
-        cfg.screen.fill("blue", tree.line_left)
-        cfg.screen.fill("blue", tree.line_right)
-        cfg.screen.fill("blue", tree.line_top)
-        cfg.screen.fill("blue", tree.line_bottom)
-        cfg.screen.fill("blue", self.rect_attack)
+        # cfg.screen.fill("blue", tree.line_left)
+        # cfg.screen.fill("blue", tree.line_right)
+        # cfg.screen.fill("blue", tree.line_top)
+        # cfg.screen.fill("blue", tree.line_bottom)
+        # cfg.screen.fill("blue", self.rect_attack)
 
         pygame.time.delay(60)
 
