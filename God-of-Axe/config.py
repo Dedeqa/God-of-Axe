@@ -275,3 +275,5 @@ trees_rects_right = []
 trees_rects_left = []
 trees_rects_top = []
 trees_rects_bottom = []
+
+#Спрайты Минотавра

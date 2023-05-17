@@ -1,7 +1,6 @@
 import pygame
-import func
 import config as cfg
-import time
+
 
 
 class Unit:
