@@ -312,6 +312,7 @@ class Tree(Unit, pygame.sprite.Sprite):
         self.line_bottom[1] = cfg.bg_y + self.line_bottom_y
 
     def take_dmg(self, dmg):
+        cfg.hit_tree.play()
         self.hp -= dmg
         if self.hp <= 0:
             self.remove(all_sprites)

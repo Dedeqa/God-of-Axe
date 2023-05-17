@@ -228,6 +228,7 @@ def options_game():
                 cfg.volume_sounds = 0.01 * ((cfg.point2_rect.centerx - cfg.scale2_rect.left) / 3)
 
                 cfg.click.set_volume(cfg.volume_sounds)
+                cfg.wave.set_volume(cfg.volume_sounds)
 
         cfg.screen.blit(cfg.tablet_transform, cfg.tablet_rect)
         cfg.screen.blit(cfg.music_label, cfg.music_label_rect)
