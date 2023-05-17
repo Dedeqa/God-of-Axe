@@ -14,6 +14,7 @@ def start_game():
     tree_generator(50)
     while True:
         cfg.clock.tick(cfg.FPS)
+        print(cfg.clock.get_fps())
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 quit()
@@ -49,7 +50,7 @@ def menu():
         mouse = pygame.mouse.get_pos()
         click = pygame.mouse.get_pressed()
 
-        cfg.clock.tick(cfg.FPS)
+        cfg.clock.tick(100)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 quit()
@@ -110,7 +111,7 @@ def pause():
         mouse = pygame.mouse.get_pos()
         click = pygame.mouse.get_pressed()
 
-        cfg.clock.tick(cfg.FPS)
+        cfg.clock.tick(100)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 quit()
@@ -165,7 +166,7 @@ def options_menu():
     while True:
         mouse = pygame.mouse.get_pos()
         click = pygame.mouse.get_pressed()
-        cfg.clock.tick(200)
+        cfg.clock.tick(100)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 quit()
@@ -206,7 +207,7 @@ def options_game():
         mouse = pygame.mouse.get_pos()
         click = pygame.mouse.get_pressed()
 
-        cfg.clock.tick(200)
+        cfg.clock.tick(100)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 quit()
