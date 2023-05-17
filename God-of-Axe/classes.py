@@ -25,6 +25,7 @@ class Player(Unit, pygame.sprite.Sprite):
         self.i = 0
         self.at = 0
         self.flag = False
+        self.wood_amount = 0
         self.rect_attack = pygame.Rect(self.rect[0] + self.rect[2] / 4 * 3, self.rect[1], self.rect[2] / 2,
                                            self.rect[3])
 
@@ -202,6 +203,7 @@ class Tree(Unit, pygame.sprite.Sprite):
         self.line_top_y = posy + self.rect[3] / 6 * 5
         self.line_bottom_x = self.line_top_x
         self.line_bottom_y = posy + self.rect[3] / 6 * 5 + self.rect[3] / 9
+        self.bonus = bonus
 
         self.line_left = pygame.Rect(self.line_left_x, self.line_left_y, 1, self.rect[3] / 9 - 8)
         self.line_right = pygame.Rect(self.line_right_x, self.line_right_y, 1, self.rect[3] / 9 - 8)
@@ -220,12 +222,22 @@ class Tree(Unit, pygame.sprite.Sprite):
         self.line_bottom[0] = cfg.bg_x + self.line_bottom_x
         self.line_bottom[1] = cfg.bg_y + self.line_bottom_y
 
+
     def take_dmg(self, dmg):
         self.hp -= dmg
         if self.hp <= 0:
             self.remove(all_sprites)
+            self.kill()
             list.clear()
-            print(self.posx)
+            self.line_left[2] = 0
+            self.line_left[3] = 0
+            self.line_right[2] = 0
+            self.line_right[3] = 0
+            self.line_top[2] = 0
+            self.line_top[3] = 0
+            self.line_bottom[2] = 0
+            self.line_bottom[3] = 0
+            player.wood_amount += self.bonus
 
 
 tree = Tree("Bereza", 500, 960, 800, 5)
