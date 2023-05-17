@@ -237,7 +237,7 @@ woodcutter_run_left = [
     pygame.transform.scale(
         pygame.image.load('Images/Player/Woodcutter_run_left/Woodcutter_run5.png').convert_alpha(), (75, 75)),
     pygame.transform.scale(
-        pygame.image.load('Images/Player/Woodcutter_run_right/Woodcutter_run6.png').convert_alpha(), (75, 75)),
+        pygame.image.load('Images/Player/Woodcutter_run_left/Woodcutter_run6.png').convert_alpha(), (75, 75)),
     # pygame.image.load('Images/Player/Woodcutter_run_left/Woodcutter_run1.png').convert_alpha(),
     # pygame.image.load('Images/Player/Woodcutter_run_left/Woodcutter_run2.png').convert_alpha(),
     # pygame.image.load('Images/Player/Woodcutter_run_left/Woodcutter_run3.png').convert_alpha(),
