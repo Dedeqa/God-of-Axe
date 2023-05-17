@@ -3,6 +3,7 @@ import pygame
 import time
 import classes
 import random
+import mobs
 
 pygame.mixer.pre_init(44100, -16, 1, 512)
 
@@ -20,6 +21,8 @@ def start_game():
                 quit()
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
+                    print(mobs.min1.rect)
+                    print(classes.player.rect)
                     pause()
 
         cfg.screen.blit(cfg.game_bg, (-1920 + cfg.bg_x, -1080 + cfg.bg_y))  # 1 зона
