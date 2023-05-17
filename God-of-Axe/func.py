@@ -34,7 +34,8 @@ def start_game():
 
         classes.all_sprites.update()
         classes.all_sprites.draw(cfg.screen)
-
+        tree_generator(2)
+        print(cfg.trees)
         pygame.display.flip()
 
 
@@ -237,3 +238,18 @@ def options_game():
         cfg.screen.blit(cfg.point2, cfg.point2_rect)
 
         pygame.display.flip()
+
+
+# Генератор деревьев------------------------------------------------------
+def tree_generator(n):
+    count = 0
+    x = random.randint(-1870, 3740)
+    y = random.randint(-1030, 2060)
+    while count < n:
+        if not (x in cfg.tree_list_x and y in cfg.tree_list_y):
+            cfg.tree_list_x.append(x)
+            cfg.tree_list_y.append(y)
+            count += 1
+    cfg.trees = [classes.Tree(f'Дерево{i}', 100, cfg.tree_list_x[i], cfg.tree_list_y[i], 5) for i in cfg.tree_list_x]
+    for elem in cfg.trees:
+        classes.all_sprites.add(elem)

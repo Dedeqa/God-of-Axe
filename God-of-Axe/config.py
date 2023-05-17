@@ -4,12 +4,13 @@ pygame.init()
 
 WIDTH = 1920
 HEIGHT = 1080
-FPS = 120
+FPS = 60
 
 clock = pygame.time.Clock()
 
 menu_flag = True
 start_game_flag = True
+attack_flag = True
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 size = screen.get_size()
@@ -286,3 +287,8 @@ woodcutter_attack_left = [
     # pygame.image.load('Images/Player/Woodcutter_attack_left/attack_5.png').convert_alpha(),
     # pygame.image.load('Images/Player/Woodcutter_attack_left/attack_6.png').convert_alpha()
 ]
+
+#Генератор
+tree_list_x = []
+tree_list_y = []
+trees = []
