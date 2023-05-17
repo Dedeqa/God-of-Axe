@@ -293,7 +293,6 @@ class Tree(Unit, pygame.sprite.Sprite):
         self.line_bottom_x = self.line_top_x
         self.line_bottom_y = posy + self.rect[3] / 6 * 5 + self.rect[3] / 9
         self.bonus = bonus
-
         self.line_left = pygame.Rect(self.line_left_x - 3, self.line_left_y + 3, 5, self.rect[3] / 9 - 5)
         self.line_right = pygame.Rect(self.line_right_x, self.line_right_y, 5, self.rect[3] / 9 - 5)
         self.line_top = pygame.Rect(self.line_top_x, self.line_top_y, self.rect[2] / 3 - 8, 5)
@@ -312,10 +311,10 @@ class Tree(Unit, pygame.sprite.Sprite):
         self.line_bottom[1] = cfg.bg_y + self.line_bottom_y
 
     def take_dmg(self, dmg):
-        if self.hp - dmg > 0:
+        if self.hp > 0:
             self.hp -= dmg
             cfg.hit_tree.play()
-        elif self.hp - dmg <= 0:
+        if self.hp <= 0:
             self.remove(all_sprites)
             self.kill()
             self.line_left[2] = 0
