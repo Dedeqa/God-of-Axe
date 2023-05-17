@@ -159,7 +159,7 @@ class Player(Unit, pygame.sprite.Sprite):
                 self.at += 1
                 if self.at == 6:
                     self.at = 0
-                    for elem in list:
+                    for elem in cfg.trees:
                         if self.rect_attack.colliderect(elem):
                             elem.take_dmg(self.weapon.damage)
                     self.flag = False
@@ -168,7 +168,7 @@ class Player(Unit, pygame.sprite.Sprite):
                 self.at += 1
                 if self.at == 6:
                     self.at = 0
-                    for elem in list:
+                    for elem in cfg.trees:
                         if self.rect_attack.colliderect(elem):
                             elem.take_dmg(self.weapon.damage)
                     self.flag = False
