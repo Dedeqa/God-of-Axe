@@ -14,7 +14,7 @@ def start_game():
     tree_generator(50)
     while True:
         cfg.clock.tick(cfg.FPS)
-        print(cfg.clock.get_fps())
+        # print(cfg.clock.get_fps())
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 quit()

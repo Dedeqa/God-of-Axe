@@ -2,6 +2,7 @@ import pygame
 import config as cfg
 
 
+# pygame.mixer.pre_init(44100, -16, 1, 512)
 
 class Unit:
     def __init__(self, nm, hp, posx, posy):
@@ -194,6 +195,7 @@ class Player(Unit, pygame.sprite.Sprite):
 
         if keystate[pygame.K_e]:
             self.flag = True
+
         self.attack()
         self.rect.x += self.speedx
         self.rect.y += self.speedy
@@ -211,12 +213,13 @@ class Player(Unit, pygame.sprite.Sprite):
         #     cfg.screen.fill("blue", elem.line_top)
         #     cfg.screen.fill("blue", elem.line_bottom)
 
-
     def attack(self):
         if self.flag:
-            cfg.wave.play()
-            if cfg.vector == "right":
+            if self.at == 0:
+                cfg.wave.stop()
+                cfg.wave.play()
 
+            if cfg.vector == "right":
                 self.image = cfg.woodcutter_attack_right[self.at]
                 self.anim_time_attack += 1
 

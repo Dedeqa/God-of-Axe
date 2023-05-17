@@ -114,7 +114,7 @@ play_music = pygame.mixer.Sound(r'Music/Bad Piggies Theme - Piano Tutorial.mp3')
 click = pygame.mixer.Sound(r'Music\zipclick.flac')
 
 # Звук взмаха топором --------------------------------------------------------------------------------------------------
-wave = pygame.mixer.Sound(r'Music\medlennyiy-zamah.mp3')
+wave = pygame.mixer.Sound(r'Music\energichnyiy-rezkiy-vzmah-razrezayuschiy-vozduh.mp3')
 
 volume_music = 1.0
 volume_sounds = 1.0
