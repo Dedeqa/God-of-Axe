@@ -187,6 +187,7 @@ def options_menu():
                 cfg.point2_rect.center = (mouse[0], cfg.scale2_rect.centery)
                 cfg.volume_sounds = 0.01 * ((cfg.point2_rect.centerx - cfg.scale2_rect.left) / 3)
                 cfg.click.set_volume(cfg.volume_sounds)
+                cfg.wave.set_volume(cfg.volume_sounds)
 
         cfg.screen.blit(cfg.menu_bg, (0, 0))
         cfg.screen.blit(cfg.menu_title, cfg.menu_title_rect)

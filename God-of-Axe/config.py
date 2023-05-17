@@ -113,9 +113,13 @@ play_music = pygame.mixer.Sound(r'Music/Bad Piggies Theme - Piano Tutorial.mp3')
 # Звук нажатия кнопок меню ---------------------------------------------------------------------------------------------
 click = pygame.mixer.Sound(r'Music\zipclick.flac')
 
+# Звук взмаха топором --------------------------------------------------------------------------------------------------
+wave = pygame.mixer.Sound(r'Music\medlennyiy-zamah.mp3')
+
 volume_music = 1.0
 volume_sounds = 1.0
-
+volume_wave = 0.2
+wave.set_volume(volume_wave)
 # Координаты для перемещения фона---------------------------------------------------------------------------------------
 bg_x = 0
 bg_y = 0
