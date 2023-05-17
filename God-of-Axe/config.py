@@ -276,4 +276,39 @@ trees_rects_left = []
 trees_rects_top = []
 trees_rects_bottom = []
 
-#Спрайты Минотавра
+# Спрайты Минотавра ----------------------------------------------------------------------------------------------------
+minotaur_walk_bottom = [
+    pygame.transform.scale(
+        pygame.image.load('Images/monsters/walk_bottom/minotaur-S-stand.png').convert_alpha(), (50, 50)),
+    pygame.transform.scale(
+        pygame.image.load('Images/monsters/walk_bottom/minotaur-S-step1.png').convert_alpha(), (50, 50)),
+   pygame.transform.scale(
+        pygame.image.load('Images/monsters/walk_bottom/minotaur-S-step2.png').convert_alpha(), (50, 50))
+]
+
+minotaur_walk_top = [
+    pygame.transform.scale(
+        pygame.image.load('Images/monsters/walk_top/minotaur-N-stand.png').convert_alpha(), (50, 50)),
+    pygame.transform.scale(
+        pygame.image.load('Images/monsters/walk_top/minotaur-N-step1.png').convert_alpha(), (50, 50)),
+   pygame.transform.scale(
+        pygame.image.load('Images/monsters/walk_top/minotaur-N-step2.png').convert_alpha(), (50, 50))
+]
+
+minotaur_walk_left = [
+    pygame.transform.scale(
+        pygame.image.load('Images/monsters/walk_left/minotaur-W-stand.png').convert_alpha(), (50, 50)),
+    pygame.transform.scale(
+        pygame.image.load('Images/monsters/walk_left/minotaur-W-step1.png').convert_alpha(), (50, 50)),
+   pygame.transform.scale(
+        pygame.image.load('Images/monsters/walk_left/minotaur-W-step2.png').convert_alpha(), (50, 50))
+]
+
+minotaur_walk_right = [
+    pygame.transform.scale(
+        pygame.image.load('Images/monsters/walk_right/minotaur_stand_right.png').convert_alpha(), (50, 50)),
+    pygame.transform.scale(
+        pygame.image.load('Images/monsters/walk_right/minotaur_step1_right.png').convert_alpha(), (50, 50)),
+   pygame.transform.scale(
+        pygame.image.load('Images/monsters/walk_right/minotaur_step2_right.png').convert_alpha(), (50, 50))
+]
