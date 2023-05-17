@@ -245,12 +245,10 @@ def tree_generator(n):
     while count < n:
         x = random.randint(-1870, 3740)
         y = random.randint(-1030, 2060)
-        if not (x in cfg.tree_list_x and y in cfg.tree_list_y):
-            cfg.tree_list_x.append(x)
-            cfg.tree_list_y.append(y)
-            count += 1
+        cfg.tree_list_x.append(x)
+        cfg.tree_list_y.append(y)
+        count += 1
     cfg.trees = [classes.Tree(f'Дерево{i}', 100, cfg.tree_list_x[i], cfg.tree_list_y[i], 5) for i in range(n)]
     cfg.trees.append(classes.tree)
     for elem in cfg.trees:
         classes.all_sprites.add(elem)
-
