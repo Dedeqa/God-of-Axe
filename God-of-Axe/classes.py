@@ -33,6 +33,7 @@ class Player(Unit, pygame.sprite.Sprite):
         self.line = pygame.Rect(self.rect[0] + self.rect[2] / 3, self.rect[1] + self.rect[3] / 6 - 5, self.rect[2] / 3,
                                 self.rect[3] / 6 * 5)
 
+
     def update(self):
         self.speedx = 0
         self.speedy = 0
