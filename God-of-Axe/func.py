@@ -12,7 +12,7 @@ def start_game():
     if cfg.start_game_flag:
         # cfg.play_music.play(-1)
         cfg.start_game_flag = False
-    tree_generator(50)
+    tree_generator(25)
     while True:
         cfg.clock.tick(cfg.FPS)
         # print(cfg.clock.get_fps())
@@ -21,7 +21,7 @@ def start_game():
                 quit()
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
-                    print(mobs.min1.rect)
+                    print(cfg.trees[1].rect.center)
                     print(classes.player.rect)
                     pause()
 
@@ -249,12 +249,27 @@ def options_game():
 
 def tree_generator(n):
     count = 0
+    delta = 500
+    first_elem_flag = True
     while count < n:
+        add_flag = True
         x = random.randint(-1870, 3740)
         y = random.randint(-1030, 2060)
-        cfg.tree_list_x.append(x)
-        cfg.tree_list_y.append(y)
-        count += 1
+        if first_elem_flag:
+            cfg.tree_list_x.append(x)
+            cfg.tree_list_y.append(y)
+            first_elem_flag = False
+            count += 1
+        for elem in range(count):
+            if abs(cfg.tree_list_x[elem] - x) > delta or abs(cfg.tree_list_y[elem] - y) > delta:
+                pass
+            else:
+                add_flag = False
+        if add_flag:
+            cfg.tree_list_x.append(x)
+            cfg.tree_list_y.append(y)
+            count += 1
+
     cfg.trees = [classes.Tree(f'Дерево{i}', 100, cfg.tree_list_x[i], cfg.tree_list_y[i], 5) for i in range(n)]
     cfg.trees.append(classes.tree)
     for elem in cfg.trees:
