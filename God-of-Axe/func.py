@@ -12,7 +12,7 @@ def start_game():
     if cfg.start_game_flag:
         # cfg.play_music.play(-1)
         cfg.start_game_flag = False
-    tree_generator(100)
+    tree_generator(500)
     while True:
         cfg.clock.tick(cfg.FPS)
         # print(cfg.clock.get_fps())
@@ -250,7 +250,7 @@ def options_game():
 
 def tree_generator(n):
     count = 0
-    delta = 300
+    delta = 125
     first_elem_flag = True
     while count < n:
         add_flag = True
@@ -272,7 +272,6 @@ def tree_generator(n):
             count += 1
 
     cfg.trees = [classes.Tree(f'Дерево{i}', 100, cfg.tree_list_x[i], cfg.tree_list_y[i], 5) for i in range(n)]
-    cfg.trees.append(classes.tree)
     for elem in cfg.trees:
         classes.all_sprites.add(elem)
         cfg.trees_rects_left.append(elem.line_left)
