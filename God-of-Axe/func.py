@@ -21,8 +21,9 @@ def start_game():
                 quit()
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
-                    print(cfg.trees[1].rect.center)
-                    print(classes.player.rect)
+                    # print(classes.player.rect)
+                    # print(mobs.Monster.distance)
+                    # print(follower_vector.x)
                     pause()
 
         cfg.screen.blit(cfg.game_bg, (-1920 + cfg.bg_x, -1080 + cfg.bg_y))  # 1 зона
@@ -254,7 +255,7 @@ def tree_generator(n):
     while count < n:
         add_flag = True
         x = random.randint(-1870, 3740)
-        y = random.randint(-1030, 2060)
+        y = random.randint(-1030, 2040)
         if first_elem_flag:
             cfg.tree_list_x.append(x)
             cfg.tree_list_y.append(y)

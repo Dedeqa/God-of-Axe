@@ -1,7 +1,7 @@
 import pygame
+import pygame.math as m
 import config as cfg
 import classes as cl
-import math
 
 
 class Monster(cl.Unit, pygame.sprite.Sprite):
@@ -16,31 +16,52 @@ class Monster(cl.Unit, pygame.sprite.Sprite):
         self.speedy = 0
         self.kx = 0
         self.ky = 0
+        self.minimum_distance = 50
+        self.maximum_distance = 10000
+        self.LERP_FACTOR = 0.05
     def update(self):
-        if self.posx <= cl.player.rect.centerx:
-            self.kx = 1
-            dx = cl.player.rect.centerx - self.posx
-        else:
-            self.kx = -1
-            dx = self.posx - cl.player.rect.centerx
-        if self.posy <= cl.player.rect.centery:
-            self.ky = 1
-            dy = cl.player.rect.centery - self.posy
-        else:
-            self.ky = -1
-            dy = self.posy - cl.player.rect.centery
-        if dx == 0:
-            self.speedx = 0
-            self.speedy = self.speed * self.ky
-        elif dy == 0:
-            self.speedy = 0
-            self.speedx = self.speed * self.kx
-        else:
-            a = math.atan(dy / dx)
-            self.speedx = self.speed * math.cos(a)
-            self.speedy = self.speed * math.sin(a)
-        self.rect.x += math.ceil(self.speedx)
-        self.rect.y += math.ceil(self.speedy)
 
+# if self.posx <= cl.player.rect.centerx:
+#     self.kx = 1
+#     dx = cl.player.rect.centerx - self.posx
+# else:
+#     self.kx = -1
+#     dx = self.posx - cl.player.rect.centerx
+# if self.posy <= cl.player.rect.centery:
+#     self.ky = 1
+#     dy = cl.player.rect.centery - self.posy
+# else:
+#     self.ky = -1
+#     dy = self.posy - cl.player.rect.centery
+# if dx == 0:
+#     self.speedx = 0
+#     self.speedy = self.speed * self.ky
+# elif dy == 0:
+#     self.speedy = 0
+#     self.speedx = self.speed * self.kx
+# else:
+#     a = math.atan(dy / dx)
+#     self.speedx = self.speed * math.cos(a)
+#     self.speedy = self.speed * math.sin(a)
+# self.rect.x += math.ceil(self.speedx)
+# self.rect.y += math.ceil(self.speedy)
+        target_vector = m.Vector2(cl.player.rect.x, cl.player.rect.y)
+        follower_vector = m.Vector2(self.rect.x, self.rect.y)
+
+        distance = follower_vector.distance_to(target_vector)
+        direction_vector = target_vector - follower_vector
+        # if distance > 0:
+        min_step = max(0, distance - self.maximum_distance)
+        max_step = distance - self.minimum_distance
+        VELOCITY = 1
+        step_distance = min(max_step, max(min_step, VELOCITY))
+        # step_distance = min_step + (max_step - min_step) * self.LERP_FACTOR
+        direction_vector /= distance
+        follower_vector = follower_vector + direction_vector * step_distance
+
+
+
+        self.rect.x = round(follower_vector.x)
+        self.rect.y = round(follower_vector.y)
 min1 = Monster("Jaba", 100, 1, 1)
 cl.all_sprites.add(min1)
