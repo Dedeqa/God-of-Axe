@@ -327,6 +327,3 @@ class Tree(Unit, pygame.sprite.Sprite):
             self.line_bottom[3] = 0
             player.wood_amount += self.bonus
 
-
-tree = Tree("Bereza", 500, 960, 800, 5)
-all_sprites.add(tree)

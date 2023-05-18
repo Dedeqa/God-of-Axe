@@ -249,29 +249,24 @@ def options_game():
 
 def tree_generator(n):
     count = 0
-    delta = 300
-    first_elem_flag = True
     while count < n:
-        add_flag = True
+        cfg.add_flag = True
         x = random.randint(-1870, 3740)
         y = random.randint(-1030, 2060)
-        if first_elem_flag:
+        if cfg.first_elem_flag:
             cfg.tree_list_x.append(x)
             cfg.tree_list_y.append(y)
-            first_elem_flag = False
+            cfg.first_elem_flag = False
             count += 1
         for elem in range(count):
-            if abs(cfg.tree_list_x[elem] - x) > delta or abs(cfg.tree_list_y[elem] - y) > delta:
-                pass
-            else:
-                add_flag = False
-        if add_flag:
+            if not(abs(cfg.tree_list_x[elem] - x) > cfg.delta or abs(cfg.tree_list_y[elem] - y) > cfg.delta):
+                cfg.add_flag = False
+        if cfg.add_flag:
             cfg.tree_list_x.append(x)
             cfg.tree_list_y.append(y)
             count += 1
 
     cfg.trees = [classes.Tree(f'Дерево{i}', 100, cfg.tree_list_x[i], cfg.tree_list_y[i], 5) for i in range(n)]
-    cfg.trees.append(classes.tree)
     for elem in cfg.trees:
         classes.all_sprites.add(elem)
         cfg.trees_rects_left.append(elem.line_left)

@@ -1,5 +1,5 @@
 import pygame
-
+import random
 pygame.init()
 
 WIDTH = 1920
@@ -10,6 +10,11 @@ clock = pygame.time.Clock()
 
 menu_flag = True
 start_game_flag = True
+add_flag = True
+first_elem_flag = True
+
+
+delta = 125
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 size = screen.get_size()
