@@ -75,7 +75,8 @@ class Player(Unit, pygame.sprite.Sprite):
                     if self.rect.x >= 50:
                         self.speedx = -sx
                     elif cfg.bg_x < 1920:
-                        cfg.bg_x += sx
+                        cfg.bg_x += sx # cfg.bg_x
+                        cfg.VELOCITY = 0
                         cfg.monsterList[0].rect.x += sx
             if keystate[pygame.K_d]:
                 cfg.vector = "right"
