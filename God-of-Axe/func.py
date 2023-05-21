@@ -22,7 +22,6 @@ def start_game():
                 quit()
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
-                    # print(classes.player.rect)
                     pause()
 
         cfg.screen.blit(cfg.game_bg, (-1920 + cfg.bg_x, -1080 + cfg.bg_y))  # 1 зона
@@ -267,7 +266,7 @@ def tree_generator1(n):
             cfg.tree1_list_y.append(y)
             count += 1
 
-    cfg.trees1 = [classes.Tree(f'Дуб{i}', 100, cfg.tree1_list_x[i], cfg.tree1_list_y[i], 5) for i in range(n)]
+    cfg.trees1 = [classes.Tree(f'Дуб{i}', 500, cfg.tree1_list_x[i], cfg.tree1_list_y[i], 5) for i in range(n)]
     for elem in cfg.trees1:
         classes.all_sprites.add(elem)
         cfg.trees_rects_left.append(elem.line_left)
@@ -296,7 +295,7 @@ def tree_generator2(n):
             cfg.tree2_list_y.append(y)
             count += 1
 
-    cfg.trees2 = [classes.Tree(f'Елка{i}', 100, cfg.tree2_list_x[i], cfg.tree2_list_y[i], 5) for i in range(n)]
+    cfg.trees2 = [classes.Tree(f'Елка{i}', 500, cfg.tree2_list_x[i], cfg.tree2_list_y[i], 5) for i in range(n)]
     for elem in cfg.trees2:
         elem.image = pygame.image.load('Images/Trees/Tree2.png')
         classes.all_sprites.add(elem)

@@ -336,5 +336,6 @@ minotaur_walk_right = [
     pygame.transform.scale(
         pygame.image.load('Images/monsters/walk_right/minotaur_step2_right.png').convert_alpha(), (50, 50))
 ]
+
 VELOCITY = 1
 font_name = pygame.font.match_font('arial')

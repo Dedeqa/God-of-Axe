@@ -1,7 +1,7 @@
 import pygame
 import config as cfg
 import sprite_func as func
-
+import pygame.math as pm
 
 # pygame.mixer.pre_init(44100, -16, 1, 512)
 
@@ -19,16 +19,17 @@ class Unit:
         text_rect.midtop = (x, y)
         surf.blit(text_surface, text_rect)
 
-    def draw_shield_bar(self, surf, x, y, pct):
+    def draw_shield_bar(self, surf, x, y, pct, bg_color, bar_color, outline_color, k):
         if pct < 0:
             pct = 0
         BAR_LENGTH = 50
         BAR_HEIGHT = 10
-        fill = (pct / 1000) * BAR_LENGTH
+        fill = (pct / k) * BAR_LENGTH
         outline_rect = pygame.Rect(x, y, BAR_LENGTH, BAR_HEIGHT)
         fill_rect = pygame.Rect(x, y, fill, BAR_HEIGHT)
-        pygame.draw.rect(surf, "RED", fill_rect)
-        pygame.draw.rect(surf, "black", outline_rect, 2)
+        pygame.draw.rect(surf, bg_color, outline_rect)
+        pygame.draw.rect(surf, bar_color, fill_rect)
+        pygame.draw.rect(surf, outline_color, outline_rect, 2)
 
 
 class Player(Unit, pygame.sprite.Sprite):
@@ -57,6 +58,8 @@ class Player(Unit, pygame.sprite.Sprite):
                                 self.rect[3] / 6 * 5)
 
     def update(self):
+        self.draw_shield_bar(cfg.screen, self.rect.x, self.rect.y - 10, self.hp, (24, 84, 26), (9, 184, 15), 'black',
+                             100)
         self.draw_text(cfg.screen, f"{self.rect}", 18, cfg.WIDTH / 2, 10)
         self.draw_text(cfg.screen, f"{self.wood_amount}", 18, cfg.WIDTH / 2, 30)
         self.speedx = 0
@@ -98,7 +101,7 @@ class Player(Unit, pygame.sprite.Sprite):
                         self.speedx = -sx
                     elif cfg.bg_x < 1920:
                         cfg.bg_x += sx
-                        func.updateMonsters_x(cfg.monsterList, sx, flag_direction=True)
+                        func.update_monsters_x(cfg.monsterList, sx, flag_direction=True)
             if keystate[pygame.K_d]:
                 cfg.vector = "right"
                 if (self.line.collidelist(cfg.trees_rects_left)) == -1:
@@ -132,7 +135,7 @@ class Player(Unit, pygame.sprite.Sprite):
                         self.speedx = sx
                     elif cfg.bg_x > -1920:
                         cfg.bg_x -= sx
-                        func.updateMonsters_x(cfg.monsterList, sx, flag_direction=False)
+                        func.update_monsters_y(cfg.monsterList, sx, flag_direction=False)
         if not (keystate[pygame.K_w] and keystate[pygame.K_s]):
             if keystate[pygame.K_w]:
                 if (self.line.collidelist(cfg.trees_rects_bottom)) == -1:
@@ -172,7 +175,7 @@ class Player(Unit, pygame.sprite.Sprite):
                         self.speedy = -sy
                     elif cfg.bg_y < 1080:
                         cfg.bg_y += sy
-                        func.updateMonsters_y(cfg.monsterList, sy, flag_direction=True)
+                        func.update_monsters_y(cfg.monsterList, sy, flag_direction=True)
             if keystate[pygame.K_s]:
                 if (self.line.collidelist(cfg.trees_rects_top)) == -1:
                     if keystate[pygame.K_LSHIFT]:
@@ -211,7 +214,7 @@ class Player(Unit, pygame.sprite.Sprite):
                         self.speedy = sy
                     elif cfg.bg_y > -1080:
                         cfg.bg_y -= sy
-                        func.updateMonsters_y(cfg.monsterList, sy, flag_direction=False)
+                        func.update_monsters_y(cfg.monsterList, sy, flag_direction=False)
         if not (keystate[pygame.K_w] or keystate[pygame.K_s] or keystate[pygame.K_a] or keystate[pygame.K_d] or
                 keystate[pygame.K_e]):
             if cfg.vector == "right":
@@ -337,8 +340,13 @@ class Tree(Unit, pygame.sprite.Sprite):
         self.line_right = pygame.Rect(self.line_right_x, self.line_right_y, 5, self.rect[3] / 9 - 5)
         self.line_top = pygame.Rect(self.line_top_x, self.line_top_y, self.rect[2] / 3 - 8, 5)
         self.line_bottom = pygame.Rect(self.line_bottom_x, self.line_bottom_y, self.rect[2] / 3 - 8, 5)
+        self.player_vector = (0, 0)
+        self.tree_vector = (0, 0)
 
     def update(self):
+        self.player_vector = pm.Vector2(player.rect.x, player.rect.y)
+        self.tree_vector = pm.Vector2(self.rect.centerx, self.rect.y + 70)
+        distance = self.tree_vector.distance_to(self.player_vector)
 
         self.rect.x = cfg.bg_x + self.posx
         self.rect.y = cfg.bg_y + self.posy
@@ -350,6 +358,10 @@ class Tree(Unit, pygame.sprite.Sprite):
         self.line_top[1] = cfg.bg_y + self.line_top_y
         self.line_bottom[0] = cfg.bg_x + self.line_bottom_x
         self.line_bottom[1] = cfg.bg_y + self.line_bottom_y
+
+        if distance <= 100:
+            self.draw_shield_bar(cfg.screen, self.rect.x + 25, self.rect.y - 10, self.hp, (92, 69, 10), (140, 104, 13), "black",
+                                 500)
 
     def take_dmg(self, dmg):
 
