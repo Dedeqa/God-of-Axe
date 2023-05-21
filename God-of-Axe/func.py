@@ -24,6 +24,7 @@ def start_game():
                     # print(classes.player.rect)
                     pause()
 
+
         cfg.screen.blit(cfg.game_bg, (-1920 + cfg.bg_x, -1080 + cfg.bg_y))  # 1 зона
         cfg.screen.blit(cfg.game_bg, (0 + cfg.bg_x, -1080 + cfg.bg_y))  # 2 зона
         cfg.screen.blit(cfg.game_bg, (1920 + cfg.bg_x, -1080 + cfg.bg_y))  # 3 зона
@@ -273,5 +274,6 @@ def tree_generator(n):
         cfg.trees_rects_right.append(elem.line_right)
         cfg.trees_rects_top.append(elem.line_top)
         cfg.trees_rects_bottom.append(elem.line_bottom)
+
 
 

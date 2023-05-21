@@ -2,15 +2,33 @@ import pygame
 import config as cfg
 import sprite_func as func
 
+
 # pygame.mixer.pre_init(44100, -16, 1, 512)
 
 class Unit:
     def __init__(self, nm, hp, posx, posy):
-
         self.name = nm
         self.hp = hp
         self.posx = posx
         self.posy = posy
+
+    def draw_text(self, surf, text, size, x, y):
+        font = pygame.font.Font(cfg.font_name, size)
+        text_surface = font.render(text, True, "WHITE")
+        text_rect = text_surface.get_rect()
+        text_rect.midtop = (x, y)
+        surf.blit(text_surface, text_rect)
+
+    def draw_shield_bar(self, surf, x, y, pct):
+        if pct < 0:
+            pct = 0
+        BAR_LENGTH = 50
+        BAR_HEIGHT = 10
+        fill = (pct / 1000) * BAR_LENGTH
+        outline_rect = pygame.Rect(x, y, BAR_LENGTH, BAR_HEIGHT)
+        fill_rect = pygame.Rect(x, y, fill, BAR_HEIGHT)
+        pygame.draw.rect(surf, "RED", fill_rect)
+        pygame.draw.rect(surf, "black", outline_rect, 2)
 
 
 class Player(Unit, pygame.sprite.Sprite):
@@ -39,7 +57,8 @@ class Player(Unit, pygame.sprite.Sprite):
                                 self.rect[3] / 6 * 5)
 
     def update(self):
-
+        self.draw_text(cfg.screen, f"{self.rect}", 18, cfg.WIDTH / 2, 10)
+        self.draw_text(cfg.screen, f"{self.wood_amount}", 18, cfg.WIDTH / 2, 30)
         self.speedx = 0
         self.speedy = 0
         keystate = pygame.key.get_pressed()
@@ -202,7 +221,6 @@ class Player(Unit, pygame.sprite.Sprite):
 
         if keystate[pygame.K_e]:
             self.flag = True
-
         self.attack()
         self.rect.x += self.speedx
         self.rect.y += self.speedy
@@ -240,6 +258,7 @@ class Player(Unit, pygame.sprite.Sprite):
                     for elem in cfg.trees:
                         if self.rect_attack.colliderect(elem):
                             elem.take_dmg(self.weapon.damage)
+                    cfg.monsterList[0].hp -= self.weapon.damage
                     self.flag = False
             else:
 
@@ -281,6 +300,8 @@ class Weapon:
 all_sprites = pygame.sprite.Group()
 player = Player("Albert", 100, cfg.WIDTH, cfg.HEIGHT)
 all_sprites.add(player)
+
+
 # --------------------------------------------------------------------------------------------------
 
 class Tree(Unit, pygame.sprite.Sprite):

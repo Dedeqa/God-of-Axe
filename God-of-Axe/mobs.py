@@ -19,22 +19,23 @@ class Monster(cl.Unit, pygame.sprite.Sprite):
         self.minimum_distance = 50
         self.maximum_distance = 10000
         self.LERP_FACTOR = 0.05
-        self.target_vector = (0,0)
-        self.follower_vector = (0,0)
+        self.target_vector = (0, 0)
+        self.follower_vector = (0, 0)
         self.i = 0
         self.anim_time = 0
         self.side = "right"
+
     def update(self):
         self.target_vector = m.Vector2(cl.player.rect.x, cl.player.rect.y)
         self.follower_vector = m.Vector2(self.rect.x, self.rect.y)
         distance = self.follower_vector.distance_to(self.target_vector)
         direction_vector = self.target_vector - self.follower_vector
-            # if distance > 0:
+        # if distance > 0:
         min_step = max(0, distance - self.maximum_distance)
         max_step = distance - self.minimum_distance
         VELOCITY = 1
         step_distance = min(max_step, max(min_step, VELOCITY))
-            # step_distance = min_step + (max_step - min_step) * self.LERP_FACTOR
+        # step_distance = min_step + (max_step - min_step) * self.LERP_FACTOR
         direction_vector /= distance
         self.follower_vector = self.follower_vector + direction_vector * step_distance
 
@@ -72,9 +73,11 @@ class Monster(cl.Unit, pygame.sprite.Sprite):
         if self.anim_time == 10:
             self.i += 1
             self.anim_time = 0
-
+        self.draw_shield_bar(cfg.screen, self.rect.x, self.rect.y - 10, self.hp)
         self.rect.x = round(self.follower_vector.x)
         self.rect.y = round(self.follower_vector.y)
-min1 = Monster("Jaba", 100, 1, 1)
+
+
+min1 = Monster("Jaba", 1000, 1, 1)
 cfg.monsterList.append(min1)
 cl.all_sprites.add(min1)
