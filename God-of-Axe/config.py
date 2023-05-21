@@ -12,7 +12,7 @@ menu_flag = True
 start_game_flag = True
 add_flag = True
 first_elem_flag = True
-
+flag_direction = True
 
 delta = 125
 

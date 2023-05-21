@@ -1,6 +1,6 @@
 import pygame
 import config as cfg
-
+import sprite_func as func
 
 # pygame.mixer.pre_init(44100, -16, 1, 512)
 
@@ -76,7 +76,7 @@ class Player(Unit, pygame.sprite.Sprite):
                         self.speedx = -sx
                     elif cfg.bg_x < 1920:
                         cfg.bg_x += sx
-                        cfg.monsterList[0].rect.x += sx
+                        func.updateMonsters_x(cfg.monsterList, sx, flag_direction=True)
             if keystate[pygame.K_d]:
                 cfg.vector = "right"
                 if (self.line.collidelist(cfg.trees_rects_left)) == -1:
@@ -110,7 +110,7 @@ class Player(Unit, pygame.sprite.Sprite):
                         self.speedx = sx
                     elif cfg.bg_x > -1920:
                         cfg.bg_x -= sx
-                        cfg.monsterList[0].rect.x -= sx
+                        func.updateMonsters_x(cfg.monsterList, sx, flag_direction=False)
         if not (keystate[pygame.K_w] and keystate[pygame.K_s]):
             if keystate[pygame.K_w]:
                 if (self.line.collidelist(cfg.trees_rects_bottom)) == -1:
@@ -150,7 +150,7 @@ class Player(Unit, pygame.sprite.Sprite):
                         self.speedy = -sy
                     elif cfg.bg_y < 1080:
                         cfg.bg_y += sy
-                        cfg.monsterList[0].rect.y += sy
+                        func.updateMonsters_y(cfg.monsterList, sy, flag_direction=True)
             if keystate[pygame.K_s]:
                 if (self.line.collidelist(cfg.trees_rects_top)) == -1:
                     if keystate[pygame.K_LSHIFT]:
@@ -189,7 +189,7 @@ class Player(Unit, pygame.sprite.Sprite):
                         self.speedy = sy
                     elif cfg.bg_y > -1080:
                         cfg.bg_y -= sy
-                        cfg.monsterList[0].rect.y -= sy
+                        func.updateMonsters_y(cfg.monsterList, sy, flag_direction=False)
         if not (keystate[pygame.K_w] or keystate[pygame.K_s] or keystate[pygame.K_a] or keystate[pygame.K_d] or
                 keystate[pygame.K_e]):
             if cfg.vector == "right":

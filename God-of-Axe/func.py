@@ -274,3 +274,4 @@ def tree_generator(n):
         cfg.trees_rects_right.append(elem.line_right)
         cfg.trees_rects_top.append(elem.line_top)
         cfg.trees_rects_bottom.append(elem.line_bottom)
+
