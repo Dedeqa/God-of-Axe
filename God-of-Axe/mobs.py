@@ -14,7 +14,9 @@ class Monster(cl.Unit, pygame.sprite.Sprite):
         self.minimum_distance = 50
         self.maximum_distance = 10000
         self.LERP_FACTOR = 0.05
+
     def update(self):
+
         target_vector = m.Vector2(cl.player.rect.x, cl.player.rect.y)
         follower_vector = m.Vector2(self.rect.x, self.rect.y)
 
@@ -30,6 +32,8 @@ class Monster(cl.Unit, pygame.sprite.Sprite):
         follower_vector = follower_vector + direction_vector * step_distance
         self.rect.x = round(follower_vector.x)
         self.rect.y = round(follower_vector.y)
+
+
 min1 = Monster("Jaba", 100, 1, 1)
 cfg.monsterList.append(min1)
 cl.all_sprites.add(min1)

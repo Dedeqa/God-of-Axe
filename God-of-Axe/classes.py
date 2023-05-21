@@ -6,6 +6,7 @@ import sprite_func as func
 
 class Unit:
     def __init__(self, nm, hp, posx, posy):
+
         self.name = nm
         self.hp = hp
         self.posx = posx
@@ -14,6 +15,7 @@ class Unit:
 
 class Player(Unit, pygame.sprite.Sprite):
     def __init__(self, nm, hp, posx, posy):
+
         Unit.__init__(self, nm, hp, posx, posy)
         pygame.sprite.Sprite.__init__(self)
         self.image = cfg.woodcutter_stay_right
@@ -37,6 +39,7 @@ class Player(Unit, pygame.sprite.Sprite):
                                 self.rect[3] / 6 * 5)
 
     def update(self):
+
         self.speedx = 0
         self.speedy = 0
         keystate = pygame.key.get_pressed()
@@ -218,6 +221,7 @@ class Player(Unit, pygame.sprite.Sprite):
         #     cfg.screen.fill("blue", elem.line_bottom)
 
     def attack(self):
+
         if self.flag:
             if self.at == 0:
                 cfg.wave.stop()
@@ -277,11 +281,10 @@ class Weapon:
 all_sprites = pygame.sprite.Group()
 player = Player("Albert", 100, cfg.WIDTH, cfg.HEIGHT)
 all_sprites.add(player)
-
-
 # --------------------------------------------------------------------------------------------------
 
 class Tree(Unit, pygame.sprite.Sprite):
+
     def __init__(self, nm, hp, posx, posy, bonus):
         Unit.__init__(self, nm, hp, posx, posy)
         pygame.sprite.Sprite.__init__(self)
@@ -303,6 +306,7 @@ class Tree(Unit, pygame.sprite.Sprite):
         self.line_bottom = pygame.Rect(self.line_bottom_x, self.line_bottom_y, self.rect[2] / 3 - 8, 5)
 
     def update(self):
+
         self.rect.x = cfg.bg_x + self.posx
         self.rect.y = cfg.bg_y + self.posy
         self.line_left[0] = cfg.bg_x + self.line_left_x
@@ -315,6 +319,7 @@ class Tree(Unit, pygame.sprite.Sprite):
         self.line_bottom[1] = cfg.bg_y + self.line_bottom_y
 
     def take_dmg(self, dmg):
+
         if self.hp > 0:
             self.hp -= dmg
             cfg.hit_tree.play()
@@ -330,4 +335,3 @@ class Tree(Unit, pygame.sprite.Sprite):
             self.line_bottom[2] = 0
             self.line_bottom[3] = 0
             player.wood_amount += self.bonus
-
