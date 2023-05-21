@@ -12,7 +12,7 @@ def start_game():
     if cfg.start_game_flag:
         # cfg.play_music.play(-1)
         cfg.start_game_flag = False
-    tree_generator(100)
+    tree_generator(500)
     while True:
         cfg.clock.tick(cfg.FPS)
         # print(cfg.clock.get_fps())
