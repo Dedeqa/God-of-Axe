@@ -13,7 +13,7 @@ class Unit:
         self.posy = posy
 
     def draw_text(self, surf, text, size, x, y):
-        font = pygame.font.Font(cfg.font_name, size)
+        font = pygame.font.Font("Fonts/Jfwildwood-ldYZ.ttf", size)
         text_surface = font.render(text, True, "WHITE")
         text_rect = text_surface.get_rect()
         text_rect.midtop = (x, y)
@@ -258,7 +258,10 @@ class Player(Unit, pygame.sprite.Sprite):
                     for elem in cfg.trees:
                         if self.rect_attack.colliderect(elem):
                             elem.take_dmg(self.weapon.damage)
-                    cfg.monsterList[0].hp -= self.weapon.damage
+                    for elem in cfg.monsterList:
+                        if self.rect_attack.colliderect(elem):
+                            elem.take_dmg(self.weapon.damage)
+
                     self.flag = False
             else:
 
@@ -272,6 +275,9 @@ class Player(Unit, pygame.sprite.Sprite):
                 if self.at == 6:
                     self.at = 0
                     for elem in cfg.trees:
+                        if self.rect_attack.colliderect(elem):
+                            elem.take_dmg(self.weapon.damage)
+                    for elem in cfg.monsterList:
                         if self.rect_attack.colliderect(elem):
                             elem.take_dmg(self.weapon.damage)
                     self.flag = False
