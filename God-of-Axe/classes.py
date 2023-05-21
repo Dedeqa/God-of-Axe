@@ -1,11 +1,12 @@
 import pygame
 import config as cfg
-
+import sprite_func as func
 
 # pygame.mixer.pre_init(44100, -16, 1, 512)
 
 class Unit:
     def __init__(self, nm, hp, posx, posy):
+
         self.name = nm
         self.hp = hp
         self.posx = posx
@@ -14,6 +15,7 @@ class Unit:
 
 class Player(Unit, pygame.sprite.Sprite):
     def __init__(self, nm, hp, posx, posy):
+
         Unit.__init__(self, nm, hp, posx, posy)
         pygame.sprite.Sprite.__init__(self)
         self.image = cfg.woodcutter_stay_right
@@ -37,6 +39,7 @@ class Player(Unit, pygame.sprite.Sprite):
                                 self.rect[3] / 6 * 5)
 
     def update(self):
+
         self.speedx = 0
         self.speedy = 0
         keystate = pygame.key.get_pressed()
@@ -75,9 +78,8 @@ class Player(Unit, pygame.sprite.Sprite):
                     if self.rect.x >= 50:
                         self.speedx = -sx
                     elif cfg.bg_x < 1920:
-                        cfg.bg_x += sx # cfg.bg_x
-                        cfg.VELOCITY = 0
-                        cfg.monsterList[0].rect.x += sx
+                        cfg.bg_x += sx
+                        func.updateMonsters_x(cfg.monsterList, sx, flag_direction=True)
             if keystate[pygame.K_d]:
                 cfg.vector = "right"
                 if (self.line.collidelist(cfg.trees_rects_left)) == -1:
@@ -111,7 +113,7 @@ class Player(Unit, pygame.sprite.Sprite):
                         self.speedx = sx
                     elif cfg.bg_x > -1920:
                         cfg.bg_x -= sx
-                        cfg.monsterList[0].rect.x -= sx
+                        func.updateMonsters_x(cfg.monsterList, sx, flag_direction=False)
         if not (keystate[pygame.K_w] and keystate[pygame.K_s]):
             if keystate[pygame.K_w]:
                 if (self.line.collidelist(cfg.trees_rects_bottom)) == -1:
@@ -151,7 +153,7 @@ class Player(Unit, pygame.sprite.Sprite):
                         self.speedy = -sy
                     elif cfg.bg_y < 1080:
                         cfg.bg_y += sy
-                        cfg.monsterList[0].rect.y += sy
+                        func.updateMonsters_y(cfg.monsterList, sy, flag_direction=True)
             if keystate[pygame.K_s]:
                 if (self.line.collidelist(cfg.trees_rects_top)) == -1:
                     if keystate[pygame.K_LSHIFT]:
@@ -190,7 +192,7 @@ class Player(Unit, pygame.sprite.Sprite):
                         self.speedy = sy
                     elif cfg.bg_y > -1080:
                         cfg.bg_y -= sy
-                        cfg.monsterList[0].rect.y -= sy
+                        func.updateMonsters_y(cfg.monsterList, sy, flag_direction=False)
         if not (keystate[pygame.K_w] or keystate[pygame.K_s] or keystate[pygame.K_a] or keystate[pygame.K_d] or
                 keystate[pygame.K_e]):
             if cfg.vector == "right":
@@ -219,6 +221,7 @@ class Player(Unit, pygame.sprite.Sprite):
         #     cfg.screen.fill("blue", elem.line_bottom)
 
     def attack(self):
+
         if self.flag:
             if self.at == 0:
                 cfg.wave.stop()
@@ -278,11 +281,10 @@ class Weapon:
 all_sprites = pygame.sprite.Group()
 player = Player("Albert", 100, cfg.WIDTH, cfg.HEIGHT)
 all_sprites.add(player)
-
-
 # --------------------------------------------------------------------------------------------------
 
 class Tree(Unit, pygame.sprite.Sprite):
+
     def __init__(self, nm, hp, posx, posy, bonus):
         Unit.__init__(self, nm, hp, posx, posy)
         pygame.sprite.Sprite.__init__(self)
@@ -304,6 +306,7 @@ class Tree(Unit, pygame.sprite.Sprite):
         self.line_bottom = pygame.Rect(self.line_bottom_x, self.line_bottom_y, self.rect[2] / 3 - 8, 5)
 
     def update(self):
+
         self.rect.x = cfg.bg_x + self.posx
         self.rect.y = cfg.bg_y + self.posy
         self.line_left[0] = cfg.bg_x + self.line_left_x
@@ -316,6 +319,7 @@ class Tree(Unit, pygame.sprite.Sprite):
         self.line_bottom[1] = cfg.bg_y + self.line_bottom_y
 
     def take_dmg(self, dmg):
+
         if self.hp > 0:
             self.hp -= dmg
             cfg.hit_tree.play()
@@ -331,4 +335,3 @@ class Tree(Unit, pygame.sprite.Sprite):
             self.line_bottom[2] = 0
             self.line_bottom[3] = 0
             player.wood_amount += self.bonus
-
