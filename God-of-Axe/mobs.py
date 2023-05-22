@@ -2,13 +2,16 @@ import pygame
 import pygame.math as m
 import config as cfg
 import classes as cl
+import sounds
+import images as img
 
 
 class Monster(cl.Unit, pygame.sprite.Sprite):
     def __init__(self, nm, hp, posx, posy, viewing_range):
+
         cl.Unit.__init__(self, nm, hp, posx, posy)
         pygame.sprite.Sprite.__init__(self)
-        self.image = cfg.minotaur_walk_bottom[0]
+        self.image = img.minotaur_walk_bottom[0]
         self.rect = self.image.get_rect()
         self.rect.center = (posx, posy)
         self.minimum_distance = 50
@@ -28,6 +31,7 @@ class Monster(cl.Unit, pygame.sprite.Sprite):
         self.flag = True
 
     def update(self):
+
         self.target_vector = m.Vector2(cl.player.rect.x, cl.player.rect.y)
         self.follower_vector = m.Vector2(self.rect.x, self.rect.y)
         distance = self.follower_vector.distance_to(self.target_vector)
@@ -42,7 +46,7 @@ class Monster(cl.Unit, pygame.sprite.Sprite):
 
             if self.flag:
                 self.flag = False
-                cfg.agr_monster.play()
+                sounds.agr_monster.play()
 
             self.follower_vector = self.follower_vector + direction_vector * step_distance
 
@@ -69,13 +73,13 @@ class Monster(cl.Unit, pygame.sprite.Sprite):
             if self.i == 3:
                 self.i = 0
             if self.side == "right":
-                self.image = cfg.minotaur_walk_right[self.i]
+                self.image = img.minotaur_walk_right[self.i]
             elif self.side == "left":
-                self.image = cfg.minotaur_walk_left[self.i]
+                self.image = img.minotaur_walk_left[self.i]
             elif self.side == "top":
-                self.image = cfg.minotaur_walk_top[self.i]
+                self.image = img.minotaur_walk_top[self.i]
             elif self.side == "bottom":
-                self.image = cfg.minotaur_walk_bottom[self.i]
+                self.image = img.minotaur_walk_bottom[self.i]
             self.anim_time += 1
             if self.anim_time == 10:
                 self.i += 1
@@ -94,10 +98,10 @@ class Monster(cl.Unit, pygame.sprite.Sprite):
                 self.j = 0
 
             if self.wait_side:
-                self.image = cfg.minotaur_walk_right[self.j]
+                self.image = img.minotaur_walk_right[self.j]
                 self.rect.x += 1
             else:
-                self.image = cfg.minotaur_walk_left[self.j]
+                self.image = img.minotaur_walk_left[self.j]
                 self.rect.x -= 1
 
             self.anim_wait_time += 1
@@ -114,7 +118,7 @@ class Monster(cl.Unit, pygame.sprite.Sprite):
 
         if self.hp > 0:
             self.hp -= dmg
-            cfg.hit_tree.play()
+            sounds.hit_tree.play()
         if self.hp <= 0:
             self.remove(cl.all_sprites)
             self.kill()
