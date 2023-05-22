@@ -1,6 +1,5 @@
 import pygame
 
-# Звуки ----------------------------------------------------------------------------------------------------------------
 # Фоновая музыка для меню ----------------------------------------------------------------------------------------------
 pygame.mixer.music.load(
     r'Music/Piano Fantasia - Song for Denise (Wide Walking Extended Version).mp3')
@@ -17,12 +16,16 @@ wave = pygame.mixer.Sound(r'Music\energichnyiy-rezkiy-vzmah-razrezayuschiy-vozdu
 # Звук удара о дерево --------------------------------------------------------------------------------------------------
 hit_tree = pygame.mixer.Sound(r'Music\korotkiy-chtkiy-rezkiy-udar-po-derevu.mp3')
 
+# Звук падающего дерева ------------------------------------------------------------------------------------------------
+falling_tree = pygame.mixer.Sound(r'Music\Neizvesten_-_Zvuk_padayucshego_dereva_posle_sruba.mp3')
+
 # Звук агра монстров ---------------------------------------------------------------------------------------------------
 agr_monster = pygame.mixer.Sound(r'Music\monster-grunt_zksbhlv_.mp3')
 
 # Громкость звуков -----------------------------------------------------------------------------------------------------
 volume_music = 1.0
 volume_sounds = 1.0
-volume_wave = 0.2
+volume_wave = 1.0
 volume_hit_tree = 1.0
 volume_agr_monster = 1.0
+volume_falling_tree = 1.0

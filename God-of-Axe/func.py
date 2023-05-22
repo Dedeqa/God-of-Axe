@@ -185,7 +185,7 @@ def options_menu():
             if click[0] and (cfg.point1_rect.collidepoint(mouse[0], mouse[1])) and (
                     cfg.scale1_rect.left <= mouse[0] <= cfg.scale1_rect.right):
                 cfg.point1_rect.center = (mouse[0], cfg.scale1_rect.centery)
-                cfg.volume_music = 0.01 * ((cfg.point1_rect.centerx - cfg.scale1_rect.left) / 3)
+                sounds.volume_music = 0.01 * ((cfg.point1_rect.centerx - cfg.scale1_rect.left) / 3)
 
                 sounds.play_music.set_volume(sounds.volume_music)
                 pygame.mixer.music.set_volume(sounds.volume_music)
@@ -193,12 +193,13 @@ def options_menu():
             if click[0] and (cfg.point2_rect.collidepoint(mouse[0], mouse[1])) and (
                     cfg.scale2_rect.left <= mouse[0] <= cfg.scale2_rect.right):
                 cfg.point2_rect.center = (mouse[0], cfg.scale2_rect.centery)
-                cfg.volume_sounds = 0.01 * ((cfg.point2_rect.centerx - cfg.scale2_rect.left) / 3)
+                sounds.volume_sounds = 0.01 * ((cfg.point2_rect.centerx - cfg.scale2_rect.left) / 3)
 
                 sounds.click.set_volume(sounds.volume_sounds)
                 sounds.wave.set_volume(sounds.volume_sounds)
                 sounds.hit_tree.set_volume(sounds.volume_sounds)
                 sounds.agr_monster.set_volume(sounds.volume_sounds)
+                sounds.falling_tree.set_volume(sounds.volume_sounds)
 
         cfg.screen.blit(img.menu_bg, (0, 0))
         cfg.screen.blit(cfg.menu_title, cfg.menu_title_rect)
@@ -229,7 +230,7 @@ def options_game():
             if click[0] and (cfg.point1_rect.collidepoint(mouse[0], mouse[1])) and (
                     cfg.scale1_rect.left <= mouse[0] <= cfg.scale1_rect.right):
                 cfg.point1_rect.center = (mouse[0], cfg.scale1_rect.centery)
-                cfg.volume_music = 0.01 * ((cfg.point1_rect.centerx - cfg.scale1_rect.left) / 3)
+                sounds.volume_music = 0.01 * ((cfg.point1_rect.centerx - cfg.scale1_rect.left) / 3)
 
                 pygame.mixer.music.set_volume(sounds.volume_music)
                 sounds.play_music.set_volume(sounds.volume_music)
@@ -237,12 +238,13 @@ def options_game():
             if click[0] and (cfg.point2_rect.collidepoint(mouse[0], mouse[1])) and (
                     cfg.scale2_rect.left <= mouse[0] <= cfg.scale2_rect.right):
                 cfg.point2_rect.center = (mouse[0], cfg.scale2_rect.centery)
-                cfg.volume_sounds = 0.01 * ((cfg.point2_rect.centerx - cfg.scale2_rect.left) / 3)
+                sounds.volume_sounds = 0.01 * ((cfg.point2_rect.centerx - cfg.scale2_rect.left) / 3)
 
                 sounds.click.set_volume(sounds.volume_sounds)
                 sounds.wave.set_volume(sounds.volume_sounds)
                 sounds.hit_tree.set_volume(sounds.volume_sounds)
                 sounds.agr_monster.set_volume(sounds.volume_sounds)
+                sounds.falling_tree.set_volume(sounds.volume_sounds)
 
         cfg.screen.blit(cfg.tablet_transform, cfg.tablet_rect)
         cfg.screen.blit(img.music_label, cfg.music_label_rect)

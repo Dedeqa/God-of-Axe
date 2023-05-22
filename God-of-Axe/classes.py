@@ -5,6 +5,7 @@ import pygame.math as pm
 import sounds
 import images as img
 
+
 # pygame.mixer.pre_init(44100, -16, 1, 512)
 
 class Unit:
@@ -15,7 +16,6 @@ class Unit:
         self.posy = posy
 
     def draw_text(self, surf, text, size, x, y):
-
         font = pygame.font.Font("Fonts/Jfwildwood-ldYZ.ttf", size)
         text_surface = font.render(text, True, "WHITE")
         text_rect = text_surface.get_rect()
@@ -23,7 +23,6 @@ class Unit:
         surf.blit(text_surface, text_rect)
 
     def draw_shield_bar(self, surf, x, y, pct, bg_color, bar_color, outline_color, k):
-
         if pct < 0:
             pct = 0
         BAR_LENGTH = 50
@@ -308,13 +307,11 @@ class Player(Unit, pygame.sprite.Sprite):
 
 class Weapon:
     def __init__(self, dmg, attack_speed):
-
         self.name = "Axe"
         self.damage = dmg
         self.attack_speed = attack_speed
 
     def dmg_up(self):
-
         self.damage += 5
 
 
@@ -377,9 +374,13 @@ class Tree(Unit, pygame.sprite.Sprite):
     def take_dmg(self, dmg):
 
         if self.hp > 0:
+            self.status = True
             self.hp -= dmg
             sounds.hit_tree.play()
         if self.hp <= 0:
+            if self.status:
+                sounds.falling_tree.play()
+
             self.remove(all_sprites)
             self.kill()
             self.status = False
