@@ -93,6 +93,10 @@ class Player(Unit, pygame.sprite.Sprite):
                         if self.i == 6:
                             self.i = 0
 
+                        # if self.i == 1 or self.i == 4:
+                        #     sounds.step.stop()
+                        #     sounds.step.play()
+
                         self.image = img.woodcutter_walk_left[self.i]
                         self.anim_time += 1
 
@@ -134,7 +138,7 @@ class Player(Unit, pygame.sprite.Sprite):
                             self.i += 1
                             self.anim_time = 0
 
-                        sx = 2
+                        sx = 1
                     if self.rect.x <= 1820:
                         self.speedx = sx
                     elif cfg.bg_x > -1920:

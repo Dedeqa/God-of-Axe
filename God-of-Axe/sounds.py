@@ -13,6 +13,9 @@ click = pygame.mixer.Sound(r'Music\zipclick.flac')
 # Звук взмаха топором --------------------------------------------------------------------------------------------------
 wave = pygame.mixer.Sound(r'Music\energichnyiy-rezkiy-vzmah-razrezayuschiy-vozduh.mp3')
 
+# Звук шага ------------------------------------------------------------------------------------------------------------
+step = pygame.mixer.Sound(r'Music\korotkiy-byistryiy-shag-po-lesu.mp3')
+
 # Звук удара о дерево --------------------------------------------------------------------------------------------------
 hit_tree = pygame.mixer.Sound(r'Music\korotkiy-chtkiy-rezkiy-udar-po-derevu.mp3')
 
