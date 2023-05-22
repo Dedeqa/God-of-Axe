@@ -25,6 +25,7 @@ class Monster(cl.Unit, pygame.sprite.Sprite):
         self.anim_wait_time = 0
         self.viewing_range = viewing_range
         self.start_hp = hp
+        self.flag = True
 
     def update(self):
         self.target_vector = m.Vector2(cl.player.rect.x, cl.player.rect.y)
@@ -38,6 +39,11 @@ class Monster(cl.Unit, pygame.sprite.Sprite):
         direction_vector /= distance
 
         if distance <= self.viewing_range:
+
+            if self.flag:
+                self.flag = False
+                cfg.agr_monster.play()
+
             self.follower_vector = self.follower_vector + direction_vector * step_distance
 
             if self.follower_vector.x > cl.player.rect.x and self.follower_vector.y > cl.player.rect.y:
@@ -81,6 +87,9 @@ class Monster(cl.Unit, pygame.sprite.Sprite):
             self.rect.y = round(self.follower_vector.y)
 
         else:
+
+            self.flag = True
+
             if self.j == 3:
                 self.j = 0
 

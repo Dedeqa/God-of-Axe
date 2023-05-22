@@ -125,10 +125,14 @@ wave = pygame.mixer.Sound(r'Music\energichnyiy-rezkiy-vzmah-razrezayuschiy-vozdu
 # Звук удара о дерево --------------------------------------------------------------------------------------------------
 hit_tree = pygame.mixer.Sound(r'Music\korotkiy-chtkiy-rezkiy-udar-po-derevu.mp3')
 
+# Звук агра монстров ---------------------------------------------------------------------------------------------------
+agr_monster = pygame.mixer.Sound(r'Music\monster-grunt_zksbhlv_.mp3')
+
 volume_music = 1.0
 volume_sounds = 1.0
 volume_wave = 0.2
 volume_hit_tree = 1.0
+volume_agr_monster = 1.0
 
 # Координаты для перемещения фона---------------------------------------------------------------------------------------
 bg_x = 0

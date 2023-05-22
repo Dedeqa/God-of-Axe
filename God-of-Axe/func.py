@@ -192,6 +192,7 @@ def options_menu():
                 cfg.click.set_volume(cfg.volume_sounds)
                 cfg.wave.set_volume(cfg.volume_sounds)
                 cfg.hit_tree.set_volume(cfg.volume_sounds)
+                cfg.agr_monster.set_volume(cfg.volume_sounds)
 
         cfg.screen.blit(cfg.menu_bg, (0, 0))
         cfg.screen.blit(cfg.menu_title, cfg.menu_title_rect)
@@ -234,6 +235,7 @@ def options_game():
                 cfg.click.set_volume(cfg.volume_sounds)
                 cfg.wave.set_volume(cfg.volume_sounds)
                 cfg.hit_tree.set_volume(cfg.volume_sounds)
+                cfg.agr_monster.set_volume(cfg.volume_sounds)
 
         cfg.screen.blit(cfg.tablet_transform, cfg.tablet_rect)
         cfg.screen.blit(cfg.music_label, cfg.music_label_rect)

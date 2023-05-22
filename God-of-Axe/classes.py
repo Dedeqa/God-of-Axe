@@ -3,6 +3,7 @@ import config as cfg
 import sprite_func as func
 import pygame.math as pm
 
+
 # pygame.mixer.pre_init(44100, -16, 1, 512)
 
 class Unit:
@@ -343,7 +344,9 @@ class Tree(Unit, pygame.sprite.Sprite):
         self.player_vector = (0, 0)
         self.tree_vector = (0, 0)
         self.start_hp = hp
+
     def update(self):
+
         self.player_vector = pm.Vector2(player.rect.x, player.rect.y)
         self.tree_vector = pm.Vector2(self.rect.centerx, self.rect.y + 70)
         distance = self.tree_vector.distance_to(self.player_vector)
@@ -359,8 +362,9 @@ class Tree(Unit, pygame.sprite.Sprite):
         self.line_bottom[0] = cfg.bg_x + self.line_bottom_x
         self.line_bottom[1] = cfg.bg_y + self.line_bottom_y
 
-        if distance <= 100:
-            self.draw_shield_bar(cfg.screen, self.rect.x + 25, self.rect.y - 10, self.hp, (92, 69, 10), (140, 104, 13), "black",
+        if distance <= 110:
+            self.draw_shield_bar(cfg.screen, self.rect.x + 25, self.rect.y - 10, self.hp, (92, 69, 10), (140, 104, 13),
+                                 "black",
                                  self.start_hp)
 
     def take_dmg(self, dmg):
