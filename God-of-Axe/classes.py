@@ -261,9 +261,9 @@ class Player(Unit, pygame.sprite.Sprite):
                     for elem in cfg.trees1:
                         if self.rect_attack.colliderect(elem):
                             elem.take_dmg(self.weapon.damage)
-                        for elem in cfg.trees2:
-                            if self.rect_attack.colliderect(elem):
-                                elem.take_dmg(self.weapon.damage)
+                    for elem in cfg.trees2:
+                        if self.rect_attack.colliderect(elem):
+                            elem.take_dmg(self.weapon.damage)
                     for elem in cfg.monsterList:
                         if self.rect_attack.colliderect(elem):
                             elem.take_dmg(self.weapon.damage)
@@ -342,7 +342,7 @@ class Tree(Unit, pygame.sprite.Sprite):
         self.line_bottom = pygame.Rect(self.line_bottom_x, self.line_bottom_y, self.rect[2] / 3 - 8, 5)
         self.player_vector = (0, 0)
         self.tree_vector = (0, 0)
-
+        self.start_hp = hp
     def update(self):
         self.player_vector = pm.Vector2(player.rect.x, player.rect.y)
         self.tree_vector = pm.Vector2(self.rect.centerx, self.rect.y + 70)
@@ -361,7 +361,7 @@ class Tree(Unit, pygame.sprite.Sprite):
 
         if distance <= 100:
             self.draw_shield_bar(cfg.screen, self.rect.x + 25, self.rect.y - 10, self.hp, (92, 69, 10), (140, 104, 13), "black",
-                                 500)
+                                 self.start_hp)
 
     def take_dmg(self, dmg):
 
@@ -371,6 +371,7 @@ class Tree(Unit, pygame.sprite.Sprite):
         if self.hp <= 0:
             self.remove(all_sprites)
             self.kill()
+            self.status = False
             self.line_left[2] = 0
             self.line_left[3] = 0
             self.line_right[2] = 0
@@ -380,3 +381,4 @@ class Tree(Unit, pygame.sprite.Sprite):
             self.line_bottom[2] = 0
             self.line_bottom[3] = 0
             player.wood_amount += self.bonus
+            self.bonus = 0

@@ -24,6 +24,7 @@ class Monster(cl.Unit, pygame.sprite.Sprite):
         self.wait_time = 0
         self.anim_wait_time = 0
         self.viewing_range = viewing_range
+        self.start_hp = hp
 
     def update(self):
         self.target_vector = m.Vector2(cl.player.rect.x, cl.player.rect.y)
@@ -75,7 +76,7 @@ class Monster(cl.Unit, pygame.sprite.Sprite):
                 self.anim_time = 0
 
             self.draw_shield_bar(cfg.screen, self.rect.x, self.rect.y - 10, self.hp, (107, 34, 34), "red", "black",
-                                 1000)
+                                 self.start_hp)
             self.rect.x = round(self.follower_vector.x)
             self.rect.y = round(self.follower_vector.y)
 

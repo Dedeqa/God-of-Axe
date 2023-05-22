@@ -295,7 +295,7 @@ def tree_generator2(n):
             cfg.tree2_list_y.append(y)
             count += 1
 
-    cfg.trees2 = [classes.Tree(f'Елка{i}', 500, cfg.tree2_list_x[i], cfg.tree2_list_y[i], 5) for i in range(n)]
+    cfg.trees2 = [classes.Tree(f'Елка{i}', 1000, cfg.tree2_list_x[i], cfg.tree2_list_y[i], 10) for i in range(n)]
     for elem in cfg.trees2:
         elem.image = pygame.image.load('Images/Trees/Tree2.png')
         classes.all_sprites.add(elem)
