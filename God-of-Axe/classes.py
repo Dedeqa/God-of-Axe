@@ -22,11 +22,11 @@ class Unit:
         text_rect.midtop = (x, y)
         surf.blit(text_surface, text_rect)
 
-    def draw_shield_bar(self, surf, x, y, pct, bg_color, bar_color, outline_color, k):
+    def draw_shield_bar(self, surf, x, y, pct, bg_color, bar_color, outline_color, k, bl, bh):
         if pct < 0:
             pct = 0
-        BAR_LENGTH = 50
-        BAR_HEIGHT = 10
+        BAR_LENGTH = bl
+        BAR_HEIGHT = bh
         fill = (pct / k) * BAR_LENGTH
         outline_rect = pygame.Rect(x, y, BAR_LENGTH, BAR_HEIGHT)
         fill_rect = pygame.Rect(x, y, fill, BAR_HEIGHT)
@@ -55,6 +55,7 @@ class Player(Unit, pygame.sprite.Sprite):
         self.anim_time = 0
         self.anim_time_attack = 0
         self.wood_amount = 0
+        self.progress = 0
         self.rect_attack = pygame.Rect(self.rect[0] + self.rect[2] / 2 + 10, self.rect[1] + self.rect[3] / 3,
                                        self.rect[2] / 3 * 2,
                                        self.rect[3] / 3)
@@ -64,12 +65,12 @@ class Player(Unit, pygame.sprite.Sprite):
     def update(self):
 
         self.draw_shield_bar(cfg.screen, self.rect.x, self.rect.y - 10, self.hp, (24, 84, 26), (9, 184, 15), 'black',
-                             100)
+                             100, 50, 10)
         self.draw_shield_bar(cfg.screen, self.rect.x, self.rect.y - 22, self.stamina, (24, 84, 26), (255, 255, 0), 'black',
-                             100)
+                             100, 50, 10)
 
 
-
+        self.progress = self.wood_amount * 100 / cfg.goal
         self.speedx = 0
         self.speedy = 0
         keystate = pygame.key.get_pressed()
@@ -392,7 +393,7 @@ class Tree(Unit, pygame.sprite.Sprite):
         if distance <= 110:
             self.draw_shield_bar(cfg.screen, self.rect.x + 25, self.rect.y - 10, self.hp, (92, 69, 10), (140, 104, 13),
                                  "black",
-                                 self.start_hp)
+                                 self.start_hp, 50, 10)
 
     def take_dmg(self, dmg):
 

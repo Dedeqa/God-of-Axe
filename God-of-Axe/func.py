@@ -37,9 +37,12 @@ def start_game():
         cfg.screen.blit(img.game_bg, (-1920 + cfg.bg_x, 1080 + cfg.bg_y))  # 7 зона
         cfg.screen.blit(img.game_bg, (0 + cfg.bg_x, 1080 + cfg.bg_y))  # 8 зона
         cfg.screen.blit(img.game_bg, (1920 + cfg.bg_x, 1080 + cfg.bg_y))  # 9 зона
-        current_time = pygame.time.get_ticks()
+
         classes.all_sprites.update()
         classes.all_sprites.draw(cfg.screen)
+        classes.player.draw_shield_bar(cfg.screen, 660, 10, classes.player.wood_amount, "brown",
+                                       "red", "black", 150, 600, 20)
+        classes.player.draw_text(cfg.screen, f'{int(classes.player.progress)}%', 14 , 960, 12)
         pygame.display.flip()
 
 

@@ -97,7 +97,7 @@ class Monster(cl.Unit, pygame.sprite.Sprite):
                 self.anim_time = 0
 
             self.draw_shield_bar(cfg.screen, self.rect.x, self.rect.y - 10, self.hp, (107, 34, 34), "red", "black",
-                                 self.start_hp)
+                                 self.start_hp, 50, 10)
             self.rect.x = round(self.follower_vector.x)
             self.rect.y = round(self.follower_vector.y)
 
@@ -190,5 +190,5 @@ class Monster(cl.Unit, pygame.sprite.Sprite):
 
         self.attack_timer += 1
 
-min1 = Monster("Jaba", 1000, 1, 1, 500, 20)
+min1 = Monster("Jaba", 1000, 1, 1, 200, 20)
 
