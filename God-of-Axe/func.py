@@ -37,10 +37,9 @@ def start_game():
         cfg.screen.blit(img.game_bg, (-1920 + cfg.bg_x, 1080 + cfg.bg_y))  # 7 зона
         cfg.screen.blit(img.game_bg, (0 + cfg.bg_x, 1080 + cfg.bg_y))  # 8 зона
         cfg.screen.blit(img.game_bg, (1920 + cfg.bg_x, 1080 + cfg.bg_y))  # 9 зона
-
+        current_time = pygame.time.get_ticks()
         classes.all_sprites.update()
         classes.all_sprites.draw(cfg.screen)
-
         pygame.display.flip()
 
 

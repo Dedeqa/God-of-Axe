@@ -50,12 +50,10 @@ class Player(Unit, pygame.sprite.Sprite):
         self.i = 0
         self.j = 0
         self.at = 0
-        self.flag = False
+        self.flag_attack = False
         self.anim_time = 0
         self.anim_time_attack = 0
-        self.anim_time_hurt = 0
         self.wood_amount = 0
-        self.flag_take_dmg = False
         self.rect_attack = pygame.Rect(self.rect[0] + self.rect[2] / 2 + 10, self.rect[1] + self.rect[3] / 3,
                                        self.rect[2] / 3 * 2,
                                        self.rect[3] / 3)
@@ -66,7 +64,7 @@ class Player(Unit, pygame.sprite.Sprite):
 
         self.draw_shield_bar(cfg.screen, self.rect.x, self.rect.y - 10, self.hp, (24, 84, 26), (9, 184, 15), 'black',
                              100)
-        self.draw_shield_bar(cfg.screen, self.rect.x, self.rect.y - 20, self.stamina, (24, 84, 26), (255, 255, 0), 'black',
+        self.draw_shield_bar(cfg.screen, self.rect.x, self.rect.y - 22, self.stamina, (24, 84, 26), (255, 255, 0), 'black',
                              100)
 
 
@@ -156,7 +154,7 @@ class Player(Unit, pygame.sprite.Sprite):
         if not (keystate[pygame.K_w] and keystate[pygame.K_s]):
             if keystate[pygame.K_w]:
                 if (self.line.collidelist(cfg.trees_rects_bottom)) == -1:
-                    if keystate[pygame.K_LSHIFT]:
+                    if keystate[pygame.K_LSHIFT] and self.stamina > 0:
 
                         if self.j == 6:
                             self.j = 0
@@ -196,7 +194,7 @@ class Player(Unit, pygame.sprite.Sprite):
                         func.update_monsters_y(cfg.monsterList, sy, flag_direction=True)
             if keystate[pygame.K_s]:
                 if (self.line.collidelist(cfg.trees_rects_top)) == -1:
-                    if keystate[pygame.K_LSHIFT]:
+                    if keystate[pygame.K_LSHIFT] and self.stamina > 0:
 
                         if self.j == 6:
                             self.j = 0
@@ -235,14 +233,14 @@ class Player(Unit, pygame.sprite.Sprite):
                         cfg.bg_y -= sy
                         func.update_monsters_y(cfg.monsterList, sy, flag_direction=False)
         if not (keystate[pygame.K_w] or keystate[pygame.K_s] or keystate[pygame.K_a] or keystate[pygame.K_d] or
-                keystate[pygame.K_e] or self.flag_take_dmg):
+                keystate[pygame.K_e]):
             if cfg.vector == "right":
                 self.image = img.woodcutter_stay_right
             elif cfg.vector == "left":
                 self.image = img.woodcutter_stay_left
 
         if keystate[pygame.K_e] and self.stamina >= 10:
-            self.flag = True
+            self.flag_attack = True
         self.attack()
         self.rect.x += self.speedx
         self.rect.y += self.speedy
@@ -261,7 +259,7 @@ class Player(Unit, pygame.sprite.Sprite):
         #     cfg.screen.fill("blue", elem.line_bottom)
 
     def attack(self):
-        if self.flag:
+        if self.flag_attack:
             self.stamina -= 1
             if self.at == 0:
                 sounds.wave.stop()
@@ -287,7 +285,7 @@ class Player(Unit, pygame.sprite.Sprite):
                         if self.rect_attack.colliderect(elem):
                             elem.take_dmg(self.weapon.damage)
 
-                    self.flag = False
+                    self.flag_attack = False
             else:
 
                 self.image = img.woodcutter_attack_left[self.at]
@@ -308,7 +306,7 @@ class Player(Unit, pygame.sprite.Sprite):
                     for elem in cfg.monsterList:
                         if self.rect_attack.colliderect(elem):
                             elem.take_dmg(self.weapon.damage)
-                    self.flag = False
+                    self.flag_attack = False
 
             if cfg.vector == 'right':
                 self.rect_attack = pygame.Rect(self.rect[0] + self.rect[2] / 2 + 10, self.rect[1] + self.rect[3] / 3,
@@ -321,12 +319,6 @@ class Player(Unit, pygame.sprite.Sprite):
 
     def take_dmg(self, dmg):
         if self.hp > 0:
-            self.flag_take_dmg = True
-            self.image = img.woodcutter_attack_right[self.at]
-            self.anim_time_hurt += 1
-            if self.anim_time_hurt == 5:
-                self.at += 1
-                self.anim_time_hurt = 0
             self.hp -= dmg
             sounds.hit_tree.play()
         if self.hp <= 0:
