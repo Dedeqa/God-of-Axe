@@ -66,6 +66,9 @@ class Player(Unit, pygame.sprite.Sprite):
                              100)
         self.draw_text(cfg.screen, f"{self.rect}", 18, cfg.WIDTH / 2, 10)
         self.draw_text(cfg.screen, f"{self.wood_amount}", 18, cfg.WIDTH / 2, 30)
+        self.draw_text(cfg.screen, f"{cfg.bg_x}", 18, cfg.WIDTH / 2, 50)
+        self.draw_text(cfg.screen, f"{cfg.bg_y}", 18, cfg.WIDTH / 2 + 50, 50)
+
         self.speedx = 0
         self.speedy = 0
         keystate = pygame.key.get_pressed()
@@ -143,7 +146,7 @@ class Player(Unit, pygame.sprite.Sprite):
                         self.speedx = sx
                     elif cfg.bg_x > -1920:
                         cfg.bg_x -= sx
-                        func.update_monsters_y(cfg.monsterList, sx, flag_direction=False)
+                        func.update_monsters_x(cfg.monsterList, sx, flag_direction=False)
         if not (keystate[pygame.K_w] and keystate[pygame.K_s]):
             if keystate[pygame.K_w]:
                 if (self.line.collidelist(cfg.trees_rects_bottom)) == -1:
@@ -242,12 +245,12 @@ class Player(Unit, pygame.sprite.Sprite):
 
         # cfg.screen.fill("red", self.rect)
         # cfg.screen.fill("orange", self.rect_attack)
-        # cfg.screen.fill("orange", self.line)
-        # for elem in cfg.trees:
-        #     cfg.screen.fill("blue", elem.line_right)
-        #     cfg.screen.fill("blue", elem.line_left)
-        #     cfg.screen.fill("blue", elem.line_top)
-        #     cfg.screen.fill("blue", elem.line_bottom)
+        cfg.screen.fill("orange", self.line)
+        for elem in cfg.trees1:
+            cfg.screen.fill("blue", elem.line_right)
+            cfg.screen.fill("blue", elem.line_left)
+            cfg.screen.fill("blue", elem.line_top)
+            cfg.screen.fill("blue", elem.line_bottom)
 
     def attack(self):
 
@@ -307,6 +310,15 @@ class Player(Unit, pygame.sprite.Sprite):
                 self.rect_attack = pygame.Rect(self.rect[0] - self.rect[2] / 3, self.rect[1] + self.rect[3] / 3,
                                                self.rect[2] / 3 * 2,
                                                self.rect[3] / 3)
+
+    def take_dmg(self, dmg):
+
+        if self.hp > 0:
+            self.hp -= dmg
+            sounds.hit_tree.play()
+        if self.hp <= 0:
+            self.remove(all_sprites)
+            self.kill()
 
 
 class Weapon:
