@@ -18,8 +18,8 @@ add_flag = True
 first_elem_flag = True
 
 delta = 125  # "радиус" спавна деревьев
-delta_monsters = 1000
-
+delta_monsters = 200
+delta_hero = 600
 # Список деревьев ------------------------------------------------------------------------------------------------------
 tree_list_x = []
 tree_list_y = []

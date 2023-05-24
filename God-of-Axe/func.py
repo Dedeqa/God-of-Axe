@@ -15,9 +15,9 @@ def start_game():
     if cfg.start_game_flag:
         # cfg.play_music.play(-1)
         cfg.start_game_flag = False
-    monster_generator(20)
+    monster_generator(30)
     tree_generator1(400)
-    #tree_generator2(150)
+    # tree_generator2(150)
     while True:
         cfg.clock.tick(cfg.FPS)
         # print(cfg.clock.get_fps())
@@ -271,7 +271,8 @@ def tree_generator1(n):
             count += 1
 
     cfg.trees1 = [classes.Tree(f'Дуб{i}', 500, cfg.tree_list_x[i], cfg.tree_list_y[i], 5) for i in range(0, n - 1, 2)]
-    cfg.trees2 = [classes.Tree(f'Елка{i}', 1000, cfg.tree_list_x[i], cfg.tree_list_y[i], 10) for i in range(1, n - 2, 2)]
+    cfg.trees2 = [classes.Tree(f'Елка{i}', 1000, cfg.tree_list_x[i], cfg.tree_list_y[i], 10) for i in
+                  range(1, n - 2, 2)]
 
     for elem in cfg.trees1:
         classes.all_sprites.add(elem)
@@ -288,8 +289,8 @@ def tree_generator1(n):
         cfg.trees_rects_top.append(elem.line_top)
         cfg.trees_rects_bottom.append(elem.line_bottom)
 
-def monster_generator(n):
 
+def monster_generator(n):
     count = 0
     while count < n:
         cfg.add_flag = True
@@ -297,17 +298,19 @@ def monster_generator(n):
         y = random.randint(-1030, 2000)
 
         for i in range(count):
-            if abs(cfg.monster_list_x[i] - x) < cfg.delta_monsters and abs(cfg.monster_list_y[i] - y) < cfg.delta_monsters and abs(cfg.monster_list_x[i] - classes.player.posx) < cfg.delta_monsters and abs(cfg.monster_list_y[i] - classes.player.posy) < cfg.delta_monsters:
+            if (abs(cfg.monster_list_x[i] - x) < cfg.delta_monsters or abs(
+                    cfg.monster_list_y[i] - y) < cfg.delta_monsters) and (abs(
+                cfg.monster_list_x[i] - classes.player.rect.x) < cfg.delta_hero or abs(
+                cfg.monster_list_y[i] - classes.player.rect.y) < cfg.delta_hero):
                 cfg.add_flag = False
 
         if cfg.add_flag:
             cfg.monster_list_x.append(x)
             cfg.monster_list_y.append(y)
             count += 1
-    cfg.monsterList = [mobs.Monster(f'Минотавр{i}', 500, cfg.monster_list_x[i], cfg.monster_list_y[i], 200,20) for i in range(n)]
+    cfg.monsterList = [mobs.Monster(f'Минотавр{i}', 500, cfg.monster_list_x[i], cfg.monster_list_y[i], 300, 20) for i in
+                       range(n)]
     cfg.monsterList.append(mobs.min1)
     classes.all_sprites.add(mobs.min1)
     for elem in cfg.monsterList:
         classes.all_sprites.add(elem)
-
-

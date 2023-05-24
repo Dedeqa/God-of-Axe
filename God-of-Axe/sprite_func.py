@@ -1,5 +1,4 @@
-import random
-import config as cfg
+
 
 
 def update_monsters_x(monster_list, shift, flag_direction):
