@@ -131,6 +131,7 @@ class Monster(cl.Unit, pygame.sprite.Sprite):
 
             else:
                 self.attack_timer = 50
+                cl.player.flag_take_dmg = False
 
         else:
             
@@ -172,12 +173,20 @@ class Monster(cl.Unit, pygame.sprite.Sprite):
             self.attack_flag = True
             cl.player.take_dmg(self.damage)
             self.attack_timer = 0
-        if self.attack_timer == 5:
-            cl.player.image = img.woodcutter_hurt[0]
-        if self.attack_timer == 10:
-            cl.player.image = img.woodcutter_hurt[1]
-        if self.attack_timer == 15:
-            cl.player.image = img.woodcutter_hurt[2]
+        if self.side == "left":
+            if self.attack_timer == 5:
+                cl.player.image = img.woodcutter_hurt_right[0]
+            if self.attack_timer == 10:
+                cl.player.image = img.woodcutter_hurt_right[1]
+            if self.attack_timer == 15:
+                cl.player.image = img.woodcutter_hurt_right[2]
+        elif self.side == "right":
+            if self.attack_timer == 5:
+                cl.player.image = img.woodcutter_hurt_left[0]
+            if self.attack_timer == 10:
+                cl.player.image = img.woodcutter_hurt_left[1]
+            if self.attack_timer == 15:
+                cl.player.image = img.woodcutter_hurt_left[2]
 
         self.attack_timer += 1
 
