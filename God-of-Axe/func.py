@@ -11,12 +11,11 @@ pygame.mixer.pre_init(44100, -16, 1, 512)
 
 
 def start_game():
-
     if cfg.start_game_flag:
         # cfg.play_music.play(-1)
         cfg.start_game_flag = False
-    tree_generator1(50)
-    tree_generator2(50)
+    tree_generator1(400)
+    #tree_generator2(150)
     while True:
         cfg.clock.tick(cfg.FPS)
         # print(cfg.clock.get_fps())
@@ -44,7 +43,6 @@ def start_game():
 
 
 def menu():
-
     sounds.play_music.stop()
     if cfg.menu_flag:
         # pygame.mixer.music.play(-1)
@@ -107,7 +105,6 @@ def menu():
 
 
 def pause():
-
     start1, start2, start3 = 0, 0, 0
 
     while True:
@@ -169,7 +166,6 @@ def pause():
 
 
 def options_menu():
-
     while True:
         mouse = pygame.mouse.get_pos()
         click = pygame.mouse.get_pressed()
@@ -215,7 +211,6 @@ def options_menu():
 
 
 def options_game():
-
     while True:
         mouse = pygame.mouse.get_pos()
         click = pygame.mouse.get_pressed()
@@ -258,27 +253,24 @@ def options_game():
 
 
 def tree_generator1(n):
-
     count = 0
     while count < n:
         cfg.add_flag = True
         x = random.randint(-1870, 3740)
         y = random.randint(-1030, 2000)
-        if cfg.first_elem_flag:
-            cfg.tree1_list_x.append(x)
-            cfg.tree1_list_y.append(y)
-            cfg.first_elem_flag = False
-            count += 1
 
-        for elem in range(count):
-            if not (abs(cfg.tree1_list_x[elem] - x) > cfg.delta or abs(cfg.tree1_list_y[elem] - y) > cfg.delta):
+        for i in range(count):
+            if abs(cfg.tree_list_x[i] - x) < cfg.delta and abs(cfg.tree_list_y[i] - y) < cfg.delta:
                 cfg.add_flag = False
+
         if cfg.add_flag:
-            cfg.tree1_list_x.append(x)
-            cfg.tree1_list_y.append(y)
+            cfg.tree_list_x.append(x)
+            cfg.tree_list_y.append(y)
             count += 1
 
-    cfg.trees1 = [classes.Tree(f'Дуб{i}', 500, cfg.tree1_list_x[i], cfg.tree1_list_y[i], 5) for i in range(n)]
+    cfg.trees1 = [classes.Tree(f'Дуб{i}', 500, cfg.tree_list_x[i], cfg.tree_list_y[i], 5) for i in range(0, n - 1, 2)]
+    cfg.trees2 = [classes.Tree(f'Елка{i}', 1000, cfg.tree_list_x[i], cfg.tree_list_y[i], 10) for i in range(1, n - 2, 2)]
+
     for elem in cfg.trees1:
         classes.all_sprites.add(elem)
         cfg.trees_rects_left.append(elem.line_left)
@@ -286,29 +278,6 @@ def tree_generator1(n):
         cfg.trees_rects_top.append(elem.line_top)
         cfg.trees_rects_bottom.append(elem.line_bottom)
 
-
-def tree_generator2(n):
-
-    count = 0
-    while count < n:
-        cfg.add_flag = True
-        x = random.randint(-1870, 3740)
-        y = random.randint(-1030, 2000)
-        if cfg.first_elem_flag:
-            cfg.tree2_list_x.append(x)
-            cfg.tree2_list_y.append(y)
-            cfg.first_elem_flag = False
-            count += 1
-
-        for elem in range(count):
-            if not (abs(cfg.tree1_list_x[elem] - x) > cfg.delta or abs(cfg.tree1_list_y[elem] - y) > cfg.delta):
-                cfg.add_flag = False
-        if cfg.add_flag:
-            cfg.tree2_list_x.append(x)
-            cfg.tree2_list_y.append(y)
-            count += 1
-
-    cfg.trees2 = [classes.Tree(f'Елка{i}', 1000, cfg.tree2_list_x[i], cfg.tree2_list_y[i], 10) for i in range(n)]
     for elem in cfg.trees2:
         elem.image = pygame.image.load('Images/Trees/Tree2.png')
         classes.all_sprites.add(elem)
@@ -316,3 +285,4 @@ def tree_generator2(n):
         cfg.trees_rects_right.append(elem.line_right)
         cfg.trees_rects_top.append(elem.line_top)
         cfg.trees_rects_bottom.append(elem.line_bottom)
+

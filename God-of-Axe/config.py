@@ -20,12 +20,12 @@ first_elem_flag = True
 delta = 125  # "радиус" спавна деревьев
 
 # Список деревьев ------------------------------------------------------------------------------------------------------
-tree1_list_x = []
-tree1_list_y = []
-tree2_list_x = []
-tree2_list_y = []
+tree_list_x = []
+tree_list_y = []
+
 trees1 = []
 trees2 = []
+
 trees_rects_right = []
 trees_rects_left = []
 trees_rects_top = []
