@@ -25,31 +25,32 @@ class Monster(cl.Unit, pygame.sprite.Sprite):
         self.anim_time = 0
         self.side = "right"
         self.wait_side = True
-        self.wait_time = 0
+        self.wait_timer = 0
         self.anim_wait_time = 0
         self.viewing_range = viewing_range
         self.start_hp = hp
         self.sound_flag = True
         self.attack_flag = False
         self.distance = 0
-        self.attack_timer = 0
+        self.attack_timer = 50
+        self.attack_wait_timer = 0
 
     def update(self):
 
         self.target_vector = m.Vector2(cl.player.rect.x, cl.player.rect.y)
-
-        if not self.attack_flag:
-            self.follower_vector = m.Vector2(self.rect.x, self.rect.y)
-        else:
-            self.follower_vector = m.Vector2(self.rect.x, self.rect.y)
+        self.follower_vector = m.Vector2(self.rect.x, self.rect.y)
 
         self.distance = self.follower_vector.distance_to(self.target_vector)
         direction_vector = self.target_vector - self.follower_vector
         min_step = max(0, int(self.distance - self.maximum_distance))
         max_step = self.distance - self.minimum_distance
         VELOCITY = 3
-        step_distance = min(max_step, max(min_step, VELOCITY))
         direction_vector /= self.distance
+
+        if not self.attack_flag:
+            step_distance = min(max_step, max(min_step, VELOCITY))
+        else:
+            step_distance = 0
 
         if self.distance <= self.viewing_range:
 
@@ -57,7 +58,7 @@ class Monster(cl.Unit, pygame.sprite.Sprite):
                 self.sound_flag = False
                 sounds.agr_monster.play()
 
-            self.follower_vector = self.follower_vector + direction_vector * step_distance
+            self.follower_vector += direction_vector * step_distance
 
             if self.follower_vector.x > cl.player.rect.x and self.follower_vector.y > cl.player.rect.y:
                 if self.follower_vector.x - cl.player.rect.x > self.follower_vector.y - cl.player.rect.y:
@@ -100,32 +101,39 @@ class Monster(cl.Unit, pygame.sprite.Sprite):
             self.rect.x = round(self.follower_vector.x)
             self.rect.y = round(self.follower_vector.y)
 
+            if self.attack_wait_timer == 20:
+                self.attack_wait_timer = 0
+                self.attack_flag = False
+            else:
+                self.attack_wait_timer += 1
+
             if self.distance <= self.minimum_distance + 10:
 
-                if self.side == "right":
-                    if (cl.player.line.collidelist(cfg.trees_rects_left)) == -1:
-                        if cfg.bg_x > -1920:
-                            cfg.bg_x -= 1
-                elif self.side == "left":
-                    if (cl.player.line.collidelist(cfg.trees_rects_right)) == -1:
-                        if cfg.bg_x < 1920:
-                            cfg.bg_x += 1
-                elif self.side == "top":
-                    if (cl.player.line.collidelist(cfg.trees_rects_bottom)) == -1:
-                        if cfg.bg_y < 1080:
-                            cfg.bg_y += 1
-                elif self.side == "bottom":
-                    if (cl.player.line.collidelist(cfg.trees_rects_top)) == -1:
-                        if cfg.bg_y > -1080:
-                            cfg.bg_y -= 1
+                if not self.attack_flag:
+                    if self.side == "right":
+                        if (cl.player.line.collidelist(cfg.trees_rects_left)) == -1:
+                            if cfg.bg_x > -1920:
+                                cfg.bg_x -= 1
+                    elif self.side == "left":
+                        if (cl.player.line.collidelist(cfg.trees_rects_right)) == -1:
+                            if cfg.bg_x < 1920:
+                                cfg.bg_x += 1
+                    elif self.side == "top":
+                        if (cl.player.line.collidelist(cfg.trees_rects_bottom)) == -1:
+                            if cfg.bg_y < 1080:
+                                cfg.bg_y += 1
+                    elif self.side == "bottom":
+                        if (cl.player.line.collidelist(cfg.trees_rects_top)) == -1:
+                            if cfg.bg_y > -1080:
+                                cfg.bg_y -= 1
 
                 self.attack()
             else:
-                self.attack_flag = False
-                self.attack_timer = 0
+                self.attack_timer = 50
 
         else:
-
+            
+            self.attack_wait_timer = 0
             self.sound_flag = True
 
             if self.j == 3:
@@ -139,13 +147,13 @@ class Monster(cl.Unit, pygame.sprite.Sprite):
                 self.rect.x -= 1
 
             self.anim_wait_time += 1
-            self.wait_time += 1
+            self.wait_timer += 1
 
             if self.anim_wait_time == 10:
                 self.j += 1
                 self.anim_wait_time = 0
-            if self.wait_time == 100:
-                self.wait_time = 0
+            if self.wait_timer == 100:
+                self.wait_timer = 0
                 self.wait_side = not self.wait_side
 
     def take_dmg(self, dmg):

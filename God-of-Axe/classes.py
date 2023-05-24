@@ -245,12 +245,12 @@ class Player(Unit, pygame.sprite.Sprite):
 
         # cfg.screen.fill("red", self.rect)
         # cfg.screen.fill("orange", self.rect_attack)
-        cfg.screen.fill("orange", self.line)
-        for elem in cfg.trees1:
-            cfg.screen.fill("blue", elem.line_right)
-            cfg.screen.fill("blue", elem.line_left)
-            cfg.screen.fill("blue", elem.line_top)
-            cfg.screen.fill("blue", elem.line_bottom)
+        # cfg.screen.fill("orange", self.line)
+        # for elem in cfg.trees1:
+        #     cfg.screen.fill("blue", elem.line_right)
+        #     cfg.screen.fill("blue", elem.line_left)
+        #     cfg.screen.fill("blue", elem.line_top)
+        #     cfg.screen.fill("blue", elem.line_bottom)
 
     def attack(self):
 
