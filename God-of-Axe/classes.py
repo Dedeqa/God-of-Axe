@@ -51,6 +51,7 @@ class Player(Unit, pygame.sprite.Sprite):
         self.j = 0
         self.at = 0
         self.flag_attack = False
+        self.flag_take_dmg = False
         self.anim_time = 0
         self.anim_time_attack = 0
         self.wood_amount = 0
@@ -233,7 +234,7 @@ class Player(Unit, pygame.sprite.Sprite):
                         cfg.bg_y -= sy
                         func.update_monsters_y(cfg.monsterList, sy, flag_direction=False)
         if not (keystate[pygame.K_w] or keystate[pygame.K_s] or keystate[pygame.K_a] or keystate[pygame.K_d] or
-                keystate[pygame.K_e]):
+                keystate[pygame.K_e] or self.flag_take_dmg):
             if cfg.vector == "right":
                 self.image = img.woodcutter_stay_right
             elif cfg.vector == "left":
@@ -319,6 +320,7 @@ class Player(Unit, pygame.sprite.Sprite):
 
     def take_dmg(self, dmg):
         if self.hp > 0:
+            self.flag_take_dmg = True
             self.hp -= dmg
             sounds.hit_tree.play()
         if self.hp <= 0:
