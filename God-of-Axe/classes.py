@@ -41,7 +41,7 @@ class Player(Unit, pygame.sprite.Sprite):
         Unit.__init__(self, nm, hp, posx, posy)
         pygame.sprite.Sprite.__init__(self)
         self.image = img.woodcutter_stay_right
-
+        self.stamina = 100
         self.rect = self.image.get_rect()
         self.rect.center = (posx / 2, posy / 2)
         self.weapon = Weapon(100, 1000)
@@ -53,7 +53,9 @@ class Player(Unit, pygame.sprite.Sprite):
         self.flag = False
         self.anim_time = 0
         self.anim_time_attack = 0
+        self.anim_time_hurt = 0
         self.wood_amount = 0
+        self.flag_take_dmg = False
         self.rect_attack = pygame.Rect(self.rect[0] + self.rect[2] / 2 + 10, self.rect[1] + self.rect[3] / 3,
                                        self.rect[2] / 3 * 2,
                                        self.rect[3] / 3)
@@ -64,21 +66,23 @@ class Player(Unit, pygame.sprite.Sprite):
 
         self.draw_shield_bar(cfg.screen, self.rect.x, self.rect.y - 10, self.hp, (24, 84, 26), (9, 184, 15), 'black',
                              100)
-        self.draw_text(cfg.screen, f"{self.rect}", 18, cfg.WIDTH / 2, 10)
-        self.draw_text(cfg.screen, f"{self.wood_amount}", 18, cfg.WIDTH / 2, 30)
-        self.draw_text(cfg.screen, f"{cfg.bg_x}", 18, cfg.WIDTH / 2, 50)
-        self.draw_text(cfg.screen, f"{cfg.bg_y}", 18, cfg.WIDTH / 2 + 50, 50)
+        self.draw_shield_bar(cfg.screen, self.rect.x, self.rect.y - 20, self.stamina, (24, 84, 26), (255, 255, 0), 'black',
+                             100)
+
+
 
         self.speedx = 0
         self.speedy = 0
         keystate = pygame.key.get_pressed()
+        if self.stamina < 100 and not keystate[pygame.K_LSHIFT]:
+            self.stamina += 0.5
         if not (keystate[pygame.K_a] and keystate[pygame.K_d]):
 
             if keystate[pygame.K_a]:
                 cfg.vector = "left"
 
                 if (self.line.collidelist(cfg.trees_rects_right)) == -1:
-                    if keystate[pygame.K_LSHIFT]:
+                    if keystate[pygame.K_LSHIFT] and self.stamina > 0:
 
                         if self.i == 6:
                             self.i = 0
@@ -90,6 +94,7 @@ class Player(Unit, pygame.sprite.Sprite):
                             self.i += 1
                             self.anim_time = 0
                         sx = 4
+                        self.stamina -= 0.5
 
                     else:
 
@@ -116,7 +121,7 @@ class Player(Unit, pygame.sprite.Sprite):
             if keystate[pygame.K_d]:
                 cfg.vector = "right"
                 if (self.line.collidelist(cfg.trees_rects_left)) == -1:
-                    if keystate[pygame.K_LSHIFT]:
+                    if keystate[pygame.K_LSHIFT] and self.stamina > 0:
 
                         if self.i == 6:
                             self.i = 0
@@ -129,6 +134,7 @@ class Player(Unit, pygame.sprite.Sprite):
                             self.anim_time = 0
 
                         sx = 4
+                        self.stamina -= 0.5
                     else:
 
                         if self.i == 6:
@@ -166,6 +172,7 @@ class Player(Unit, pygame.sprite.Sprite):
                             self.anim_time = 0
 
                         sy = 4
+                        self.stamina -= 0.5
                     else:
 
                         if self.j == 6:
@@ -205,6 +212,7 @@ class Player(Unit, pygame.sprite.Sprite):
                             self.anim_time = 0
 
                         sy = 4
+                        self.stamina -= 0.5
                     else:
 
                         if self.j == 6:
@@ -227,13 +235,13 @@ class Player(Unit, pygame.sprite.Sprite):
                         cfg.bg_y -= sy
                         func.update_monsters_y(cfg.monsterList, sy, flag_direction=False)
         if not (keystate[pygame.K_w] or keystate[pygame.K_s] or keystate[pygame.K_a] or keystate[pygame.K_d] or
-                keystate[pygame.K_e]):
+                keystate[pygame.K_e] or self.flag_take_dmg):
             if cfg.vector == "right":
                 self.image = img.woodcutter_stay_right
             elif cfg.vector == "left":
                 self.image = img.woodcutter_stay_left
 
-        if keystate[pygame.K_e]:
+        if keystate[pygame.K_e] and self.stamina >= 10:
             self.flag = True
         self.attack()
         self.rect.x += self.speedx
@@ -253,8 +261,8 @@ class Player(Unit, pygame.sprite.Sprite):
         #     cfg.screen.fill("blue", elem.line_bottom)
 
     def attack(self):
-
         if self.flag:
+            self.stamina -= 1
             if self.at == 0:
                 sounds.wave.stop()
                 sounds.wave.play()
@@ -312,8 +320,13 @@ class Player(Unit, pygame.sprite.Sprite):
                                                self.rect[3] / 3)
 
     def take_dmg(self, dmg):
-
         if self.hp > 0:
+            self.flag_take_dmg = True
+            self.image = img.woodcutter_attack_right[self.at]
+            self.anim_time_hurt += 1
+            if self.anim_time_hurt == 5:
+                self.at += 1
+                self.anim_time_hurt = 0
             self.hp -= dmg
             sounds.hit_tree.play()
         if self.hp <= 0:
