@@ -14,7 +14,7 @@ def start_game():
     if cfg.start_game_flag:
         # cfg.play_music.play(-1)
         cfg.start_game_flag = False
-    tree_generator1(400)
+    tree_generator(400)
     #tree_generator2(150)
     while True:
         cfg.clock.tick(cfg.FPS)
@@ -35,10 +35,12 @@ def start_game():
         cfg.screen.blit(img.game_bg, (-1920 + cfg.bg_x, 1080 + cfg.bg_y))  # 7 зона
         cfg.screen.blit(img.game_bg, (0 + cfg.bg_x, 1080 + cfg.bg_y))  # 8 зона
         cfg.screen.blit(img.game_bg, (1920 + cfg.bg_x, 1080 + cfg.bg_y))  # 9 зона
+        classes.player.draw_text(cfg.screen, f"{classes.player.rect}", 18, cfg.WIDTH / 2, 10)
 
         classes.all_sprites.update()
         classes.all_sprites.draw(cfg.screen)
-
+        classes.player.draw_text(cfg.screen, f"{classes.player.wood_amount}", 18, cfg.WIDTH / 2, 20)
+        classes.player.draw_text(cfg.screen, f"{classes.player.stamina}", 18, cfg.WIDTH / 2, 50)
         pygame.display.flip()
 
 
@@ -252,7 +254,7 @@ def options_game():
         pygame.display.flip()
 
 
-def tree_generator1(n):
+def tree_generator(n):
     count = 0
     while count < n:
         cfg.add_flag = True

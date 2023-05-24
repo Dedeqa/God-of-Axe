@@ -120,8 +120,10 @@ class Monster(cl.Unit, pygame.sprite.Sprite):
                             cfg.bg_y -= 1
 
                 self.attack()
+
             else:
-                self.attack_flag = False
+                # self.attack_flag = False
+                cl.player.flag_take_dmg = False
                 self.attack_timer = 0
 
         else:
@@ -163,7 +165,6 @@ class Monster(cl.Unit, pygame.sprite.Sprite):
             self.attack_flag = True
             cl.player.take_dmg(self.damage)
             self.attack_timer = 0
-
         self.attack_timer += 1
 
 
