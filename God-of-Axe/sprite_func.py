@@ -1,3 +1,6 @@
+import random
+import config as cfg
+
 
 def update_monsters_x(monster_list, shift, flag_direction):
 
@@ -17,3 +20,4 @@ def update_monsters_y(monster_list, shift, flag_direction):
     else:
         for elem in monster_list:
             elem.rect.y -= shift
+

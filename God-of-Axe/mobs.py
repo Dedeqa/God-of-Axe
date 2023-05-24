@@ -101,7 +101,7 @@ class Monster(cl.Unit, pygame.sprite.Sprite):
             self.rect.x = round(self.follower_vector.x)
             self.rect.y = round(self.follower_vector.y)
 
-            if self.attack_wait_timer == 20:
+            if self.attack_wait_timer == 100:
                 self.attack_wait_timer = 0
                 self.attack_flag = False
             else:
@@ -174,7 +174,5 @@ class Monster(cl.Unit, pygame.sprite.Sprite):
 
         self.attack_timer += 1
 
-
 min1 = Monster("Jaba", 1000, 1, 1, 500, 20)
-cfg.monsterList.append(min1)
-cl.all_sprites.add(min1)
+
