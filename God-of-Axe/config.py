@@ -7,6 +7,7 @@ WIDTH = 1920  # Параметры окна
 HEIGHT = 1080
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 size = screen.get_size()
+label = pygame.Rect(0,0 ,200,200)
 
 FPS = 60  # Количество FPS
 

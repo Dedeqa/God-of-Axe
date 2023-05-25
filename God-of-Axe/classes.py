@@ -68,11 +68,7 @@ class Player(Unit, pygame.sprite.Sprite):
 
     def update(self):
 
-        self.draw_shield_bar(cfg.screen, self.rect.x, self.rect.y - 10, self.hp, (24, 84, 26), (9, 184, 15), 'black',
-                             100, 50, 10)
-        self.draw_shield_bar(cfg.screen, self.rect.x, self.rect.y - 22, self.stamina, (24, 84, 26), (255, 255, 0),
-                             'black',
-                             100, 50, 10)
+
 
         self.progress = self.wood_amount * 100 / cfg.goal
         self.speedx = 0
