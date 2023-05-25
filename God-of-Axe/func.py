@@ -15,10 +15,9 @@ def start_game():
     if cfg.start_game_flag:
         # cfg.play_music.play(-1)
         cfg.start_game_flag = False
-    monster_generator(40)
+    monster_generator(30)
     tree_generator1(400)
     # tree_generator2(150)
-
     while True:
         cfg.clock.tick(cfg.FPS)
         # print(cfg.clock.get_fps())
@@ -43,17 +42,12 @@ def start_game():
         classes.all_sprites.draw(cfg.screen)
         classes.player.draw_shield_bar(cfg.screen, 0, 1070, classes.player.wood_amount, "brown",
                                        "yellow", "black", 150, 1920, 10)
-        # classes.player.draw_text(cfg.screen, f'{int(classes.player.progress)} proc', 14, 960, 12)
-        classes.player.draw_text(cfg.screen, f'Oak-{(classes.player.oak_amount)}x', 14, 900, 30)
-        classes.player.draw_text(cfg.screen, f'Fir-{(classes.player.fir_amount)}x', 14, 1020, 30)
-        classes.player.draw_text(cfg.screen, f'{(classes.player.apples_amount)}x', 14, 960, 50)
+        classes.player.draw_text(cfg.screen, f'{int(classes.player.progress)} %', 14, 960, 1050, cfg.font_interface, "black")
+        classes.player.draw_text(cfg.screen, f'Oak-{(classes.player.oak_amount)}x', 12, 900, 30, cfg.font_interface , "white")
+        classes.player.draw_text(cfg.screen, f'Fir-{(classes.player.fir_amount)}x', 12, 1020, 30, cfg.font_interface,"white")
+        classes.player.draw_text(cfg.screen, f'{(classes.player.apples_amount)}x', 12, 960, 50, cfg.font_interface,"white")
         cfg.screen.blit(img.apple, (920, 45))
-        classes.player.draw_shield_bar(cfg.screen, 0, 0, classes.player.hp, 'DarkRed','red', 'black',
-                                       100, 350, 10 )
-        classes.player.draw_shield_bar(cfg.screen, 0, 10,
-                                       classes.player.stamina, (24, 84, 26), (255, 255, 0),
-                                       'black',
-                                       100, 350, 10)
+
         pygame.display.flip()
 
 

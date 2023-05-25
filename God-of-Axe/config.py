@@ -41,7 +41,8 @@ monster_list_y = []
 
 # Шрифты -----------------------------------------------------------------------------------------------------
 my_font = pygame.font.Font('Fonts/Jfwildwood-ldYZ.ttf', 100)
-font_name = pygame.font.match_font('arial')
+font_interface = 'Fonts/HoltwoodOneSC-Regular.ttf'
+
 
 # Координаты для перемещения фона---------------------------------------------------------------------------------------
 bg_x = 0
