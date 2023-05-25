@@ -40,17 +40,21 @@ def start_game():
 
         classes.all_sprites.update()
         classes.all_sprites.draw(cfg.screen)
-        classes.player.draw_shield_bar(cfg.screen, 0, 1070, classes.player.wood_amount, "brown",
-                                       "yellow", "black", 150, 1920, 10)
-        classes.player.draw_text(cfg.screen, f'{int(classes.player.progress)} %', 14, 960, 1050, cfg.font_interface, "black")
-        classes.player.draw_text(cfg.screen, f'Oak-{(classes.player.oak_amount)}x', 12, 900, 30, cfg.font_interface , "white")
-        classes.player.draw_text(cfg.screen, f'Fir-{(classes.player.fir_amount)}x', 12, 1020, 30, cfg.font_interface,"white")
-        classes.player.draw_text(cfg.screen, f'{(classes.player.apples_amount)}x', 12, 960, 50, cfg.font_interface,"white")
-        classes.player.draw_shield_bar(cfg.screen, 0, 0, classes.player.hp, 'DarkRed', 'red', 'black',
-                             100, 350, 10)
-        classes.player.draw_shield_bar(cfg.screen, 0, 10, classes.player.stamina, (24, 84, 26), (255, 255, 0),
-                             'black',
-                             100, 350, 10)
+
+        classes.player.draw_shield_bar(cfg.screen, 0, 1050, classes.player.wood_amount, "brown",
+                                       "yellow", "black", 150, 1920, 30)
+        classes.player.draw_text(cfg.screen, f'{int(classes.player.progress)} %', 14, 960, 1053, cfg.font_interface,
+                                 "black")
+        classes.player.draw_text(cfg.screen, f'Oak-{(classes.player.oak_amount)}x', 12, 900, 30, cfg.font_interface,
+                                 "white")
+        classes.player.draw_text(cfg.screen, f'Fir-{(classes.player.fir_amount)}x', 12, 1020, 30, cfg.font_interface,
+                                 "white")
+        classes.player.draw_text(cfg.screen, f'{(classes.player.apples_amount)}x', 12, 960, 50, cfg.font_interface,
+                                 "white")
+        classes.player.draw_shield_bar(cfg.screen, 0, 0, classes.player.hp, 'DarkRed', 'red', 'black', 100, 350, 13)
+        classes.player.draw_shield_bar(cfg.screen, 0, 13, classes.player.stamina, (24, 84, 26), (255, 255, 0),
+                                       'black', 100, 350, 13)
+
         cfg.screen.blit(img.apple, (920, 45))
 
         pygame.display.flip()
