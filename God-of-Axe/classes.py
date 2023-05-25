@@ -4,6 +4,7 @@ import sprite_func as func
 import pygame.math as pm
 import sounds
 import images as img
+import random
 
 
 # pygame.mixer.pre_init(44100, -16, 1, 512)
@@ -58,6 +59,7 @@ class Player(Unit, pygame.sprite.Sprite):
         self.oak_amount = 0
         self.fir_amount = 0
         self.progress = 0
+        self.apples_amount = 3
         self.rect_attack = pygame.Rect(self.rect[0] + self.rect[2] / 2 + 10, self.rect[1] + self.rect[3] / 3,
                                        self.rect[2] / 3 * 2,
                                        self.rect[3] / 3)
@@ -68,9 +70,9 @@ class Player(Unit, pygame.sprite.Sprite):
 
         self.draw_shield_bar(cfg.screen, self.rect.x, self.rect.y - 10, self.hp, (24, 84, 26), (9, 184, 15), 'black',
                              100, 50, 10)
-        self.draw_shield_bar(cfg.screen, self.rect.x, self.rect.y - 22, self.stamina, (24, 84, 26), (255, 255, 0), 'black',
+        self.draw_shield_bar(cfg.screen, self.rect.x, self.rect.y - 22, self.stamina, (24, 84, 26), (255, 255, 0),
+                             'black',
                              100, 50, 10)
-
 
         self.progress = self.wood_amount * 100 / cfg.goal
         self.speedx = 0
@@ -236,14 +238,16 @@ class Player(Unit, pygame.sprite.Sprite):
                     elif cfg.bg_y > -1080:
                         cfg.bg_y -= sy
                         func.update_monsters_y(cfg.monsterList, sy, flag_direction=False)
+        if keystate[pygame.K_e]:
+            self.eat_an_apple()
         if not (keystate[pygame.K_w] or keystate[pygame.K_s] or keystate[pygame.K_a] or keystate[pygame.K_d] or
-                keystate[pygame.K_e] or self.flag_take_dmg):
+                keystate[pygame.K_SPACE] or self.flag_take_dmg):
             if cfg.vector == "right":
                 self.image = img.woodcutter_stay_right
             elif cfg.vector == "left":
                 self.image = img.woodcutter_stay_left
 
-        if keystate[pygame.K_e] and self.stamina >= 10:
+        if keystate[pygame.K_SPACE] and self.stamina >= 10:
             self.flag_attack = True
         self.attack()
         self.rect.x += self.speedx
@@ -330,6 +334,12 @@ class Player(Unit, pygame.sprite.Sprite):
             self.remove(all_sprites)
             self.kill()
 
+    def eat_an_apple(self):
+        if self.apples_amount > 0 and self.hp < 100:
+            self.hp += 10
+            self.apples_amount -= 1
+            sounds.eat_apple.play()
+
 
 class Weapon:
     def __init__(self, dmg, attack_speed):
@@ -409,6 +419,7 @@ class Tree(Unit, pygame.sprite.Sprite):
 
             self.remove(all_sprites)
             self.kill()
+            self.give_an_apple()
             self.status = False
             self.line_left[2] = 0
             self.line_left[3] = 0
@@ -424,3 +435,13 @@ class Tree(Unit, pygame.sprite.Sprite):
             elif self.bonus == 5:
                 player.oak_amount += 1
             self.bonus = 0
+
+    def give_an_apple(self):
+        if self.status:
+            chance = 0
+            if self.bonus == 5:
+                chance = random.randint(1, 5)
+            elif self.bonus == 10:
+                chance = random.randint(1, 2)
+            if chance == 1:
+                player.apples_amount += 1

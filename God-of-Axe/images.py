@@ -230,10 +230,12 @@ woodcutter_hurt_right = [
         'Images/Player/Woodcutter_hurt_right/Woodcutter_hurt3.png').convert_alpha(), (50, 50))
 ]
 woodcutter_hurt_left = [
-pygame.transform.scale(pygame.image.load(
+    pygame.transform.scale(pygame.image.load(
         'Images/Player/Woodcutter_hurt_left/Woodcutter_hurt_left1.png').convert_alpha(), (50, 50)),
-pygame.transform.scale(pygame.image.load(
+    pygame.transform.scale(pygame.image.load(
         'Images/Player/Woodcutter_hurt_left/Woodcutter_hurt_left2.png').convert_alpha(), (50, 50)),
-pygame.transform.scale(pygame.image.load(
+    pygame.transform.scale(pygame.image.load(
         'Images/Player/Woodcutter_hurt_left/Woodcutter_hurt_left3.png').convert_alpha(), (50, 50)),
 ]
+# Яблоко для интерфейса ------------------------------------------------------------------------------------------------
+apple = pygame.transform.scale(pygame.image.load('Images/ interface/apple.png').convert_alpha(), (25, 25))

@@ -2,7 +2,6 @@ import pygame
 import func
 import config as cfg
 import images as img
-
 pygame.mixer.pre_init(44100, -16, 1, 512)
 pygame.init()
 
