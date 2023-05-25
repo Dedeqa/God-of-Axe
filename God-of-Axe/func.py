@@ -45,6 +45,7 @@ def start_game():
         classes.player.draw_text(cfg.screen, f'{int(classes.player.progress)} proc', 14 , 960, 12)
         classes.player.draw_text(cfg.screen, f'Oak-{(classes.player.oak_amount)}x', 14 , 900, 30)
         classes.player.draw_text(cfg.screen, f'Fir-{(classes.player.fir_amount)}x', 14 , 1020, 30)
+
         pygame.display.flip()
 
 
