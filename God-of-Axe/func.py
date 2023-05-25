@@ -15,7 +15,7 @@ def start_game():
     if cfg.start_game_flag:
         # cfg.play_music.play(-1)
         cfg.start_game_flag = False
-    monster_generator(30)
+    monster_generator(40)
     tree_generator1(400)
     # tree_generator2(150)
     while True:
@@ -40,9 +40,9 @@ def start_game():
 
         classes.all_sprites.update()
         classes.all_sprites.draw(cfg.screen)
-        classes.player.draw_shield_bar(cfg.screen, 660, 10, classes.player.wood_amount, "brown",
-                                       "red", "black", 150, 600, 20)
-        classes.player.draw_text(cfg.screen, f'{int(classes.player.progress)} proc', 14, 960, 12)
+        classes.player.draw_shield_bar(cfg.screen, 0, 1070, classes.player.wood_amount, "brown",
+                                       "yellow", "black", 150, 1920, 10)
+        #classes.player.draw_text(cfg.screen, f'{int(classes.player.progress)} proc', 14, 960, 12)
         classes.player.draw_text(cfg.screen, f'Oak-{(classes.player.oak_amount)}x', 14, 900, 30)
         classes.player.draw_text(cfg.screen, f'Fir-{(classes.player.fir_amount)}x', 14, 1020, 30)
         classes.player.draw_text(cfg.screen, f'{(classes.player.apples_amount)}x', 14, 960, 50)

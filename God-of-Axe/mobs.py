@@ -32,7 +32,7 @@ class Monster(cl.Unit, pygame.sprite.Sprite):
         self.sound_flag = True
         self.attack_flag = False
         self.distance = 0
-        self.attack_timer = 50
+        self.attack_timer = 100
         self.attack_wait_timer = 0
 
     def update(self):
@@ -107,7 +107,7 @@ class Monster(cl.Unit, pygame.sprite.Sprite):
             else:
                 self.attack_wait_timer += 1
 
-            if self.distance <= self.minimum_distance + 10:
+            if self.distance <= self.minimum_distance+1:
 
                 if not self.attack_flag:
                     if self.side == "right":
@@ -130,7 +130,7 @@ class Monster(cl.Unit, pygame.sprite.Sprite):
                 self.attack()
 
             else:
-                self.attack_timer = 50
+                self.attack_timer = 100
                 cl.player.flag_take_dmg = False
 
         else:
@@ -169,7 +169,7 @@ class Monster(cl.Unit, pygame.sprite.Sprite):
 
     def attack(self):
 
-        if self.attack_timer == 50:
+        if self.attack_timer == 100:
             self.attack_flag = True
             cl.player.take_dmg(self.damage)
             self.attack_timer = 0
