@@ -42,7 +42,9 @@ def start_game():
         classes.all_sprites.draw(cfg.screen)
         classes.player.draw_shield_bar(cfg.screen, 660, 10, classes.player.wood_amount, "brown",
                                        "red", "black", 150, 600, 20)
-        classes.player.draw_text(cfg.screen, f'{int(classes.player.progress)}%', 14 , 960, 12)
+        classes.player.draw_text(cfg.screen, f'{int(classes.player.progress)} proc', 14 , 960, 12)
+        classes.player.draw_text(cfg.screen, f'Oak-{(classes.player.oak_amount)}x', 14 , 900, 30)
+        classes.player.draw_text(cfg.screen, f'Fir-{(classes.player.fir_amount)}x', 14 , 1020, 30)
         pygame.display.flip()
 
 

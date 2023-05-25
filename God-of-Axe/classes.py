@@ -55,6 +55,8 @@ class Player(Unit, pygame.sprite.Sprite):
         self.anim_time = 0
         self.anim_time_attack = 0
         self.wood_amount = 0
+        self.oak_amount = 0
+        self.fir_amount = 0
         self.progress = 0
         self.rect_attack = pygame.Rect(self.rect[0] + self.rect[2] / 2 + 10, self.rect[1] + self.rect[3] / 3,
                                        self.rect[2] / 3 * 2,
@@ -417,4 +419,8 @@ class Tree(Unit, pygame.sprite.Sprite):
             self.line_bottom[2] = 0
             self.line_bottom[3] = 0
             player.wood_amount += self.bonus
+            if self.bonus == 10:
+                player.fir_amount += 1
+            elif self.bonus == 5:
+                player.oak_amount += 1
             self.bonus = 0
