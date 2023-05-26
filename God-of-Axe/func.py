@@ -58,7 +58,7 @@ def start_game():
                                        'black', 100, 350, 13)
         classes.player.draw_shield_bar(cfg.screen, 0, 13, classes.player.stamina, (24, 84, 26), (255, 255, 0),
                                        'black', 100, 350, 13)
-        classes.player.draw_text(cfg.screen, f'{600 - int(cfg.current_time / 1000)}', 24, 960, 10, cfg.font_interface,
+        classes.player.draw_text(cfg.screen, f'{600 - int(cfg.current_time / 1000)}', 25, 960, 13, cfg.font_interface,
                                  "red")
 
         cfg.screen.blit(img.apple, (20, 45))
