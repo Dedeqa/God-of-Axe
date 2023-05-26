@@ -59,6 +59,7 @@ class Player(Unit, pygame.sprite.Sprite):
         self.oak_amount = 0
         self.fir_amount = 0
         self.progress = 0
+        self.kills = 0
         self.apples_amount = 3
         self.rect_attack = pygame.Rect(self.rect[0] + self.rect[2] / 2 + 10, self.rect[1] + self.rect[3] / 3,
                                        self.rect[2] / 3 * 2,
@@ -349,7 +350,7 @@ class Weapon:
 
 # Экземпляр класса Player() -----------------------------------------------------------------------
 all_sprites = pygame.sprite.Group()
-player = Player("Albert", 100, cfg.WIDTH, cfg.HEIGHT)
+player = Player("Albert", 1, cfg.WIDTH, cfg.HEIGHT)
 all_sprites.add(player)
 
 

@@ -164,6 +164,7 @@ class Monster(cl.Unit, pygame.sprite.Sprite):
             self.hp -= dmg
             sounds.hit_tree.play()
         if self.hp <= 0:
+            cl.player.kills += 1
             self.remove(cl.all_sprites)
             self.kill()
 

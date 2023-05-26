@@ -239,3 +239,6 @@ woodcutter_hurt_left = [
 ]
 # Яблоко для интерфейса ------------------------------------------------------------------------------------------------
 apple = pygame.transform.scale(pygame.image.load('Images/ interface/apple.png').convert_alpha(), (25, 25))
+
+# Окно You Died --------------------------------------------------------------------------------------------------------
+die_bg = pygame.image.load("Images/backgrounds/die_bg.jpeg").convert_alpha()
