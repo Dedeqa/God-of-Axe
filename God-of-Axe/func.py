@@ -41,9 +41,9 @@ def start_game():
         classes.all_sprites.update()
         classes.all_sprites.draw(cfg.screen)
 
-        classes.player.draw_shield_bar(cfg.screen, 0, 1050, classes.player.wood_amount, "brown",
-                                       "yellow", "black", 150, 1920, 30)
-        classes.player.draw_text(cfg.screen, f'{int(classes.player.progress)} %', 14, 960, 1053, cfg.font_interface,
+        classes.player.draw_shield_bar(cfg.screen, 0, 1065, classes.player.wood_amount, "brown",
+                                       "yellow", "black", 150, 1920, 15)
+        classes.player.draw_text(cfg.screen, f'{int(classes.player.progress)} %', 14, 960, 1045, cfg.font_interface,
                                  "black")
         classes.player.draw_text(cfg.screen, f'Oak-{(classes.player.oak_amount)}x', 12, 900, 30, cfg.font_interface,
                                  "white")
