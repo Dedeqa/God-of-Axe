@@ -353,10 +353,8 @@ class Weapon:
 
 # Экземпляр класса Player() -----------------------------------------------------------------------
 all_sprites = pygame.sprite.Group()
-player = Player("Albert", 1, cfg.WIDTH, cfg.HEIGHT)
+player = Player("Albert", 100, cfg.WIDTH, cfg.HEIGHT)
 all_sprites.add(player)
-
-
 # --------------------------------------------------------------------------------------------------
 
 class Tree(Unit, pygame.sprite.Sprite):
