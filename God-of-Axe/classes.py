@@ -59,7 +59,9 @@ class Player(Unit, pygame.sprite.Sprite):
         self.oak_amount = 0
         self.fir_amount = 0
         self.progress = 0
+        self.time_apple = cfg.current_time + 1000
         self.kills = 0
+
         self.apples_amount = 3
         self.rect_attack = pygame.Rect(self.rect[0] + self.rect[2] / 2 + 10, self.rect[1] + self.rect[3] / 3,
                                        self.rect[2] / 3 * 2,
@@ -68,7 +70,6 @@ class Player(Unit, pygame.sprite.Sprite):
                                 self.rect[3] / 6 * 5)
 
     def update(self):
-
 
 
         self.progress = self.wood_amount * 100 / cfg.goal
@@ -332,10 +333,12 @@ class Player(Unit, pygame.sprite.Sprite):
             self.kill()
 
     def eat_an_apple(self):
-        if self.apples_amount > 0 and self.hp < 100:
-            self.hp += 10
-            self.apples_amount -= 1
-            sounds.eat_apple.play()
+        if self.time_apple < cfg.current_time:
+            if self.apples_amount > 0 and self.hp < 100:
+                self.hp += 10
+                self.apples_amount -= 1
+                sounds.eat_apple.play()
+                self.time_apple = cfg.current_time + 1000
 
 
 class Weapon:
