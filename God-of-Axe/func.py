@@ -18,7 +18,9 @@ def start_game():
     monster_generator(30)
     tree_generator1(400)
     # tree_generator2(150)
+
     while True:
+        current_time = pygame.time.get_ticks()
         cfg.clock.tick(cfg.FPS)
         # print(cfg.clock.get_fps())
         for event in pygame.event.get():
@@ -45,17 +47,24 @@ def start_game():
                                        "yellow", "black", 150, 1920, 15)
         classes.player.draw_text(cfg.screen, f'{int(classes.player.progress)} %', 14, 960, 1045, cfg.font_interface,
                                  "black")
-        classes.player.draw_text(cfg.screen, f'Oak-{(classes.player.oak_amount)}x', 12, 900, 30, cfg.font_interface,
-                                 "white")
-        classes.player.draw_text(cfg.screen, f'Fir-{(classes.player.fir_amount)}x', 12, 1020, 30, cfg.font_interface,
-                                 "white")
-        classes.player.draw_text(cfg.screen, f'{(classes.player.apples_amount)}x', 12, 960, 50, cfg.font_interface,
+        # classes.player.draw_text(cfg.screen, f'Oak-{(classes.player.oak_amount)}x', 12, 900, 30, cfg.font_interface,
+        #                          "white")
+        # classes.player.draw_text(cfg.screen, f'Fir-{(classes.player.fir_amount)}x', 12, 1020, 30, cfg.font_interface,
+        #                          "white")
+        classes.player.draw_text(cfg.screen, f'{(classes.player.apples_amount)}x', 12, 60, 48, cfg.font_interface,
                                  "white")
         classes.player.draw_shield_bar(cfg.screen, 0, 0, classes.player.hp, 'DarkRed', 'red', 'black', 100, 350, 13)
         classes.player.draw_shield_bar(cfg.screen, 0, 13, classes.player.stamina, (24, 84, 26), (255, 255, 0),
                                        'black', 100, 350, 13)
+        classes.player.draw_shield_bar(cfg.screen, 0, 13, classes.player.stamina, (24, 84, 26), (255, 255, 0),
+                                       'black', 100, 350, 13)
+        classes.player.draw_text(cfg.screen, f'{int(current_time / 1000)}', 12, 960, 10, cfg.font_interface,
+                                 "white")
 
-        cfg.screen.blit(img.apple, (920, 45))
+        cfg.screen.blit(img.apple, (20, 45))
+
+        if classes.player.hp <= 0:
+            menu()
 
         pygame.display.flip()
 
