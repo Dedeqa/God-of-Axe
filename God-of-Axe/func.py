@@ -45,8 +45,8 @@ def start_game():
 
         classes.player.draw_shield_bar(cfg.screen, 0, 1065, classes.player.wood_amount, "brown",
                                        "yellow", "black", 150, 1920, 15)
-        classes.player.draw_text(cfg.screen, f'{int(classes.player.progress)} %', 14, 960, 1045, cfg.font_interface,
-                                 "black")
+        classes.player.draw_text(cfg.screen, f'{int(classes.player.progress)} %', 18, 960, 1040, cfg.font_interface,
+                                 "red")
         # classes.player.draw_text(cfg.screen, f'Oak-{(classes.player.oak_amount)}x', 12, 900, 30, cfg.font_interface,
         #                          "white")
         # classes.player.draw_text(cfg.screen, f'Fir-{(classes.player.fir_amount)}x', 12, 1020, 30, cfg.font_interface,
