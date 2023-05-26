@@ -378,9 +378,10 @@ def tree_generator1(n):
             cfg.tree_list_y.append(y)
             count += 1
 
-    cfg.trees1 = [classes.Tree(f'Дуб{i}', 500, cfg.tree_list_x[i], cfg.tree_list_y[i], 5) for i in range(0, n - 1, 2)]
+    cfg.trees1 = [classes.Tree(f'Дуб{i}', 500, cfg.tree_list_x[i], cfg.tree_list_y[i], 5) for i in range(0, n - 2, 3)]
     cfg.trees2 = [classes.Tree(f'Елка{i}', 1000, cfg.tree_list_x[i], cfg.tree_list_y[i], 10) for i in
-                  range(1, n - 2, 2)]
+                  range(1, n - 2, 3)]
+    cfg.trees3 = [classes.Tree(f'Пальма{i}', 2000, cfg.tree_list_x[i], cfg.tree_list_y[i], 100) for i in range(2, n - 3, 3)]
 
     for elem in cfg.trees1:
         classes.all_sprites.add(elem)
@@ -397,6 +398,13 @@ def tree_generator1(n):
         cfg.trees_rects_top.append(elem.line_top)
         cfg.trees_rects_bottom.append(elem.line_bottom)
 
+    for elem in cfg.trees3:
+        elem.image = pygame.image.load('Images/Trees/Tree3.png')
+        classes.all_sprites.add(elem)
+        cfg.trees_rects_left.append(elem.line_left)
+        cfg.trees_rects_right.append(elem.line_right)
+        cfg.trees_rects_top.append(elem.line_top)
+        cfg.trees_rects_bottom.append(elem.line_bottom)
 
 def monster_generator(n):
     count = 0

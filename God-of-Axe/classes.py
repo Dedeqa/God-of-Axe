@@ -287,6 +287,9 @@ class Player(Unit, pygame.sprite.Sprite):
                     for elem in cfg.trees2:
                         if self.rect_attack.colliderect(elem):
                             elem.take_dmg(self.weapon.damage)
+                    for elem in cfg.trees3:
+                        if self.rect_attack.colliderect(elem):
+                            elem.take_dmg(self.weapon.damage)
                     for elem in cfg.monsterList:
                         if self.rect_attack.colliderect(elem):
                             elem.take_dmg(self.weapon.damage)
@@ -307,6 +310,9 @@ class Player(Unit, pygame.sprite.Sprite):
                         if self.rect_attack.colliderect(elem):
                             elem.take_dmg(self.weapon.damage)
                     for elem in cfg.trees2:
+                        if self.rect_attack.colliderect(elem):
+                            elem.take_dmg(self.weapon.damage)
+                    for elem in cfg.trees3:
                         if self.rect_attack.colliderect(elem):
                             elem.take_dmg(self.weapon.damage)
                     for elem in cfg.monsterList:

@@ -27,6 +27,7 @@ tree_list_y = []
 
 trees1 = []
 trees2 = []
+trees3 = []
 
 trees_rects_right = []
 trees_rects_left = []
