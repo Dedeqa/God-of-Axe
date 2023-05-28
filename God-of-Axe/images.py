@@ -241,4 +241,7 @@ woodcutter_hurt_left = [
 apple = pygame.transform.scale(pygame.image.load('Images/ interface/apple.png').convert_alpha(), (25, 25))
 
 # Окно You Died --------------------------------------------------------------------------------------------------------
-die_bg = pygame.image.load("Images/backgrounds/die_bg.jpeg").convert_alpha()
+die_bg = pygame.transform.scale(pygame.image.load("Images/backgrounds/Vic.jpg").convert_alpha(), (1920,1080))
+
+# Фон при победе -------------------------------------------------------------------------------------------------------
+vic_bg = pygame.transform.scale(pygame.image.load('Images/backgrounds/blue_vic_bg.jpg').convert_alpha(), (1920,1080))

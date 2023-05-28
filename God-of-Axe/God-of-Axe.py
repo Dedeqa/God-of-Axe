@@ -10,3 +10,5 @@ pygame.display.set_caption("God of Axe")
 pygame.display.set_icon(img.icon)
 
 func.menu()
+
+

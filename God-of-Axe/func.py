@@ -65,8 +65,8 @@ def start_game():
 
         if classes.player.hp <= 0 or cfg.current_time > 600000:
             lose_game()
-        # if classes.player.progress >= 100:
-        #     win_game()
+        if classes.player.progress >= 100:
+            win_game()
         pygame.display.flip()
 
 
@@ -115,9 +115,9 @@ def lose_game():
     continue_flag = False
     while True:
         cfg.screen.blit(img.die_bg, (0, 0))
-        classes.player.draw_text(cfg.screen, 'You were worse than last time!', 20, 960, 700, cfg.font_interface,
-                                 "red")
-        classes.player.draw_text(cfg.screen, 'Press space to continue...', 16, 960, 750, cfg.font_interface, "red")
+        classes.player.draw_text(cfg.screen, 'You were worse than last time!', 40, 960, 900, cfg.font_interface,
+                                 "white")
+        classes.player.draw_text(cfg.screen, 'Press space to continue...', 30, 960, 1000, cfg.font_interface, "white")
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
                 continue_flag = True
@@ -151,6 +151,46 @@ def lose_game():
                                      960, 680, cfg.font_interface, "purple")
         pygame.display.flip()
 
+
+def win_game():
+    continue_flag = False
+    while True:
+        cfg.screen.blit(img.vic_bg, (0,0))
+        classes.player.draw_text(cfg.screen, 'You have become the real god of the axe!', 40, 960, 700, cfg.font_interface,
+                                 "green")
+        classes.player.draw_text(cfg.screen, 'Press space to continue...', 30, 960, 1000, cfg.font_interface, "green")
+        for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+                continue_flag = True
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+                menu()
+        if continue_flag:
+            cfg.screen.fill("grey")
+            classes.player.draw_text(cfg.screen,
+                                     f'You have mastered only {classes.player.progress}%',
+                                     30,
+                                     960, 200, cfg.font_interface, "red")
+            classes.player.draw_text(cfg.screen, f'You have wasted {int(cfg.current_time / 1000)} seconds your life',
+                                     24,
+                                     960, 300, cfg.font_interface, "orange")
+            classes.player.draw_text(cfg.screen,
+                                     f'You have cut down {classes.player.oak_amount} DUBOV and {classes.player.fir_amount}  IOLOK',
+                                     24,
+                                     960, 370, cfg.font_interface, "yellow")
+            classes.player.draw_text(cfg.screen,
+                                     f'You have {classes.player.apples_amount} apples left',
+                                     24,
+                                     960, 440, cfg.font_interface, "green")
+
+            classes.player.draw_text(cfg.screen,
+                                     f'You have destroyed {classes.player.kills} monsters',
+                                     30,
+                                     960, 510, cfg.font_interface, "blue")
+            classes.player.draw_text(cfg.screen,
+                                     'Press Esc to exit the menu',
+                                     20,
+                                     960, 680, cfg.font_interface, "purple")
+        pygame.display.flip()
 
 def menu():
     sounds.play_music.stop()
