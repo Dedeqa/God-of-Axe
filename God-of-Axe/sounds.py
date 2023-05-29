@@ -24,8 +24,13 @@ falling_tree = pygame.mixer.Sound(r'Music\Neizvesten_-_Zvuk_padayucshego_dereva_
 
 # Звук агра монстров ---------------------------------------------------------------------------------------------------
 agr_monster = pygame.mixer.Sound(r'Music\monster-grunt_zksbhlv_.mp3')
+
 # Звук поедания яблока -------------------------------------------------------------------------------------------------
 eat_apple = pygame.mixer.Sound(r'Music/the_sound_of_eating_an_apple.mp3')
+
+# Звук выпивания кокоса
+drink_coconut = pygame.mixer.Sound(r'Music/eat_coconut.mp3')
+
 # Громкость звуков -----------------------------------------------------------------------------------------------------
 volume_music = 1.0
 volume_sounds = 1.0

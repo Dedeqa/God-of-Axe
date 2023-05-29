@@ -43,6 +43,7 @@ class Player(Unit, pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         self.image = img.woodcutter_stay_right
         self.stamina = 100
+        self.stamina_recovery = 0.5
         self.rect = self.image.get_rect()
         self.rect.center = (posx / 2, posy / 2)
         self.weapon = Weapon(100, 1000)
@@ -55,14 +56,22 @@ class Player(Unit, pygame.sprite.Sprite):
         self.flag_take_dmg = False
         self.anim_time = 0
         self.anim_time_attack = 0
+
         self.wood_amount = 0
         self.oak_amount = 0
         self.fir_amount = 0
         self.progress = 0
+
         self.time_apple = cfg.current_time + 1000
+        self.time_shishka = cfg.current_time + 1000
+        self.time_coconut = cfg.current_time + 1000
+
+        self.coconut_timer = self.time_coconut + 7000
+
         self.kills = 0
 
-        self.apples_amount = 3
+        self.utilities = [0, 0, 0]
+
         self.rect_attack = pygame.Rect(self.rect[0] + self.rect[2] / 2 + 10, self.rect[1] + self.rect[3] / 3,
                                        self.rect[2] / 3 * 2,
                                        self.rect[3] / 3)
@@ -71,13 +80,15 @@ class Player(Unit, pygame.sprite.Sprite):
 
     def update(self):
 
+        if self.coconut_timer < cfg.current_time:
+            self.stamina_recovery = 0.5
 
         self.progress = self.wood_amount * 100 / cfg.goal
         self.speedx = 0
         self.speedy = 0
         keystate = pygame.key.get_pressed()
         if self.stamina < 100 and not keystate[pygame.K_LSHIFT]:
-            self.stamina += 0.5
+            self.stamina += self.stamina_recovery
         if not (keystate[pygame.K_a] and keystate[pygame.K_d]):
 
             if keystate[pygame.K_a]:
@@ -236,8 +247,15 @@ class Player(Unit, pygame.sprite.Sprite):
                     elif cfg.bg_y > -1080:
                         cfg.bg_y -= sy
                         func.update_monsters_y(cfg.monsterList, sy, flag_direction=False)
-        if keystate[pygame.K_e]:
+        if keystate[pygame.K_c]:
             self.eat_an_apple()
+
+        if keystate[pygame.K_x]:
+            self.eat_a_coconut()
+
+        if keystate[pygame.K_z]:
+            self.eat_a_shishka()
+
         if not (keystate[pygame.K_w] or keystate[pygame.K_s] or keystate[pygame.K_a] or keystate[pygame.K_d] or
                 keystate[pygame.K_SPACE] or self.flag_take_dmg):
             if cfg.vector == "right":
@@ -340,12 +358,28 @@ class Player(Unit, pygame.sprite.Sprite):
 
     def eat_an_apple(self):
         if self.time_apple < cfg.current_time:
-            if self.apples_amount > 0 and self.hp < 100:
+            if self.utilities[0] > 0 and self.hp < 100:
                 self.hp += 10
-                self.apples_amount -= 1
+                self.utilities[0] -= 1
                 sounds.eat_apple.play()
                 self.time_apple = cfg.current_time + 1000
 
+    def eat_a_shishka(self):
+        if self.time_shishka < cfg.current_time:
+            if self.utilities[1] > 0 and self.hp < 100:
+                self.utilities[1] -= 1
+                sounds.eat_apple.play()
+                self.time_shishka = cfg.current_time + 1000
+
+    def eat_a_coconut(self):
+
+        if self.time_coconut < cfg.current_time:
+            if self.utilities[2] > 0:
+                self.utilities[2] -= 1
+                self.stamina_recovery = 1.5
+                sounds.drink_coconut.play()
+                self.time_coconut = cfg.current_time + 1000
+                self.coconut_timer = self.time_coconut + 6000
 
 class Weapon:
     def __init__(self, dmg, attack_speed):
@@ -361,11 +395,13 @@ class Weapon:
 all_sprites = pygame.sprite.Group()
 player = Player("Albert", 1, cfg.WIDTH, cfg.HEIGHT)
 all_sprites.add(player)
+
+
 # --------------------------------------------------------------------------------------------------
 
 class Tree(Unit, pygame.sprite.Sprite):
 
-    def __init__(self, nm, hp, posx, posy, bonus):
+    def __init__(self, nm, hp, posx, posy, bonus, drop):
 
         Unit.__init__(self, nm, hp, posx, posy)
         pygame.sprite.Sprite.__init__(self)
@@ -388,6 +424,8 @@ class Tree(Unit, pygame.sprite.Sprite):
         self.player_vector = (0, 0)
         self.tree_vector = (0, 0)
         self.start_hp = hp
+
+        self.drop = drop
 
     def update(self):
 
@@ -423,7 +461,7 @@ class Tree(Unit, pygame.sprite.Sprite):
 
             self.remove(all_sprites)
             self.kill()
-            self.give_an_apple()
+            self.give_drop()
             self.status = False
             self.line_left[2] = 0
             self.line_left[3] = 0
@@ -440,12 +478,32 @@ class Tree(Unit, pygame.sprite.Sprite):
                 player.oak_amount += 1
             self.bonus = 0
 
-    def give_an_apple(self):
+    def give_drop(self):
+
         if self.status:
-            chance = 0
-            if self.bonus == 5:
-                chance = random.randint(1, 5)
-            elif self.bonus == 10:
-                chance = random.randint(1, 2)
+
+            chance = random.randint(1, 10) // 10
+
             if chance == 1:
-                player.apples_amount += 1
+                player.utilities[self.drop] += 1
+
+
+class Dub(Tree):
+    def __init__(self, nm, hp, posx, posy, bonus, drop=0):
+        Tree.__init__(self, nm, hp, posx, posy, bonus, drop)
+        pygame.sprite.Sprite.__init__(self)
+        self.image = pygame.image.load("Images/Trees/Tree1.png").convert_alpha()
+
+
+class Elka(Tree):
+    def __init__(self, nm, hp, posx, posy, bonus, drop=1):
+        Tree.__init__(self, nm, hp, posx, posy, bonus, drop)
+        pygame.sprite.Sprite.__init__(self)
+        self.image = pygame.image.load("Images/Trees/Tree2.png").convert_alpha()
+
+
+class Palma(Tree):
+    def __init__(self, nm, hp, posx, posy, bonus, drop=2):
+        Tree.__init__(self, nm, hp, posx, posy, bonus, drop)
+        pygame.sprite.Sprite.__init__(self)
+        self.image = pygame.image.load("Images/Trees/Tree3.png").convert_alpha()

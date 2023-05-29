@@ -237,11 +237,22 @@ woodcutter_hurt_left = [
     pygame.transform.scale(pygame.image.load(
         'Images/Player/Woodcutter_hurt_left/Woodcutter_hurt_left3.png').convert_alpha(), (50, 50)),
 ]
-# Яблоко для интерфейса ------------------------------------------------------------------------------------------------
-apple = pygame.transform.scale(pygame.image.load('Images/ interface/apple.png').convert_alpha(), (25, 25))
+# --------------------------------------------- Интерфейс --------------------------------------------------------------
+
+# Иконка яблока --------------------------------------------------------------------------------------------------------
+apple_icon = pygame.transform.scale(pygame.image.load('Images/Interface/apple_icon.png').convert_alpha(), (30, 30))
+
+# Иконка древесины -----------------------------------------------------------------------------------------------------
+wood_icon = pygame.transform.scale(pygame.image.load('Images/Interface/drevesina_icon.png').convert_alpha(), (30, 30))
+
+# Иконка кокоса --------------------------------------------------------------------------------------------------------
+coconut_icon = pygame.transform.scale(pygame.image.load('Images/Interface/coconut_icon.png').convert_alpha(), (30, 30))
+
+# Иконка шишки ---------------------------------------------------------------------------------------------------------
+shishka_icon = pygame.transform.scale(pygame.image.load('Images/Interface/shishka_icon.png').convert_alpha(), (30, 30))
 
 # Окно You Died --------------------------------------------------------------------------------------------------------
-die_bg = pygame.transform.scale(pygame.image.load("Images/backgrounds/Vic.jpg").convert_alpha(), (1920,1080))
+die_bg = pygame.transform.scale(pygame.image.load("Images/backgrounds/Vic.jpg").convert_alpha(), (1920, 1080))
 
 # Фон при победе -------------------------------------------------------------------------------------------------------
-vic_bg = pygame.transform.scale(pygame.image.load('Images/backgrounds/blue_vic_bg.jpg').convert_alpha(), (1920,1080))
+vic_bg = pygame.transform.scale(pygame.image.load('Images/backgrounds/blue_vic_bg.jpg').convert_alpha(), (1920, 1080))

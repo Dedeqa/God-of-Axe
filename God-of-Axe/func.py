@@ -51,8 +51,15 @@ def start_game():
         #                          "white")
         # classes.player.draw_text(cfg.screen, f'Fir-{(classes.player.fir_amount)}x', 12, 1020, 30, cfg.font_interface,
         #                          "white")
-        classes.player.draw_text(cfg.screen, f'{(classes.player.apples_amount)}x', 12, 60, 48, cfg.font_interface,
+        classes.player.draw_text(cfg.screen, f'{(classes.player.utilities[0])}x', 14, 60, 48, cfg.font_interface,
                                  "white")
+        classes.player.draw_text(cfg.screen, f'{(classes.player.utilities[1])}x', 14, 60, 70, cfg.font_interface,
+                                 "white")
+        classes.player.draw_text(cfg.screen, f'{(classes.player.utilities[2])}x', 14, 60, 92, cfg.font_interface,
+                                 "white")
+        classes.player.draw_text(cfg.screen, f'{(classes.player.wood_amount)}x', 14, 60, 114, cfg.font_interface,
+                                 "white")
+
         classes.player.draw_shield_bar(cfg.screen, 0, 0, classes.player.hp, 'DarkRed', 'red', 'black', 100, 350, 13)
         classes.player.draw_shield_bar(cfg.screen, 0, 13, classes.player.stamina, (24, 84, 26), (255, 255, 0),
                                        'black', 100, 350, 13)
@@ -61,7 +68,10 @@ def start_game():
         classes.player.draw_text(cfg.screen, f'{600 - int(cfg.current_time / 1000)}', 25, 960, 13, cfg.font_interface,
                                  "red")
 
-        cfg.screen.blit(img.apple, (20, 45))
+        cfg.screen.blit(img.apple_icon, (20, 45))
+        cfg.screen.blit(img.shishka_icon, (20, 90))
+        cfg.screen.blit(img.coconut_icon, (20, 135))
+        cfg.screen.blit(img.wood_icon, (20, 180))
 
         if classes.player.hp <= 0 or cfg.current_time > 600000:
             lose_game()
@@ -73,7 +83,7 @@ def start_game():
 # def win_game():
 #     continue_flag = False
 #     while True:
-#         cfg.screen.blit(img. (0, 0))
+#         cfg.screen.blit(img.vic_bg, (0, 0))
 #         classes.player.draw_text(cfg.screen, 'You were worse than last time!', 20, 960, 700, cfg.font_interface,
 #                                  "red")
 #         classes.player.draw_text(cfg.screen, 'Press space to continue...', 16, 960, 750, cfg.font_interface, "red")
@@ -137,7 +147,7 @@ def lose_game():
                                      24,
                                      960, 370, cfg.font_interface, "yellow")
             classes.player.draw_text(cfg.screen,
-                                     f'You have {classes.player.apples_amount} apples left',
+                                     f'You have {classes.player.utilities[0]} apples, {classes.player.utilities[1]} shishkas, {classes.player.utilities[2]} coconuts left',
                                      24,
                                      960, 440, cfg.font_interface, "green")
 
@@ -155,8 +165,9 @@ def lose_game():
 def win_game():
     continue_flag = False
     while True:
-        cfg.screen.blit(img.vic_bg, (0,0))
-        classes.player.draw_text(cfg.screen, 'You have become the real god of the axe!', 40, 960, 700, cfg.font_interface,
+        cfg.screen.blit(img.vic_bg, (0, 0))
+        classes.player.draw_text(cfg.screen, 'You have become the real god of the axe!', 40, 960, 700,
+                                 cfg.font_interface,
                                  "green")
         classes.player.draw_text(cfg.screen, 'Press space to continue...', 30, 960, 1000, cfg.font_interface, "green")
         for event in pygame.event.get():
@@ -178,7 +189,7 @@ def win_game():
                                      24,
                                      960, 370, cfg.font_interface, "yellow")
             classes.player.draw_text(cfg.screen,
-                                     f'You have {classes.player.apples_amount} apples left',
+                                     f'You have {classes.player.utilities[0]} apples, {classes.player.utilities[1]} shishkas, {classes.player.utilities[2]} coconuts left',
                                      24,
                                      960, 440, cfg.font_interface, "green")
 
@@ -191,6 +202,7 @@ def win_game():
                                      20,
                                      960, 680, cfg.font_interface, "purple")
         pygame.display.flip()
+
 
 def menu():
     sounds.play_music.stop()
@@ -418,10 +430,11 @@ def tree_generator1(n):
             cfg.tree_list_y.append(y)
             count += 1
 
-    cfg.trees1 = [classes.Tree(f'Дуб{i}', 500, cfg.tree_list_x[i], cfg.tree_list_y[i], 5) for i in range(0, n - 2, 3)]
-    cfg.trees2 = [classes.Tree(f'Елка{i}', 1000, cfg.tree_list_x[i], cfg.tree_list_y[i], 10) for i in
+    cfg.trees1 = [classes.Dub(f'Дуб{i}', 500, cfg.tree_list_x[i], cfg.tree_list_y[i], 5) for i in range(0, n - 2, 3)]
+    cfg.trees2 = [classes.Elka(f'Елка{i}', 1000, cfg.tree_list_x[i], cfg.tree_list_y[i], 10) for i in
                   range(1, n - 2, 3)]
-    cfg.trees3 = [classes.Tree(f'Пальма{i}', 2000, cfg.tree_list_x[i], cfg.tree_list_y[i], 100) for i in range(2, n - 3, 3)]
+    cfg.trees3 = [classes.Palma(f'Пальма{i}', 2000, cfg.tree_list_x[i], cfg.tree_list_y[i], 100) for i in
+                  range(2, n - 3, 3)]
 
     for elem in cfg.trees1:
         classes.all_sprites.add(elem)
@@ -445,6 +458,7 @@ def tree_generator1(n):
         cfg.trees_rects_right.append(elem.line_right)
         cfg.trees_rects_top.append(elem.line_top)
         cfg.trees_rects_bottom.append(elem.line_bottom)
+
 
 def monster_generator(n):
     count = 0
