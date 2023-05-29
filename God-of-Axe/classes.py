@@ -70,7 +70,7 @@ class Player(Unit, pygame.sprite.Sprite):
 
         self.kills = 0
 
-        self.utilities = [0, 0, 0]
+        self.utilities = [3, 3, 3]
 
         self.rect_attack = pygame.Rect(self.rect[0] + self.rect[2] / 2 + 10, self.rect[1] + self.rect[3] / 3,
                                        self.rect[2] / 3 * 2,
@@ -82,13 +82,14 @@ class Player(Unit, pygame.sprite.Sprite):
 
         if self.coconut_timer < cfg.current_time:
             self.stamina_recovery = 0.5
-
         self.progress = self.wood_amount * 100 / cfg.goal
         self.speedx = 0
         self.speedy = 0
         keystate = pygame.key.get_pressed()
         if self.stamina < 100 and not keystate[pygame.K_LSHIFT]:
             self.stamina += self.stamina_recovery
+        elif self.stamina > 100:
+            self.stamina = 100
         if not (keystate[pygame.K_a] and keystate[pygame.K_d]):
 
             if keystate[pygame.K_a]:
@@ -482,7 +483,7 @@ class Tree(Unit, pygame.sprite.Sprite):
 
         if self.status:
 
-            chance = random.randint(1, 10) // 10
+            chance = random.randint(1, 1)
 
             if chance == 1:
                 player.utilities[self.drop] += 1
