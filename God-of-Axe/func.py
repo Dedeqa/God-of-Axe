@@ -44,7 +44,7 @@ def start_game():
         classes.all_sprites.draw(cfg.screen)
 
         classes.player.draw_shield_bar(cfg.screen, 0, 1065, classes.player.wood_amount, "brown",
-                                       "yellow", "black", 150, 1920, 15)
+                                       "yellow", "black", 500, 1920, 15)
         classes.player.draw_text(cfg.screen, f'{int(classes.player.progress)} %', 18, 960, 1040, cfg.font_interface,
                                  "red")
         # classes.player.draw_text(cfg.screen, f'Oak-{(classes.player.oak_amount)}x', 12, 900, 30, cfg.font_interface,
@@ -60,10 +60,10 @@ def start_game():
         classes.player.draw_text(cfg.screen, f'{(classes.player.wood_amount)}', 16, 65, 50, cfg.font_interface,
                                  "white")
 
-        classes.player.draw_shield_bar(cfg.screen, 0, 0, classes.player.hp, 'DarkRed', 'red', 'black', 100, 350, 13)
-        classes.player.draw_shield_bar(cfg.screen, 0, 14, classes.player.stamina, (24, 84, 26), (255, 255, 0),
+        classes.player.draw_shield_bar(cfg.screen, 0, 14, classes.player.hp, 'DarkRed', 'red', 'black', 100, 350, 13)
+        classes.player.draw_shield_bar(cfg.screen, 0, 28, classes.player.stamina, (24, 84, 26), (255, 255, 0),
                                        'black', 100, 350, 13)
-        classes.player.draw_shield_bar(cfg.screen, 0, 28, classes.player.armor, (16, 72, 105), (27, 123, 179), 'black',
+        classes.player.draw_shield_bar(cfg.screen, 0, 0, classes.player.armor, (16, 72, 105), (27, 123, 179), 'black',
                                        100, 350, 13)
         classes.player.draw_text(cfg.screen, f'{600 - int(cfg.current_time / 1000)}', 25, 960, 13, cfg.font_interface,
                                  "red")
@@ -392,7 +392,7 @@ def tree_generator1(n):
     cfg.trees1 = [classes.Dub(f'Дуб{i}', 500, cfg.tree_list_x[i], cfg.tree_list_y[i], 5) for i in range(0, n - 2, 3)]
     cfg.trees2 = [classes.Elka(f'Елка{i}', 1000, cfg.tree_list_x[i], cfg.tree_list_y[i], 10) for i in
                   range(1, n - 2, 3)]
-    cfg.trees3 = [classes.Palma(f'Пальма{i}', 2000, cfg.tree_list_x[i], cfg.tree_list_y[i], 25) for i in
+    cfg.trees3 = [classes.Palma(f'Пальма{i}', 2000, cfg.tree_list_x[i], cfg.tree_list_y[i], 20) for i in
                   range(2, n - 3, 3)]
 
     for elem in cfg.trees1:

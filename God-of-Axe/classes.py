@@ -43,6 +43,7 @@ class Player(Unit, pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         self.image = img.woodcutter_stay_right
         self.stamina = 100
+        self.armor = 25
         self.stamina_recovery = 0.5
         self.rect = self.image.get_rect()
         self.rect.center = (posx / 2, posy / 2)
@@ -57,7 +58,7 @@ class Player(Unit, pygame.sprite.Sprite):
         self.anim_time = 0
         self.anim_time_attack = 0
 
-        self.armor = 25
+        self.armor = 100
 
         self.wood_amount = 0
         self.oak_amount = 0
@@ -354,7 +355,11 @@ class Player(Unit, pygame.sprite.Sprite):
     def take_dmg(self, dmg):
         if self.hp > 0:
             self.flag_take_dmg = True
-            self.hp -= dmg
+            if self.armor > 0:
+                self.hp -= dmg - (self.armor/100)*dmg
+                self.armor -= dmg // 2
+            elif self.armor <= 0:
+                self.hp -= dmg
             sounds.hit_tree.play()
         if self.hp <= 0:
             self.remove(all_sprites)
@@ -363,17 +368,26 @@ class Player(Unit, pygame.sprite.Sprite):
     def eat_an_apple(self):
         if self.time_apple < cfg.current_time:
             if self.utilities[0] > 0 and self.hp < 100:
-                self.hp += 10
+                if self.hp + 10 <= 100:
+                    self.hp += 10
+                elif self.hp + 10 > 100:
+                    self.hp = 100
                 self.utilities[0] -= 1
                 sounds.eat_apple.play()
                 self.time_apple = cfg.current_time + 1000
 
     def eat_a_shishka(self):
         if self.time_shishka < cfg.current_time:
-            if self.utilities[1] > 0 and self.hp < 100:
+            if self.utilities[1] > 0 and self.armor < 100:
+                if self.armor + 25 <= 100:
+                    self.armor += 25
+                elif self.armor + 25 > 100:
+                    self.armor = 100
                 self.utilities[1] -= 1
-                sounds.eat_apple.play()
+                sounds.falling_tree.play()
                 self.time_shishka = cfg.current_time + 1000
+        elif self.armor > 100:
+            self.armor = 100
 
     def eat_a_coconut(self):
 
