@@ -51,27 +51,25 @@ def start_game():
         #                          "white")
         # classes.player.draw_text(cfg.screen, f'Fir-{(classes.player.fir_amount)}x', 12, 1020, 30, cfg.font_interface,
         #                          "white")
-        classes.player.draw_text(cfg.screen, f'{(classes.player.utilities[0])}x', 14, 60, 48, cfg.font_interface,
+        classes.player.draw_text(cfg.screen, f'{(classes.player.utilities[0])}', 16, 123, 38, cfg.font_interface,
                                  "white")
-        classes.player.draw_text(cfg.screen, f'{(classes.player.utilities[1])}x', 14, 60, 70, cfg.font_interface,
+        classes.player.draw_text(cfg.screen, f'{(classes.player.utilities[1])}', 16, 198, 38, cfg.font_interface,
                                  "white")
-        classes.player.draw_text(cfg.screen, f'{(classes.player.utilities[2])}x', 14, 60, 92, cfg.font_interface,
+        classes.player.draw_text(cfg.screen, f'{(classes.player.utilities[2])}', 16, 273, 38, cfg.font_interface,
                                  "white")
-        classes.player.draw_text(cfg.screen, f'{(classes.player.wood_amount)}x', 14, 60, 114, cfg.font_interface,
+        classes.player.draw_text(cfg.screen, f'{(classes.player.wood_amount)}', 16, 48, 38, cfg.font_interface,
                                  "white")
 
         classes.player.draw_shield_bar(cfg.screen, 0, 0, classes.player.hp, 'DarkRed', 'red', 'black', 100, 350, 13)
         classes.player.draw_shield_bar(cfg.screen, 0, 13, classes.player.stamina, (24, 84, 26), (255, 255, 0),
                                        'black', 100, 350, 13)
-        classes.player.draw_shield_bar(cfg.screen, 0, 13, classes.player.stamina, (24, 84, 26), (255, 255, 0),
-                                       'black', 100, 350, 13)
         classes.player.draw_text(cfg.screen, f'{600 - int(cfg.current_time / 1000)}', 25, 960, 13, cfg.font_interface,
                                  "red")
 
-        cfg.screen.blit(img.apple_icon, (20, 45))
-        cfg.screen.blit(img.shishka_icon, (20, 90))
-        cfg.screen.blit(img.coconut_icon, (20, 135))
-        cfg.screen.blit(img.wood_icon, (20, 180))
+        cfg.screen.blit(img.apple_icon, (80, 35))
+        cfg.screen.blit(img.shishka_icon, (155, 35))
+        cfg.screen.blit(img.coconut_icon, (230, 35))
+        cfg.screen.blit(img.wood_icon, (5, 35))
 
         if classes.player.hp <= 0 or cfg.current_time > 600000:
             lose_game()
