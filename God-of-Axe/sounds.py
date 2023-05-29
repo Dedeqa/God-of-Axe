@@ -20,7 +20,7 @@ step = pygame.mixer.Sound(r'Music\korotkiy-byistryiy-shag-po-lesu.mp3')
 hit_tree = pygame.mixer.Sound(r'Music\korotkiy-chtkiy-rezkiy-udar-po-derevu.mp3')
 
 # Звук падающего дерева ------------------------------------------------------------------------------------------------
-falling_tree = pygame.mixer.Sound(r'Music\Neizvesten_-_Zvuk_padayucshego_dereva_posle_sruba.mp3')
+falling_tree = pygame.mixer.Sound(r'Music\falling_tree.mp3')
 
 # Звук агра монстров ---------------------------------------------------------------------------------------------------
 agr_monster = pygame.mixer.Sound(r'Music\monster-grunt_zksbhlv_.mp3')
