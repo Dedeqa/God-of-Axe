@@ -57,6 +57,8 @@ class Player(Unit, pygame.sprite.Sprite):
         self.anim_time = 0
         self.anim_time_attack = 0
 
+        self.armor = 25
+
         self.wood_amount = 0
         self.oak_amount = 0
         self.fir_amount = 0

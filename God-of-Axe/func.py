@@ -51,72 +51,33 @@ def start_game():
         #                          "white")
         # classes.player.draw_text(cfg.screen, f'Fir-{(classes.player.fir_amount)}x', 12, 1020, 30, cfg.font_interface,
         #                          "white")
-        classes.player.draw_text(cfg.screen, f'{(classes.player.utilities[0])}', 16, 145, 38, cfg.font_interface,
+        classes.player.draw_text(cfg.screen, f'{(classes.player.utilities[0])}', 16, 145, 50, cfg.font_interface,
                                  "white")
-        classes.player.draw_text(cfg.screen, f'{(classes.player.utilities[1])}', 16, 225, 38, cfg.font_interface,
+        classes.player.draw_text(cfg.screen, f'{(classes.player.utilities[1])}', 16, 225, 50, cfg.font_interface,
                                  "white")
-        classes.player.draw_text(cfg.screen, f'{(classes.player.utilities[2])}', 16, 305, 38, cfg.font_interface,
+        classes.player.draw_text(cfg.screen, f'{(classes.player.utilities[2])}', 16, 305, 50, cfg.font_interface,
                                  "white")
-        classes.player.draw_text(cfg.screen, f'{(classes.player.wood_amount)}', 16, 65, 38, cfg.font_interface,
+        classes.player.draw_text(cfg.screen, f'{(classes.player.wood_amount)}', 16, 65, 50, cfg.font_interface,
                                  "white")
 
         classes.player.draw_shield_bar(cfg.screen, 0, 0, classes.player.hp, 'DarkRed', 'red', 'black', 100, 350, 13)
-        classes.player.draw_shield_bar(cfg.screen, 0, 13, classes.player.stamina, (24, 84, 26), (255, 255, 0),
+        classes.player.draw_shield_bar(cfg.screen, 0, 14, classes.player.stamina, (24, 84, 26), (255, 255, 0),
                                        'black', 100, 350, 13)
+        classes.player.draw_shield_bar(cfg.screen, 0, 28, classes.player.armor, (16, 72, 105), (27, 123, 179), 'black',
+                                       100, 350, 13)
         classes.player.draw_text(cfg.screen, f'{600 - int(cfg.current_time / 1000)}', 25, 960, 13, cfg.font_interface,
                                  "red")
 
-        cfg.screen.blit(img.apple_icon, (85, 35))
-        cfg.screen.blit(img.shishka_icon, (165, 35))
-        cfg.screen.blit(img.coconut_icon, (245, 35))
-        cfg.screen.blit(img.wood_icon, (5, 35))
+        cfg.screen.blit(img.apple_icon, (85, 47))
+        cfg.screen.blit(img.shishka_icon, (165, 47))
+        cfg.screen.blit(img.coconut_icon, (245, 47))
+        cfg.screen.blit(img.wood_icon, (5, 47))
 
         if classes.player.hp <= 0 or cfg.current_time > 600000:
             lose_game()
         if classes.player.progress >= 100:
             win_game()
         pygame.display.flip()
-
-
-# def win_game():
-#     continue_flag = False
-#     while True:
-#         cfg.screen.blit(img.vic_bg, (0, 0))
-#         classes.player.draw_text(cfg.screen, 'You were worse than last time!', 20, 960, 700, cfg.font_interface,
-#                                  "red")
-#         classes.player.draw_text(cfg.screen, 'Press space to continue...', 16, 960, 750, cfg.font_interface, "red")
-#         for event in pygame.event.get():
-#             if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
-#                 continue_flag = True
-#             if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
-#                 menu()
-#         if continue_flag:
-#             cfg.screen.fill("black")
-#             classes.player.draw_text(cfg.screen,
-#                                      f'You have mastered only {classes.player.progress}%',
-#                                      30,
-#                                      960, 200, cfg.font_interface, "red")
-#             classes.player.draw_text(cfg.screen, f'You have wasted {int(cfg.current_time / 1000)} seconds your life',
-#                                      24,
-#                                      960, 300, cfg.font_interface, "orange")
-#             classes.player.draw_text(cfg.screen,
-#                                      f'You have cut down {classes.player.oak_amount} DUBOV and {classes.player.fir_amount}  IOLOK',
-#                                      24,
-#                                      960, 370, cfg.font_interface, "yellow")
-#             classes.player.draw_text(cfg.screen,
-#                                      f'You have {classes.player.apples_amount} apples left',
-#                                      24,
-#                                      960, 440, cfg.font_interface, "green")
-#
-#             classes.player.draw_text(cfg.screen,
-#                                      f'You have destroyed {classes.player.kills} monsters',
-#                                      30,
-#                                      960, 510, cfg.font_interface, "blue")
-#             classes.player.draw_text(cfg.screen,
-#                                      'Press Esc to exit the menu',
-#                                      20,
-#                                      960, 680, cfg.font_interface, "purple")
-#         pygame.display.flip()
 
 
 def lose_game():
