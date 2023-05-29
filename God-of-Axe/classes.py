@@ -251,10 +251,10 @@ class Player(Unit, pygame.sprite.Sprite):
         if keystate[pygame.K_c]:
             self.eat_an_apple()
 
-        if keystate[pygame.K_x]:
+        if keystate[pygame.K_z]:
             self.eat_a_coconut()
 
-        if keystate[pygame.K_z]:
+        if keystate[pygame.K_x]:
             self.eat_a_shishka()
 
         if not (keystate[pygame.K_w] or keystate[pygame.K_s] or keystate[pygame.K_a] or keystate[pygame.K_d] or
@@ -379,8 +379,9 @@ class Player(Unit, pygame.sprite.Sprite):
                 self.utilities[2] -= 1
                 self.stamina_recovery = 1.5
                 sounds.drink_coconut.play()
-                self.time_coconut = cfg.current_time + 1000
-                self.coconut_timer = self.time_coconut + 6000
+                self.time_coconut = cfg.current_time + 5100
+                self.coconut_timer = self.time_coconut
+
 
 class Weapon:
     def __init__(self, dmg, attack_speed):
@@ -402,7 +403,7 @@ all_sprites.add(player)
 
 class Tree(Unit, pygame.sprite.Sprite):
 
-    def __init__(self, nm, hp, posx, posy, bonus, drop):
+    def __init__(self, nm, hp, posx, posy, bonus, drop, _random):
 
         Unit.__init__(self, nm, hp, posx, posy)
         pygame.sprite.Sprite.__init__(self)
@@ -427,6 +428,8 @@ class Tree(Unit, pygame.sprite.Sprite):
         self.start_hp = hp
 
         self.drop = drop
+        self._random = _random
+        self.temp_random = _random
 
     def update(self):
 
@@ -483,28 +486,31 @@ class Tree(Unit, pygame.sprite.Sprite):
 
         if self.status:
 
-            chance = random.randint(1, 1)
+            chance = random.randint(1, 100)
 
-            if chance == 1:
+            if 0 <= chance <= self.temp_random:
                 player.utilities[self.drop] += 1
+                self.temp_random = self._random
+            else:
+                self.temp_random += 10
 
 
 class Dub(Tree):
-    def __init__(self, nm, hp, posx, posy, bonus, drop=0):
-        Tree.__init__(self, nm, hp, posx, posy, bonus, drop)
+    def __init__(self, nm, hp, posx, posy, bonus, drop=0, _random=40):
+        Tree.__init__(self, nm, hp, posx, posy, bonus, drop, _random)
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.image.load("Images/Trees/Tree1.png").convert_alpha()
 
 
 class Elka(Tree):
-    def __init__(self, nm, hp, posx, posy, bonus, drop=1):
-        Tree.__init__(self, nm, hp, posx, posy, bonus, drop)
+    def __init__(self, nm, hp, posx, posy, bonus, drop=1, _random=25):
+        Tree.__init__(self, nm, hp, posx, posy, bonus, drop, _random)
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.image.load("Images/Trees/Tree2.png").convert_alpha()
 
 
 class Palma(Tree):
-    def __init__(self, nm, hp, posx, posy, bonus, drop=2):
-        Tree.__init__(self, nm, hp, posx, posy, bonus, drop)
+    def __init__(self, nm, hp, posx, posy, bonus, drop=2, _random=30):
+        Tree.__init__(self, nm, hp, posx, posy, bonus, drop, _random)
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.image.load("Images/Trees/Tree3.png").convert_alpha()
