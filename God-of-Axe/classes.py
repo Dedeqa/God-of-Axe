@@ -60,6 +60,7 @@ class Player(Unit, pygame.sprite.Sprite):
         self.wood_amount = 0
         self.oak_amount = 0
         self.fir_amount = 0
+        self.palm_amount = 0
         self.progress = 0
 
         self.time_apple = cfg.current_time + 1000
@@ -477,6 +478,8 @@ class Tree(Unit, pygame.sprite.Sprite):
                 player.fir_amount += 1
             elif self.bonus == 5:
                 player.oak_amount += 1
+            elif self.bonus == 25:
+                player.palm_amount += 1
             self.bonus = 0
 
     def give_drop(self):

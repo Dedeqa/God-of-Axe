@@ -141,7 +141,7 @@ def lose_game():
                                      24,
                                      960, 300, cfg.font_interface, "orange")
             classes.player.draw_text(cfg.screen,
-                                     f'You have cut down {classes.player.oak_amount} DUBOV and {classes.player.fir_amount}  IOLOK',
+                                     f'You have cut down {classes.player.oak_amount} DUBOV, {classes.player.fir_amount}  IOLOK and {classes.player.palm_amount} PALMAS',
                                      24,
                                      960, 370, cfg.font_interface, "yellow")
             classes.player.draw_text(cfg.screen,
@@ -431,7 +431,7 @@ def tree_generator1(n):
     cfg.trees1 = [classes.Dub(f'Дуб{i}', 500, cfg.tree_list_x[i], cfg.tree_list_y[i], 5) for i in range(0, n - 2, 3)]
     cfg.trees2 = [classes.Elka(f'Елка{i}', 1000, cfg.tree_list_x[i], cfg.tree_list_y[i], 10) for i in
                   range(1, n - 2, 3)]
-    cfg.trees3 = [classes.Palma(f'Пальма{i}', 2000, cfg.tree_list_x[i], cfg.tree_list_y[i], 100) for i in
+    cfg.trees3 = [classes.Palma(f'Пальма{i}', 2000, cfg.tree_list_x[i], cfg.tree_list_y[i], 25) for i in
                   range(2, n - 3, 3)]
 
     for elem in cfg.trees1:
