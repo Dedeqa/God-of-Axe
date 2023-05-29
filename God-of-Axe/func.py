@@ -6,7 +6,6 @@ import time
 import classes
 import random
 import mobs
-import sprite_func
 
 pygame.mixer.pre_init(44100, -16, 1, 512)
 
@@ -16,8 +15,7 @@ def start_game():
         # cfg.play_music.play(-1)
         cfg.start_game_flag = False
     monster_generator(30)
-    tree_generator1(400)
-    # tree_generator2(150)
+    tree_generator(400)
 
     while True:
         cfg.clock.tick(cfg.FPS)
@@ -47,12 +45,7 @@ def start_game():
                                        "yellow", "black", 500, 1920, 15)
         classes.player.draw_text(cfg.screen, f'{int(classes.player.progress)} %', 18, 960, 1040, cfg.font_interface,
                                  "red")
-        classes.player.draw_text(cfg.screen, 'seconds left', 20, 1820, 20, cfg.font_interface,
-                                 "red")
-        # classes.player.draw_text(cfg.screen, f'Oak-{(classes.player.oak_amount)}x', 12, 900, 30, cfg.font_interface,
-        #                          "white")
-        # classes.player.draw_text(cfg.screen, f'Fir-{(classes.player.fir_amount)}x', 12, 1020, 30, cfg.font_interface,
-        #                          "white")
+
         classes.player.draw_text(cfg.screen, f'{(classes.player.utilities[0])}', 16, 145, 50, cfg.font_interface,
                                  "white")
         classes.player.draw_text(cfg.screen, f'{(classes.player.utilities[1])}', 16, 225, 50, cfg.font_interface,
@@ -67,8 +60,14 @@ def start_game():
                                        'black', 100, 350, 13)
         classes.player.draw_shield_bar(cfg.screen, 0, 0, classes.player.armor, (16, 72, 105), (27, 123, 179), 'black',
                                        100, 350, 13)
-        classes.player.draw_text(cfg.screen, f'{600 - int(cfg.current_time / 1000)}', 25, 1700, 15, cfg.font_interface,
-                                 "red")
+
+        # cfg.screen.blit(img.timer_tablet, (1663, 10))
+        pygame.draw.rect(cfg.screen, 'black', (920, 10, 80, 40))
+        pygame.draw.rect(cfg.screen, 'black', (830, 47, 260, 40))
+        classes.player.draw_text(cfg.screen, f'{600 - int(cfg.current_time / 1000)}', 35, 960, 13, cfg.my_font,
+                                 (224, 153, 9))
+        classes.player.draw_text(cfg.screen, 'seconds left', 30, 960, 50, cfg.my_font,
+                                 (224, 153, 9))
 
         cfg.screen.blit(img.apple_icon, (85, 47))
         cfg.screen.blit(img.shishka_icon, (165, 47))
@@ -79,6 +78,7 @@ def start_game():
             lose_game()
         if classes.player.progress >= 100:
             win_game()
+
         pygame.display.flip()
 
 
@@ -375,7 +375,7 @@ def options_game():
         pygame.display.flip()
 
 
-def tree_generator1(n):
+def tree_generator(n):
     count = 0
     while count < n:
         cfg.add_flag = True

@@ -32,7 +32,8 @@ class Monster(cl.Unit, pygame.sprite.Sprite):
         self.sound_flag = True
         self.attack_flag = False
         self.distance = 0
-        self.attack_timer = 100
+
+        self.attack_timer = 0
         self.attack_wait_timer = 0
 
     def update(self):
@@ -107,7 +108,7 @@ class Monster(cl.Unit, pygame.sprite.Sprite):
             else:
                 self.attack_wait_timer += 1
 
-            if self.distance <= self.minimum_distance+1:
+            if self.distance <= self.minimum_distance + 1:
 
                 if not self.attack_flag:
                     if self.side == "right":
@@ -134,7 +135,7 @@ class Monster(cl.Unit, pygame.sprite.Sprite):
                 cl.player.flag_take_dmg = False
 
         else:
-            
+
             self.attack_wait_timer = 0
             self.sound_flag = True
 
@@ -188,8 +189,7 @@ class Monster(cl.Unit, pygame.sprite.Sprite):
                 cl.player.image = img.woodcutter_hurt_left[1]
             if self.attack_timer == 15:
                 cl.player.image = img.woodcutter_hurt_left[2]
-
         self.attack_timer += 1
 
-min1 = Monster("Jaba", 1000, 1, 1, 200, 20)
 
+min1 = Monster("Jaba", 1000, 1, 1, 200, 20)

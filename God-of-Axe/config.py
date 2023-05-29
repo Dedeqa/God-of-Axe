@@ -7,11 +7,18 @@ WIDTH = 1920  # Параметры окна
 HEIGHT = 1080
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 size = screen.get_size()
-label = pygame.Rect(0,0 ,200,200)
+label = pygame.Rect(0, 0, 200, 200)
 
 FPS = 60  # Количество FPS
 
 clock = pygame.time.Clock()
+
+random_list = [40, 25, 30]
+temp_random_list = [40, 25, 30]
+
+random_dub = 40
+random_elka = 25
+random_palma = 30
 
 menu_flag = True  # флаг нахождения в меню
 start_game_flag = True  # флаг запуска игры для воспроизведения музыки
@@ -19,7 +26,7 @@ add_flag = True
 first_elem_flag = True
 
 delta = 125  # "радиус" спавна деревьев
-delta_monsters = 200
+delta_monsters = 200 # "радиус" спавна монстров
 delta_hero = 600
 # Список деревьев ------------------------------------------------------------------------------------------------------
 tree_list_x = []
@@ -41,9 +48,8 @@ monster_list_x = []
 monster_list_y = []
 
 # Шрифты -----------------------------------------------------------------------------------------------------
-my_font = pygame.font.Font('Fonts/Jfwildwood-ldYZ.ttf', 100)
+my_font = 'Fonts/Jfwildwood-ldYZ.ttf'
 font_interface = 'Fonts/HoltwoodOneSC-Regular.ttf'
-
 
 # Координаты для перемещения фона---------------------------------------------------------------------------------------
 bg_x = 0
@@ -110,7 +116,7 @@ point2_rect = img.point2.get_rect()
 point2_rect.center = (scale2_rect.right, scale2_rect.centery)
 
 # Надпись God of Axe в Меню --------------------------------------------------------------------------------------------
-menu_title = my_font.render("God of Axe", True, (224, 153, 9))
+menu_title = pygame.font.Font(f'{my_font}', 100).render("God of Axe", True, (224, 153, 9))
 menu_title_rect = menu_title.get_rect()
 menu_title_rect.bottomleft = (0, size[1])
 

@@ -29,25 +29,27 @@ active_quite = pygame.image.load('Images/menu/buttons/quite_active.png').convert
 
 # --------------------------------------------- Объекты в Options ------------------------------------------------------
 # Tablet (табличка) ----------------------------------------------------------------------------------------------------
-tablet = pygame.image.load('Images/menu/icons/Tablet.png')
+tablet = pygame.image.load('Images/menu/icons/Tablet.png').convert_alpha()
+
+timer_tablet = pygame.transform.scale(tablet, (250, 50)).convert_alpha()
 
 # Music_label (надпись music) ------------------------------------------------------------------------------------------
-music_label = pygame.image.load('Images/menu/labels/music_label.png')
+music_label = pygame.image.load('Images/menu/labels/music_label.png').convert_alpha()
 
 # Scale1 (шкала громкости музыки) --------------------------------------------------------------------------------------
-scale1 = pygame.image.load('Images/menu/icons/scale1.png')
+scale1 = pygame.image.load('Images/menu/icons/scale1.png').convert_alpha()
 
 # Sounds_label (надпись sounds) ----------------------------------------------------------------------------------------
-sounds_label = pygame.image.load('Images/menu/labels/sounds_label.png')
+sounds_label = pygame.image.load('Images/menu/labels/sounds_label.png').convert_alpha()
 
 # Scale2 (шкала громкости звуков) --------------------------------------------------------------------------------------
-scale2 = pygame.image.load('Images/menu/icons/scale2.png')
+scale2 = pygame.image.load('Images/menu/icons/scale2.png').convert_alpha()
 
 # Point1 (ползунок изменения громкости музыки) -------------------------------------------------------------------------
-point1 = pygame.image.load('Images/menu/icons/point1.png')
+point1 = pygame.image.load('Images/menu/icons/point1.png').convert_alpha()
 
 # Point2 (ползунок изменения громкости звуков) -------------------------------------------------------------------------
-point2 = pygame.image.load('Images/menu/icons/point2.png')
+point2 = pygame.image.load('Images/menu/icons/point2.png').convert_alpha()
 
 # Фон меню -------------------------------------------------------------------------------------------------------------
 menu_bg = pygame.image.load('Images/backgrounds/bg_menu.jpg').convert_alpha()
@@ -55,7 +57,7 @@ game_bg = pygame.image.load('Images/backgrounds/game_field.png').convert_alpha()
 
 # ------------------------------------------------ Кнопки паузы --------------------------------------------------------
 # Надпись Pause --------------------------------------------------------------------------------------------------------
-pause_label = pygame.image.load('Images/menu/labels/pause_label.png')
+pause_label = pygame.image.load('Images/menu/labels/pause_label.png').convert_alpha()
 
 # Кнопка Continue ------------------------------------------------------------------------------------------------------
 continue_ = pygame.image.load('Images/menu/buttons/continue.png').convert_alpha()
