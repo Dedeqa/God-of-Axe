@@ -51,13 +51,13 @@ def start_game():
         #                          "white")
         # classes.player.draw_text(cfg.screen, f'Fir-{(classes.player.fir_amount)}x', 12, 1020, 30, cfg.font_interface,
         #                          "white")
-        classes.player.draw_text(cfg.screen, f'{(classes.player.utilities[0])}', 16, 123, 38, cfg.font_interface,
+        classes.player.draw_text(cfg.screen, f'{(classes.player.utilities[0])}', 16, 145, 38, cfg.font_interface,
                                  "white")
-        classes.player.draw_text(cfg.screen, f'{(classes.player.utilities[1])}', 16, 198, 38, cfg.font_interface,
+        classes.player.draw_text(cfg.screen, f'{(classes.player.utilities[1])}', 16, 225, 38, cfg.font_interface,
                                  "white")
-        classes.player.draw_text(cfg.screen, f'{(classes.player.utilities[2])}', 16, 273, 38, cfg.font_interface,
+        classes.player.draw_text(cfg.screen, f'{(classes.player.utilities[2])}', 16, 305, 38, cfg.font_interface,
                                  "white")
-        classes.player.draw_text(cfg.screen, f'{(classes.player.wood_amount)}', 16, 48, 38, cfg.font_interface,
+        classes.player.draw_text(cfg.screen, f'{(classes.player.wood_amount)}', 16, 65, 38, cfg.font_interface,
                                  "white")
 
         classes.player.draw_shield_bar(cfg.screen, 0, 0, classes.player.hp, 'DarkRed', 'red', 'black', 100, 350, 13)
@@ -66,9 +66,9 @@ def start_game():
         classes.player.draw_text(cfg.screen, f'{600 - int(cfg.current_time / 1000)}', 25, 960, 13, cfg.font_interface,
                                  "red")
 
-        cfg.screen.blit(img.apple_icon, (80, 35))
-        cfg.screen.blit(img.shishka_icon, (155, 35))
-        cfg.screen.blit(img.coconut_icon, (230, 35))
+        cfg.screen.blit(img.apple_icon, (85, 35))
+        cfg.screen.blit(img.shishka_icon, (165, 35))
+        cfg.screen.blit(img.coconut_icon, (245, 35))
         cfg.screen.blit(img.wood_icon, (5, 35))
 
         if classes.player.hp <= 0 or cfg.current_time > 600000:
