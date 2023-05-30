@@ -256,3 +256,6 @@ die_bg = pygame.transform.scale(pygame.image.load("Images/backgrounds/Vic.jpg").
 
 # Фон при победе -------------------------------------------------------------------------------------------------------
 vic_bg = pygame.transform.scale(pygame.image.load('Images/backgrounds/blue_vic_bg.jpg').convert_alpha(), (1920, 1080))
+
+# Иконка домика --------------------------------------------------------------------------------------------------------
+house_icon = pygame.image.load('Images/other_objects/house.png').convert_alpha()
