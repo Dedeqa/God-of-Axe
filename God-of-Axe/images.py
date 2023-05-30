@@ -259,7 +259,7 @@ woodcutter_death_right = [
         pygame.image.load(woodcutter_death6_r_p).convert_alpha(), (50, 50)),
 ]
 
-# Смерть влуво ---------------------------------------------------------------------------------------------------------
+# Смерть влево ---------------------------------------------------------------------------------------------------------
 woodcutter_death1_l_p = f.resource_path('Images/Player/Woodcutter_death_left/death1.png')
 woodcutter_death2_l_p = f.resource_path('Images/Player/Woodcutter_death_left/death2.png')
 woodcutter_death3_l_p = f.resource_path('Images/Player/Woodcutter_death_left/death3.png')
