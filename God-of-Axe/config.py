@@ -49,8 +49,8 @@ monster_list_x = []
 monster_list_y = []
 
 # Шрифты -----------------------------------------------------------------------------------------------------
-my_font_p = 'Fonts/Jfwildwood-ldYZ.ttf'
-font_interface_p = 'Fonts/HoltwoodOneSC-Regular.ttf'
+my_font_p = f.resource_path('Fonts/Jfwildwood-ldYZ.ttf')
+font_interface_p = f.resource_path('Fonts/HoltwoodOneSC-Regular.ttf')
 
 # Координаты для перемещения фона---------------------------------------------------------------------------------------
 bg_x = 0

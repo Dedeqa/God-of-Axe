@@ -83,6 +83,7 @@ def start_game():
 
 
 def lose_game():
+
     continue_flag = False
     while True:
         cfg.screen.blit(img.die_bg, (0, 0))
@@ -124,6 +125,7 @@ def lose_game():
 
 
 def win_game():
+
     continue_flag = False
     while True:
         cfg.screen.blit(img.vic_bg, (0, 0))
@@ -166,7 +168,8 @@ def win_game():
 
 
 def menu():
-    sounds.play_music.stop()
+
+    #sounds.play_music.stop()
     if cfg.menu_flag:
         pygame.mixer.music.play(-1)
         cfg.menu_flag = False
@@ -228,6 +231,7 @@ def menu():
 
 
 def pause():
+
     start1, start2, start3 = 0, 0, 0
 
     while True:
@@ -289,6 +293,7 @@ def pause():
 
 
 def options_menu():
+
     while True:
         mouse = pygame.mouse.get_pos()
         click = pygame.mouse.get_pressed()
@@ -334,6 +339,7 @@ def options_menu():
 
 
 def options_game():
+
     while True:
         mouse = pygame.mouse.get_pos()
         click = pygame.mouse.get_pressed()
@@ -376,6 +382,7 @@ def options_game():
 
 
 def tree_generator(n):
+
     count = 0
     while count < n:
         cfg.add_flag = True
@@ -422,6 +429,7 @@ def tree_generator(n):
 
 
 def monster_generator(n):
+
     count = 0
     while count < n:
         cfg.add_flag = True

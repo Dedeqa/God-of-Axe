@@ -17,7 +17,7 @@ class Unit:
         self.posy = posy
 
     def draw_text(self, surf, text, size, x, y, font, color):
-        font = pygame.font.Font(f'{font}', size)
+        font = pygame.font.Font(font, size)
         text_surface = font.render(text, True, color)
         text_rect = text_surface.get_rect()
         text_rect.midtop = (x, y)
