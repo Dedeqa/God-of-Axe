@@ -6,7 +6,6 @@ import time
 import classes
 import random
 import mobs
-import sprite_func
 
 pygame.mixer.pre_init(44100, -16, 1, 512)
 
@@ -17,7 +16,6 @@ def start_game():
         cfg.start_game_flag = False
     monster_generator(30)
     tree_generator(400)
-    # tree_generator2(150)
 
     while True:
         cfg.clock.tick(cfg.FPS)
@@ -39,26 +37,22 @@ def start_game():
         cfg.screen.blit(img.game_bg, (-1920 + cfg.bg_x, 1080 + cfg.bg_y))  # 7 зона
         cfg.screen.blit(img.game_bg, (0 + cfg.bg_x, 1080 + cfg.bg_y))  # 8 зона
         cfg.screen.blit(img.game_bg, (1920 + cfg.bg_x, 1080 + cfg.bg_y))  # 9 зона
+
         classes.all_sprites.update()
         classes.all_sprites.draw(cfg.screen)
 
         classes.player.draw_shield_bar(cfg.screen, 0, 1065, classes.player.wood_amount, "brown",
                                        "yellow", "black", 500, 1920, 15)
-        classes.player.draw_text(cfg.screen, f'{int(classes.player.progress)} %', 18, 960, 1040, cfg.font_interface,
+        classes.player.draw_text(cfg.screen, f'{int(classes.player.progress)} %', 18, 960, 1040, cfg.font_interface_p,
                                  "red")
-        classes.player.draw_text(cfg.screen, 'seconds left', 20, 1820, 20, cfg.font_interface,
-                                 "red")
-        # classes.player.draw_text(cfg.screen, f'Oak-{(classes.player.oak_amount)}x', 12, 900, 30, cfg.font_interface,
-        #                          "white")
-        # classes.player.draw_text(cfg.screen, f'Fir-{(classes.player.fir_amount)}x', 12, 1020, 30, cfg.font_interface,
-        #                          "white")
-        classes.player.draw_text(cfg.screen, f'{(classes.player.utilities[0])}', 16, 145, 50, cfg.font_interface,
+
+        classes.player.draw_text(cfg.screen, f'{(classes.player.utilities[0])}', 16, 145, 50, cfg.font_interface_p,
                                  "white")
-        classes.player.draw_text(cfg.screen, f'{(classes.player.utilities[1])}', 16, 225, 50, cfg.font_interface,
+        classes.player.draw_text(cfg.screen, f'{(classes.player.utilities[1])}', 16, 225, 50, cfg.font_interface_p,
                                  "white")
-        classes.player.draw_text(cfg.screen, f'{(classes.player.utilities[2])}', 16, 305, 50, cfg.font_interface,
+        classes.player.draw_text(cfg.screen, f'{(classes.player.utilities[2])}', 16, 305, 50, cfg.font_interface_p,
                                  "white")
-        classes.player.draw_text(cfg.screen, f'{(classes.player.wood_amount)}', 16, 65, 50, cfg.font_interface,
+        classes.player.draw_text(cfg.screen, f'{(classes.player.wood_amount)}', 16, 65, 50, cfg.font_interface_p,
                                  "white")
 
         classes.player.draw_shield_bar(cfg.screen, 0, 14, classes.player.hp, 'DarkRed', 'red', 'black', 100, 350, 13)
@@ -66,8 +60,14 @@ def start_game():
                                        'black', 100, 350, 13)
         classes.player.draw_shield_bar(cfg.screen, 0, 0, classes.player.armor, (16, 72, 105), (27, 123, 179), 'black',
                                        100, 350, 13)
-        classes.player.draw_text(cfg.screen, f'{600 - int(cfg.current_time / 1000)}', 25, 1700, 15, cfg.font_interface,
-                                 "red")
+
+        # cfg.screen.blit(img.timer_tablet, (1663, 10))
+        pygame.draw.rect(cfg.screen, 'black', (920, 10, 80, 40))
+        pygame.draw.rect(cfg.screen, 'black', (830, 47, 260, 40))
+        classes.player.draw_text(cfg.screen, f'{600 - int(cfg.current_time / 1000)}', 35, 960, 13, cfg.my_font_p,
+                                 (224, 153, 9))
+        classes.player.draw_text(cfg.screen, 'seconds left', 30, 960, 50, cfg.my_font_p,
+                                 (224, 153, 9))
 
         cfg.screen.blit(img.apple_icon, (85, 47))
         cfg.screen.blit(img.shishka_icon, (165, 47))
@@ -78,16 +78,18 @@ def start_game():
             lose_game()
         if classes.player.progress >= 100:
             win_game()
+
         pygame.display.flip()
 
 
 def lose_game():
+
     continue_flag = False
     while True:
         cfg.screen.blit(img.die_bg, (0, 0))
-        classes.player.draw_text(cfg.screen, 'You were worse than last time!', 40, 960, 900, cfg.font_interface,
+        classes.player.draw_text(cfg.screen, 'You were worse than last time!', 40, 960, 900, cfg.font_interface_p,
                                  "white")
-        classes.player.draw_text(cfg.screen, 'Press space to continue...', 30, 960, 1000, cfg.font_interface, "white")
+        classes.player.draw_text(cfg.screen, 'Press space to continue...', 30, 960, 1000, cfg.font_interface_p, "white")
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
                 continue_flag = True
@@ -98,38 +100,39 @@ def lose_game():
             classes.player.draw_text(cfg.screen,
                                      f'You have mastered only {classes.player.progress}%',
                                      30,
-                                     960, 200, cfg.font_interface, "red")
+                                     960, 200, cfg.font_interface_p, "red")
             classes.player.draw_text(cfg.screen, f'You have wasted {int(cfg.current_time / 1000)} seconds your life',
                                      24,
-                                     960, 300, cfg.font_interface, "orange")
+                                     960, 300, cfg.font_interface_p, "orange")
             classes.player.draw_text(cfg.screen,
                                      f'You have cut down {classes.player.oak_amount} DUBOV, {classes.player.fir_amount}  IOLOK and {classes.player.palm_amount} PALMAS',
                                      24,
-                                     960, 370, cfg.font_interface, "yellow")
+                                     960, 370, cfg.font_interface_p, "yellow")
             classes.player.draw_text(cfg.screen,
                                      f'You have {classes.player.utilities[0]} apples, {classes.player.utilities[1]} shishkas, {classes.player.utilities[2]} coconuts left',
                                      24,
-                                     960, 440, cfg.font_interface, "green")
+                                     960, 440, cfg.font_interface_p, "green")
 
             classes.player.draw_text(cfg.screen,
                                      f'You have destroyed {classes.player.kills} monsters',
                                      30,
-                                     960, 510, cfg.font_interface, "blue")
+                                     960, 510, cfg.font_interface_p, "blue")
             classes.player.draw_text(cfg.screen,
                                      'Press Esc to exit the menu',
                                      20,
-                                     960, 680, cfg.font_interface, "purple")
+                                     960, 680, cfg.font_interface_p, "purple")
         pygame.display.flip()
 
 
 def win_game():
+
     continue_flag = False
     while True:
         cfg.screen.blit(img.vic_bg, (0, 0))
         classes.player.draw_text(cfg.screen, 'You have become the real god of the axe!', 40, 960, 700,
-                                 cfg.font_interface,
+                                 cfg.font_interface_p,
                                  "green")
-        classes.player.draw_text(cfg.screen, 'Press space to continue...', 30, 960, 1000, cfg.font_interface, "green")
+        classes.player.draw_text(cfg.screen, 'Press space to continue...', 30, 960, 1000, cfg.font_interface_p, "green")
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
                 continue_flag = True
@@ -140,34 +143,35 @@ def win_game():
             classes.player.draw_text(cfg.screen,
                                      f'You have mastered only {classes.player.progress}%',
                                      30,
-                                     960, 200, cfg.font_interface, "red")
+                                     960, 200, cfg.font_interface_p, "red")
             classes.player.draw_text(cfg.screen, f'You have wasted {int(cfg.current_time / 1000)} seconds your life',
                                      24,
-                                     960, 300, cfg.font_interface, "orange")
+                                     960, 300, cfg.font_interface_p, "orange")
             classes.player.draw_text(cfg.screen,
                                      f'You have cut down {classes.player.oak_amount} DUBOV and {classes.player.fir_amount}  IOLOK',
                                      24,
-                                     960, 370, cfg.font_interface, "yellow")
+                                     960, 370, cfg.font_interface_p, "yellow")
             classes.player.draw_text(cfg.screen,
                                      f'You have {classes.player.utilities[0]} apples, {classes.player.utilities[1]} shishkas, {classes.player.utilities[2]} coconuts left',
                                      24,
-                                     960, 440, cfg.font_interface, "green")
+                                     960, 440, cfg.font_interface_p, "green")
 
             classes.player.draw_text(cfg.screen,
                                      f'You have destroyed {classes.player.kills} monsters',
                                      30,
-                                     960, 510, cfg.font_interface, "blue")
+                                     960, 510, cfg.font_interface_p, "blue")
             classes.player.draw_text(cfg.screen,
                                      'Press Esc to exit the menu',
                                      20,
-                                     960, 680, cfg.font_interface, "purple")
+                                     960, 680, cfg.font_interface_p, "purple")
         pygame.display.flip()
 
 
 def menu():
-    sounds.play_music.stop()
+
+    #sounds.play_music.stop()
     if cfg.menu_flag:
-        # pygame.mixer.music.play(-1)
+        pygame.mixer.music.play(-1)
         cfg.menu_flag = False
 
     start1, start2, start3 = 0, 0, 0
@@ -227,6 +231,7 @@ def menu():
 
 
 def pause():
+
     start1, start2, start3 = 0, 0, 0
 
     while True:
@@ -288,6 +293,7 @@ def pause():
 
 
 def options_menu():
+
     while True:
         mouse = pygame.mouse.get_pos()
         click = pygame.mouse.get_pressed()
@@ -305,7 +311,7 @@ def options_menu():
                 cfg.point1_rect.center = (mouse[0], cfg.scale1_rect.centery)
                 sounds.volume_music = 0.01 * ((cfg.point1_rect.centerx - cfg.scale1_rect.left) / 3)
 
-                sounds.play_music.set_volume(sounds.volume_music)
+                sounds.play_music_p.set_volume(sounds.volume_music)
                 pygame.mixer.music.set_volume(sounds.volume_music)
 
             if click[0] and (cfg.point2_rect.collidepoint(mouse[0], mouse[1])) and (
@@ -333,6 +339,7 @@ def options_menu():
 
 
 def options_game():
+
     while True:
         mouse = pygame.mouse.get_pos()
         click = pygame.mouse.get_pressed()
@@ -375,18 +382,17 @@ def options_game():
 
 
 def tree_generator(n):
+
     count = 0
     while count < n:
         cfg.add_flag = True
         x = random.randint(-1870, 3740)
         y = random.randint(-1030, 2000)
-        if abs(x - classes.house.rect.center[0]) < cfg.delta + classes.house.rect[2] / 2 and abs(
-                y - classes.house.rect.center[1]) < cfg.delta + classes.house.rect[3] / 2:
-            cfg.add_flag = False
-        if cfg.add_flag:
-            for i in range(count):
-                if abs(cfg.tree_list_x[i] - x) < cfg.delta and abs(cfg.tree_list_y[i] - y) < cfg.delta:
-                    cfg.add_flag = False
+
+        for i in range(count):
+            if abs(cfg.tree_list_x[i] - x) < cfg.delta and abs(cfg.tree_list_y[i] - y) < cfg.delta:
+                cfg.add_flag = False
+
         if cfg.add_flag:
             cfg.tree_list_x.append(x)
             cfg.tree_list_y.append(y)
@@ -423,6 +429,7 @@ def tree_generator(n):
 
 
 def monster_generator(n):
+
     count = 0
     while count < n:
         cfg.add_flag = True
@@ -431,8 +438,8 @@ def monster_generator(n):
 
         for i in range(count):
             if (abs(cfg.monster_list_x[i] - x) < cfg.delta_monsters or abs(
-                    cfg.monster_list_y[i] - y) < cfg.delta_monsters) and (
-                    abs(cfg.monster_list_x[i] - classes.player.rect.x) < cfg.delta_hero or abs(
+                    cfg.monster_list_y[i] - y) < cfg.delta_monsters) and (abs(
+                cfg.monster_list_x[i] - classes.player.rect.x) < cfg.delta_hero or abs(
                 cfg.monster_list_y[i] - classes.player.rect.y) < cfg.delta_hero):
                 cfg.add_flag = False
 

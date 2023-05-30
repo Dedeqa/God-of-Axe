@@ -6,8 +6,8 @@ import sounds
 import images as img
 import random
 
+pygame.mixer.pre_init(44100, -16, 1, 512)
 
-# pygame.mixer.pre_init(44100, -16, 1, 512)
 
 class Unit:
     def __init__(self, nm, hp, posx, posy):
@@ -17,8 +17,8 @@ class Unit:
         self.posy = posy
 
     def draw_text(self, surf, text, size, x, y, font, color):
-        font = pygame.font.Font(f'{font}', size)
-        text_surface = font.render(text, True, f'{color}')
+        font = pygame.font.Font(font, size)
+        text_surface = font.render(text, True, color)
         text_rect = text_surface.get_rect()
         text_rect.midtop = (x, y)
         surf.blit(text_surface, text_rect)
@@ -419,7 +419,7 @@ all_sprites.add(player)
 
 class Tree(Unit, pygame.sprite.Sprite):
 
-    def __init__(self, nm, hp, posx, posy, bonus, drop, _random):
+    def __init__(self, nm, hp, posx, posy, bonus, drop, random_index):
 
         Unit.__init__(self, nm, hp, posx, posy)
         pygame.sprite.Sprite.__init__(self)
@@ -444,8 +444,7 @@ class Tree(Unit, pygame.sprite.Sprite):
         self.start_hp = hp
 
         self.drop = drop
-        self._random = _random
-        self.temp_random = _random
+        self.random_index = random_index
 
     def update(self):
 
@@ -506,30 +505,30 @@ class Tree(Unit, pygame.sprite.Sprite):
 
             chance = random.randint(1, 100)
 
-            if 0 <= chance <= self.temp_random:
+            if 0 <= chance <= cfg.temp_random_list[self.random_index]:
                 player.utilities[self.drop] += 1
-                self.temp_random = self._random
+                cfg.temp_random_list[self.random_index] = cfg.random_list[self.random_index]
             else:
-                self.temp_random += 10
+                cfg.temp_random_list[self.random_index] += 10
 
 
 class Dub(Tree):
-    def __init__(self, nm, hp, posx, posy, bonus, drop=0, _random=40):
-        Tree.__init__(self, nm, hp, posx, posy, bonus, drop, _random)
+    def __init__(self, nm, hp, posx, posy, bonus, drop=0, random_index=0):
+        Tree.__init__(self, nm, hp, posx, posy, bonus, drop, random_index)
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.image.load("Images/Trees/Tree1.png").convert_alpha()
 
 
 class Elka(Tree):
-    def __init__(self, nm, hp, posx, posy, bonus, drop=1, _random=25):
-        Tree.__init__(self, nm, hp, posx, posy, bonus, drop, _random)
+    def __init__(self, nm, hp, posx, posy, bonus, drop=1, random_index=1):
+        Tree.__init__(self, nm, hp, posx, posy, bonus, drop, random_index)
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.image.load("Images/Trees/Tree2.png").convert_alpha()
 
 
 class Palma(Tree):
-    def __init__(self, nm, hp, posx, posy, bonus, drop=2, _random=30):
-        Tree.__init__(self, nm, hp, posx, posy, bonus, drop, _random)
+    def __init__(self, nm, hp, posx, posy, bonus, drop=2, random_index=2):
+        Tree.__init__(self, nm, hp, posx, posy, bonus, drop, random_index)
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.image.load("Images/Trees/Tree3.png").convert_alpha()
 
