@@ -236,6 +236,52 @@ woodcutter_attack_left = [
         pygame.image.load(woodcutter_attack6_l_p).convert_alpha(), (50, 50)),
 ]
 
+# Смерть вправо --------------------------------------------------------------------------------------------------------
+woodcutter_death1_r_p = f.resource_path('Images/Player/Woodcutter_death_right/death1.png')
+woodcutter_death2_r_p = f.resource_path('Images/Player/Woodcutter_death_right/death2.png')
+woodcutter_death3_r_p = f.resource_path('Images/Player/Woodcutter_death_right/death3.png')
+woodcutter_death4_r_p = f.resource_path('Images/Player/Woodcutter_death_right/death4.png')
+woodcutter_death5_r_p = f.resource_path('Images/Player/Woodcutter_death_right/death5.png')
+woodcutter_death6_r_p = f.resource_path('Images/Player/Woodcutter_death_right/death6.png')
+
+woodcutter_death_right = [
+    pygame.transform.scale(
+        pygame.image.load(woodcutter_death1_r_p).convert_alpha(), (50, 50)),
+    pygame.transform.scale(
+        pygame.image.load(woodcutter_death2_r_p).convert_alpha(), (50, 50)),
+    pygame.transform.scale(
+        pygame.image.load(woodcutter_death3_r_p).convert_alpha(), (50, 50)),
+    pygame.transform.scale(
+        pygame.image.load(woodcutter_death4_r_p).convert_alpha(), (50, 50)),
+    pygame.transform.scale(
+        pygame.image.load(woodcutter_death5_r_p).convert_alpha(), (50, 50)),
+    pygame.transform.scale(
+        pygame.image.load(woodcutter_death6_r_p).convert_alpha(), (50, 50)),
+]
+
+# Смерть влуво ---------------------------------------------------------------------------------------------------------
+woodcutter_death1_l_p = f.resource_path('Images/Player/Woodcutter_death_left/death1.png')
+woodcutter_death2_l_p = f.resource_path('Images/Player/Woodcutter_death_left/death2.png')
+woodcutter_death3_l_p = f.resource_path('Images/Player/Woodcutter_death_left/death3.png')
+woodcutter_death4_l_p = f.resource_path('Images/Player/Woodcutter_death_left/death4.png')
+woodcutter_death5_l_p = f.resource_path('Images/Player/Woodcutter_death_left/death5.png')
+woodcutter_death6_l_p = f.resource_path('Images/Player/Woodcutter_death_left/death6.png')
+
+woodcutter_death_left = [
+    pygame.transform.scale(
+        pygame.image.load(woodcutter_death1_l_p).convert_alpha(), (50, 50)),
+    pygame.transform.scale(
+        pygame.image.load(woodcutter_death2_l_p).convert_alpha(), (50, 50)),
+    pygame.transform.scale(
+        pygame.image.load(woodcutter_death3_l_p).convert_alpha(), (50, 50)),
+    pygame.transform.scale(
+        pygame.image.load(woodcutter_death4_l_p).convert_alpha(), (50, 50)),
+    pygame.transform.scale(
+        pygame.image.load(woodcutter_death5_l_p).convert_alpha(), (50, 50)),
+    pygame.transform.scale(
+        pygame.image.load(woodcutter_death6_l_p).convert_alpha(), (50, 50)),
+]
+
 # ----------------------------------------------- Спрайты минотавра ----------------------------------------------------
 
 # Ходьба вниз ----------------------------------------------------------------------------------------------------------
@@ -251,7 +297,7 @@ minotaur_walk_bottom = [
     pygame.transform.scale(
         pygame.image.load(minotaur_walk_bottom3_p).convert_alpha(), (50, 50))
 ]
-# Хотьба вверх ---------------------------------------------------------------------------------------------------------
+# Ходьба вверх ---------------------------------------------------------------------------------------------------------
 minotaur_walk_top1_p = f.resource_path('Images/monsters/walk_top/minotaur-N-stand.png')
 minotaur_walk_top2_p = f.resource_path('Images/monsters/walk_top/minotaur-N-step1.png')
 minotaur_walk_top3_p = f.resource_path('Images/monsters/walk_top/minotaur-N-step2.png')

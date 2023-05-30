@@ -47,7 +47,9 @@ class Monster(cl.Unit, pygame.sprite.Sprite):
         min_step = max(0, int(self.distance - self.maximum_distance))
         max_step = self.distance - self.minimum_distance
         VELOCITY = 2
-        direction_vector /= self.distance
+
+        if self.distance != 0:
+            direction_vector /= self.distance
 
         if not self.attack_flag:
             step_distance = min(max_step, max(min_step, VELOCITY))
