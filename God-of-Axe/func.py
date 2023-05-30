@@ -47,6 +47,8 @@ def start_game():
                                        "yellow", "black", 500, 1920, 15)
         classes.player.draw_text(cfg.screen, f'{int(classes.player.progress)} %', 18, 960, 1040, cfg.font_interface,
                                  "red")
+        classes.player.draw_text(cfg.screen, 'seconds left', 20, 1820, 20, cfg.font_interface,
+                                 "red")
         # classes.player.draw_text(cfg.screen, f'Oak-{(classes.player.oak_amount)}x', 12, 900, 30, cfg.font_interface,
         #                          "white")
         # classes.player.draw_text(cfg.screen, f'Fir-{(classes.player.fir_amount)}x', 12, 1020, 30, cfg.font_interface,
@@ -65,7 +67,7 @@ def start_game():
                                        'black', 100, 350, 13)
         classes.player.draw_shield_bar(cfg.screen, 0, 0, classes.player.armor, (16, 72, 105), (27, 123, 179), 'black',
                                        100, 350, 13)
-        classes.player.draw_text(cfg.screen, f'{600 - int(cfg.current_time / 1000)}', 25, 960, 13, cfg.font_interface,
+        classes.player.draw_text(cfg.screen, f'{600 - int(cfg.current_time / 1000)}', 25, 1700, 15, cfg.font_interface,
                                  "red")
 
         cfg.screen.blit(img.apple_icon, (85, 47))

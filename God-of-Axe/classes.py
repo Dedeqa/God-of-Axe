@@ -58,8 +58,6 @@ class Player(Unit, pygame.sprite.Sprite):
         self.anim_time = 0
         self.anim_time_attack = 0
 
-        self.armor = 100
-
         self.wood_amount = 0
         self.oak_amount = 0
         self.fir_amount = 0
@@ -74,7 +72,7 @@ class Player(Unit, pygame.sprite.Sprite):
 
         self.kills = 0
 
-        self.utilities = [3, 3, 3]
+        self.utilities = [3, 0, 0]
 
         self.rect_attack = pygame.Rect(self.rect[0] + self.rect[2] / 2 + 10, self.rect[1] + self.rect[3] / 3,
                                        self.rect[2] / 3 * 2,
@@ -131,9 +129,9 @@ class Player(Unit, pygame.sprite.Sprite):
                             self.anim_time = 0
 
                         sx = 2
-                    if self.rect.x >= 50:
+                    if self.rect.x >= 100:
                         self.speedx = -sx
-                    elif cfg.bg_x < 1920:
+                    elif cfg.bg_x < 1820:
                         cfg.bg_x += sx
                         func.update_monsters_x(cfg.monsterList, sx, flag_direction=True)
             if keystate[pygame.K_d]:
@@ -168,7 +166,7 @@ class Player(Unit, pygame.sprite.Sprite):
                         sx = 1
                     if self.rect.x <= 1820:
                         self.speedx = sx
-                    elif cfg.bg_x > -1920:
+                    elif cfg.bg_x > -1820:
                         cfg.bg_x -= sx
                         func.update_monsters_x(cfg.monsterList, sx, flag_direction=False)
         if not (keystate[pygame.K_w] and keystate[pygame.K_s]):
@@ -207,7 +205,7 @@ class Player(Unit, pygame.sprite.Sprite):
                             self.anim_time = 0
 
                         sy = 2
-                    if self.rect.y >= 50:
+                    if self.rect.y >= 100:
                         self.speedy = -sy
                     elif cfg.bg_y < 1080:
                         cfg.bg_y += sy
