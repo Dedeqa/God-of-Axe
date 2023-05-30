@@ -24,6 +24,27 @@ step_p = pygame.mixer.Sound(r'Music\korotkiy-byistryiy-shag-po-lesu.mp3')
 hit_tree_p = f.resource_path(r'Music\korotkiy-chtkiy-rezkiy-udar-po-derevu.mp3')
 hit_tree = pygame.mixer.Sound(hit_tree_p)
 
+# Звуки получения урона ------------------------------------------------------------------------------------------------
+take_dmg1_p = f.resource_path(r'Music\take_dmg1.mp3')
+take_dmg2_p = f.resource_path(r'Music\take_dmg2.mp3')
+take_dmg3_p = f.resource_path(r'Music\take_dmg3.mp3')
+last_hit_p = f.resource_path(r'Music\last_hit.mp3')
+
+
+take_dmg1 = pygame.mixer.Sound(take_dmg1_p)
+take_dmg2 = pygame.mixer.Sound(take_dmg2_p)
+take_dmg3 = pygame.mixer.Sound(take_dmg3_p)
+
+index = 0
+
+take_dmg_sounds_list = [take_dmg1, take_dmg2, take_dmg3]
+
+last_hit = pygame.mixer.Sound(last_hit_p)
+
+# Звук удара по монстру ------------------------------------------------------------------------------------------------
+hit_monster_p = f.resource_path(r'Music\rassechenie-ploti-boevym-toporom-48.mp3')
+hit_monster = pygame.mixer.Sound(hit_monster_p)
+
 # Звук падающего дерева ------------------------------------------------------------------------------------------------
 falling_tree_p = f.resource_path(r'Music\falling_tree.mp3')
 falling_tree = pygame.mixer.Sound(falling_tree_p)

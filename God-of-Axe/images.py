@@ -98,7 +98,8 @@ woodcutter_stay_right = pygame.transform.scale(pygame.image.load(woodcutter_stay
 
 woodcutter_stay_left_p = f.resource_path('Images/Player/Woodcutter_left.png')
 woodcutter_stay_left = pygame.transform.scale(pygame.image.load(woodcutter_stay_left_p).convert_alpha(), (50, 50))
-# Хотьба вправо --------------------------------------------------------------------------------------------------------
+
+# Ходьба вправо --------------------------------------------------------------------------------------------------------
 woodcutter_walk1_r_p = f.resource_path('Images/Player/Woodcutter_walk_right/Woodcutter_walk1.png')
 woodcutter_walk2_r_p = f.resource_path('Images/Player/Woodcutter_walk_right/Woodcutter_walk2.png')
 woodcutter_walk3_r_p = f.resource_path('Images/Player/Woodcutter_walk_right/Woodcutter_walk3.png')
@@ -121,7 +122,7 @@ woodcutter_walk_right = [
         pygame.image.load(woodcutter_walk6_r_p).convert_alpha(), (50, 50)),
 ]
 
-# Хотьба влево ---------------------------------------------------------------------------------------------------------
+# Ходьба влево ---------------------------------------------------------------------------------------------------------
 woodcutter_walk1_l_p = f.resource_path('Images/Player/Woodcutter_walk_left/Woodcutter_walk1.png')
 woodcutter_walk2_l_p = f.resource_path('Images/Player/Woodcutter_walk_left/Woodcutter_walk2.png')
 woodcutter_walk3_l_p = f.resource_path('Images/Player/Woodcutter_walk_left/Woodcutter_walk3.png')
@@ -234,6 +235,58 @@ woodcutter_attack_left = [
         pygame.image.load(woodcutter_attack5_l_p).convert_alpha(), (50, 50)),
     pygame.transform.scale(
         pygame.image.load(woodcutter_attack6_l_p).convert_alpha(), (50, 50)),
+]
+
+# Смерть вправо --------------------------------------------------------------------------------------------------------
+woodcutter_death1_r_p = f.resource_path(r'Images/Player/Woodcutter_death_right/death1.png')
+woodcutter_death2_r_p = f.resource_path(r'Images/Player/Woodcutter_death_right/death2.png')
+woodcutter_death3_r_p = f.resource_path(r'Images/Player/Woodcutter_death_right/death3.png')
+woodcutter_death4_r_p = f.resource_path(r'Images/Player/Woodcutter_death_right/death4.png')
+woodcutter_death5_r_p = f.resource_path(r'Images/Player/Woodcutter_death_right/death5.png')
+woodcutter_death6_r_p = f.resource_path(r'Images/Player/Woodcutter_death_right/death6.png')
+woodcutter_death7_r_p = f.resource_path(r'Images/Player/Woodcutter_death_right/death7.png')
+
+woodcutter_death_right = [
+    pygame.transform.scale(
+        pygame.image.load(woodcutter_death1_r_p).convert_alpha(), (50, 50)),
+    pygame.transform.scale(
+        pygame.image.load(woodcutter_death2_r_p).convert_alpha(), (50, 50)),
+    pygame.transform.scale(
+        pygame.image.load(woodcutter_death3_r_p).convert_alpha(), (50, 50)),
+    pygame.transform.scale(
+        pygame.image.load(woodcutter_death4_r_p).convert_alpha(), (50, 50)),
+    pygame.transform.scale(
+        pygame.image.load(woodcutter_death5_r_p).convert_alpha(), (50, 50)),
+    pygame.transform.scale(
+        pygame.image.load(woodcutter_death6_r_p).convert_alpha(), (50, 50)),
+    pygame.transform.scale(
+        pygame.image.load(woodcutter_death7_r_p).convert_alpha(), (50, 50)),
+]
+
+# Смерть влево ---------------------------------------------------------------------------------------------------------
+woodcutter_death1_l_p = f.resource_path(r'Images/Player/Woodcutter_death_left/death1.png')
+woodcutter_death2_l_p = f.resource_path(r'Images/Player/Woodcutter_death_left/death2.png')
+woodcutter_death3_l_p = f.resource_path(r'Images/Player/Woodcutter_death_left/death3.png')
+woodcutter_death4_l_p = f.resource_path(r'Images/Player/Woodcutter_death_left/death4.png')
+woodcutter_death5_l_p = f.resource_path(r'Images/Player/Woodcutter_death_left/death5.png')
+woodcutter_death6_l_p = f.resource_path(r'Images/Player/Woodcutter_death_left/death6.png')
+woodcutter_death7_l_p = f.resource_path(r'Images/Player/Woodcutter_death_left/death7.png')
+
+woodcutter_death_left = [
+    pygame.transform.scale(
+        pygame.image.load(woodcutter_death1_l_p).convert_alpha(), (50, 50)),
+    pygame.transform.scale(
+        pygame.image.load(woodcutter_death2_l_p).convert_alpha(), (50, 50)),
+    pygame.transform.scale(
+        pygame.image.load(woodcutter_death3_l_p).convert_alpha(), (50, 50)),
+    pygame.transform.scale(
+        pygame.image.load(woodcutter_death4_l_p).convert_alpha(), (50, 50)),
+    pygame.transform.scale(
+        pygame.image.load(woodcutter_death5_l_p).convert_alpha(), (50, 50)),
+    pygame.transform.scale(
+        pygame.image.load(woodcutter_death6_l_p).convert_alpha(), (50, 50)),
+pygame.transform.scale(
+        pygame.image.load(woodcutter_death7_l_p).convert_alpha(), (50, 50)),
 ]
 
 # ----------------------------------------------- Спрайты минотавра ----------------------------------------------------

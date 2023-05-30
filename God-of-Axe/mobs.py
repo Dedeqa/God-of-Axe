@@ -7,6 +7,7 @@ import images as img
 
 
 class Monster(cl.Unit, pygame.sprite.Sprite):
+
     def __init__(self, nm, hp, posx, posy, viewing_range, dmg):
 
         cl.Unit.__init__(self, nm, hp, posx, posy)
@@ -53,7 +54,7 @@ class Monster(cl.Unit, pygame.sprite.Sprite):
         else:
             step_distance = 0
 
-        if self.distance <= self.viewing_range:
+        if self.distance <= self.viewing_range and cl.player.hp > 0:
 
             if self.sound_flag:
                 self.sound_flag = False
@@ -163,7 +164,7 @@ class Monster(cl.Unit, pygame.sprite.Sprite):
 
         if self.hp > 0:
             self.hp -= dmg
-            sounds.hit_tree.play()
+            sounds.hit_monster.play()
         if self.hp <= 0:
             cl.player.kills += 1
             self.remove(cl.all_sprites)

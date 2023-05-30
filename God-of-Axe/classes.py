@@ -53,6 +53,10 @@ class Player(Unit, pygame.sprite.Sprite):
         self.i = 0
         self.j = 0
         self.at = 0
+
+        self.death_timer = cfg.current_time + 100
+        self.death_index = 0
+
         self.flag_attack = False
         self.flag_take_dmg = False
         self.anim_time = 0
@@ -92,187 +96,216 @@ class Player(Unit, pygame.sprite.Sprite):
             self.stamina += self.stamina_recovery
         elif self.stamina > 100:
             self.stamina = 100
-        if not (keystate[pygame.K_a] and keystate[pygame.K_d]):
+        if self.hp > 0:
+            if not (keystate[pygame.K_a] and keystate[pygame.K_d]):
 
-            if keystate[pygame.K_a]:
-                cfg.vector = "left"
+                if keystate[pygame.K_a]:
+                    cfg.vector = "left"
 
-                if (self.line.collidelist(cfg.trees_rects_right)) == -1:
-                    if keystate[pygame.K_LSHIFT] and self.stamina > 0:
+                    if (self.line.collidelist(cfg.trees_rects_right)) == -1:
+                        if keystate[pygame.K_LSHIFT] and self.stamina > 0:
 
-                        if self.i == 6:
-                            self.i = 0
+                            if self.i == 6:
+                                self.i = 0
 
-                        self.image = img.woodcutter_run_left[self.i]
-                        self.anim_time += 1
+                            self.image = img.woodcutter_run_left[self.i]
+                            self.anim_time += 1
 
-                        if self.anim_time == 5:
-                            self.i += 1
-                            self.anim_time = 0
-                        sx = 4
-                        self.stamina -= 0.5
+                            if self.anim_time == 5:
+                                self.i += 1
+                                self.anim_time = 0
+                            sx = 4
+                            self.stamina -= 0.5
 
-                    else:
-
-                        if self.i == 6:
-                            self.i = 0
-
-                        # if self.i == 1 or self.i == 4:
-                        #     sounds.step.stop()
-                        #     sounds.step.play()
-
-                        self.image = img.woodcutter_walk_left[self.i]
-                        self.anim_time += 1
-
-                        if self.anim_time == 5:
-                            self.i += 1
-                            self.anim_time = 0
-
-                        sx = 2
-                    if self.rect.x >= 100:
-                        self.speedx = -sx
-                    elif cfg.bg_x < 1820:
-                        cfg.bg_x += sx
-                        func.update_monsters_x(cfg.monsterList, sx, flag_direction=True)
-            if keystate[pygame.K_d]:
-                cfg.vector = "right"
-                if (self.line.collidelist(cfg.trees_rects_left)) == -1:
-                    if keystate[pygame.K_LSHIFT] and self.stamina > 0:
-
-                        if self.i == 6:
-                            self.i = 0
-
-                        self.image = img.woodcutter_run_right[self.i]
-                        self.anim_time += 1
-
-                        if self.anim_time == 5:
-                            self.i += 1
-                            self.anim_time = 0
-
-                        sx = 4
-                        self.stamina -= 0.5
-                    else:
-
-                        if self.i == 6:
-                            self.i = 0
-
-                        self.image = img.woodcutter_walk_right[self.i]
-                        self.anim_time += 1
-
-                        if self.anim_time == 5:
-                            self.i += 1
-                            self.anim_time = 0
-
-                        sx = 1
-                    if self.rect.x <= 1820:
-                        self.speedx = sx
-                    elif cfg.bg_x > -1820:
-                        cfg.bg_x -= sx
-                        func.update_monsters_x(cfg.monsterList, sx, flag_direction=False)
-        if not (keystate[pygame.K_w] and keystate[pygame.K_s]):
-            if keystate[pygame.K_w]:
-                if (self.line.collidelist(cfg.trees_rects_bottom)) == -1:
-                    if keystate[pygame.K_LSHIFT] and self.stamina > 0:
-
-                        if self.j == 6:
-                            self.j = 0
-
-                        if cfg.vector == "right":
-                            self.image = img.woodcutter_run_right[self.j]
                         else:
-                            self.image = img.woodcutter_run_left[self.j]
-                        self.anim_time += 1
 
-                        if self.anim_time == 5:
-                            self.j += 1
-                            self.anim_time = 0
+                            if self.i == 6:
+                                self.i = 0
 
-                        sy = 4
-                        self.stamina -= 0.5
-                    else:
+                            # if self.i == 1 or self.i == 4:
+                            #     sounds.step.stop()
+                            #     sounds.step.play()
 
-                        if self.j == 6:
-                            self.j = 0
+                            self.image = img.woodcutter_walk_left[self.i]
+                            self.anim_time += 1
 
-                        if cfg.vector == "right":
-                            self.image = img.woodcutter_walk_right[self.j]
+                            if self.anim_time == 5:
+                                self.i += 1
+                                self.anim_time = 0
+
+                            sx = 2
+                        if self.rect.x >= 100:
+                            self.speedx = -sx
+                        elif cfg.bg_x < 1820:
+                            cfg.bg_x += sx
+                            func.update_monsters_x(cfg.monsterList, sx, flag_direction=True)
+                if keystate[pygame.K_d]:
+                    cfg.vector = "right"
+                    if (self.line.collidelist(cfg.trees_rects_left)) == -1:
+                        if keystate[pygame.K_LSHIFT] and self.stamina > 0:
+
+                            if self.i == 6:
+                                self.i = 0
+
+                            self.image = img.woodcutter_run_right[self.i]
+                            self.anim_time += 1
+
+                            if self.anim_time == 5:
+                                self.i += 1
+                                self.anim_time = 0
+
+                            sx = 4
+                            self.stamina -= 0.5
                         else:
-                            self.image = img.woodcutter_walk_left[self.j]
-                        self.anim_time += 1
 
-                        if self.anim_time == 5:
-                            self.j += 1
-                            self.anim_time = 0
+                            if self.i == 6:
+                                self.i = 0
 
-                        sy = 2
-                    if self.rect.y >= 100:
-                        self.speedy = -sy
-                    elif cfg.bg_y < 1080:
-                        cfg.bg_y += sy
-                        func.update_monsters_y(cfg.monsterList, sy, flag_direction=True)
-            if keystate[pygame.K_s]:
-                if (self.line.collidelist(cfg.trees_rects_top)) == -1:
-                    if keystate[pygame.K_LSHIFT] and self.stamina > 0:
+                            self.image = img.woodcutter_walk_right[self.i]
+                            self.anim_time += 1
 
-                        if self.j == 6:
-                            self.j = 0
+                            if self.anim_time == 5:
+                                self.i += 1
+                                self.anim_time = 0
 
-                        if cfg.vector == "right":
-                            self.image = img.woodcutter_run_right[self.j]
+                            sx = 1
+                        if self.rect.x <= 1820:
+                            self.speedx = sx
+                        elif cfg.bg_x > -1820:
+                            cfg.bg_x -= sx
+                            func.update_monsters_x(cfg.monsterList, sx, flag_direction=False)
+            if not (keystate[pygame.K_w] and keystate[pygame.K_s]):
+                if keystate[pygame.K_w]:
+                    if (self.line.collidelist(cfg.trees_rects_bottom)) == -1:
+                        if keystate[pygame.K_LSHIFT] and self.stamina > 0:
+
+                            if self.j == 6:
+                                self.j = 0
+
+                            if cfg.vector == "right":
+                                self.image = img.woodcutter_run_right[self.j]
+                            else:
+                                self.image = img.woodcutter_run_left[self.j]
+                            self.anim_time += 1
+
+                            if self.anim_time == 5:
+                                self.j += 1
+                                self.anim_time = 0
+
+                            sy = 4
+                            self.stamina -= 0.5
                         else:
-                            self.image = img.woodcutter_run_left[self.j]
-                        self.anim_time += 1
 
-                        if self.anim_time == 5:
-                            self.j += 1
-                            self.anim_time = 0
+                            if self.j == 6:
+                                self.j = 0
 
-                        sy = 4
-                        self.stamina -= 0.5
-                    else:
+                            if cfg.vector == "right":
+                                self.image = img.woodcutter_walk_right[self.j]
+                            else:
+                                self.image = img.woodcutter_walk_left[self.j]
+                            self.anim_time += 1
 
-                        if self.j == 6:
-                            self.j = 0
+                            if self.anim_time == 5:
+                                self.j += 1
+                                self.anim_time = 0
 
-                        if cfg.vector == "right":
-                            self.image = img.woodcutter_walk_right[self.j]
+                            sy = 2
+                        if self.rect.y >= 100:
+                            self.speedy = -sy
+                        elif cfg.bg_y < 1080:
+                            cfg.bg_y += sy
+                            func.update_monsters_y(cfg.monsterList, sy, flag_direction=True)
+                if keystate[pygame.K_s]:
+                    if (self.line.collidelist(cfg.trees_rects_top)) == -1:
+                        if keystate[pygame.K_LSHIFT] and self.stamina > 0:
+
+                            if self.j == 6:
+                                self.j = 0
+
+                            if cfg.vector == "right":
+                                self.image = img.woodcutter_run_right[self.j]
+                            else:
+                                self.image = img.woodcutter_run_left[self.j]
+                            self.anim_time += 1
+
+                            if self.anim_time == 5:
+                                self.j += 1
+                                self.anim_time = 0
+
+                            sy = 4
+                            self.stamina -= 0.5
                         else:
-                            self.image = img.woodcutter_walk_left[self.j]
-                        self.anim_time += 1
 
-                        if self.anim_time == 5:
-                            self.j += 1
-                            self.anim_time = 0
+                            if self.j == 6:
+                                self.j = 0
 
-                        sy = 2
-                    if self.rect.y <= 980:
-                        self.speedy = sy
-                    elif cfg.bg_y > -1080:
-                        cfg.bg_y -= sy
-                        func.update_monsters_y(cfg.monsterList, sy, flag_direction=False)
-        if keystate[pygame.K_c]:
-            self.eat_an_apple()
+                            if cfg.vector == "right":
+                                self.image = img.woodcutter_walk_right[self.j]
+                            else:
+                                self.image = img.woodcutter_walk_left[self.j]
+                            self.anim_time += 1
 
-        if keystate[pygame.K_z]:
-            self.eat_a_coconut()
+                            if self.anim_time == 5:
+                                self.j += 1
+                                self.anim_time = 0
 
-        if keystate[pygame.K_x]:
-            self.eat_a_shishka()
+                            sy = 2
+                        if self.rect.y <= 980:
+                            self.speedy = sy
+                        elif cfg.bg_y > -1080:
+                            cfg.bg_y -= sy
+                            func.update_monsters_y(cfg.monsterList, sy, flag_direction=False)
+            if keystate[pygame.K_c]:
+                self.eat_an_apple()
 
-        if not (keystate[pygame.K_w] or keystate[pygame.K_s] or keystate[pygame.K_a] or keystate[pygame.K_d] or
-                keystate[pygame.K_SPACE] or self.flag_take_dmg):
+            if keystate[pygame.K_z]:
+                self.eat_a_coconut()
+
+            if keystate[pygame.K_x]:
+                self.eat_a_shishka()
+
+            if not (keystate[pygame.K_w] or keystate[pygame.K_s] or keystate[pygame.K_a] or keystate[pygame.K_d] or
+                    keystate[pygame.K_SPACE] or self.flag_take_dmg):
+                if cfg.vector == "right":
+                    self.image = img.woodcutter_stay_right
+                elif cfg.vector == "left":
+                    self.image = img.woodcutter_stay_left
+
+            if keystate[pygame.K_SPACE] and self.stamina >= 10:
+                self.flag_attack = True
+            self.attack()
+        else:
+
             if cfg.vector == "right":
-                self.image = img.woodcutter_stay_right
-            elif cfg.vector == "left":
-                self.image = img.woodcutter_stay_left
+                if self.death_index < 7 and self.death_timer < cfg.current_time:
 
-        if keystate[pygame.K_SPACE] and self.stamina >= 10:
-            self.flag_attack = True
-        self.attack()
+                    if self.death_index <= 5:
+                        self.image = img.woodcutter_death_right[self.death_index]
+                        self.death_timer = cfg.current_time + 100
+                    else:
+                        self.death_timer = cfg.current_time + 1000
+                    self.death_index += 1
+                elif self.death_index == 7 and self.death_timer < cfg.current_time:
+                    self.remove(all_sprites)
+                    self.kill()
+                    cfg.lose_flag = True
+            elif cfg.vector == "left":
+                if self.death_index < 7 and self.death_timer < cfg.current_time:
+
+                    if self.death_index <= 5:
+                        self.image = img.woodcutter_death_left[self.death_index]
+                        self.death_timer = cfg.current_time + 100
+                    else:
+                        self.death_timer = cfg.current_time + 1000
+                    self.death_index += 1
+                elif self.death_index == 7 and self.death_timer < cfg.current_time:
+                    self.remove(all_sprites)
+                    self.kill()
+                    cfg.lose_flag = True
+
         self.rect.x += self.speedx
         self.rect.y += self.speedy
-        # self.line_y[0] += self.speedx
-        # self.line_y[1] += self.speedy
+
         self.line[0] += self.speedx
         self.line[1] += self.speedy
 
@@ -351,17 +384,25 @@ class Player(Unit, pygame.sprite.Sprite):
                                                self.rect[3] / 3)
 
     def take_dmg(self, dmg):
+
+        self.flag_take_dmg = True
+
+        if self.armor > 0:
+            self.hp -= dmg - (self.armor / 100) * dmg
+            self.armor -= dmg // 2
+        elif self.armor <= 0:
+            self.hp -= dmg
+
         if self.hp > 0:
-            self.flag_take_dmg = True
-            if self.armor > 0:
-                self.hp -= dmg - (self.armor / 100) * dmg
-                self.armor -= dmg // 2
-            elif self.armor <= 0:
-                self.hp -= dmg
-            sounds.hit_tree.play()
-        if self.hp <= 0:
-            self.remove(all_sprites)
-            self.kill()
+            sounds.take_dmg_sounds_list[sounds.index].play()
+            sounds.index += 1
+
+            if sounds.index == 3:
+                sounds.index = 0
+        else:
+            sounds.last_hit.play()
+
+
 
     def eat_an_apple(self):
         if self.time_apple < cfg.current_time:
