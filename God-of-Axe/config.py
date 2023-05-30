@@ -1,5 +1,6 @@
 import pygame
 import images as img
+import path_func as f
 
 pygame.init()
 
@@ -48,8 +49,8 @@ monster_list_x = []
 monster_list_y = []
 
 # Шрифты -----------------------------------------------------------------------------------------------------
-my_font = 'Fonts/Jfwildwood-ldYZ.ttf'
-font_interface = 'Fonts/HoltwoodOneSC-Regular.ttf'
+my_font_p = 'Fonts/Jfwildwood-ldYZ.ttf'
+font_interface_p = 'Fonts/HoltwoodOneSC-Regular.ttf'
 
 # Координаты для перемещения фона---------------------------------------------------------------------------------------
 bg_x = 0
@@ -116,7 +117,7 @@ point2_rect = img.point2.get_rect()
 point2_rect.center = (scale2_rect.right, scale2_rect.centery)
 
 # Надпись God of Axe в Меню --------------------------------------------------------------------------------------------
-menu_title = pygame.font.Font(f'{my_font}', 100).render("God of Axe", True, (224, 153, 9))
+menu_title = pygame.font.Font(f'{my_font_p}', 100).render("God of Axe", True, (224, 153, 9))
 menu_title_rect = menu_title.get_rect()
 menu_title_rect.bottomleft = (0, size[1])
 
