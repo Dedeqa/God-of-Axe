@@ -14,7 +14,7 @@ def start_game():
     if cfg.start_game_flag:
         # cfg.play_music.play(-1)
         cfg.start_game_flag = False
-    monster_generator(30)
+    monster_generator(100)
     tree_generator(400)
 
     while True:
@@ -381,10 +381,12 @@ def tree_generator(n):
         cfg.add_flag = True
         x = random.randint(-1870, 3740)
         y = random.randint(-1030, 2000)
-
-        for i in range(count):
-            if abs(cfg.tree_list_x[i] - x) < cfg.delta and abs(cfg.tree_list_y[i] - y) < cfg.delta:
-                cfg.add_flag = False
+        if abs(x - classes.house.rect.center[0]) < cfg.delta and abs(y - classes.house.rect.center[1]) < cfg.delta:
+            cfg.add_flag = False
+        if cfg.add_flag:
+            for i in range(count):
+                if abs(cfg.tree_list_x[i] - x) < cfg.delta and abs(cfg.tree_list_y[i] - y) < cfg.delta:
+                    cfg.add_flag = False
 
         if cfg.add_flag:
             cfg.tree_list_x.append(x)
@@ -427,13 +429,15 @@ def monster_generator(n):
         cfg.add_flag = True
         x = random.randint(-1870, 3740)
         y = random.randint(-1030, 2000)
-
-        for i in range(count):
-            if (abs(cfg.monster_list_x[i] - x) < cfg.delta_monsters or abs(
-                    cfg.monster_list_y[i] - y) < cfg.delta_monsters) and (abs(
-                cfg.monster_list_x[i] - classes.player.rect.x) < cfg.delta_hero or abs(
-                cfg.monster_list_y[i] - classes.player.rect.y) < cfg.delta_hero):
-                cfg.add_flag = False
+        if abs(x - classes.house.rect.center[0]) < cfg.delta and abs(y - classes.house.rect.center[1]) < cfg.delta:
+            cfg.add_flag = False
+        if cfg.add_flag:
+            for i in range(count):
+                if (abs(cfg.monster_list_x[i] - x) < cfg.delta_monsters or abs(
+                        cfg.monster_list_y[i] - y) < cfg.delta_monsters) and (abs(
+                    cfg.monster_list_x[i] - classes.player.rect.x) < cfg.delta_hero or abs(
+                    cfg.monster_list_y[i] - classes.player.rect.y) < cfg.delta_hero):
+                    cfg.add_flag = False
 
         if cfg.add_flag:
             cfg.monster_list_x.append(x)
