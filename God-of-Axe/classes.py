@@ -267,6 +267,11 @@ class Player(Unit, pygame.sprite.Sprite):
             if keystate[pygame.K_x]:
                 self.eat_a_shishka()
 
+            if keystate[pygame.K_e] and (
+                    self.line.colliderect(house.line_left) or self.line.colliderect(house.line_right) or
+                    self.line.colliderect(house.line_bottom) or self.line.colliderect(house.line_top)):
+                cfg.workshop_flag = True
+
             if not (keystate[pygame.K_w] or keystate[pygame.K_s] or keystate[pygame.K_a] or keystate[pygame.K_d] or
                     keystate[pygame.K_SPACE] or self.flag_take_dmg):
                 if cfg.vector == "right":
@@ -315,11 +320,21 @@ class Player(Unit, pygame.sprite.Sprite):
         # cfg.screen.fill("red", self.rect)
         # cfg.screen.fill("orange", self.rect_attack)
         # cfg.screen.fill("orange", self.line)
-        # for elem in cfg.trees1:
-        #     cfg.screen.fill("blue", elem.line_right)
-        #     cfg.screen.fill("blue", elem.line_left)
-        #     cfg.screen.fill("blue", elem.line_top)
-        #     cfg.screen.fill("blue", elem.line_bottom)
+        for elem in cfg.trees1:
+            cfg.screen.fill("blue", elem.line_right)
+            cfg.screen.fill("blue", elem.line_left)
+            cfg.screen.fill("blue", elem.line_top)
+            cfg.screen.fill("blue", elem.line_bottom)
+        for elem in cfg.trees2:
+            cfg.screen.fill("blue", elem.line_right)
+            cfg.screen.fill("blue", elem.line_left)
+            cfg.screen.fill("blue", elem.line_top)
+            cfg.screen.fill("blue", elem.line_bottom)
+        for elem in cfg.trees3:
+            cfg.screen.fill("blue", elem.line_right)
+            cfg.screen.fill("blue", elem.line_left)
+            cfg.screen.fill("blue", elem.line_top)
+            cfg.screen.fill("blue", elem.line_bottom)
 
     def attack(self):
         if self.flag_attack:

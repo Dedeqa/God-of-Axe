@@ -115,10 +115,10 @@ class Monster(cl.Unit, pygame.sprite.Sprite):
 
                 if not self.attack_flag:
                     if self.side == "right":
-                        if (cl.player.line.collidelist(cfg.trees_rects_left)) == -1 and (cl.player.line.colliderect(
-                                cl.house.line_left) and cl.player.line.collidelist(
-                                cfg.trees_rects_right) and cl.player.line.collidelist(
-                                cfg.trees_rects_top) and cl.player.line.collidelist(cfg.trees_rects_bottom)):
+                        if (cl.player.line.collidelist(cfg.trees_rects_left)) == -1 and (not cl.player.line.colliderect(
+                                cl.house.line_left) and not cl.player.line.collidelist(
+                                cfg.trees_rects_right) and not cl.player.line.collidelist(
+                                cfg.trees_rects_top) and not cl.player.line.collidelist(cfg.trees_rects_bottom)):
 
                             if cfg.bg_x > -1920:
                                 cfg.bg_x -= 1
@@ -126,7 +126,7 @@ class Monster(cl.Unit, pygame.sprite.Sprite):
                         if (cl.player.line.collidelist(cfg.trees_rects_right)) == -1 or not cl.player.line.colliderect(
                                 cl.house.line_left) or not cl.player.line.collidelist(
                                 cfg.trees_rects_right) or not cl.player.line.collidelist(
-                                cfg.trees_rects_top) or not  cl.player.line.collidelist(cfg.trees_rects_bottom):
+                                cfg.trees_rects_top) or not cl.player.line.collidelist(cfg.trees_rects_bottom):
                             if cfg.bg_x < 1920:
                                 cfg.bg_x += 1
                     elif self.side == "top":
