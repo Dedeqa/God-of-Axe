@@ -271,6 +271,9 @@ class Player(Unit, pygame.sprite.Sprite):
                     self.line.colliderect(house.line_left) or self.line.colliderect(house.line_right) or
                     self.line.colliderect(house.line_bottom) or self.line.colliderect(house.line_top)):
                 cfg.workshop_flag = True
+            elif not (self.line.colliderect(house.line_left) or self.line.colliderect(house.line_right) or
+                    self.line.colliderect(house.line_bottom) or self.line.colliderect(house.line_top)):
+                cfg.workshop_flag = False
 
             if not (keystate[pygame.K_w] or keystate[pygame.K_s] or keystate[pygame.K_a] or keystate[pygame.K_d] or
                     keystate[pygame.K_SPACE] or self.flag_take_dmg):
@@ -598,10 +601,10 @@ class House(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.center = (posx, posy)
 
-        self.line_left = pygame.Rect(self.posx, self.posy + 60, 1, self.rect[3] - 60)
+        self.line_left = pygame.Rect(self.posx - 10, self.posy + 60, 1, self.rect[3] - 60)
         self.line_right = pygame.Rect(posx + self.rect[2] - 30, posy + 60, 1, self.rect[3] - 60)
-        self.line_top = pygame.Rect(self.posx, self.posy + 60, self.rect[2] - 30, 1)
-        self.line_bottom = pygame.Rect(self.posx, self.posy + self.rect[3], self.rect[2] - 30, 1)
+        self.line_top = pygame.Rect(self.posx - 10, self.posy + 60, self.rect[2] - 20, 1)
+        self.line_bottom = pygame.Rect(self.posx - 10, self.posy + self.rect[3], self.rect[2] - 20, 1)
         print(self.rect)
 
     def update(self):
@@ -617,11 +620,11 @@ class House(pygame.sprite.Sprite):
         # self.line_right.y = self.line_right_y + cfg.bg_y
         self.line_right.x = self.posx + self.rect[2] - 30 + cfg.bg_x
         self.line_right.y = self.posy + 60 + cfg.bg_y
-        self.line_left.x = self.posx + cfg.bg_x
+        self.line_left.x = self.posx - 10 + cfg.bg_x
         self.line_left.y = self.posy + 60 + cfg.bg_y
-        self.line_top.x = self.posx + cfg.bg_x
+        self.line_top.x = self.posx - 10 + cfg.bg_x
         self.line_top.y = self.posy + 60 + cfg.bg_y
-        self.line_bottom.x = self.posx + cfg.bg_x
+        self.line_bottom.x = self.posx - 10 + cfg.bg_x
         self.line_bottom.y = self.posy + self.rect[3] + cfg.bg_y
         # # self.line_right.y = cfg.bg_y + self.posy
         # # self.line_left.x = cfg.bg_x + self.posx
