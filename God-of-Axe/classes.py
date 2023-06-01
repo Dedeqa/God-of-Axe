@@ -102,7 +102,8 @@ class Player(Unit, pygame.sprite.Sprite):
                 if keystate[pygame.K_a]:
                     cfg.vector = "left"
 
-                    if (self.line.collidelist(cfg.trees_rects_right)) == -1:
+                    if (self.line.collidelist(cfg.trees_rects_right)) == -1 and not self.line.colliderect(
+                            house.line_right):
                         if keystate[pygame.K_LSHIFT] and self.stamina > 0:
 
                             if self.i == 6:
@@ -141,7 +142,8 @@ class Player(Unit, pygame.sprite.Sprite):
                             func.update_monsters_x(cfg.monsterList, sx, flag_direction=True)
                 if keystate[pygame.K_d]:
                     cfg.vector = "right"
-                    if (self.line.collidelist(cfg.trees_rects_left)) == -1:
+                    if (self.line.collidelist(cfg.trees_rects_left)) == -1 and not self.line.colliderect(
+                            house.line_left):
                         if keystate[pygame.K_LSHIFT] and self.stamina > 0:
 
                             if self.i == 6:
@@ -168,7 +170,7 @@ class Player(Unit, pygame.sprite.Sprite):
                                 self.i += 1
                                 self.anim_time = 0
 
-                            sx = 1
+                            sx = 2
                         if self.rect.x <= 1820:
                             self.speedx = sx
                         elif cfg.bg_x > -1820:
@@ -176,7 +178,8 @@ class Player(Unit, pygame.sprite.Sprite):
                             func.update_monsters_x(cfg.monsterList, sx, flag_direction=False)
             if not (keystate[pygame.K_w] and keystate[pygame.K_s]):
                 if keystate[pygame.K_w]:
-                    if (self.line.collidelist(cfg.trees_rects_bottom)) == -1:
+                    if (self.line.collidelist(cfg.trees_rects_bottom)) == -1 and not self.line.colliderect(
+                            house.line_bottom):
                         if keystate[pygame.K_LSHIFT] and self.stamina > 0:
 
                             if self.j == 6:
@@ -216,7 +219,7 @@ class Player(Unit, pygame.sprite.Sprite):
                             cfg.bg_y += sy
                             func.update_monsters_y(cfg.monsterList, sy, flag_direction=True)
                 if keystate[pygame.K_s]:
-                    if (self.line.collidelist(cfg.trees_rects_top)) == -1:
+                    if (self.line.collidelist(cfg.trees_rects_top)) == -1 and not self.line.colliderect(house.line_top):
                         if keystate[pygame.K_LSHIFT] and self.stamina > 0:
 
                             if self.j == 6:
@@ -402,8 +405,6 @@ class Player(Unit, pygame.sprite.Sprite):
         else:
             sounds.last_hit.play()
 
-
-
     def eat_an_apple(self):
         if self.time_apple < cfg.current_time:
             if self.utilities[0] > 0 and self.hp < 100:
@@ -571,3 +572,46 @@ class Palma(Tree):
         Tree.__init__(self, nm, hp, posx, posy, bonus, drop, random_index)
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.image.load("Images/Trees/Tree3.png").convert_alpha()
+
+
+class House(pygame.sprite.Sprite):
+    def __init__(self, posx, posy):
+        pygame.sprite.Sprite.__init__(self)
+        self.posx = posx
+        self.posy = posy
+        self.image = img.house_icon
+        self.rect = self.image.get_rect()
+        self.rect.center = (posx, posy)
+
+        self.line_left = pygame.Rect(self.posx, self.posy + 60, 1, self.rect[3] - 60)
+        self.line_right = pygame.Rect(posx + self.rect[2] - 30, posy + 60, 1, self.rect[3] - 60)
+        self.line_top = pygame.Rect(self.posx, self.posy + 60, self.rect[2] - 30, 1)
+        self.line_bottom = pygame.Rect(self.posx, self.posy + self.rect[3], self.rect[2] - 30, 1)
+        print(self.rect)
+
+    def update(self):
+        self.rect.x = self.posx + cfg.bg_x
+        self.rect.y = self.posy + cfg.bg_y
+        cfg.screen.fill("red", self.line_left)
+        cfg.screen.fill("red", self.line_right)
+        cfg.screen.fill("red", self.line_top)
+        cfg.screen.fill("red", self.line_bottom)
+        # self.line_left.x = self.line_left_x + cfg.bg_x
+        # self.line_left.y = self.line_left_y + cfg.bg_y
+        # self.line_right.x = self.line_right_x + cfg.bg_x
+        # self.line_right.y = self.line_right_y + cfg.bg_y
+        self.line_right.x = self.posx + self.rect[2] - 30 + cfg.bg_x
+        self.line_right.y = self.posy + 60 + cfg.bg_y
+        self.line_left.x = self.posx + cfg.bg_x
+        self.line_left.y = self.posy + 60 + cfg.bg_y
+        self.line_top.x = self.posx + cfg.bg_x
+        self.line_top.y = self.posy + 60 + cfg.bg_y
+        self.line_bottom.x = self.posx + cfg.bg_x
+        self.line_bottom.y = self.posy + self.rect[3] + cfg.bg_y
+        # # self.line_right.y = cfg.bg_y + self.posy
+        # # self.line_left.x = cfg.bg_x + self.posx
+        # # self.line_left.y = cfg.bg_y +self.posy
+
+
+house = House(960, 200)
+all_sprites.add(house)
