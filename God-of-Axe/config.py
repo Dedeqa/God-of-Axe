@@ -2,11 +2,13 @@ import pygame
 import images as img
 import path_func as f
 
-pygame.init()
 
 WIDTH = 1920  # Параметры окна
 HEIGHT = 1080
-screen = pygame.display.set_mode((WIDTH, HEIGHT))
+
+
+currentRez = (pygame.display.Info().current_w, pygame.display.Info().current_h)
+screen = pygame.display.set_mode(currentRez, pygame.RESIZABLE , 32, vsync=1)
 size = screen.get_size()
 label = pygame.Rect(0, 0, 200, 200)
 

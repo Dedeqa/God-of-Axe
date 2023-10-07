@@ -320,21 +320,21 @@ class Player(Unit, pygame.sprite.Sprite):
         # cfg.screen.fill("red", self.rect)
         # cfg.screen.fill("orange", self.rect_attack)
         # cfg.screen.fill("orange", self.line)
-        for elem in cfg.trees1:
-            cfg.screen.fill("blue", elem.line_right)
-            cfg.screen.fill("blue", elem.line_left)
-            cfg.screen.fill("blue", elem.line_top)
-            cfg.screen.fill("blue", elem.line_bottom)
-        for elem in cfg.trees2:
-            cfg.screen.fill("blue", elem.line_right)
-            cfg.screen.fill("blue", elem.line_left)
-            cfg.screen.fill("blue", elem.line_top)
-            cfg.screen.fill("blue", elem.line_bottom)
-        for elem in cfg.trees3:
-            cfg.screen.fill("blue", elem.line_right)
-            cfg.screen.fill("blue", elem.line_left)
-            cfg.screen.fill("blue", elem.line_top)
-            cfg.screen.fill("blue", elem.line_bottom)
+        #for elem in cfg.trees1:
+            #cfg.screen.fill("blue", elem.line_right)
+            #cfg.screen.fill("blue", elem.line_left)
+            #cfg.screen.fill("blue", elem.line_top)
+            #cfg.screen.fill("blue", elem.line_bottom)
+        #for elem in cfg.trees2:
+            #cfg.screen.fill("blue", elem.line_right)
+            #cfg.screen.fill("blue", elem.line_left)
+            #cfg.screen.fill("blue", elem.line_top)
+            #cfg.screen.fill("blue", elem.line_bottom)
+        #for elem in cfg.trees3:
+            #cfg.screen.fill("blue", elem.line_right)
+            #cfg.screen.fill("blue", elem.line_left)
+            #cfg.screen.fill("blue", elem.line_top)
+            #cfg.screen.fill("blue", elem.line_bottom)
 
     def attack(self):
         if self.flag_attack:
@@ -607,10 +607,10 @@ class House(pygame.sprite.Sprite):
     def update(self):
         self.rect.x = self.posx + cfg.bg_x
         self.rect.y = self.posy + cfg.bg_y
-        cfg.screen.fill("red", self.line_left)
-        cfg.screen.fill("red", self.line_right)
-        cfg.screen.fill("red", self.line_top)
-        cfg.screen.fill("red", self.line_bottom)
+        # cfg.screen.fill("red", self.line_left)
+        # cfg.screen.fill("red", self.line_right)
+        # cfg.screen.fill("red", self.line_top)
+        # cfg.screen.fill("red", self.line_bottom)
         # self.line_left.x = self.line_left_x + cfg.bg_x
         # self.line_left.y = self.line_left_y + cfg.bg_y
         # self.line_right.x = self.line_right_x + cfg.bg_x

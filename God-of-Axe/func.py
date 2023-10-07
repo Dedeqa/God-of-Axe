@@ -62,7 +62,7 @@ def start_game():
         classes.player.draw_shield_bar(cfg.screen, 0, 0, classes.player.armor, (16, 72, 105), (27, 123, 179), 'black',
                                        100, 350, 13)
 
-        # cfg.screen.blit(img.timer_tablet, (1663, 10))
+        #cfg.screen.blit(img.timer_tablet, (1663, 10))
         pygame.draw.rect(cfg.screen, 'black', (920, 10, 80, 40))
         pygame.draw.rect(cfg.screen, 'black', (830, 47, 260, 40))
 
