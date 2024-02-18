@@ -3,7 +3,7 @@ import path_func as f
 pygame.init()
 
 # Фоновая музыка для меню ----------------------------------------------------------------------------------------------
-menu_music_p = f.resource_path('Music/Piano Fantasia - Song for Denise (Wide Walking Extended Version).mp3')
+menu_music_p = f.resource_path(r'Music/Piano Fantasia - Song for Denise (Wide Walking Extended Version).mp3')
 pygame.mixer.music.load(menu_music_p)
 
 # Фоновая музыка для игры ----------------------------------------------------------------------------------------------

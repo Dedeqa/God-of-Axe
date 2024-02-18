@@ -7,19 +7,29 @@ import classes
 import random
 import mobs
 
-pygame.mixer.pre_init(44100, -16, 1, 512)
+
+# pygame.mixer.pre_init(44100, -16, 1, 512)   # пока непонятно, нужно или нет
 
 
 def start_game():
-    if cfg.start_game_sound_flag:
-        sounds.play_music.play(-1)
-        cfg.start_game_sound_flag = False
+    pygame.mixer.pre_init(44100, -16, 1, 512)  # используется для инициализации звуковой системы Pygame
+    pygame.init()
+    # cfg.screen = pygame.display.set_mode(cfg.size) пока непонятно, нужно или нет
+    pygame.display.set_caption("God of Axe")
+    pygame.display.set_icon(img.icon)
+    menu()
+
+
+def play_game():
+    # if cfg.start_game_sound_flag:
+    #     sounds.play_music.play(-1)
+    #     cfg.start_game_sound_flag = False     больше не воспроизводится музыка в игре
     monster_generator(100)
     tree_generator(400)
 
     while True:
         cfg.clock.tick(cfg.FPS)
-        cfg.current_time = pygame.time.get_ticks()
+        cfg.in_game_time = pygame.time.get_ticks()
         # print(cfg.clock.get_fps())
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -66,14 +76,14 @@ def start_game():
         pygame.draw.rect(cfg.screen, 'black', (920, 10, 80, 40))
         pygame.draw.rect(cfg.screen, 'black', (830, 47, 260, 40))
 
-        classes.player.draw_text(cfg.screen, f'{600 - int(cfg.current_time / 1000)}', 37, 960, 13, cfg.my_font_p,
+        classes.player.draw_text(cfg.screen, f'{600 - int(cfg.in_game_time / 1000)}', 37, 960, 13, cfg.my_font_p,
                                  "black")
         # classes.player.draw_text(cfg.screen, 'seconds left', 32, 915, 50, cfg.my_font_p,
         #                          "black")
 
         # pygame.draw.circle(cfg.screen, (224, 153, 9), (960, 30), 30)
 
-        classes.player.draw_text(cfg.screen, f'{600 - int(cfg.current_time / 1000)}', 35, 960, 13, cfg.my_font_p,
+        classes.player.draw_text(cfg.screen, f'{600 - int(cfg.in_game_time / 1000)}', 35, 960, 13, cfg.my_font_p,
                                  (224, 153, 9))
         classes.player.draw_text(cfg.screen, 'seconds left', 30, 960, 50, cfg.my_font_p,
                                  (224, 153, 9))
@@ -111,7 +121,7 @@ def lose_game():
                                      f'You have mastered only {classes.player.progress}%',
                                      30,
                                      960, 200, cfg.font_interface_p, "red")
-            classes.player.draw_text(cfg.screen, f'You have wasted {int(cfg.current_time / 1000)} seconds your life',
+            classes.player.draw_text(cfg.screen, f'You have wasted {int(cfg.in_game_time / 1000)} seconds your life',
                                      24,
                                      960, 300, cfg.font_interface_p, "orange")
             classes.player.draw_text(cfg.screen,
@@ -155,7 +165,7 @@ def win_game():
                                      f'You have mastered only {classes.player.progress}%',
                                      30,
                                      960, 200, cfg.font_interface_p, "red")
-            classes.player.draw_text(cfg.screen, f'You have wasted {int(cfg.current_time / 1000)} seconds your life',
+            classes.player.draw_text(cfg.screen, f'You have wasted {int(cfg.in_game_time / 1000)} seconds your life',
                                      24,
                                      960, 300, cfg.font_interface_p, "orange")
             classes.player.draw_text(cfg.screen,
@@ -179,12 +189,14 @@ def win_game():
 
 
 def menu():
-    sounds.play_music.stop()
-    if cfg.menu_sound_flag:
-        pygame.mixer.music.play(-1)
-        cfg.menu_sound_flag = False
+    # sounds.play_music.stop()
+    # if cfg.menu_sound_flag:
+    pygame.mixer.music.play(-1)
+    #     cfg.menu_sound_flag = False   флаг для музыки больше не нужен (ушли от этой концепции)
 
-    start1, start2, start3 = 0, 0, 0
+    # pygame.mixer.music.play(-1) запуск фоновой музыки
+
+    play_delay_start, options_delay_start, quit_delay_start = 0, 0, 0
     while cfg.menu_flag:
         mouse = pygame.mouse.get_pos()
         click = pygame.mouse.get_pressed()
@@ -199,18 +211,20 @@ def menu():
 
         if (cfg.play_rect.left <= mouse[0] <= cfg.play_rect.right) and (
                 cfg.play_rect.top <= mouse[1] <= cfg.play_rect.bottom) and \
-                click[0]:
+                click[0]:  # условие нажатия ЛКМ в области кнопки play
 
-            cfg.screen.blit(cfg.active_play_transform, cfg.active_play_rect)
-            pygame.mixer.music.pause()
-            if start1 > 2:
+            cfg.screen.blit(cfg.active_play_transform,
+                            cfg.active_play_rect)  # помещаем иконку active_play_transform в область active_play_rect
+
+            # pygame.mixer.music.stop() фоновая музыка не отключается при нажатии на play
+            if play_delay_start > 2:
                 sounds.click.play()
-                start1 = 0
+                play_delay_start = 0
                 time.sleep(0.2)
-                cfg.current_time = 0
-                start_game()
+                cfg.in_game_time = 0
+                play_game()
 
-            start1 += 1
+            play_delay_start += 1
 
         else:
             cfg.screen.blit(cfg.play_transform, cfg.play_rect)
@@ -218,32 +232,32 @@ def menu():
         if (cfg.options_rect.left <= mouse[0] <= cfg.options_rect.right) and (
                 cfg.options_rect.top <= mouse[1] <= cfg.options_rect.bottom) and click[0]:
             cfg.screen.blit(img.active_options, cfg.active_options_rect)
-            if start2 > 2:
+            if options_delay_start > 2:
                 sounds.click.play()
-                start2 = 0
+                options_delay_start = 0
                 time.sleep(0.2)
                 options_menu()
-            start2 += 1
+            options_delay_start += 1
         else:
             cfg.screen.blit(img.options, cfg.options_rect)
 
-        if (cfg.quite_rect.left <= mouse[0] <= cfg.quite_rect.right) and (
-                cfg.quite_rect.top <= mouse[1] <= cfg.quite_rect.bottom) and \
+        if (cfg.quit_rect.left <= mouse[0] <= cfg.quit_rect.right) and (
+                cfg.quit_rect.top <= mouse[1] <= cfg.quit_rect.bottom) and \
                 click[0]:
             cfg.screen.blit(img.active_quite, cfg.active_quite_rect)
-            if start3 > 2:
+            if quit_delay_start > 2:
                 sounds.click.play()
-                start3 = 0
+                quit_delay_start = 0
                 time.sleep(0.2)
                 quit()
-            start3 += 1
+            quit_delay_start += 1
         else:
-            cfg.screen.blit(img.quite, cfg.quite_rect)
+            cfg.screen.blit(img.quite, cfg.quit_rect)
         pygame.display.flip()
 
 
 def pause():
-    start1, start2, start3 = 0, 0, 0
+    play_delay_start, options_delay_start, quit_delay_start = 0, 0, 0
 
     while cfg.start_game_flag:
 
@@ -261,13 +275,13 @@ def pause():
                 click[0]:
             cfg.screen.blit(img.continue_active, cfg.continue_active_rect)
 
-            if start1 > 2:
+            if play_delay_start > 2:
                 sounds.click.play()
-                start1 = 0
+                play_delay_start = 0
                 time.sleep(0.2)
                 cfg.start_game_sound_flag = False
                 cfg.start_game_flag = False
-            start1 += 1
+            play_delay_start += 1
         else:
             cfg.screen.blit(img.continue_, cfg.continue_rect)
 
@@ -276,12 +290,12 @@ def pause():
 
             cfg.screen.blit(img.Options_active, cfg.Options_active_rect)
 
-            if start2 > 2:
+            if options_delay_start > 2:
                 sounds.click.play()
-                start2 = 0
+                options_delay_start = 0
                 time.sleep(0.2)
                 options_game()
-            start2 += 1
+            options_delay_start += 1
 
         else:
             cfg.screen.blit(img.Options, cfg.Options_rect)
@@ -290,11 +304,11 @@ def pause():
                 cfg.menu_rect.top <= mouse[1] <= cfg.menu_rect.bottom) and \
                 click[0]:
             cfg.screen.blit(img.menu_active, cfg.menu_active_rect)
-            if start3 > 2:
+            if quit_delay_start > 2:
                 sounds.click.play()
-                start3 = 0
+                quit_delay_start = 0
                 time.sleep(0.2)
-                pygame.mixer.music.unpause()
+                # pygame.mixer.music.play() не нужно повторно включать фоновую музыку
 
                 cfg.start_game_sound_flag = True
                 # classes.all_sprites.clear(cfg.screen, cfg.screen)
@@ -388,7 +402,7 @@ def pause():
                 # classes.player.utilities = [3, 0, 0]
                 # classes.player.kills = 0
                 menu()
-            start3 += 1
+            quit_delay_start += 1
         else:
             cfg.screen.blit(img.menu, cfg.menu_rect)
         pygame.display.flip()
@@ -404,8 +418,8 @@ def options_menu():
                 quit()
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
-                    sounds.play_music.stop()
-                    pygame.mixer.music.unpause()
+                    # sounds.play_music.stop()
+                    # pygame.mixer.music.unpause()
                     menu()
             if click[0] and (cfg.point1_rect.collidepoint(mouse[0], mouse[1])) and (
                     cfg.scale1_rect.left <= mouse[0] <= cfg.scale1_rect.right):
@@ -571,6 +585,6 @@ def workshop():
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
                 cfg.workshop_flag = False
-                start_game()
+                play_game()
 
     pygame.display.flip()

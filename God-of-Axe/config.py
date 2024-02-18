@@ -21,7 +21,7 @@ random_dub = 40
 random_elka = 25
 random_palma = 30
 
-menu_sound_flag = True  # флаг нахождения в меню
+# menu_sound_flag = True  # флаг нахождения в меню
 menu_flag = True
 start_game_sound_flag = True  # флаг запуска игры для воспроизведения музыки
 start_game_flag = True
@@ -52,7 +52,7 @@ monsterList = []
 monster_list_x = []
 monster_list_y = []
 
-# Шрифты -----------------------------------------------------------------------------------------------------
+# Шрифты ---------------------------------------------------------------------------------------------------------------
 my_font_p = f.resource_path('Fonts/Jfwildwood-ldYZ.ttf')
 font_interface_p = f.resource_path('Fonts/HoltwoodOneSC-Regular.ttf')
 
@@ -83,8 +83,8 @@ active_options_rect = img.active_options.get_rect()
 active_options_rect.center = (size[0] // 2, 356)
 
 # Кнопка Quite ---------------------------------------------------------------------------------------------------------
-quite_rect = img.quite.get_rect()
-quite_rect.center = (size[0] // 2, 476)
+quit_rect = img.quite.get_rect()
+quit_rect.center = (size[0] // 2, 476)
 
 # Нажатая кнопка Quite -------------------------------------------------------------------------------------------------
 active_quite_rect = img.active_quite.get_rect()
@@ -157,5 +157,5 @@ menu_active_rect.center = (size[0] // 2, 558)
 
 # Условие победы -------------------------------------------------------------------------------------------------------
 goal = 500
-# Текущее время -------------------------------------------------------------------------------------------------------
-current_time = 0
+# Время игровой сессии -------------------------------------------------------------------------------------------------
+in_game_time = 0

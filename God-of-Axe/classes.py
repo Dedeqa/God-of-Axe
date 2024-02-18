@@ -54,7 +54,7 @@ class Player(Unit, pygame.sprite.Sprite):
         self.j = 0
         self.at = 0
 
-        self.death_timer = cfg.current_time + 100
+        self.death_timer = cfg.in_game_time + 100
         self.death_index = 0
 
         self.flag_attack = False
@@ -68,9 +68,9 @@ class Player(Unit, pygame.sprite.Sprite):
         self.palm_amount = 0
         self.progress = 0
 
-        self.time_apple = cfg.current_time + 1000
-        self.time_shishka = cfg.current_time + 1000
-        self.time_coconut = cfg.current_time + 1000
+        self.time_apple = cfg.in_game_time + 1000
+        self.time_shishka = cfg.in_game_time + 1000
+        self.time_coconut = cfg.in_game_time + 1000
 
         self.coconut_timer = self.time_coconut + 7000
 
@@ -86,7 +86,7 @@ class Player(Unit, pygame.sprite.Sprite):
 
     def update(self):
 
-        if self.coconut_timer < cfg.current_time:
+        if self.coconut_timer < cfg.in_game_time:
             self.stamina_recovery = 0.5
         self.progress = self.wood_amount * 100 / cfg.goal
         self.speedx = 0
@@ -122,10 +122,6 @@ class Player(Unit, pygame.sprite.Sprite):
 
                             if self.i == 6:
                                 self.i = 0
-
-                            # if self.i == 1 or self.i == 4:
-                            #     sounds.step.stop()
-                            #     sounds.step.play()
 
                             self.image = img.woodcutter_walk_left[self.i]
                             self.anim_time += 1
@@ -288,28 +284,28 @@ class Player(Unit, pygame.sprite.Sprite):
         else:
 
             if cfg.vector == "right":
-                if self.death_index < 7 and self.death_timer < cfg.current_time:
+                if self.death_index < 7 and self.death_timer < cfg.in_game_time:
 
                     if self.death_index <= 5:
                         self.image = img.woodcutter_death_right[self.death_index]
-                        self.death_timer = cfg.current_time + 100
+                        self.death_timer = cfg.in_game_time + 100
                     else:
-                        self.death_timer = cfg.current_time + 1000
+                        self.death_timer = cfg.in_game_time + 1000
                     self.death_index += 1
-                elif self.death_index == 7 and self.death_timer < cfg.current_time:
+                elif self.death_index == 7 and self.death_timer < cfg.in_game_time:
                     self.remove(all_sprites)
                     self.kill()
                     cfg.lose_flag = True
             elif cfg.vector == "left":
-                if self.death_index < 7 and self.death_timer < cfg.current_time:
+                if self.death_index < 7 and self.death_timer < cfg.in_game_time:
 
                     if self.death_index <= 5:
                         self.image = img.woodcutter_death_left[self.death_index]
-                        self.death_timer = cfg.current_time + 100
+                        self.death_timer = cfg.in_game_time + 100
                     else:
-                        self.death_timer = cfg.current_time + 1000
+                        self.death_timer = cfg.in_game_time + 1000
                     self.death_index += 1
-                elif self.death_index == 7 and self.death_timer < cfg.current_time:
+                elif self.death_index == 7 and self.death_timer < cfg.in_game_time:
                     self.remove(all_sprites)
                     self.kill()
                     cfg.lose_flag = True
@@ -323,21 +319,21 @@ class Player(Unit, pygame.sprite.Sprite):
         # cfg.screen.fill("red", self.rect)
         # cfg.screen.fill("orange", self.rect_attack)
         # cfg.screen.fill("orange", self.line)
-        for elem in cfg.trees1:
-            cfg.screen.fill("blue", elem.line_right)
-            cfg.screen.fill("blue", elem.line_left)
-            cfg.screen.fill("blue", elem.line_top)
-            cfg.screen.fill("blue", elem.line_bottom)
-        for elem in cfg.trees2:
-            cfg.screen.fill("blue", elem.line_right)
-            cfg.screen.fill("blue", elem.line_left)
-            cfg.screen.fill("blue", elem.line_top)
-            cfg.screen.fill("blue", elem.line_bottom)
-        for elem in cfg.trees3:
-            cfg.screen.fill("blue", elem.line_right)
-            cfg.screen.fill("blue", elem.line_left)
-            cfg.screen.fill("blue", elem.line_top)
-            cfg.screen.fill("blue", elem.line_bottom)
+        # for elem in cfg.trees1:
+        #     cfg.screen.fill("blue", elem.line_right)
+        #     cfg.screen.fill("blue", elem.line_left)
+        #     cfg.screen.fill("blue", elem.line_top)
+        #     cfg.screen.fill("blue", elem.line_bottom)
+        # for elem in cfg.trees2:
+        #     cfg.screen.fill("blue", elem.line_right)
+        #     cfg.screen.fill("blue", elem.line_left)
+        #     cfg.screen.fill("blue", elem.line_top)
+        #     cfg.screen.fill("blue", elem.line_bottom)
+        # for elem in cfg.trees3:
+        #     cfg.screen.fill("blue", elem.line_right)
+        #     cfg.screen.fill("blue", elem.line_left)
+        #     cfg.screen.fill("blue", elem.line_top)
+        #     cfg.screen.fill("blue", elem.line_bottom)
 
     def attack(self):
         if self.flag_attack:
@@ -424,7 +420,7 @@ class Player(Unit, pygame.sprite.Sprite):
             sounds.last_hit.play()
 
     def eat_an_apple(self):
-        if self.time_apple < cfg.current_time:
+        if self.time_apple < cfg.in_game_time:
             if self.utilities[0] > 0 and self.hp < 100:
                 if self.hp + 10 <= 100:
                     self.hp += 10
@@ -432,10 +428,10 @@ class Player(Unit, pygame.sprite.Sprite):
                     self.hp = 100
                 self.utilities[0] -= 1
                 sounds.eat_apple.play()
-                self.time_apple = cfg.current_time + 1000
+                self.time_apple = cfg.in_game_time + 1000
 
     def eat_a_shishka(self):
-        if self.time_shishka < cfg.current_time:
+        if self.time_shishka < cfg.in_game_time:
             if self.utilities[1] > 0 and self.armor < 100:
                 if self.armor + 25 <= 100:
                     self.armor += 25
@@ -443,18 +439,18 @@ class Player(Unit, pygame.sprite.Sprite):
                     self.armor = 100
                 self.utilities[1] -= 1
                 sounds.falling_tree.play()
-                self.time_shishka = cfg.current_time + 1000
+                self.time_shishka = cfg.in_game_time + 1000
         elif self.armor > 100:
             self.armor = 100
 
     def eat_a_coconut(self):
 
-        if self.time_coconut < cfg.current_time:
+        if self.time_coconut < cfg.in_game_time:
             if self.utilities[2] > 0:
                 self.utilities[2] -= 1
                 self.stamina_recovery = 1.5
                 sounds.drink_coconut.play()
-                self.time_coconut = cfg.current_time + 5100
+                self.time_coconut = cfg.in_game_time + 5100
                 self.coconut_timer = self.time_coconut
 
 
