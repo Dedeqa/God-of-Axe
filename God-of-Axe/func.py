@@ -191,7 +191,7 @@ def win_game():
 def menu():
     # sounds.play_music.stop()
     # if cfg.menu_sound_flag:
-    pygame.mixer.music.play(-1)
+    # pygame.mixer.music.play(-1)
     #     cfg.menu_sound_flag = False   флаг для музыки больше не нужен (ушли от этой концепции)
 
     # pygame.mixer.music.play(-1) запуск фоновой музыки
