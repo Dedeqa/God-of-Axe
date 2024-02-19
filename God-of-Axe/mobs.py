@@ -100,8 +100,8 @@ class Monster(cl.Unit, pygame.sprite.Sprite):
                 self.i += 1
                 self.anim_time = 0
 
-            self.draw_shield_bar(cfg.screen, self.rect.x, self.rect.y - 10, self.hp, (107, 34, 34), "red", "black",
-                                 self.start_hp, 50, 10)
+            self.draw_info_bar(cfg.screen, self.rect.x, self.rect.y - 10, self.hp, (107, 34, 34), "red", "black",
+                               self.start_hp, 50, 10)
             self.rect.x = round(self.follower_vector.x)
             self.rect.y = round(self.follower_vector.y)
 
@@ -115,32 +115,32 @@ class Monster(cl.Unit, pygame.sprite.Sprite):
 
                 if not self.attack_flag:
                     if self.side == "right":
-                        if (cl.player.line.collidelist(cfg.trees_rects_left)) == -1 and (not cl.player.line.colliderect(
-                                cl.house.line_left) and not cl.player.line.collidelist(
-                                cfg.trees_rects_right) and not cl.player.line.collidelist(
-                                cfg.trees_rects_top) and not cl.player.line.collidelist(cfg.trees_rects_bottom)):
+                        if (cl.player.hitbox.collidelist(cfg.trees_rects_left)) == -1 and (not cl.player.hitbox.colliderect(
+                                cl.house.line_left) and not cl.player.hitbox.collidelist(
+                                cfg.trees_rects_right) and not cl.player.hitbox.collidelist(
+                                cfg.trees_rects_top) and not cl.player.hitbox.collidelist(cfg.trees_rects_bottom)):
 
                             if cfg.bg_x > -1920:
                                 cfg.bg_x -= 1
                     elif self.side == "left":
-                        if (cl.player.line.collidelist(cfg.trees_rects_right)) == -1 and (not cl.player.line.colliderect(
-                                cl.house.line_left) and not cl.player.line.collidelist(
-                                cfg.trees_rects_right) and not cl.player.line.collidelist(
-                                cfg.trees_rects_top) and not cl.player.line.collidelist(cfg.trees_rects_bottom)):
+                        if (cl.player.hitbox.collidelist(cfg.trees_rects_right)) == -1 and (not cl.player.hitbox.colliderect(
+                                cl.house.line_left) and not cl.player.hitbox.collidelist(
+                                cfg.trees_rects_right) and not cl.player.hitbox.collidelist(
+                                cfg.trees_rects_top) and not cl.player.hitbox.collidelist(cfg.trees_rects_bottom)):
                             if cfg.bg_x < 1920:
                                 cfg.bg_x += 1
                     elif self.side == "top":
-                        if (cl.player.line.collidelist(cfg.trees_rects_bottom)) == -1 and (not cl.player.line.colliderect(
-                                cl.house.line_left) and not cl.player.line.collidelist(
-                                cfg.trees_rects_right) and not cl.player.line.collidelist(
-                                cfg.trees_rects_top) and not cl.player.line.collidelist(cfg.trees_rects_bottom)):
+                        if (cl.player.hitbox.collidelist(cfg.trees_rects_bottom)) == -1 and (not cl.player.hitbox.colliderect(
+                                cl.house.line_left) and not cl.player.hitbox.collidelist(
+                                cfg.trees_rects_right) and not cl.player.hitbox.collidelist(
+                                cfg.trees_rects_top) and not cl.player.hitbox.collidelist(cfg.trees_rects_bottom)):
                             if cfg.bg_y < 1080:
                                 cfg.bg_y += 1
                     elif self.side == "bottom":
-                        if (cl.player.line.collidelist(cfg.trees_rects_top)) == -1 and (not cl.player.line.colliderect(
-                                cl.house.line_left) and not cl.player.line.collidelist(
-                                cfg.trees_rects_right) and not cl.player.line.collidelist(
-                                cfg.trees_rects_top) and not cl.player.line.collidelist(cfg.trees_rects_bottom)):
+                        if (cl.player.hitbox.collidelist(cfg.trees_rects_top)) == -1 and (not cl.player.hitbox.colliderect(
+                                cl.house.line_left) and not cl.player.hitbox.collidelist(
+                                cfg.trees_rects_right) and not cl.player.hitbox.collidelist(
+                                cfg.trees_rects_top) and not cl.player.hitbox.collidelist(cfg.trees_rects_bottom)):
                             if cfg.bg_y > -1080:
                                 cfg.bg_y -= 1
 

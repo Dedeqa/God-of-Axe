@@ -52,8 +52,8 @@ def play_game():
         classes.all_sprites.update()
         classes.all_sprites.draw(cfg.screen)
 
-        classes.player.draw_shield_bar(cfg.screen, 0, 1065, classes.player.wood_amount, "brown",
-                                       "yellow", "black", 500, 1920, 15)
+        classes.player.draw_info_bar(cfg.screen, 0, 1065, classes.player.wood_amount, "brown", "yellow", "black", 500,
+                                     1920, 15)
         classes.player.draw_text(cfg.screen, f'{int(classes.player.progress)} %', 18, 960, 1040, cfg.font_interface_p,
                                  "red")
 
@@ -66,11 +66,11 @@ def play_game():
         classes.player.draw_text(cfg.screen, f'{(classes.player.wood_amount)}', 16, 65, 50, cfg.font_interface_p,
                                  "white")
 
-        classes.player.draw_shield_bar(cfg.screen, 0, 14, classes.player.hp, 'DarkRed', 'red', 'black', 100, 350, 13)
-        classes.player.draw_shield_bar(cfg.screen, 0, 28, classes.player.stamina, (24, 84, 26), (255, 255, 0),
-                                       'black', 100, 350, 13)
-        classes.player.draw_shield_bar(cfg.screen, 0, 0, classes.player.armor, (16, 72, 105), (27, 123, 179), 'black',
-                                       100, 350, 13)
+        classes.player.draw_info_bar(cfg.screen, 0, 14, classes.player.hp, 'DarkRed', 'red', 'black', 100, 350, 13)
+        classes.player.draw_info_bar(cfg.screen, 0, 28, classes.player.stamina, (24, 84, 26), (255, 255, 0), 'black',
+                                     100, 350, 13)
+        classes.player.draw_info_bar(cfg.screen, 0, 0, classes.player.armor, (16, 72, 105), (27, 123, 179), 'black',
+                                     100, 350, 13)
 
         # cfg.screen.blit(img.timer_tablet, (1663, 10))
         pygame.draw.rect(cfg.screen, 'black', (920, 10, 80, 40))
@@ -98,6 +98,7 @@ def play_game():
         if cfg.lose_flag:
             lose_game()
         if classes.player.progress >= 100:
+            classes.player.progress = 100
             win_game()
 
         pygame.display.flip()
@@ -191,7 +192,7 @@ def win_game():
 def menu():
     # sounds.play_music.stop()
     # if cfg.menu_sound_flag:
-    pygame.mixer.music.play(-1)
+    # pygame.mixer.music.play(-1)
     #     cfg.menu_sound_flag = False   флаг для музыки больше не нужен (ушли от этой концепции)
 
     # pygame.mixer.music.play(-1) запуск фоновой музыки
