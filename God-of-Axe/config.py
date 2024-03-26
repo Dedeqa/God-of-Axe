@@ -22,14 +22,18 @@ random_elka = 25
 random_palma = 30
 
 # menu_sound_flag = True  # флаг нахождения в меню
-menu_flag = True
+menu_active_flag = False
+# play_game_active_flag = False
 start_game_sound_flag = True  # флаг запуска игры для воспроизведения музыки
-start_game_flag = True
+pause_active_flag = False
+play_game_active_flag = False
+lose_game_active_flag = False
+win_game_active_flag = False
 add_flag = True
 first_elem_flag = True
 lose_flag = False  # флаг поражения
 workshop_flag = False  # флаг нахождения в мастерской
-
+main_active_flag = False # флаг для main
 delta = 125  # "радиус" спавна деревьев
 delta_monsters = 200  # "радиус" спавна монстров
 delta_hero = 600

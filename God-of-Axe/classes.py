@@ -16,6 +16,9 @@ class Unit:
         self.posx = posx
         self.posy = posy
 
+    def __del__(self):
+        pass
+
     def draw_text(self, surf, text, size, x, y, font, color):
         font = pygame.font.Font(font, size)
         text_surface = font.render(text, True, color)
@@ -52,6 +55,9 @@ class Player(Unit, pygame.sprite.Sprite):
         self.speed_x = 0
         self.speed_y = 0
 
+        self.bg_x = cfg.bg_x
+        self.bg_y = cfg.bg_y
+
         self.anim_counter_x = 0
         self.anim_counter_y = 0  # счетчики для анимации движения, атаки и смерти героя
         self.anim_counter_attack = 0
@@ -83,11 +89,12 @@ class Player(Unit, pygame.sprite.Sprite):
 
         self.rect_attack = pygame.Rect(self.rect[0] + self.rect[2] / 2 + 10, self.rect[1] + self.rect[3] / 3,
                                        self.rect[2] / 3 * 2, self.rect[3] / 3)
-        self.hitbox = pygame.Rect(self.rect[0] + self.rect[2] / 3, self.rect[1] + self.rect[3] / 6 - 5, self.rect[2] / 3,
+        self.hitbox = pygame.Rect(self.rect[0] + self.rect[2] / 3, self.rect[1] + self.rect[3] / 6 - 5,
+                                  self.rect[2] / 3,
                                   self.rect[3] / 6 * 5)
 
     def update(self):
-
+        global house, all_sprites
         if self.coconut_boost_time < cfg.in_game_time:
             self.stamina_recovery = 0.5
         self.progress = self.wood_amount * 100 / cfg.goal
@@ -135,8 +142,8 @@ class Player(Unit, pygame.sprite.Sprite):
                             sx = 2
                         if self.rect.x >= 100:
                             self.speed_x = -sx
-                        elif cfg.bg_x < 1820:
-                            cfg.bg_x += sx
+                        elif self.bg_x < 1820:
+                            self.bg_x += sx
                             func.update_monsters_x(cfg.monsterList, sx, flag_direction=True)
                 if keystate[pygame.K_d]:
                     cfg.vector = "right"
@@ -171,8 +178,8 @@ class Player(Unit, pygame.sprite.Sprite):
                             sx = 2
                         if self.rect.x <= 1820:
                             self.speed_x = sx
-                        elif cfg.bg_x > -1820:
-                            cfg.bg_x -= sx
+                        elif self.bg_x > -1820:
+                            self.bg_x -= sx
                             func.update_monsters_x(cfg.monsterList, sx, flag_direction=False)
             if not (keystate[pygame.K_w] and keystate[pygame.K_s]):
                 if keystate[pygame.K_w]:
@@ -213,11 +220,12 @@ class Player(Unit, pygame.sprite.Sprite):
                             sy = 2
                         if self.rect.y >= 100:
                             self.speed_y = -sy
-                        elif cfg.bg_y < 1080:
-                            cfg.bg_y += sy
+                        elif self.bg_y < 1080:
+                            self.bg_y += sy
                             func.update_monsters_y(cfg.monsterList, sy, flag_direction=True)
                 if keystate[pygame.K_s]:
-                    if (self.hitbox.collidelist(cfg.trees_rects_top)) == -1 and not self.hitbox.colliderect(house.line_top):
+                    if (self.hitbox.collidelist(cfg.trees_rects_top)) == -1 and not self.hitbox.colliderect(
+                            house.line_top):
                         if keystate[pygame.K_LSHIFT] and self.stamina > 0:
 
                             if self.anim_counter_y == 6:
@@ -253,8 +261,8 @@ class Player(Unit, pygame.sprite.Sprite):
                             sy = 2
                         if self.rect.y <= 980:
                             self.speed_y = sy
-                        elif cfg.bg_y > -1080:
-                            cfg.bg_y -= sy
+                        elif self.bg_y > -1080:
+                            self.bg_y -= sy
                             func.update_monsters_y(cfg.monsterList, sy, flag_direction=False)
             if keystate[pygame.K_c]:
                 self.eat_apple()
@@ -468,13 +476,10 @@ class Weapon:
         self.damage += 5
 
 
-# Экземпляр класса Player() -----------------------------------------------------------------------
 all_sprites = pygame.sprite.Group()
 player = Player("Albert", 100, cfg.WIDTH, cfg.HEIGHT)
 all_sprites.add(player)
 
-
-# --------------------------------------------------------------------------------------------------
 
 class Tree(Unit, pygame.sprite.Sprite):
 
@@ -511,16 +516,16 @@ class Tree(Unit, pygame.sprite.Sprite):
         self.tree_vector = pm.Vector2(self.rect.centerx, self.rect.y + 70)
         distance = self.tree_vector.distance_to(self.player_vector)
 
-        self.rect.x = cfg.bg_x + self.posx
-        self.rect.y = cfg.bg_y + self.posy
-        self.line_left[0] = cfg.bg_x + self.line_left_x
-        self.line_left[1] = cfg.bg_y + self.line_left_y
-        self.line_right[0] = cfg.bg_x + self.line_right_x
-        self.line_right[1] = cfg.bg_y + self.line_right_y
-        self.line_top[0] = cfg.bg_x + self.line_top_x
-        self.line_top[1] = cfg.bg_y + self.line_top_y
-        self.line_bottom[0] = cfg.bg_x + self.line_bottom_x
-        self.line_bottom[1] = cfg.bg_y + self.line_bottom_y
+        self.rect.x = player.bg_x + self.posx
+        self.rect.y = player.bg_y + self.posy
+        self.line_left[0] = player.bg_x + self.line_left_x
+        self.line_left[1] = player.bg_y + self.line_left_y
+        self.line_right[0] = player.bg_x + self.line_right_x
+        self.line_right[1] = player.bg_y + self.line_right_y
+        self.line_top[0] = player.bg_x + self.line_top_x
+        self.line_top[1] = player.bg_y + self.line_top_y
+        self.line_bottom[0] = player.bg_x + self.line_bottom_x
+        self.line_bottom[1] = player.bg_y + self.line_bottom_y
 
         if distance <= 110:
             self.draw_info_bar(cfg.screen, self.rect.x + 25, self.rect.y - 10, self.hp, (92, 69, 10), (140, 104, 13),
@@ -607,8 +612,9 @@ class House(pygame.sprite.Sprite):
         print(self.rect)
 
     def update(self):
-        self.rect.x = self.posx + cfg.bg_x
-        self.rect.y = self.posy + cfg.bg_y
+        global player
+        self.rect.x = self.posx + player.bg_x
+        self.rect.y = self.posy + player.bg_y
         cfg.screen.fill("red", self.line_left)
         cfg.screen.fill("red", self.line_right)
         cfg.screen.fill("red", self.line_top)
@@ -617,14 +623,14 @@ class House(pygame.sprite.Sprite):
         # self.line_left.y = self.line_left_y + cfg.bg_y
         # self.line_right.x = self.line_right_x + cfg.bg_x
         # self.line_right.y = self.line_right_y + cfg.bg_y
-        self.line_right.x = self.posx + self.rect[2] - 30 + cfg.bg_x
-        self.line_right.y = self.posy + 60 + cfg.bg_y
-        self.line_left.x = self.posx - 10 + cfg.bg_x
-        self.line_left.y = self.posy + 60 + cfg.bg_y
-        self.line_top.x = self.posx - 10 + cfg.bg_x
-        self.line_top.y = self.posy + 60 + cfg.bg_y
-        self.line_bottom.x = self.posx - 10 + cfg.bg_x
-        self.line_bottom.y = self.posy + self.rect[3] + cfg.bg_y
+        self.line_right.x = self.posx + self.rect[2] - 30 + player.bg_x
+        self.line_right.y = self.posy + 60 + player.bg_y
+        self.line_left.x = self.posx - 10 + player.bg_x
+        self.line_left.y = self.posy + 60 + player.bg_y
+        self.line_top.x = self.posx - 10 + player.bg_x
+        self.line_top.y = self.posy + 60 + player.bg_y
+        self.line_bottom.x = self.posx - 10 + player.bg_x
+        self.line_bottom.y = self.posy + self.rect[3] + player.bg_y
         # # self.line_right.y = cfg.bg_y + self.posy
         # # self.line_left.x = cfg.bg_x + self.posx
         # # self.line_left.y = cfg.bg_y +self.posy
@@ -632,3 +638,21 @@ class House(pygame.sprite.Sprite):
 
 house = House(960, 200)
 all_sprites.add(house)
+
+
+def initit_units():
+    # Экземпляр класса Player() -----------------------------------------------------------------------
+    all_sprites = pygame.sprite.Group()
+    player = Player("Albert", 100, cfg.WIDTH, cfg.HEIGHT)
+    all_sprites.add(player)
+
+    # --------------------------------------------------------------------------------------------------
+    house = House(960, 200)
+    all_sprites.add(house)
+
+
+def del_units():
+    player.__del__()
+    for obj in all_sprites:
+        del obj
+    all_sprites.empty()

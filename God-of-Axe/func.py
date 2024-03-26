@@ -11,23 +11,49 @@ import mobs
 # pygame.mixer.pre_init(44100, -16, 1, 512)   # пока непонятно, нужно или нет
 
 
+def main():
+    start_game()
+    while cfg.main_active_flag:
+        # Закрытие окна ----------------
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                quit()
+        # Меню --------------------------------
+        if cfg.menu_active_flag:
+            menu()
+        # Окно игры ---------------------------
+        if cfg.play_game_active_flag:
+            play_game()
+
+        if cfg.pause_active_flag:
+            pause()
+
+        if cfg.lose_game_active_flag:
+            lose_game()
+
+        if cfg.win_game_active_flag:
+            win_game()
+
+
 def start_game():
     pygame.mixer.pre_init(44100, -16, 1, 512)  # используется для инициализации звуковой системы Pygame
-    pygame.init()
+    pygame.init()  # запускает pygame
     # cfg.screen = pygame.display.set_mode(cfg.size) пока непонятно, нужно или нет
     pygame.display.set_caption("God of Axe")
     pygame.display.set_icon(img.icon)
-    menu()
+    cfg.menu_active_flag = True
+    cfg.main_active_flag = True
 
 
 def play_game():
     # if cfg.start_game_sound_flag:
     #     sounds.play_music.play(-1)
     #     cfg.start_game_sound_flag = False     больше не воспроизводится музыка в игре
+    classes.initit_units()
     monster_generator(100)
     tree_generator(400)
 
-    while True:
+    while cfg.play_game_active_flag:
         cfg.clock.tick(cfg.FPS)
         cfg.in_game_time = pygame.time.get_ticks()
         # print(cfg.clock.get_fps())
@@ -36,18 +62,18 @@ def play_game():
                 quit()
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
-                    cfg.start_game_flag = True
+                    cfg.pause_active_flag = True
                     pause()
 
-        cfg.screen.blit(img.game_bg, (-1920 + cfg.bg_x, -1080 + cfg.bg_y))  # 1 зона
-        cfg.screen.blit(img.game_bg, (0 + cfg.bg_x, -1080 + cfg.bg_y))  # 2 зона
-        cfg.screen.blit(img.game_bg, (1920 + cfg.bg_x, -1080 + cfg.bg_y))  # 3 зона
-        cfg.screen.blit(img.game_bg, (-1920 + cfg.bg_x, 0 + cfg.bg_y))  # 4 зона
-        cfg.screen.blit(img.game_bg, (0 + cfg.bg_x, 0 + cfg.bg_y))  # 5 зона
-        cfg.screen.blit(img.game_bg, (1920 + cfg.bg_x, 0 + cfg.bg_y))  # 6 зона
-        cfg.screen.blit(img.game_bg, (-1920 + cfg.bg_x, 1080 + cfg.bg_y))  # 7 зона
-        cfg.screen.blit(img.game_bg, (0 + cfg.bg_x, 1080 + cfg.bg_y))  # 8 зона
-        cfg.screen.blit(img.game_bg, (1920 + cfg.bg_x, 1080 + cfg.bg_y))  # 9 зона
+        cfg.screen.blit(img.game_bg, (-1920 + classes.player.bg_x, -1080 + classes.player.bg_y))  # 1 зона
+        cfg.screen.blit(img.game_bg, (0 + classes.player.bg_x, -1080 + classes.player.bg_y))  # 2 зона
+        cfg.screen.blit(img.game_bg, (1920 + classes.player.bg_x, -1080 + classes.player.bg_y))  # 3 зона
+        cfg.screen.blit(img.game_bg, (-1920 + classes.player.bg_x, 0 + classes.player.bg_y))  # 4 зона
+        cfg.screen.blit(img.game_bg, (0 + classes.player.bg_x, 0 + classes.player.bg_y))  # 5 зона
+        cfg.screen.blit(img.game_bg, (1920 + classes.player.bg_x, 0 + classes.player.bg_y))  # 6 зона
+        cfg.screen.blit(img.game_bg, (-1920 + classes.player.bg_x, 1080 + classes.player.bg_y))  # 7 зона
+        cfg.screen.blit(img.game_bg, (0 + classes.player.bg_x, 1080 + classes.player.bg_y))  # 8 зона
+        cfg.screen.blit(img.game_bg, (1920 + classes.player.bg_x, 1080 + classes.player.bg_y))  # 9 зона
 
         classes.all_sprites.update()
         classes.all_sprites.draw(cfg.screen)
@@ -96,17 +122,19 @@ def play_game():
         if cfg.workshop_flag:
             workshop()
         if cfg.lose_flag:
-            lose_game()
+            cfg.play_game_active_flag = False
+            cfg.lose_game_active_flag = True
         if classes.player.progress >= 100:
             classes.player.progress = 100
-            win_game()
+            cfg.play_game_active_flag = False
+            cfg.win_game_active_flag = True
 
         pygame.display.flip()
 
 
 def lose_game():
     continue_flag = False
-    while True:
+    while cfg.lose_game_active_flag:
         cfg.screen.blit(img.die_bg, (0, 0))
         classes.player.draw_text(cfg.screen, 'You were worse than last time!', 40, 960, 900, cfg.font_interface_p,
                                  "white")
@@ -115,7 +143,8 @@ def lose_game():
             if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
                 continue_flag = True
             if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
-                menu()
+                cfg.lose_game_active_flag = False
+                cfg.menu_active_flag = True
         if continue_flag:
             cfg.screen.fill("black")
             classes.player.draw_text(cfg.screen,
@@ -149,7 +178,7 @@ def lose_game():
 
 def win_game():
     continue_flag = False
-    while True:
+    while cfg.win_game_active_flag:
         cfg.screen.blit(img.vic_bg, (0, 0))
         classes.player.draw_text(cfg.screen, 'You have become the real god of the axe!', 40, 960, 700,
                                  cfg.font_interface_p,
@@ -159,7 +188,8 @@ def win_game():
             if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
                 continue_flag = True
             if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
-                menu()
+                cfg.win_game_active_flag = False
+                cfg.menu_active_flag = True
         if continue_flag:
             cfg.screen.fill("grey")
             classes.player.draw_text(cfg.screen,
@@ -196,9 +226,9 @@ def menu():
     #     cfg.menu_sound_flag = False   флаг для музыки больше не нужен (ушли от этой концепции)
 
     # pygame.mixer.music.play(-1) запуск фоновой музыки
-
+    # timer = 0
     play_delay_start, options_delay_start, quit_delay_start = 0, 0, 0
-    while cfg.menu_flag:
+    while cfg.menu_active_flag:
         mouse = pygame.mouse.get_pos()
         click = pygame.mouse.get_pressed()
 
@@ -209,24 +239,24 @@ def menu():
 
         cfg.screen.blit(img.menu_bg, (0, 0))
         cfg.screen.blit(cfg.menu_title, cfg.menu_title_rect)
-
+        # условие нажатия ЛКМ в области кнопки play
         if (cfg.play_rect.left <= mouse[0] <= cfg.play_rect.right) and (
                 cfg.play_rect.top <= mouse[1] <= cfg.play_rect.bottom) and \
-                click[0]:  # условие нажатия ЛКМ в области кнопки play
-
-            cfg.screen.blit(cfg.active_play_transform,
-                            cfg.active_play_rect)  # помещаем иконку active_play_transform в область active_play_rect
-
-            # pygame.mixer.music.stop() фоновая музыка не отключается при нажатии на play
+                click[0]:
+            # помещаем иконку active_play_transform в область active_play_rect
+            cfg.screen.blit(cfg.active_play_transform, cfg.active_play_rect)
+            cfg.play_game_active_flag = True
+            # pygame.mixer.music.stop() # фоновая музыка не отключается при нажатии на play
             if play_delay_start > 2:
                 sounds.click.play()
                 play_delay_start = 0
                 time.sleep(0.2)
                 cfg.in_game_time = 0
-                play_game()
+                # play_game()
+                cfg.play_game_active_flag = True
+                cfg.menu_active_flag = False
 
             play_delay_start += 1
-
         else:
             cfg.screen.blit(cfg.play_transform, cfg.play_rect)
 
@@ -259,9 +289,7 @@ def menu():
 
 def pause():
     play_delay_start, options_delay_start, quit_delay_start = 0, 0, 0
-
-    while cfg.start_game_flag:
-
+    while cfg.pause_active_flag:
         cfg.screen.blit(img.bg_pause_new, (0, 0))
         cfg.screen.blit(cfg.pause_label_transform, cfg.pause_label_rect)
         mouse = pygame.mouse.get_pos()
@@ -275,13 +303,12 @@ def pause():
                 cfg.continue_rect.top <= mouse[1] <= cfg.continue_rect.bottom) and \
                 click[0]:
             cfg.screen.blit(img.continue_active, cfg.continue_active_rect)
-
             if play_delay_start > 2:
                 sounds.click.play()
                 play_delay_start = 0
                 time.sleep(0.2)
                 cfg.start_game_sound_flag = False
-                cfg.start_game_flag = False
+                cfg.pause_active_flag = False
             play_delay_start += 1
         else:
             cfg.screen.blit(img.continue_, cfg.continue_rect)
@@ -309,9 +336,15 @@ def pause():
                 sounds.click.play()
                 quit_delay_start = 0
                 time.sleep(0.2)
-                # pygame.mixer.music.play() не нужно повторно включать фоновую музыку
 
                 cfg.start_game_sound_flag = True
+                cfg.pause_active_flag = False
+                cfg.menu_active_flag = True
+                classes.del_units()
+                # for obj in classes.all_sprites:
+                #     del obj
+                #
+                # classes.all_sprites.empty()
                 # classes.all_sprites.clear(cfg.screen, cfg.screen)
 
                 # cfg.bg_x, cfg.bg_y = 0, 0
@@ -402,15 +435,20 @@ def pause():
                 #
                 # classes.player.utilities = [3, 0, 0]
                 # classes.player.kills = 0
-                menu()
+
             quit_delay_start += 1
         else:
             cfg.screen.blit(img.menu, cfg.menu_rect)
         pygame.display.flip()
+        # for obj in classes.all_sprites:
+        #     del obj
+        # classes.all_sprites.empty()
+        menu()
 
 
 def options_menu():
-    while True:
+    active_flag = True  # Флаг активного состояния options_menu
+    while active_flag:
         mouse = pygame.mouse.get_pos()
         click = pygame.mouse.get_pressed()
         cfg.clock.tick(200)
@@ -421,7 +459,7 @@ def options_menu():
                 if event.key == pygame.K_ESCAPE:
                     # sounds.play_music.stop()
                     # pygame.mixer.music.unpause()
-                    menu()
+                    active_flag = False
             if click[0] and (cfg.point1_rect.collidepoint(mouse[0], mouse[1])) and (
                     cfg.scale1_rect.left <= mouse[0] <= cfg.scale1_rect.right):
                 cfg.point1_rect.center = (mouse[0], cfg.scale1_rect.centery)
@@ -452,10 +490,12 @@ def options_menu():
         cfg.screen.blit(img.point2, cfg.point2_rect)
 
         pygame.display.flip()
+    menu()
 
 
 def options_game():
-    while True:
+    active_flag = True  # Флаг активного состояния options_game
+    while active_flag:
         mouse = pygame.mouse.get_pos()
         click = pygame.mouse.get_pressed()
 
@@ -465,7 +505,8 @@ def options_game():
                 quit()
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
-                    pause()
+                    active_flag = False
+
             if click[0] and (cfg.point1_rect.collidepoint(mouse[0], mouse[1])) and (
                     cfg.scale1_rect.left <= mouse[0] <= cfg.scale1_rect.right):
                 cfg.point1_rect.center = (mouse[0], cfg.scale1_rect.centery)
@@ -494,9 +535,11 @@ def options_game():
         cfg.screen.blit(img.point2, cfg.point2_rect)
 
         pygame.display.flip()
+    pause()
 
 
 def tree_generator(n):
+    global house
     count = 0
     while count < n:
         cfg.add_flag = True
