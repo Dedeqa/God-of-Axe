@@ -653,6 +653,4 @@ def initit_units():
 
 def del_units():
     player.__del__()
-    for obj in all_sprites:
-        del obj
-    all_sprites.empty()
+
