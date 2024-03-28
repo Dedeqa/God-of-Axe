@@ -75,7 +75,10 @@ class Player(Unit, pygame.sprite.Sprite):
         self.oak_amount = 0
         self.fir_amount = 0
         self.palm_amount = 0
+
         self.progress = 0
+
+        self.coins = 0
 
         self.apple_eat_time = cfg.in_game_time + 1000
         self.shishka_eat_time = cfg.in_game_time + 1000  # время приема пищи

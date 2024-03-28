@@ -382,6 +382,10 @@ coconut_icon = pygame.transform.scale(pygame.image.load(coconut_icon_p).convert_
 shishka_icon_p = f.resource_path('Images/Interface/shishka_icon.png')
 shishka_icon = pygame.transform.scale(pygame.image.load(shishka_icon_p).convert_alpha(), (30, 30))
 
+# Иконка монетки -------------------------------------------------------------------------------------------------------
+coin_icon_p = f.resource_path('Images/Interface/coin.png')
+coin_icon = pygame.transform.scale(pygame.image.load(coin_icon_p).convert_alpha(), (30, 30))
+
 # Окно You Died --------------------------------------------------------------------------------------------------------
 die_bg_p = f.resource_path("Images/backgrounds/Vic.jpg")
 die_bg = pygame.transform.scale(pygame.image.load(die_bg_p).convert_alpha(), (1920, 1080))

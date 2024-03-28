@@ -4,6 +4,7 @@ import config as cfg
 import classes as cl
 import sounds
 import images as img
+import random
 
 
 class Monster(cl.Unit, pygame.sprite.Sprite):
@@ -64,23 +65,31 @@ class Monster(cl.Unit, pygame.sprite.Sprite):
 
             self.follower_vector += direction_vector * step_distance
 
-            if self.follower_vector.x > cfg.list_all_sprites[0].rect.x and self.follower_vector.y > cfg.list_all_sprites[0].rect.y:
-                if self.follower_vector.x - cfg.list_all_sprites[0].rect.x > self.follower_vector.y - cfg.list_all_sprites[0].rect.y:
+            if self.follower_vector.x > cfg.list_all_sprites[0].rect.x and self.follower_vector.y > \
+                    cfg.list_all_sprites[0].rect.y:
+                if self.follower_vector.x - cfg.list_all_sprites[0].rect.x > self.follower_vector.y - \
+                        cfg.list_all_sprites[0].rect.y:
                     self.side = "left"
                 else:
                     self.side = "top"
-            elif self.follower_vector.x > cfg.list_all_sprites[0].rect.x and self.follower_vector.y < cfg.list_all_sprites[0].rect.y:
-                if self.follower_vector.x - cfg.list_all_sprites[0].rect.x > cfg.list_all_sprites[0].rect.y - self.follower_vector.y:
+            elif self.follower_vector.x > cfg.list_all_sprites[0].rect.x and self.follower_vector.y < \
+                    cfg.list_all_sprites[0].rect.y:
+                if self.follower_vector.x - cfg.list_all_sprites[0].rect.x > cfg.list_all_sprites[
+                    0].rect.y - self.follower_vector.y:
                     self.side = "left"
                 else:
                     self.side = "bottom"
-            elif self.follower_vector.x < cfg.list_all_sprites[0].rect.x and self.follower_vector.y > cfg.list_all_sprites[0].rect.y:
-                if cfg.list_all_sprites[0].rect.x - self.follower_vector.x > self.follower_vector.y - cfg.list_all_sprites[0].rect.y:
+            elif self.follower_vector.x < cfg.list_all_sprites[0].rect.x and self.follower_vector.y > \
+                    cfg.list_all_sprites[0].rect.y:
+                if cfg.list_all_sprites[0].rect.x - self.follower_vector.x > self.follower_vector.y - \
+                        cfg.list_all_sprites[0].rect.y:
                     self.side = "right"
                 else:
                     self.side = "top"
-            elif self.follower_vector.x < cfg.list_all_sprites[0].rect.x and self.follower_vector.y < cfg.list_all_sprites[0].rect.y:
-                if cfg.list_all_sprites[0].rect.x - self.follower_vector.x > cfg.list_all_sprites[0].rect.y - self.follower_vector.y:
+            elif self.follower_vector.x < cfg.list_all_sprites[0].rect.x and self.follower_vector.y < \
+                    cfg.list_all_sprites[0].rect.y:
+                if cfg.list_all_sprites[0].rect.x - self.follower_vector.x > cfg.list_all_sprites[
+                    0].rect.y - self.follower_vector.y:
                     self.side = "right"
                 else:
                     self.side = "bottom"
@@ -115,32 +124,44 @@ class Monster(cl.Unit, pygame.sprite.Sprite):
 
                 if not self.attack_flag:
                     if self.side == "right":
-                        if (cfg.list_all_sprites[0].hitbox.collidelist(cfg.trees_rects_left)) == -1 and (not cfg.list_all_sprites[0].hitbox.colliderect(
-                                cl.cfg.all_sprites.sprites()[1].line_left) and not cfg.list_all_sprites[0].hitbox.collidelist(
-                                cfg.trees_rects_right) and not cfg.list_all_sprites[0].hitbox.collidelist(
-                                cfg.trees_rects_top) and not cfg.list_all_sprites[0].hitbox.collidelist(cfg.trees_rects_bottom)):
+                        if (cfg.list_all_sprites[0].hitbox.collidelist(cfg.trees_rects_left)) == -1 and (
+                                not cfg.list_all_sprites[0].hitbox.colliderect(
+                                    cl.cfg.all_sprites.sprites()[1].line_left) and not cfg.list_all_sprites[
+                            0].hitbox.collidelist(
+                            cfg.trees_rects_right) and not cfg.list_all_sprites[0].hitbox.collidelist(
+                            cfg.trees_rects_top) and not cfg.list_all_sprites[0].hitbox.collidelist(
+                            cfg.trees_rects_bottom)):
 
                             if cfg.bg_x > -1920:
                                 cfg.bg_x -= 1
                     elif self.side == "left":
-                        if (cfg.list_all_sprites[0].hitbox.collidelist(cfg.trees_rects_right)) == -1 and (not cfg.list_all_sprites[0].hitbox.colliderect(
-                                cl.cfg.all_sprites.sprites()[1].line_left) and not cfg.list_all_sprites[0].hitbox.collidelist(
-                                cfg.trees_rects_right) and not cfg.list_all_sprites[0].hitbox.collidelist(
-                                cfg.trees_rects_top) and not cfg.list_all_sprites[0].hitbox.collidelist(cfg.trees_rects_bottom)):
+                        if (cfg.list_all_sprites[0].hitbox.collidelist(cfg.trees_rects_right)) == -1 and (
+                                not cfg.list_all_sprites[0].hitbox.colliderect(
+                                    cl.cfg.all_sprites.sprites()[1].line_left) and not cfg.list_all_sprites[
+                            0].hitbox.collidelist(
+                            cfg.trees_rects_right) and not cfg.list_all_sprites[0].hitbox.collidelist(
+                            cfg.trees_rects_top) and not cfg.list_all_sprites[0].hitbox.collidelist(
+                            cfg.trees_rects_bottom)):
                             if cfg.bg_x < 1920:
                                 cfg.bg_x += 1
                     elif self.side == "top":
-                        if (cfg.list_all_sprites[0].hitbox.collidelist(cfg.trees_rects_bottom)) == -1 and (not cfg.list_all_sprites[0].hitbox.colliderect(
-                                cl.cfg.all_sprites.sprites()[1].line_left) and not cfg.list_all_sprites[0].hitbox.collidelist(
-                                cfg.trees_rects_right) and not cfg.list_all_sprites[0].hitbox.collidelist(
-                                cfg.trees_rects_top) and not cfg.list_all_sprites[0].hitbox.collidelist(cfg.trees_rects_bottom)):
+                        if (cfg.list_all_sprites[0].hitbox.collidelist(cfg.trees_rects_bottom)) == -1 and (
+                                not cfg.list_all_sprites[0].hitbox.colliderect(
+                                    cl.cfg.all_sprites.sprites()[1].line_left) and not cfg.list_all_sprites[
+                            0].hitbox.collidelist(
+                            cfg.trees_rects_right) and not cfg.list_all_sprites[0].hitbox.collidelist(
+                            cfg.trees_rects_top) and not cfg.list_all_sprites[0].hitbox.collidelist(
+                            cfg.trees_rects_bottom)):
                             if cfg.bg_y < 1080:
                                 cfg.bg_y += 1
                     elif self.side == "bottom":
-                        if (cfg.list_all_sprites[0].hitbox.collidelist(cfg.trees_rects_top)) == -1 and (not cfg.list_all_sprites[0].hitbox.colliderect(
-                                cl.cfg.all_sprites.sprites()[1].line_left) and not cfg.list_all_sprites[0].hitbox.collidelist(
-                                cfg.trees_rects_right) and not cfg.list_all_sprites[0].hitbox.collidelist(
-                                cfg.trees_rects_top) and not cfg.list_all_sprites[0].hitbox.collidelist(cfg.trees_rects_bottom)):
+                        if (cfg.list_all_sprites[0].hitbox.collidelist(cfg.trees_rects_top)) == -1 and (
+                                not cfg.list_all_sprites[0].hitbox.colliderect(
+                                    cl.cfg.all_sprites.sprites()[1].line_left) and not cfg.list_all_sprites[
+                            0].hitbox.collidelist(
+                            cfg.trees_rects_right) and not cfg.list_all_sprites[0].hitbox.collidelist(
+                            cfg.trees_rects_top) and not cfg.list_all_sprites[0].hitbox.collidelist(
+                            cfg.trees_rects_bottom)):
                             if cfg.bg_y > -1080:
                                 cfg.bg_y -= 1
 
@@ -182,8 +203,9 @@ class Monster(cl.Unit, pygame.sprite.Sprite):
             sounds.hit_monster.play()
         if self.hp <= 0:
             cfg.list_all_sprites[0].kills += 1
-            self.remove(cl.cfg.all_sprites)
-            self.kill()
+            cfg.list_all_sprites[0].coins += random.randint(3, 10)
+            cfg.all_sprites.remove(self)
+            cfg.monsterList.remove(self)
 
     def attack(self):
 
