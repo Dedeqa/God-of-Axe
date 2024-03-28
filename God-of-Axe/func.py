@@ -62,61 +62,76 @@ def play_game():
                     cfg.pause_active_flag = True
                     pause()
 
-        cfg.screen.blit(img.game_bg, (-1920 + cfg.list_all_sprites[0].bg_x, -1080 + cfg.list_all_sprites[0].bg_y))  # 1 зона
+        cfg.screen.blit(img.game_bg,
+                        (-1920 + cfg.list_all_sprites[0].bg_x, -1080 + cfg.list_all_sprites[0].bg_y))  # 1 зона
         cfg.screen.blit(img.game_bg, (0 + cfg.list_all_sprites[0].bg_x, -1080 + cfg.list_all_sprites[0].bg_y))  # 2 зона
-        cfg.screen.blit(img.game_bg, (1920 + cfg.list_all_sprites[0].bg_x, -1080 + cfg.list_all_sprites[0].bg_y))  # 3 зона
+        cfg.screen.blit(img.game_bg,
+                        (1920 + cfg.list_all_sprites[0].bg_x, -1080 + cfg.list_all_sprites[0].bg_y))  # 3 зона
         cfg.screen.blit(img.game_bg, (-1920 + cfg.list_all_sprites[0].bg_x, 0 + cfg.list_all_sprites[0].bg_y))  # 4 зона
         cfg.screen.blit(img.game_bg, (0 + cfg.list_all_sprites[0].bg_x, 0 + cfg.list_all_sprites[0].bg_y))  # 5 зона
         cfg.screen.blit(img.game_bg, (1920 + cfg.list_all_sprites[0].bg_x, 0 + cfg.list_all_sprites[0].bg_y))  # 6 зона
-        cfg.screen.blit(img.game_bg, (-1920 + cfg.list_all_sprites[0].bg_x, 1080 + cfg.list_all_sprites[0].bg_y))  # 7 зона
+        cfg.screen.blit(img.game_bg,
+                        (-1920 + cfg.list_all_sprites[0].bg_x, 1080 + cfg.list_all_sprites[0].bg_y))  # 7 зона
         cfg.screen.blit(img.game_bg, (0 + cfg.list_all_sprites[0].bg_x, 1080 + cfg.list_all_sprites[0].bg_y))  # 8 зона
-        cfg.screen.blit(img.game_bg, (1920 + cfg.list_all_sprites[0].bg_x, 1080 + cfg.list_all_sprites[0].bg_y))  # 9 зона
+        cfg.screen.blit(img.game_bg,
+                        (1920 + cfg.list_all_sprites[0].bg_x, 1080 + cfg.list_all_sprites[0].bg_y))  # 9 зона
 
         cfg.all_sprites.update()
         cfg.all_sprites.draw(cfg.screen)
 
-        cfg.list_all_sprites[0].draw_info_bar(cfg.screen, 0, 1065, cfg.list_all_sprites[0].wood_amount, "brown", "yellow", "black", 500,
-                                     1920, 15)
-        cfg.list_all_sprites[0].draw_text(cfg.screen, f'{int(cfg.list_all_sprites[0].progress)} %', 18, 960, 1040, cfg.font_interface_p,
-                                 "red")
+        cfg.list_all_sprites[0].draw_info_bar(cfg.screen, 0, 1065, cfg.list_all_sprites[0].wood_amount, "brown",
+                                              "yellow", "black", 500,
+                                              1920, 15)
+        cfg.list_all_sprites[0].draw_text(cfg.screen, f'{int(cfg.list_all_sprites[0].progress)} %', 18, 960, 1040,
+                                          cfg.font_interface_p,
+                                          "red")
 
-        cfg.list_all_sprites[0].draw_text(cfg.screen, f'{(cfg.list_all_sprites[0].utilities[0])}', 16, 145, 50, cfg.font_interface_p,
-                                 "white")
-        cfg.list_all_sprites[0].draw_text(cfg.screen, f'{(cfg.list_all_sprites[0].utilities[1])}', 16, 225, 50, cfg.font_interface_p,
-                                 "white")
-        cfg.list_all_sprites[0].draw_text(cfg.screen, f'{(cfg.list_all_sprites[0].utilities[2])}', 16, 305, 50, cfg.font_interface_p,
-                                 "white")
-        cfg.list_all_sprites[0].draw_text(cfg.screen, f'{(cfg.list_all_sprites[0].wood_amount)}', 16, 65, 50, cfg.font_interface_p,
-                                 "white")
+        cfg.list_all_sprites[0].draw_text(cfg.screen, f'{(cfg.list_all_sprites[0].utilities[0])}', 16, 145, 50,
+                                          cfg.font_interface_p,
+                                          "white")
+        cfg.list_all_sprites[0].draw_text(cfg.screen, f'{(cfg.list_all_sprites[0].utilities[1])}', 16, 225, 50,
+                                          cfg.font_interface_p,
+                                          "white")
+        cfg.list_all_sprites[0].draw_text(cfg.screen, f'{(cfg.list_all_sprites[0].utilities[2])}', 16, 305, 50,
+                                          cfg.font_interface_p,
+                                          "white")
+        cfg.list_all_sprites[0].draw_text(cfg.screen, f'{(cfg.list_all_sprites[0].wood_amount)}', 16, 65, 50,
+                                          cfg.font_interface_p,
+                                          "white")
 
-        cfg.list_all_sprites[0].draw_info_bar(cfg.screen, 0, 14, cfg.list_all_sprites[0].hp, 'DarkRed', 'red', 'black', 100, 350, 13)
-        cfg.list_all_sprites[0].draw_info_bar(cfg.screen, 0, 28, cfg.list_all_sprites[0].stamina, (24, 84, 26), (255, 255, 0), 'black',
-                                     100, 350, 13)
-        cfg.list_all_sprites[0].draw_info_bar(cfg.screen, 0, 0, cfg.list_all_sprites[0].armor, (16, 72, 105), (27, 123, 179), 'black',
-                                     100, 350, 13)
+        cfg.list_all_sprites[0].draw_info_bar(cfg.screen, 0, 14, cfg.list_all_sprites[0].hp, 'DarkRed', 'red', 'black',
+                                              100, 350, 13)
+        cfg.list_all_sprites[0].draw_info_bar(cfg.screen, 0, 28, cfg.list_all_sprites[0].stamina, (24, 84, 26),
+                                              (255, 255, 0), 'black',
+                                              100, 350, 13)
+        cfg.list_all_sprites[0].draw_info_bar(cfg.screen, 0, 0, cfg.list_all_sprites[0].armor, (16, 72, 105),
+                                              (27, 123, 179), 'black',
+                                              100, 350, 13)
 
         # cfg.screen.blit(img.timer_tablet, (1663, 10))
         pygame.draw.rect(cfg.screen, 'black', (920, 10, 80, 40))
         pygame.draw.rect(cfg.screen, 'black', (830, 47, 260, 40))
 
-        cfg.list_all_sprites[0].draw_text(cfg.screen, f'{600 - int(cfg.in_game_time / 1000)}', 37, 960, 13, cfg.my_font_p,
-                                 "black")
+        cfg.list_all_sprites[0].draw_text(cfg.screen, f'{600 - int(cfg.in_game_time / 1000)}', 37, 960, 13,
+                                          cfg.my_font_p,
+                                          "black")
         # cfg.list_all_sprites[0].draw_text(cfg.screen, 'seconds left', 32, 915, 50, cfg.my_font_p,
         #                          "black")
 
         # pygame.draw.circle(cfg.screen, (224, 153, 9), (960, 30), 30)
 
-        cfg.list_all_sprites[0].draw_text(cfg.screen, f'{600 - int(cfg.in_game_time / 1000)}', 35, 960, 13, cfg.my_font_p,
-                                 (224, 153, 9))
+        cfg.list_all_sprites[0].draw_text(cfg.screen, f'{600 - int(cfg.in_game_time / 1000)}', 35, 960, 13,
+                                          cfg.my_font_p,
+                                          (224, 153, 9))
         cfg.list_all_sprites[0].draw_text(cfg.screen, 'seconds left', 30, 960, 50, cfg.my_font_p,
-                                 (224, 153, 9))
+                                          (224, 153, 9))
 
         cfg.screen.blit(img.apple_icon, (85, 47))
         cfg.screen.blit(img.shishka_icon, (165, 47))
         cfg.screen.blit(img.coconut_icon, (245, 47))
         cfg.screen.blit(img.wood_icon, (5, 47))
 
-        if cfg.workshop_flag:
+        if cfg.workshop_active_flag:
             workshop()
         if cfg.lose_flag:
             cfg.play_game_active_flag = False
@@ -133,9 +148,11 @@ def lose_game():
     continue_flag = False
     while cfg.lose_game_active_flag:
         cfg.screen.blit(img.die_bg, (0, 0))
-        cfg.list_all_sprites[0].draw_text(cfg.screen, 'You were worse than last time!', 40, 960, 900, cfg.font_interface_p,
-                                 "white")
-        cfg.list_all_sprites[0].draw_text(cfg.screen, 'Press space to continue...', 30, 960, 1000, cfg.font_interface_p, "white")
+        cfg.list_all_sprites[0].draw_text(cfg.screen, 'You were worse than last time!', 40, 960, 900,
+                                          cfg.font_interface_p,
+                                          "white")
+        cfg.list_all_sprites[0].draw_text(cfg.screen, 'Press space to continue...', 30, 960, 1000, cfg.font_interface_p,
+                                          "white")
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
                 continue_flag = True
@@ -147,31 +164,32 @@ def lose_game():
         if continue_flag:
             cfg.screen.fill("black")
             cfg.list_all_sprites[0].draw_text(cfg.screen,
-                                     f'You have mastered only {cfg.list_all_sprites[0].progress}%',
-                                     30,
-                                     960, 200, cfg.font_interface_p, "red")
-            cfg.list_all_sprites[0].draw_text(cfg.screen, f'You have wasted {int(cfg.in_game_time / 1000)} seconds your life',
-                                     24,
-                                     960, 300, cfg.font_interface_p, "orange")
+                                              f'You have mastered only {cfg.list_all_sprites[0].progress}%',
+                                              30,
+                                              960, 200, cfg.font_interface_p, "red")
             cfg.list_all_sprites[0].draw_text(cfg.screen,
-                                     f'You have cut down {cfg.list_all_sprites[0].oak_amount} DUBOV, {cfg.list_all_sprites[0].fir_amount}'
-                                     f'IOLOK and {cfg.list_all_sprites[0].palm_amount} PALMAS',
-                                     24,
-                                     960, 370, cfg.font_interface_p, "yellow")
+                                              f'You have wasted {int(cfg.in_game_time / 1000)} seconds your life',
+                                              24,
+                                              960, 300, cfg.font_interface_p, "orange")
             cfg.list_all_sprites[0].draw_text(cfg.screen,
-                                     f'You have {cfg.list_all_sprites[0].utilities[0]} apples, {cfg.list_all_sprites[0].utilities[1]} '
-                                     f'shishkas, {cfg.list_all_sprites[0].utilities[2]} coconuts left',
-                                     24,
-                                     960, 440, cfg.font_interface_p, "green")
+                                              f'You have cut down {cfg.list_all_sprites[0].oak_amount} DUBOV, {cfg.list_all_sprites[0].fir_amount}'
+                                              f'IOLOK and {cfg.list_all_sprites[0].palm_amount} PALMAS',
+                                              24,
+                                              960, 370, cfg.font_interface_p, "yellow")
+            cfg.list_all_sprites[0].draw_text(cfg.screen,
+                                              f'You have {cfg.list_all_sprites[0].utilities[0]} apples, {cfg.list_all_sprites[0].utilities[1]} '
+                                              f'shishkas, {cfg.list_all_sprites[0].utilities[2]} coconuts left',
+                                              24,
+                                              960, 440, cfg.font_interface_p, "green")
 
             cfg.list_all_sprites[0].draw_text(cfg.screen,
-                                     f'You have destroyed {cfg.list_all_sprites[0].kills} monsters',
-                                     30,
-                                     960, 510, cfg.font_interface_p, "blue")
+                                              f'You have destroyed {cfg.list_all_sprites[0].kills} monsters',
+                                              30,
+                                              960, 510, cfg.font_interface_p, "blue")
             cfg.list_all_sprites[0].draw_text(cfg.screen,
-                                     'Press Esc to exit the menu',
-                                     20,
-                                     960, 680, cfg.font_interface_p, "purple")
+                                              'Press Esc to exit the menu',
+                                              20,
+                                              960, 680, cfg.font_interface_p, "purple")
         pygame.display.flip()
 
 
@@ -180,9 +198,10 @@ def win_game():
     while cfg.win_game_active_flag:
         cfg.screen.blit(img.vic_bg, (0, 0))
         cfg.list_all_sprites[0].draw_text(cfg.screen, 'You have become the real god of the axe!', 40, 960, 700,
-                                 cfg.font_interface_p,
-                                 "green")
-        cfg.list_all_sprites[0].draw_text(cfg.screen, 'Press space to continue...', 30, 960, 1000, cfg.font_interface_p, "green")
+                                          cfg.font_interface_p,
+                                          "green")
+        cfg.list_all_sprites[0].draw_text(cfg.screen, 'Press space to continue...', 30, 960, 1000, cfg.font_interface_p,
+                                          "green")
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
                 continue_flag = True
@@ -193,29 +212,30 @@ def win_game():
         if continue_flag:
             cfg.screen.fill("grey")
             cfg.list_all_sprites[0].draw_text(cfg.screen,
-                                     f'You have mastered only {cfg.list_all_sprites[0].progress}%',
-                                     30,
-                                     960, 200, cfg.font_interface_p, "red")
-            cfg.list_all_sprites[0].draw_text(cfg.screen, f'You have wasted {int(cfg.in_game_time / 1000)} seconds your life',
-                                     24,
-                                     960, 300, cfg.font_interface_p, "orange")
+                                              f'You have mastered only {cfg.list_all_sprites[0].progress}%',
+                                              30,
+                                              960, 200, cfg.font_interface_p, "red")
             cfg.list_all_sprites[0].draw_text(cfg.screen,
-                                     f'You have cut down {cfg.list_all_sprites[0].oak_amount} DUBOV and {cfg.list_all_sprites[0].fir_amount}  IOLOK',
-                                     24,
-                                     960, 370, cfg.font_interface_p, "yellow")
+                                              f'You have wasted {int(cfg.in_game_time / 1000)} seconds your life',
+                                              24,
+                                              960, 300, cfg.font_interface_p, "orange")
             cfg.list_all_sprites[0].draw_text(cfg.screen,
-                                     f'You have {cfg.list_all_sprites[0].utilities[0]} apples, {cfg.list_all_sprites[0].utilities[1]} shishkas, {cfg.list_all_sprites[0].utilities[2]} coconuts left',
-                                     24,
-                                     960, 440, cfg.font_interface_p, "green")
+                                              f'You have cut down {cfg.list_all_sprites[0].oak_amount} DUBOV and {cfg.list_all_sprites[0].fir_amount}  IOLOK',
+                                              24,
+                                              960, 370, cfg.font_interface_p, "yellow")
+            cfg.list_all_sprites[0].draw_text(cfg.screen,
+                                              f'You have {cfg.list_all_sprites[0].utilities[0]} apples, {cfg.list_all_sprites[0].utilities[1]} shishkas, {cfg.list_all_sprites[0].utilities[2]} coconuts left',
+                                              24,
+                                              960, 440, cfg.font_interface_p, "green")
 
             cfg.list_all_sprites[0].draw_text(cfg.screen,
-                                     f'You have destroyed {cfg.list_all_sprites[0].kills} monsters',
-                                     30,
-                                     960, 510, cfg.font_interface_p, "blue")
+                                              f'You have destroyed {cfg.list_all_sprites[0].kills} monsters',
+                                              30,
+                                              960, 510, cfg.font_interface_p, "blue")
             cfg.list_all_sprites[0].draw_text(cfg.screen,
-                                     'Press Esc to exit the menu',
-                                     20,
-                                     960, 680, cfg.font_interface_p, "purple")
+                                              'Press Esc to exit the menu',
+                                              20,
+                                              960, 680, cfg.font_interface_p, "purple")
         pygame.display.flip()
 
 
@@ -614,18 +634,12 @@ def monster_generator(n):
 
 
 def workshop():
-    cfg.screen.blit(pygame.transform.scale(img.tablet, (800, 400)), (560, 200))
-
-    mouse = pygame.mouse.get_pos()
-    click = pygame.mouse.get_pressed()
-
-    cfg.clock.tick(200)
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            quit()
-        elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_ESCAPE:
-                cfg.workshop_flag = False
-                play_game()
-
-    pygame.display.flip()
+    while cfg.workshop_active_flag:
+        cfg.screen.blit(pygame.transform.scale(img.tablet, (800, 400)), (560, 200))
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                quit()
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    cfg.workshop_active_flag = False
+        pygame.display.flip()
