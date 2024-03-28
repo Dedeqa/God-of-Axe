@@ -86,30 +86,27 @@ def play_game():
                                           cfg.font_interface_p,
                                           "red")
 
-        cfg.list_all_sprites[0].draw_text(cfg.screen, f'{(cfg.list_all_sprites[0].utilities[0])}', 16, 215, 60,
+        cfg.list_all_sprites[0].draw_text(cfg.screen, f'{(cfg.list_all_sprites[0].utilities[0])}', 16, 145, 50,
                                           cfg.font_interface_p,
                                           "white")
-        cfg.list_all_sprites[0].draw_text(cfg.screen, f'{(cfg.list_all_sprites[0].utilities[1])}', 16, 295, 60,
+        cfg.list_all_sprites[0].draw_text(cfg.screen, f'{(cfg.list_all_sprites[0].utilities[1])}', 16, 225, 50,
                                           cfg.font_interface_p,
                                           "white")
-        cfg.list_all_sprites[0].draw_text(cfg.screen, f'{(cfg.list_all_sprites[0].utilities[2])}', 16, 375, 60,
+        cfg.list_all_sprites[0].draw_text(cfg.screen, f'{(cfg.list_all_sprites[0].utilities[2])}', 16, 305, 50,
                                           cfg.font_interface_p,
                                           "white")
-        cfg.list_all_sprites[0].draw_text(cfg.screen, f'{(cfg.list_all_sprites[0].wood_amount)}', 16, 65, 60,
-                                          cfg.font_interface_p,
-                                          "white")
-        cfg.list_all_sprites[0].draw_text(cfg.screen, f'{(cfg.list_all_sprites[0].coins)}', 16, 135, 60,
+        cfg.list_all_sprites[0].draw_text(cfg.screen, f'{(cfg.list_all_sprites[0].wood_amount)}', 16, 65, 50,
                                           cfg.font_interface_p,
                                           "white")
 
-        cfg.list_all_sprites[0].draw_info_bar(cfg.screen, 0, 18, cfg.list_all_sprites[0].hp, 'DarkRed', 'red', 'black',
-                                              100, 450, 17)
-        cfg.list_all_sprites[0].draw_info_bar(cfg.screen, 0, 36, cfg.list_all_sprites[0].stamina, (24, 84, 26),
+        cfg.list_all_sprites[0].draw_info_bar(cfg.screen, 0, 14, cfg.list_all_sprites[0].hp, 'DarkRed', 'red', 'black',
+                                              100, 350, 13)
+        cfg.list_all_sprites[0].draw_info_bar(cfg.screen, 0, 28, cfg.list_all_sprites[0].stamina, (24, 84, 26),
                                               (255, 255, 0), 'black',
-                                              100, 450, 17)
+                                              100, 350, 13)
         cfg.list_all_sprites[0].draw_info_bar(cfg.screen, 0, 0, cfg.list_all_sprites[0].armor, (16, 72, 105),
                                               (27, 123, 179), 'black',
-                                              100, 450, 17)
+                                              100, 350, 13)
 
         # cfg.screen.blit(img.timer_tablet, (1663, 10))
         pygame.draw.rect(cfg.screen, 'black', (920, 10, 80, 40))
@@ -129,13 +126,12 @@ def play_game():
         cfg.list_all_sprites[0].draw_text(cfg.screen, 'seconds left', 30, 960, 50, cfg.my_font_p,
                                           (224, 153, 9))
 
-        cfg.screen.blit(img.apple_icon, (165, 57))
-        cfg.screen.blit(img.shishka_icon, (245, 57))
-        cfg.screen.blit(img.coconut_icon, (325, 57))
-        cfg.screen.blit(img.wood_icon, (5, 57))
-        cfg.screen.blit(img.coin_icon, (85, 57))
+        cfg.screen.blit(img.apple_icon, (85, 47))
+        cfg.screen.blit(img.shishka_icon, (165, 47))
+        cfg.screen.blit(img.coconut_icon, (245, 47))
+        cfg.screen.blit(img.wood_icon, (5, 47))
 
-        if cfg.workshop_flag:
+        if cfg.workshop_active_flag:
             workshop()
         if cfg.lose_flag:
             cfg.play_game_active_flag = False
@@ -632,23 +628,18 @@ def monster_generator(n):
     cfg.monsterList = [mobs.Monster(f'Минотавр{i}', 500, cfg.monster_list_x[i], cfg.monster_list_y[i], 300, 20) for i in
                        range(n)]
     cfg.monsterList.append(mobs.min1)
-    cfg.all_sprites.add(mobs.min1)
+    classes.cfg.all_sprites.add(mobs.min1)
     for elem in cfg.monsterList:
-        cfg.all_sprites.add(elem)
+        classes.cfg.all_sprites.add(elem)
 
 
 def workshop():
-    cfg.screen.blit(pygame.transform.scale(img.tablet, (800, 400)), (560, 200))
-
-    mouse = pygame.mouse.get_pos()
-    click = pygame.mouse.get_pressed()
-
-    cfg.clock.tick(200)
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            quit()
-        elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_ESCAPE:
-                cfg.workshop_flag = False
-
-    pygame.display.flip()
+    while cfg.workshop_active_flag:
+        cfg.screen.blit(pygame.transform.scale(img.tablet, (800, 400)), (560, 200))
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                quit()
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    cfg.workshop_active_flag = False
+        pygame.display.flip()

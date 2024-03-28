@@ -278,10 +278,10 @@ class Player(Unit, pygame.sprite.Sprite):
             if keystate[pygame.K_e] and (
                     self.hitbox.colliderect(cfg.all_sprites.sprites()[1].line_left) or self.hitbox.colliderect(cfg.all_sprites.sprites()[1].line_right) or
                     self.hitbox.colliderect(cfg.all_sprites.sprites()[1].line_bottom) or self.hitbox.colliderect(cfg.all_sprites.sprites()[1].line_top)):
-                cfg.workshop_flag = True
+                cfg.workshop_active_flag = True
             elif not (self.hitbox.colliderect(cfg.all_sprites.sprites()[1].line_left) or self.hitbox.colliderect(cfg.all_sprites.sprites()[1].line_right) or
                       self.hitbox.colliderect(cfg.all_sprites.sprites()[1].line_bottom) or self.hitbox.colliderect(cfg.all_sprites.sprites()[1].line_top)):
-                cfg.workshop_flag = False
+                cfg.workshop_active_flag = False
 
             if not (keystate[pygame.K_w] or keystate[pygame.K_s] or keystate[pygame.K_a] or keystate[pygame.K_d] or
                     keystate[pygame.K_SPACE] or self.flag_take_dmg):
