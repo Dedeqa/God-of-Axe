@@ -94,7 +94,6 @@ class Player(Unit, pygame.sprite.Sprite):
                                   self.rect[3] / 6 * 5)
 
     def update(self):
-        global house, all_sprites
         if self.coconut_boost_time < cfg.in_game_time:
             self.stamina_recovery = 0.5
         self.progress = self.wood_amount * 100 / cfg.goal
@@ -112,7 +111,7 @@ class Player(Unit, pygame.sprite.Sprite):
                     cfg.vector = "left"
 
                     if (self.hitbox.collidelist(cfg.trees_rects_right)) == -1 and not self.hitbox.colliderect(
-                            house.line_right):
+                            cfg.all_sprites.sprites()[1].line_right):
                         if keystate[pygame.K_LSHIFT] and self.stamina > 0:
 
                             if self.anim_counter_x == 6:
@@ -148,7 +147,7 @@ class Player(Unit, pygame.sprite.Sprite):
                 if keystate[pygame.K_d]:
                     cfg.vector = "right"
                     if (self.hitbox.collidelist(cfg.trees_rects_left)) == -1 and not self.hitbox.colliderect(
-                            house.line_left):
+                            cfg.all_sprites.sprites()[1].line_left):
                         if keystate[pygame.K_LSHIFT] and self.stamina > 0:
 
                             if self.anim_counter_x == 6:
@@ -184,7 +183,7 @@ class Player(Unit, pygame.sprite.Sprite):
             if not (keystate[pygame.K_w] and keystate[pygame.K_s]):
                 if keystate[pygame.K_w]:
                     if (self.hitbox.collidelist(cfg.trees_rects_bottom)) == -1 and not self.hitbox.colliderect(
-                            house.line_bottom):
+                            cfg.all_sprites.sprites()[1].line_bottom):
                         if keystate[pygame.K_LSHIFT] and self.stamina > 0:
 
                             if self.anim_counter_y == 6:
@@ -225,7 +224,7 @@ class Player(Unit, pygame.sprite.Sprite):
                             func.update_monsters_y(cfg.monsterList, sy, flag_direction=True)
                 if keystate[pygame.K_s]:
                     if (self.hitbox.collidelist(cfg.trees_rects_top)) == -1 and not self.hitbox.colliderect(
-                            house.line_top):
+                            cfg.all_sprites.sprites()[1].line_top):
                         if keystate[pygame.K_LSHIFT] and self.stamina > 0:
 
                             if self.anim_counter_y == 6:
@@ -274,11 +273,11 @@ class Player(Unit, pygame.sprite.Sprite):
                 self.eat_shishka()
 
             if keystate[pygame.K_e] and (
-                    self.hitbox.colliderect(house.line_left) or self.hitbox.colliderect(house.line_right) or
-                    self.hitbox.colliderect(house.line_bottom) or self.hitbox.colliderect(house.line_top)):
+                    self.hitbox.colliderect(cfg.all_sprites.sprites()[1].line_left) or self.hitbox.colliderect(cfg.all_sprites.sprites()[1].line_right) or
+                    self.hitbox.colliderect(cfg.all_sprites.sprites()[1].line_bottom) or self.hitbox.colliderect(cfg.all_sprites.sprites()[1].line_top)):
                 cfg.workshop_flag = True
-            elif not (self.hitbox.colliderect(house.line_left) or self.hitbox.colliderect(house.line_right) or
-                      self.hitbox.colliderect(house.line_bottom) or self.hitbox.colliderect(house.line_top)):
+            elif not (self.hitbox.colliderect(cfg.all_sprites.sprites()[1].line_left) or self.hitbox.colliderect(cfg.all_sprites.sprites()[1].line_right) or
+                      self.hitbox.colliderect(cfg.all_sprites.sprites()[1].line_bottom) or self.hitbox.colliderect(cfg.all_sprites.sprites()[1].line_top)):
                 cfg.workshop_flag = False
 
             if not (keystate[pygame.K_w] or keystate[pygame.K_s] or keystate[pygame.K_a] or keystate[pygame.K_d] or
@@ -303,7 +302,7 @@ class Player(Unit, pygame.sprite.Sprite):
                         self.death_delay = cfg.in_game_time + 1000
                     self.anim_counter_death += 1
                 elif self.anim_counter_death == 7 and self.death_delay < cfg.in_game_time:
-                    self.remove(all_sprites)
+                    self.remove(cfg.all_sprites)
                     self.kill()
                     cfg.lose_flag = True
             elif cfg.vector == "left":
@@ -316,7 +315,7 @@ class Player(Unit, pygame.sprite.Sprite):
                         self.death_delay = cfg.in_game_time + 1000
                     self.anim_counter_death += 1
                 elif self.anim_counter_death == 7 and self.death_delay < cfg.in_game_time:
-                    self.remove(all_sprites)
+                    self.remove(cfg.all_sprites)
                     self.kill()
                     cfg.lose_flag = True
 
@@ -476,9 +475,7 @@ class Weapon:
         self.damage += 5
 
 
-all_sprites = pygame.sprite.Group()
-player = Player("Albert", 100, cfg.WIDTH, cfg.HEIGHT)
-all_sprites.add(player)
+
 
 
 class Tree(Unit, pygame.sprite.Sprite):
@@ -512,20 +509,20 @@ class Tree(Unit, pygame.sprite.Sprite):
 
     def update(self):
 
-        self.player_vector = pm.Vector2(player.rect.x, player.rect.y)
+        self.player_vector = pm.Vector2(cfg.list_all_sprites[0].rect.x, cfg.list_all_sprites[0].rect.y)
         self.tree_vector = pm.Vector2(self.rect.centerx, self.rect.y + 70)
         distance = self.tree_vector.distance_to(self.player_vector)
 
-        self.rect.x = player.bg_x + self.posx
-        self.rect.y = player.bg_y + self.posy
-        self.line_left[0] = player.bg_x + self.line_left_x
-        self.line_left[1] = player.bg_y + self.line_left_y
-        self.line_right[0] = player.bg_x + self.line_right_x
-        self.line_right[1] = player.bg_y + self.line_right_y
-        self.line_top[0] = player.bg_x + self.line_top_x
-        self.line_top[1] = player.bg_y + self.line_top_y
-        self.line_bottom[0] = player.bg_x + self.line_bottom_x
-        self.line_bottom[1] = player.bg_y + self.line_bottom_y
+        self.rect.x = cfg.list_all_sprites[0].bg_x + self.posx
+        self.rect.y = cfg.list_all_sprites[0].bg_y + self.posy
+        self.line_left[0] = cfg.list_all_sprites[0].bg_x + self.line_left_x
+        self.line_left[1] = cfg.list_all_sprites[0].bg_y + self.line_left_y
+        self.line_right[0] = cfg.list_all_sprites[0].bg_x + self.line_right_x
+        self.line_right[1] = cfg.list_all_sprites[0].bg_y + self.line_right_y
+        self.line_top[0] = cfg.list_all_sprites[0].bg_x + self.line_top_x
+        self.line_top[1] = cfg.list_all_sprites[0].bg_y + self.line_top_y
+        self.line_bottom[0] = cfg.list_all_sprites[0].bg_x + self.line_bottom_x
+        self.line_bottom[1] = cfg.list_all_sprites[0].bg_y + self.line_bottom_y
 
         if distance <= 110:
             self.draw_info_bar(cfg.screen, self.rect.x + 25, self.rect.y - 10, self.hp, (92, 69, 10), (140, 104, 13),
@@ -541,7 +538,7 @@ class Tree(Unit, pygame.sprite.Sprite):
             if self.status:
                 sounds.falling_tree.play()
 
-            self.remove(all_sprites)
+            self.remove(cfg.all_sprites)
             self.kill()
             self.give_drop()
             self.status = False
@@ -553,13 +550,13 @@ class Tree(Unit, pygame.sprite.Sprite):
             self.line_top[3] = 0
             self.line_bottom[2] = 0
             self.line_bottom[3] = 0
-            player.wood_amount += self.bonus
+            cfg.list_all_sprites[0].wood_amount += self.bonus
             if self.bonus == 10:
-                player.fir_amount += 1
+                cfg.list_all_sprites[0].fir_amount += 1
             elif self.bonus == 5:
-                player.oak_amount += 1
+                cfg.list_all_sprites[0].oak_amount += 1
             elif self.bonus == 25:
-                player.palm_amount += 1
+                cfg.list_all_sprites[0].palm_amount += 1
             self.bonus = 0
 
     def give_drop(self):
@@ -569,7 +566,7 @@ class Tree(Unit, pygame.sprite.Sprite):
             chance = random.randint(1, 100)
 
             if 0 <= chance <= cfg.temp_random_list[self.random_index]:
-                player.utilities[self.drop] += 1
+                cfg.list_all_sprites[0].utilities[self.drop] += 1
                 cfg.temp_random_list[self.random_index] = cfg.random_list[self.random_index]
             else:
                 cfg.temp_random_list[self.random_index] += 10
@@ -612,9 +609,8 @@ class House(pygame.sprite.Sprite):
         print(self.rect)
 
     def update(self):
-        global player
-        self.rect.x = self.posx + player.bg_x
-        self.rect.y = self.posy + player.bg_y
+        self.rect.x = self.posx + cfg.list_all_sprites[0].bg_x
+        self.rect.y = self.posy + cfg.list_all_sprites[0].bg_y
         cfg.screen.fill("red", self.line_left)
         cfg.screen.fill("red", self.line_right)
         cfg.screen.fill("red", self.line_top)
@@ -623,34 +619,41 @@ class House(pygame.sprite.Sprite):
         # self.line_left.y = self.line_left_y + cfg.bg_y
         # self.line_right.x = self.line_right_x + cfg.bg_x
         # self.line_right.y = self.line_right_y + cfg.bg_y
-        self.line_right.x = self.posx + self.rect[2] - 30 + player.bg_x
-        self.line_right.y = self.posy + 60 + player.bg_y
-        self.line_left.x = self.posx - 10 + player.bg_x
-        self.line_left.y = self.posy + 60 + player.bg_y
-        self.line_top.x = self.posx - 10 + player.bg_x
-        self.line_top.y = self.posy + 60 + player.bg_y
-        self.line_bottom.x = self.posx - 10 + player.bg_x
-        self.line_bottom.y = self.posy + self.rect[3] + player.bg_y
+        self.line_right.x = self.posx + self.rect[2] - 30 + cfg.list_all_sprites[0].bg_x
+        self.line_right.y = self.posy + 60 + cfg.list_all_sprites[0].bg_y
+        self.line_left.x = self.posx - 10 + cfg.list_all_sprites[0].bg_x
+        self.line_left.y = self.posy + 60 + cfg.list_all_sprites[0].bg_y
+        self.line_top.x = self.posx - 10 + cfg.list_all_sprites[0].bg_x
+        self.line_top.y = self.posy + 60 + cfg.list_all_sprites[0].bg_y
+        self.line_bottom.x = self.posx - 10 + cfg.list_all_sprites[0].bg_x
+        self.line_bottom.y = self.posy + self.rect[3] + cfg.list_all_sprites[0].bg_y
         # # self.line_right.y = cfg.bg_y + self.posy
         # # self.line_left.x = cfg.bg_x + self.posx
         # # self.line_left.y = cfg.bg_y +self.posy
 
 
-house = House(960, 200)
-all_sprites.add(house)
+
 
 
 def initit_units():
     # Экземпляр класса Player() -----------------------------------------------------------------------
-    all_sprites = pygame.sprite.Group()
     player = Player("Albert", 100, cfg.WIDTH, cfg.HEIGHT)
-    all_sprites.add(player)
-
+    cfg.all_sprites.add(player)
     # --------------------------------------------------------------------------------------------------
     house = House(960, 200)
-    all_sprites.add(house)
+    cfg.all_sprites.add(house)
+    # print(cfg.all_sprites.sprites())
 
 
 def del_units():
-    player.__del__()
-
+    for obj in cfg.all_sprites:
+        del obj
+    cfg.all_sprites.empty()
+    cfg.tree_list_x.clear()
+    cfg.tree_list_y.clear()
+    cfg.monster_list_x.clear()
+    cfg.monster_list_y.clear()
+    cfg.trees_rects_bottom.clear()
+    cfg.trees_rects_top.clear()
+    cfg.trees_rects_left.clear()
+    cfg.trees_rects_right.clear()

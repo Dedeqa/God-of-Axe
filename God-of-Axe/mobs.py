@@ -39,7 +39,7 @@ class Monster(cl.Unit, pygame.sprite.Sprite):
 
     def update(self):
 
-        self.target_vector = m.Vector2(cl.player.rect.x, cl.player.rect.y)
+        self.target_vector = m.Vector2(cfg.list_all_sprites[0].rect.x, cfg.list_all_sprites[0].rect.y)
         self.follower_vector = m.Vector2(self.rect.x, self.rect.y)
 
         self.distance = self.follower_vector.distance_to(self.target_vector)
@@ -56,7 +56,7 @@ class Monster(cl.Unit, pygame.sprite.Sprite):
         else:
             step_distance = 0
 
-        if self.distance <= self.viewing_range and cl.player.hp > 0:
+        if self.distance <= self.viewing_range and cfg.list_all_sprites[0].hp > 0:
 
             if self.sound_flag:
                 self.sound_flag = False
@@ -64,23 +64,23 @@ class Monster(cl.Unit, pygame.sprite.Sprite):
 
             self.follower_vector += direction_vector * step_distance
 
-            if self.follower_vector.x > cl.player.rect.x and self.follower_vector.y > cl.player.rect.y:
-                if self.follower_vector.x - cl.player.rect.x > self.follower_vector.y - cl.player.rect.y:
+            if self.follower_vector.x > cfg.list_all_sprites[0].rect.x and self.follower_vector.y > cfg.list_all_sprites[0].rect.y:
+                if self.follower_vector.x - cfg.list_all_sprites[0].rect.x > self.follower_vector.y - cfg.list_all_sprites[0].rect.y:
                     self.side = "left"
                 else:
                     self.side = "top"
-            elif self.follower_vector.x > cl.player.rect.x and self.follower_vector.y < cl.player.rect.y:
-                if self.follower_vector.x - cl.player.rect.x > cl.player.rect.y - self.follower_vector.y:
+            elif self.follower_vector.x > cfg.list_all_sprites[0].rect.x and self.follower_vector.y < cfg.list_all_sprites[0].rect.y:
+                if self.follower_vector.x - cfg.list_all_sprites[0].rect.x > cfg.list_all_sprites[0].rect.y - self.follower_vector.y:
                     self.side = "left"
                 else:
                     self.side = "bottom"
-            elif self.follower_vector.x < cl.player.rect.x and self.follower_vector.y > cl.player.rect.y:
-                if cl.player.rect.x - self.follower_vector.x > self.follower_vector.y - cl.player.rect.y:
+            elif self.follower_vector.x < cfg.list_all_sprites[0].rect.x and self.follower_vector.y > cfg.list_all_sprites[0].rect.y:
+                if cfg.list_all_sprites[0].rect.x - self.follower_vector.x > self.follower_vector.y - cfg.list_all_sprites[0].rect.y:
                     self.side = "right"
                 else:
                     self.side = "top"
-            elif self.follower_vector.x < cl.player.rect.x and self.follower_vector.y < cl.player.rect.y:
-                if cl.player.rect.x - self.follower_vector.x > cl.player.rect.y - self.follower_vector.y:
+            elif self.follower_vector.x < cfg.list_all_sprites[0].rect.x and self.follower_vector.y < cfg.list_all_sprites[0].rect.y:
+                if cfg.list_all_sprites[0].rect.x - self.follower_vector.x > cfg.list_all_sprites[0].rect.y - self.follower_vector.y:
                     self.side = "right"
                 else:
                     self.side = "bottom"
@@ -115,32 +115,32 @@ class Monster(cl.Unit, pygame.sprite.Sprite):
 
                 if not self.attack_flag:
                     if self.side == "right":
-                        if (cl.player.hitbox.collidelist(cfg.trees_rects_left)) == -1 and (not cl.player.hitbox.colliderect(
-                                cl.house.line_left) and not cl.player.hitbox.collidelist(
-                                cfg.trees_rects_right) and not cl.player.hitbox.collidelist(
-                                cfg.trees_rects_top) and not cl.player.hitbox.collidelist(cfg.trees_rects_bottom)):
+                        if (cfg.list_all_sprites[0].hitbox.collidelist(cfg.trees_rects_left)) == -1 and (not cfg.list_all_sprites[0].hitbox.colliderect(
+                                cl.cfg.all_sprites.sprites()[1].line_left) and not cfg.list_all_sprites[0].hitbox.collidelist(
+                                cfg.trees_rects_right) and not cfg.list_all_sprites[0].hitbox.collidelist(
+                                cfg.trees_rects_top) and not cfg.list_all_sprites[0].hitbox.collidelist(cfg.trees_rects_bottom)):
 
                             if cfg.bg_x > -1920:
                                 cfg.bg_x -= 1
                     elif self.side == "left":
-                        if (cl.player.hitbox.collidelist(cfg.trees_rects_right)) == -1 and (not cl.player.hitbox.colliderect(
-                                cl.house.line_left) and not cl.player.hitbox.collidelist(
-                                cfg.trees_rects_right) and not cl.player.hitbox.collidelist(
-                                cfg.trees_rects_top) and not cl.player.hitbox.collidelist(cfg.trees_rects_bottom)):
+                        if (cfg.list_all_sprites[0].hitbox.collidelist(cfg.trees_rects_right)) == -1 and (not cfg.list_all_sprites[0].hitbox.colliderect(
+                                cl.cfg.all_sprites.sprites()[1].line_left) and not cfg.list_all_sprites[0].hitbox.collidelist(
+                                cfg.trees_rects_right) and not cfg.list_all_sprites[0].hitbox.collidelist(
+                                cfg.trees_rects_top) and not cfg.list_all_sprites[0].hitbox.collidelist(cfg.trees_rects_bottom)):
                             if cfg.bg_x < 1920:
                                 cfg.bg_x += 1
                     elif self.side == "top":
-                        if (cl.player.hitbox.collidelist(cfg.trees_rects_bottom)) == -1 and (not cl.player.hitbox.colliderect(
-                                cl.house.line_left) and not cl.player.hitbox.collidelist(
-                                cfg.trees_rects_right) and not cl.player.hitbox.collidelist(
-                                cfg.trees_rects_top) and not cl.player.hitbox.collidelist(cfg.trees_rects_bottom)):
+                        if (cfg.list_all_sprites[0].hitbox.collidelist(cfg.trees_rects_bottom)) == -1 and (not cfg.list_all_sprites[0].hitbox.colliderect(
+                                cl.cfg.all_sprites.sprites()[1].line_left) and not cfg.list_all_sprites[0].hitbox.collidelist(
+                                cfg.trees_rects_right) and not cfg.list_all_sprites[0].hitbox.collidelist(
+                                cfg.trees_rects_top) and not cfg.list_all_sprites[0].hitbox.collidelist(cfg.trees_rects_bottom)):
                             if cfg.bg_y < 1080:
                                 cfg.bg_y += 1
                     elif self.side == "bottom":
-                        if (cl.player.hitbox.collidelist(cfg.trees_rects_top)) == -1 and (not cl.player.hitbox.colliderect(
-                                cl.house.line_left) and not cl.player.hitbox.collidelist(
-                                cfg.trees_rects_right) and not cl.player.hitbox.collidelist(
-                                cfg.trees_rects_top) and not cl.player.hitbox.collidelist(cfg.trees_rects_bottom)):
+                        if (cfg.list_all_sprites[0].hitbox.collidelist(cfg.trees_rects_top)) == -1 and (not cfg.list_all_sprites[0].hitbox.colliderect(
+                                cl.cfg.all_sprites.sprites()[1].line_left) and not cfg.list_all_sprites[0].hitbox.collidelist(
+                                cfg.trees_rects_right) and not cfg.list_all_sprites[0].hitbox.collidelist(
+                                cfg.trees_rects_top) and not cfg.list_all_sprites[0].hitbox.collidelist(cfg.trees_rects_bottom)):
                             if cfg.bg_y > -1080:
                                 cfg.bg_y -= 1
 
@@ -148,7 +148,7 @@ class Monster(cl.Unit, pygame.sprite.Sprite):
 
             else:
                 self.attack_timer = 100
-                cl.player.flag_take_dmg = False
+                cfg.list_all_sprites[0].flag_take_dmg = False
 
         else:
 
@@ -181,30 +181,30 @@ class Monster(cl.Unit, pygame.sprite.Sprite):
             self.hp -= dmg
             sounds.hit_monster.play()
         if self.hp <= 0:
-            cl.player.kills += 1
-            self.remove(cl.all_sprites)
+            cfg.list_all_sprites[0].kills += 1
+            self.remove(cl.cfg.all_sprites)
             self.kill()
 
     def attack(self):
 
         if self.attack_timer == 100:
             self.attack_flag = True
-            cl.player.take_dmg(self.damage)
+            cfg.list_all_sprites[0].take_dmg(self.damage)
             self.attack_timer = 0
         if self.side == "left":
             if self.attack_timer == 5:
-                cl.player.image = img.woodcutter_hurt_right[0]
+                cfg.list_all_sprites[0].image = img.woodcutter_hurt_right[0]
             if self.attack_timer == 10:
-                cl.player.image = img.woodcutter_hurt_right[1]
+                cfg.list_all_sprites[0].image = img.woodcutter_hurt_right[1]
             if self.attack_timer == 15:
-                cl.player.image = img.woodcutter_hurt_right[2]
+                cfg.list_all_sprites[0].image = img.woodcutter_hurt_right[2]
         elif self.side == "right":
             if self.attack_timer == 5:
-                cl.player.image = img.woodcutter_hurt_left[0]
+                cfg.list_all_sprites[0].image = img.woodcutter_hurt_left[0]
             if self.attack_timer == 10:
-                cl.player.image = img.woodcutter_hurt_left[1]
+                cfg.list_all_sprites[0].image = img.woodcutter_hurt_left[1]
             if self.attack_timer == 15:
-                cl.player.image = img.woodcutter_hurt_left[2]
+                cfg.list_all_sprites[0].image = img.woodcutter_hurt_left[2]
         self.attack_timer += 1
 
 

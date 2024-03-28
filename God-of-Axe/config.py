@@ -14,6 +14,10 @@ FPS = 60  # Количество FPS
 
 clock = pygame.time.Clock()
 
+#Лист со всеми объектами
+all_sprites = pygame.sprite.Group()
+list_all_sprites = []
+
 random_list = [40, 25, 30]
 temp_random_list = [40, 25, 30]
 
@@ -125,7 +129,7 @@ point2_rect = img.point2.get_rect()
 point2_rect.center = (scale2_rect.right, scale2_rect.centery)
 
 # Надпись God of Axe в Меню --------------------------------------------------------------------------------------------
-menu_title = pygame.font.Font(f'{my_font_p}', 100).render("God of Axe", True, (224, 153, 9))
+menu_title = pygame.font.Font(f'{my_font_p}', 100).render("BIG PENIS", True, (224, 153, 9))
 menu_title_rect = menu_title.get_rect()
 menu_title_rect.bottomleft = (0, size[1])
 
@@ -160,6 +164,6 @@ menu_active_rect = img.menu_active.get_rect()
 menu_active_rect.center = (size[0] // 2, 558)
 
 # Условие победы -------------------------------------------------------------------------------------------------------
-goal = 500
+goal = 5
 # Время игровой сессии -------------------------------------------------------------------------------------------------
 in_game_time = 0
