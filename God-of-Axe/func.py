@@ -632,7 +632,6 @@ def monster_generator(n):
     for elem in cfg.monsterList:
         classes.cfg.all_sprites.add(elem)
 
-
 def workshop():
     while cfg.workshop_active_flag:
         cfg.screen.blit(pygame.transform.scale(img.tablet, (800, 400)), (560, 200))
