@@ -404,3 +404,7 @@ vic_bg = pygame.transform.scale(pygame.image.load(vic_bg_p).convert_alpha(), (19
 
 # Ионка дома
 house_icon = pygame.image.load('Images/other_objects/house.png')
+
+# Кнопка Upgrade в Workshop --------------------------------------------------------------------------------------------
+btn_upgrade_p = f.resource_path("Images/other_objects/btn_upgrade.png")
+btn_upgrade = pygame.transform.scale(pygame.image.load(btn_upgrade_p).convert_alpha(), (300, 200))

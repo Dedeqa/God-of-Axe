@@ -48,7 +48,7 @@ def play_game():
     #     cfg.start_game_sound_flag = False     больше не воспроизводится музыка в игре
     classes.initit_units()
     cfg.list_all_sprites = cfg.all_sprites.sprites()
-    monster_generator(100)
+    monster_generator(50)
     tree_generator(400)
     while cfg.play_game_active_flag:
         pressed_keys = pygame.key.get_pressed()
@@ -368,109 +368,10 @@ def pause():
                 cfg.menu_active_flag = True
                 cfg.play_game_active_flag = False
                 classes.del_units()
-                # for obj in classes.cfg.all_sprites:
-                #     del obj
-                #
-                # classes.cfg.all_sprites.empty()
-                # classes.cfg.all_sprites.clear(cfg.screen, cfg.screen)
-
-                # cfg.bg_x, cfg.bg_y = 0, 0
-
-                # for elem1, elem2, elem3 in zip(cfg.trees1, cfg.trees2, cfg.trees3):
-                #     classes.cfg.all_sprites.remove(elem1, elem2, elem3)
-                #     elem1.line_left[2] = 0
-                #     elem1.line_left[3] = 0
-                #     elem1.line_right[2] = 0
-                #     elem1.line_right[3] = 0
-                #     elem1.line_top[2] = 0
-                #     elem1.line_top[3] = 0
-                #     elem1.line_bottom[2] = 0
-                #     elem1.line_bottom[3] = 0
-                #
-                #     elem2.line_left[2] = 0
-                #     elem2.line_left[3] = 0
-                #     elem2.line_right[2] = 0
-                #     elem2.line_right[3] = 0
-                #     elem2.line_top[2] = 0
-                #     elem2.line_top[3] = 0
-                #     elem2.line_bottom[2] = 0
-                #     elem2.line_bottom[3] = 0
-                #
-                #     elem3.line_left[2] = 0
-                #     elem3.line_left[3] = 0
-                #     elem3.line_right[2] = 0
-                #     elem3.line_right[3] = 0
-                #     elem3.line_top[2] = 0
-                #     elem3.line_top[3] = 0
-                #     elem3.line_bottom[2] = 0
-                #     elem3.line_bottom[3] = 0
-                #     cfg.trees1.remove(elem1)
-                #     cfg.trees2.remove(elem2)
-                #     cfg.trees3.remove(elem3)
-
-                # for elem in cfg.trees1:
-                #     classes.cfg.all_sprites.remove(elem)
-                #     elem.line_left[2] = 0
-                #     elem.line_left[3] = 0
-                #     elem.line_right[2] = 0
-                #     elem.line_right[3] = 0
-                #     elem.line_top[2] = 0
-                #     elem.line_top[3] = 0
-                #     elem.line_bottom[2] = 0
-                #     elem.line_bottom[3] = 0
-                #     cfg.trees1.remove(elem)
-                #
-                # for elem in cfg.trees2:
-                #     classes.cfg.all_sprites.remove(elem)
-                #     elem.line_left[2] = 0
-                #     elem.line_left[3] = 0
-                #     elem.line_right[2] = 0
-                #     elem.line_right[3] = 0
-                #     elem.line_top[2] = 0
-                #     elem.line_top[3] = 0
-                #     elem.line_bottom[2] = 0
-                #     elem.line_bottom[3] = 0
-                #     cfg.trees2.remove(elem)
-                #
-                # for elem in cfg.trees3:
-                #     classes.cfg.all_sprites.remove(elem)
-                #     elem.line_left[2] = 0
-                #     elem.line_left[3] = 0
-                #     elem.line_right[2] = 0
-                #     elem.line_right[3] = 0
-                #     elem.line_top[2] = 0
-                #     elem.line_top[3] = 0
-                #     elem.line_bottom[2] = 0
-                #     elem.line_bottom[3] = 0
-                #     cfg.trees3.remove(elem)
-                #
-                # for elem in cfg.monsterList:
-                #     classes.cfg.all_sprites.remove(elem)
-                #
-                # cfg.tree_list_x.clear()
-                # cfg.tree_list_y.clear()
-                # cfg.monster_list_x.clear()
-                # cfg.monster_list_y.clear()
-                #
-                # cfg.list_all_sprites[0].hp = 100
-                # cfg.list_all_sprites[0].stamina = 100
-                # cfg.list_all_sprites[0].armor = 25
-                # cfg.list_all_sprites[0].stamina_recovery = 0.5
-                # cfg.list_all_sprites[0].rect = cfg.list_all_sprites[0].image.get_rect()
-                # cfg.list_all_sprites[0].rect.center = (cfg.list_all_sprites[0].posx / 2, cfg.list_all_sprites[0].posy / 2)
-                # cfg.list_all_sprites[0].weapon = classes.Weapon(100, 1000)
-                #
-                # cfg.list_all_sprites[0].utilities = [3, 0, 0]
-                # cfg.list_all_sprites[0].kills = 0
-
             quit_delay_start += 1
         else:
             cfg.screen.blit(img.menu, cfg.menu_rect)
         pygame.display.flip()
-        # for obj in classes.cfg.all_sprites:
-        #     del obj
-        # classes.cfg.all_sprites.empty()
-
 
 def options_menu():
     active_flag = True  # Флаг активного состояния options_menu
@@ -566,8 +467,8 @@ def tree_generator(n):
     count = 0
     while count < n:
         cfg.add_flag = True
-        x = random.randint(-1870, 3740)
-        y = random.randint(-1030, 2000)
+        x = random.randint(-1820, 3640)
+        y = random.randint(-1030, 1900)
         if abs(x - cfg.all_sprites.sprites()[1].rect.center[0]) < cfg.delta + 100 and abs(
                 y - cfg.all_sprites.sprites()[1].rect.center[1]) < cfg.delta + 100:
             cfg.add_flag = False
@@ -595,7 +496,6 @@ def tree_generator(n):
         cfg.trees_rects_bottom.append(elem.line_bottom)
 
     for elem in cfg.trees2:
-        elem.image = pygame.image.load('Images/Trees/Tree2.png')
         classes.cfg.all_sprites.add(elem)
         cfg.trees_rects_left.append(elem.line_left)
         cfg.trees_rects_right.append(elem.line_right)
@@ -603,7 +503,6 @@ def tree_generator(n):
         cfg.trees_rects_bottom.append(elem.line_bottom)
 
     for elem in cfg.trees3:
-        elem.image = pygame.image.load('Images/Trees/Tree3.png')
         classes.cfg.all_sprites.add(elem)
         cfg.trees_rects_left.append(elem.line_left)
         cfg.trees_rects_right.append(elem.line_right)
@@ -622,9 +521,9 @@ def monster_generator(n):
             cfg.add_flag = False
         if cfg.add_flag:
             for i in range(count):
-                if (abs(cfg.monster_list_x[i] - x) < cfg.delta_monsters or abs(
+                if (abs(cfg.monster_list_x[i] - x) < cfg.delta_monsters and abs(
                         cfg.monster_list_y[i] - y) < cfg.delta_monsters) and (abs(
-                    cfg.monster_list_x[i] - cfg.list_all_sprites[0].rect.x) < cfg.delta_hero or abs(
+                    cfg.monster_list_x[i] - cfg.list_all_sprites[0].rect.x) < cfg.delta_hero and abs(
                     cfg.monster_list_y[i] - cfg.list_all_sprites[0].rect.y) < cfg.delta_hero):
                     cfg.add_flag = False
         if cfg.add_flag:
@@ -648,36 +547,4 @@ def workshop():
                     cfg.workshop_active_flag = False
         pygame.display.flip()
 
-# def inventory():
-#     while cfg.inventory_active_flag:
-#         pressed_keys = pygame.key.get_pressed()
-#
-#         if pressed_keys[pygame.K_LALT]:
-#             cfg.screen.blit(img.inventory_tablet, cfg.inventory_tablet_rect)
-#             cfg.list_all_sprites[0].draw_text(cfg.screen, f'{(cfg.list_all_sprites[0].utilities[0])}', 30, 635, 460,
-#                                               cfg.font_interface_p,
-#                                               "white")
-#             cfg.list_all_sprites[0].draw_text(cfg.screen, f'{(cfg.list_all_sprites[0].utilities[1])}', 16, 295, 57,
-#                                               cfg.font_interface_p,
-#                                               "white")
-#             cfg.list_all_sprites[0].draw_text(cfg.screen, f'{(cfg.list_all_sprites[0].utilities[2])}', 16, 375, 57,
-#                                               cfg.font_interface_p,
-#                                               "white")
-#             cfg.list_all_sprites[0].draw_text(cfg.screen, f'{(cfg.list_all_sprites[0].wood_amount)}', 16, 65, 57,
-#                                               cfg.font_interface_p,
-#                                               "white")
-#             cfg.list_all_sprites[0].draw_text(cfg.screen, f'{(cfg.list_all_sprites[0].coins)}', 16, 135, 57,
-#                                               cfg.font_interface_p,
-#                                               "white")
-#             cfg.screen.blit(img.apple_icon, (600, 400))
-#             cfg.screen.blit(img.shishka_icon, (245, 55))
-#             cfg.screen.blit(img.coconut_icon, (325, 55))
-#             cfg.screen.blit(img.wood_icon, (5, 55))
-#             cfg.screen.blit(img.coin_icon, (85, 55))
-#
-#             for event in pygame.event.get():
-#                 if event.type == pygame.QUIT:
-#                     quit()
-#         else:
-#             cfg.inventory_active_flag = False
-#         pygame.display.flip()
+
