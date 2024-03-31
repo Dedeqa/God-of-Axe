@@ -276,11 +276,15 @@ class Player(Unit, pygame.sprite.Sprite):
                 self.eat_shishka()
 
             if keystate[pygame.K_e] and (
-                    self.hitbox.colliderect(cfg.all_sprites.sprites()[1].line_left) or self.hitbox.colliderect(cfg.all_sprites.sprites()[1].line_right) or
-                    self.hitbox.colliderect(cfg.all_sprites.sprites()[1].line_bottom) or self.hitbox.colliderect(cfg.all_sprites.sprites()[1].line_top)):
+                    self.hitbox.colliderect(cfg.all_sprites.sprites()[1].line_left) or self.hitbox.colliderect(
+                cfg.all_sprites.sprites()[1].line_right) or
+                    self.hitbox.colliderect(cfg.all_sprites.sprites()[1].line_bottom) or self.hitbox.colliderect(
+                cfg.all_sprites.sprites()[1].line_top)):
                 cfg.workshop_active_flag = True
-            elif not (self.hitbox.colliderect(cfg.all_sprites.sprites()[1].line_left) or self.hitbox.colliderect(cfg.all_sprites.sprites()[1].line_right) or
-                      self.hitbox.colliderect(cfg.all_sprites.sprites()[1].line_bottom) or self.hitbox.colliderect(cfg.all_sprites.sprites()[1].line_top)):
+            elif not (self.hitbox.colliderect(cfg.all_sprites.sprites()[1].line_left) or self.hitbox.colliderect(
+                    cfg.all_sprites.sprites()[1].line_right) or
+                      self.hitbox.colliderect(cfg.all_sprites.sprites()[1].line_bottom) or self.hitbox.colliderect(
+                        cfg.all_sprites.sprites()[1].line_top)):
                 cfg.workshop_active_flag = False
 
             if not (keystate[pygame.K_w] or keystate[pygame.K_s] or keystate[pygame.K_a] or keystate[pygame.K_d] or
@@ -478,9 +482,6 @@ class Weapon:
         self.damage += 5
 
 
-
-
-
 class Tree(Unit, pygame.sprite.Sprite):
 
     def __init__(self, nm, hp, posx, posy, bonus, drop, random_index):
@@ -633,9 +634,6 @@ class House(pygame.sprite.Sprite):
         # # self.line_right.y = cfg.bg_y + self.posy
         # # self.line_left.x = cfg.bg_x + self.posx
         # # self.line_left.y = cfg.bg_y +self.posy
-
-
-
 
 
 def initit_units():

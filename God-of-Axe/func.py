@@ -51,6 +51,7 @@ def play_game():
     monster_generator(100)
     tree_generator(400)
     while cfg.play_game_active_flag:
+        pressed_keys = pygame.key.get_pressed()
         cfg.clock.tick(cfg.FPS)
         cfg.in_game_time = pygame.time.get_ticks()
         # print(cfg.clock.get_fps())
@@ -61,18 +62,26 @@ def play_game():
                 if event.key == pygame.K_ESCAPE:
                     cfg.pause_active_flag = True
                     pause()
+                # elif event.key == pygame.K_LALT:
+                #     cfg.inventory_active_flag = True
+                #     inventory()
 
         cfg.screen.blit(img.game_bg,
                         (-1920 + cfg.list_all_sprites[0].bg_x, -1080 + cfg.list_all_sprites[0].bg_y))  # 1 зона
-        cfg.screen.blit(img.game_bg, (0 + cfg.list_all_sprites[0].bg_x, -1080 + cfg.list_all_sprites[0].bg_y))  # 2 зона
+        cfg.screen.blit(img.game_bg,
+                        (0 + cfg.list_all_sprites[0].bg_x, -1080 + cfg.list_all_sprites[0].bg_y))  # 2 зона
         cfg.screen.blit(img.game_bg,
                         (1920 + cfg.list_all_sprites[0].bg_x, -1080 + cfg.list_all_sprites[0].bg_y))  # 3 зона
-        cfg.screen.blit(img.game_bg, (-1920 + cfg.list_all_sprites[0].bg_x, 0 + cfg.list_all_sprites[0].bg_y))  # 4 зона
-        cfg.screen.blit(img.game_bg, (0 + cfg.list_all_sprites[0].bg_x, 0 + cfg.list_all_sprites[0].bg_y))  # 5 зона
-        cfg.screen.blit(img.game_bg, (1920 + cfg.list_all_sprites[0].bg_x, 0 + cfg.list_all_sprites[0].bg_y))  # 6 зона
+        cfg.screen.blit(img.game_bg,
+                        (-1920 + cfg.list_all_sprites[0].bg_x, 0 + cfg.list_all_sprites[0].bg_y))  # 4 зона
+        cfg.screen.blit(img.game_bg,
+                        (0 + cfg.list_all_sprites[0].bg_x, 0 + cfg.list_all_sprites[0].bg_y))  # 5 зона
+        cfg.screen.blit(img.game_bg,
+                        (1920 + cfg.list_all_sprites[0].bg_x, 0 + cfg.list_all_sprites[0].bg_y))  # 6 зона
         cfg.screen.blit(img.game_bg,
                         (-1920 + cfg.list_all_sprites[0].bg_x, 1080 + cfg.list_all_sprites[0].bg_y))  # 7 зона
-        cfg.screen.blit(img.game_bg, (0 + cfg.list_all_sprites[0].bg_x, 1080 + cfg.list_all_sprites[0].bg_y))  # 8 зона
+        cfg.screen.blit(img.game_bg,
+                        (0 + cfg.list_all_sprites[0].bg_x, 1080 + cfg.list_all_sprites[0].bg_y))  # 8 зона
         cfg.screen.blit(img.game_bg,
                         (1920 + cfg.list_all_sprites[0].bg_x, 1080 + cfg.list_all_sprites[0].bg_y))  # 9 зона
 
@@ -85,22 +94,6 @@ def play_game():
         cfg.list_all_sprites[0].draw_text(cfg.screen, f'{int(cfg.list_all_sprites[0].progress)} %', 18, 960, 1040,
                                           cfg.font_interface_p,
                                           "red")
-
-        cfg.list_all_sprites[0].draw_text(cfg.screen, f'{(cfg.list_all_sprites[0].utilities[0])}', 16, 215, 57,
-                                          cfg.font_interface_p,
-                                          "white")
-        cfg.list_all_sprites[0].draw_text(cfg.screen, f'{(cfg.list_all_sprites[0].utilities[1])}', 16, 295, 57,
-                                          cfg.font_interface_p,
-                                          "white")
-        cfg.list_all_sprites[0].draw_text(cfg.screen, f'{(cfg.list_all_sprites[0].utilities[2])}', 16, 375, 57,
-                                          cfg.font_interface_p,
-                                          "white")
-        cfg.list_all_sprites[0].draw_text(cfg.screen, f'{(cfg.list_all_sprites[0].wood_amount)}', 16, 65, 57,
-                                          cfg.font_interface_p,
-                                          "white")
-        cfg.list_all_sprites[0].draw_text(cfg.screen, f'{(cfg.list_all_sprites[0].coins)}', 16, 135, 57,
-                                          cfg.font_interface_p,
-                                          "white")
 
         cfg.list_all_sprites[0].draw_info_bar(cfg.screen, 0, 18, cfg.list_all_sprites[0].hp, 'DarkRed', 'red', 'black',
                                               100, 450, 17)
@@ -115,25 +108,34 @@ def play_game():
         pygame.draw.rect(cfg.screen, 'black', (920, 10, 80, 40))
         pygame.draw.rect(cfg.screen, 'black', (830, 47, 260, 40))
 
-        cfg.list_all_sprites[0].draw_text(cfg.screen, f'{600 - int(cfg.in_game_time / 1000)}', 37, 960, 13,
-                                          cfg.my_font_p,
-                                          "black")
-        # cfg.list_all_sprites[0].draw_text(cfg.screen, 'seconds left', 32, 915, 50, cfg.my_font_p,
-        #                          "black")
-
-        # pygame.draw.circle(cfg.screen, (224, 153, 9), (960, 30), 30)
+        # cfg.list_all_sprites[0].draw_text(cfg.screen, 'seconds left', 32, 915, 50, cfg.my_font_p, "black")
 
         cfg.list_all_sprites[0].draw_text(cfg.screen, f'{600 - int(cfg.in_game_time / 1000)}', 35, 960, 13,
-                                          cfg.my_font_p,
-                                          (224, 153, 9))
-        cfg.list_all_sprites[0].draw_text(cfg.screen, 'seconds left', 30, 960, 50, cfg.my_font_p,
-                                          (224, 153, 9))
+                                          cfg.my_font_p, (224, 153, 9))
+        cfg.list_all_sprites[0].draw_text(cfg.screen, 'seconds left', 30, 960, 50, cfg.my_font_p, (224, 153, 9))
 
-        cfg.screen.blit(img.apple_icon, (165, 55))
-        cfg.screen.blit(img.shishka_icon, (245, 55))
-        cfg.screen.blit(img.coconut_icon, (325, 55))
-        cfg.screen.blit(img.wood_icon, (5, 55))
-        cfg.screen.blit(img.coin_icon, (85, 55))
+        if pressed_keys[pygame.K_LALT]:  # Реализация показа инвентаря при удержанном Alt
+            cfg.screen.blit(img.inventory_tablet, cfg.inventory_tablet_rect)
+            cfg.list_all_sprites[0].draw_text(cfg.screen, f'{(cfg.list_all_sprites[0].utilities[0])}', 30, 935, 440,
+                                              cfg.font_interface_p,
+                                              "white")
+            cfg.list_all_sprites[0].draw_text(cfg.screen, f'{(cfg.list_all_sprites[0].utilities[1])}', 30, 1085, 440,
+                                              cfg.font_interface_p,
+                                              "white")
+            cfg.list_all_sprites[0].draw_text(cfg.screen, f'{(cfg.list_all_sprites[0].utilities[2])}', 30, 1235, 440,
+                                              cfg.font_interface_p,
+                                              "white")
+            cfg.list_all_sprites[0].draw_text(cfg.screen, f'{(cfg.list_all_sprites[0].wood_amount)}', 30, 635, 440,
+                                              cfg.font_interface_p,
+                                              "white")
+            cfg.list_all_sprites[0].draw_text(cfg.screen, f'{(cfg.list_all_sprites[0].coins)}', 30, 785, 440,
+                                              cfg.font_interface_p,
+                                              "white")
+            cfg.screen.blit(img.apple_icon, (900, 370))
+            cfg.screen.blit(img.shishka_icon, (1050, 370))
+            cfg.screen.blit(img.coconut_icon, (1200, 370))
+            cfg.screen.blit(img.wood_icon, (600, 370))
+            cfg.screen.blit(img.coin_icon, (750, 370))
 
         if cfg.workshop_active_flag:
             workshop()
@@ -631,15 +633,13 @@ def monster_generator(n):
             count += 1
     cfg.monsterList = [mobs.Monster(f'Минотавр{i}', 500, cfg.monster_list_x[i], cfg.monster_list_y[i], 300, 20) for i in
                        range(n)]
-    cfg.monsterList.append(mobs.min1)
-    classes.cfg.all_sprites.add(mobs.min1)
     for elem in cfg.monsterList:
         classes.cfg.all_sprites.add(elem)
 
 
 def workshop():
     while cfg.workshop_active_flag:
-        cfg.screen.blit(pygame.transform.scale(img.tablet, (800, 400)), (560, 200))
+        cfg.screen.blit(img.workshop_tablet, cfg.workshop_tablet_rect)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 quit()
@@ -647,3 +647,37 @@ def workshop():
                 if event.key == pygame.K_ESCAPE:
                     cfg.workshop_active_flag = False
         pygame.display.flip()
+
+# def inventory():
+#     while cfg.inventory_active_flag:
+#         pressed_keys = pygame.key.get_pressed()
+#
+#         if pressed_keys[pygame.K_LALT]:
+#             cfg.screen.blit(img.inventory_tablet, cfg.inventory_tablet_rect)
+#             cfg.list_all_sprites[0].draw_text(cfg.screen, f'{(cfg.list_all_sprites[0].utilities[0])}', 30, 635, 460,
+#                                               cfg.font_interface_p,
+#                                               "white")
+#             cfg.list_all_sprites[0].draw_text(cfg.screen, f'{(cfg.list_all_sprites[0].utilities[1])}', 16, 295, 57,
+#                                               cfg.font_interface_p,
+#                                               "white")
+#             cfg.list_all_sprites[0].draw_text(cfg.screen, f'{(cfg.list_all_sprites[0].utilities[2])}', 16, 375, 57,
+#                                               cfg.font_interface_p,
+#                                               "white")
+#             cfg.list_all_sprites[0].draw_text(cfg.screen, f'{(cfg.list_all_sprites[0].wood_amount)}', 16, 65, 57,
+#                                               cfg.font_interface_p,
+#                                               "white")
+#             cfg.list_all_sprites[0].draw_text(cfg.screen, f'{(cfg.list_all_sprites[0].coins)}', 16, 135, 57,
+#                                               cfg.font_interface_p,
+#                                               "white")
+#             cfg.screen.blit(img.apple_icon, (600, 400))
+#             cfg.screen.blit(img.shishka_icon, (245, 55))
+#             cfg.screen.blit(img.coconut_icon, (325, 55))
+#             cfg.screen.blit(img.wood_icon, (5, 55))
+#             cfg.screen.blit(img.coin_icon, (85, 55))
+#
+#             for event in pygame.event.get():
+#                 if event.type == pygame.QUIT:
+#                     quit()
+#         else:
+#             cfg.inventory_active_flag = False
+#         pygame.display.flip()

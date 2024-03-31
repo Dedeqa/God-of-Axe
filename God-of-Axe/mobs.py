@@ -228,6 +228,3 @@ class Monster(cl.Unit, pygame.sprite.Sprite):
             if self.attack_timer == 15:
                 cfg.list_all_sprites[0].image = img.woodcutter_hurt_left[2]
         self.attack_timer += 1
-
-
-min1 = Monster("Jaba", 1000, 1, 1, 200, 20)
