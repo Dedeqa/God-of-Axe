@@ -34,6 +34,7 @@ play_game_active_flag = False
 lose_game_active_flag = False
 win_game_active_flag = False
 monster_add_flag = True
+tree_add_flag = True
 first_elem_flag = True
 lose_flag = False  # флаг поражения
 workshop_active_flag = False  # флаг нахождения в мастерской
