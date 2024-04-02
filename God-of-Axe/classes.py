@@ -618,7 +618,7 @@ class House(pygame.sprite.Sprite):
         cfg.screen.fill("red", self.line_right)
         cfg.screen.fill("red", self.line_top)
         cfg.screen.fill("red", self.line_bottom)
-        # self.line_left.x = self.line_left_x + cfg.bg_x
+        # self.line_left.x = self.line_left_x + cfg.bg_x````````````````````````````````````````````````````````````````````````
         # self.line_left.y = self.line_left_y + cfg.bg_y
         # self.line_right.x = self.line_right_x + cfg.bg_x
         # self.line_right.y = self.line_right_y + cfg.bg_y

@@ -265,7 +265,7 @@ def menu():
                 click[0]:
             # помещаем иконку active_play_transform в область active_play_rect
             cfg.screen.blit(cfg.active_play_transform, cfg.active_play_rect)
-            cfg.play_game_active_flag = True
+            #cfg.play_game_active_flag = True
             # pygame.mixer.music.stop() # фоновая музыка не отключается при нажатии на play
             if play_delay_start > 2:
                 sounds.click.play()
@@ -273,8 +273,10 @@ def menu():
                 time.sleep(0.2)
                 cfg.in_game_time = 0
                 # play_game()
-                cfg.play_game_active_flag = True
-                cfg.menu_active_flag = False
+                #cfg.play_game_active_flag = True
+
+                difficult_menu()
+
 
             play_delay_start += 1
         else:
@@ -305,6 +307,72 @@ def menu():
         else:
             cfg.screen.blit(img.quite, cfg.quit_rect)
         pygame.display.flip()
+def difficult_menu():
+    active_flag_diff = True
+
+    easy_delay_start, medium_delay_start, hard_delay_start = 0, 0, 0
+
+    while active_flag_diff:
+        cfg.screen.blit(img.vic_bg, (0, 0))
+        cfg.screen.blit(cfg.menu_title, cfg.menu_title_rect)
+        mouse = pygame.mouse.get_pos()
+        click = pygame.mouse.get_pressed()
+        cfg.clock.tick(100)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                quit()
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    active_flag_diff = False
+        if (cfg.play_rect.left <= mouse[0] <= cfg.play_rect.right) and (
+                cfg.play_rect.top <= mouse[1] <= cfg.play_rect.bottom) and \
+                click[0]:
+            cfg.screen.blit(cfg.active_play_transform, cfg.active_play_rect)
+            if easy_delay_start > 2:
+                sounds.click.play()
+                easy_delay_start = 0
+                time.sleep(0.2)
+                cfg.in_game_time = 0
+                cfg.difficuilt_flag = 0
+                cfg.play_game_active_flag = True
+                active_flag_diff = False
+                cfg.menu_active_flag = False
+            easy_delay_start += 1
+        else:
+            cfg.screen.blit(cfg.play_transform, cfg.play_rect)
+
+        if (cfg.options_rect.left <= mouse[0] <= cfg.options_rect.right) and (
+                cfg.options_rect.top <= mouse[1] <= cfg.options_rect.bottom) and click[0]:
+            cfg.screen.blit(img.active_options, cfg.active_options_rect)
+            if medium_delay_start > 2:
+                sounds.click.play()
+                medium_delay_start = 0
+                time.sleep(0.2)
+                cfg.in_game_time = 0
+                cfg.difficuilt_flag = 1
+                cfg.play_game_active_flag = True
+                active_flag_diff = False
+                cfg.menu_active_flag = False
+            medium_delay_start += 1
+        else:
+            cfg.screen.blit(img.options, cfg.options_rect)
+
+        if (cfg.quit_rect.left <= mouse[0] <= cfg.quit_rect.right) and (
+                cfg.quit_rect.top <= mouse[1] <= cfg.quit_rect.bottom) and \
+                click[0]:
+            cfg.screen.blit(img.active_quite, cfg.active_quite_rect)
+            if hard_delay_start > 2:
+                sounds.click.play()
+                hard_delay_start = 0
+                cfg.in_game_time = 0
+                cfg.difficuilt_flag = 2
+                cfg.play_game_active_flag = True
+                active_flag_diff = False
+                cfg.menu_active_flag = False
+            hard_delay_start += 1
+        else:
+            cfg.screen.blit(img.quite, cfg.quit_rect)
+        pygame.display.flip()
 
 
 def pause():
@@ -314,7 +382,6 @@ def pause():
         cfg.screen.blit(cfg.pause_label_transform, cfg.pause_label_rect)
         mouse = pygame.mouse.get_pos()
         click = pygame.mouse.get_pressed()
-
         cfg.clock.tick(100)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -356,114 +423,17 @@ def pause():
                 sounds.click.play()
                 quit_delay_start = 0
                 time.sleep(0.2)
-
                 cfg.start_game_sound_flag = True
                 cfg.pause_active_flag = False
                 cfg.menu_active_flag = True
                 cfg.play_game_active_flag = False
                 classes.del_units()
-                # for obj in classes.cfg.all_sprites:
-                #     del obj
-                #
-                # classes.cfg.all_sprites.empty()
-                # classes.cfg.all_sprites.clear(cfg.screen, cfg.screen)
-
-                # cfg.bg_x, cfg.bg_y = 0, 0
-
-                # for elem1, elem2, elem3 in zip(cfg.trees1, cfg.trees2, cfg.trees3):
-                #     classes.cfg.all_sprites.remove(elem1, elem2, elem3)
-                #     elem1.line_left[2] = 0
-                #     elem1.line_left[3] = 0
-                #     elem1.line_right[2] = 0
-                #     elem1.line_right[3] = 0
-                #     elem1.line_top[2] = 0
-                #     elem1.line_top[3] = 0
-                #     elem1.line_bottom[2] = 0
-                #     elem1.line_bottom[3] = 0
-                #
-                #     elem2.line_left[2] = 0
-                #     elem2.line_left[3] = 0
-                #     elem2.line_right[2] = 0
-                #     elem2.line_right[3] = 0
-                #     elem2.line_top[2] = 0
-                #     elem2.line_top[3] = 0
-                #     elem2.line_bottom[2] = 0
-                #     elem2.line_bottom[3] = 0
-                #
-                #     elem3.line_left[2] = 0
-                #     elem3.line_left[3] = 0
-                #     elem3.line_right[2] = 0
-                #     elem3.line_right[3] = 0
-                #     elem3.line_top[2] = 0
-                #     elem3.line_top[3] = 0
-                #     elem3.line_bottom[2] = 0
-                #     elem3.line_bottom[3] = 0
-                #     cfg.trees1.remove(elem1)
-                #     cfg.trees2.remove(elem2)
-                #     cfg.trees3.remove(elem3)
-
-                # for elem in cfg.trees1:
-                #     classes.cfg.all_sprites.remove(elem)
-                #     elem.line_left[2] = 0
-                #     elem.line_left[3] = 0
-                #     elem.line_right[2] = 0
-                #     elem.line_right[3] = 0
-                #     elem.line_top[2] = 0
-                #     elem.line_top[3] = 0
-                #     elem.line_bottom[2] = 0
-                #     elem.line_bottom[3] = 0
-                #     cfg.trees1.remove(elem)
-                #
-                # for elem in cfg.trees2:
-                #     classes.cfg.all_sprites.remove(elem)
-                #     elem.line_left[2] = 0
-                #     elem.line_left[3] = 0
-                #     elem.line_right[2] = 0
-                #     elem.line_right[3] = 0
-                #     elem.line_top[2] = 0
-                #     elem.line_top[3] = 0
-                #     elem.line_bottom[2] = 0
-                #     elem.line_bottom[3] = 0
-                #     cfg.trees2.remove(elem)
-                #
-                # for elem in cfg.trees3:
-                #     classes.cfg.all_sprites.remove(elem)
-                #     elem.line_left[2] = 0
-                #     elem.line_left[3] = 0
-                #     elem.line_right[2] = 0
-                #     elem.line_right[3] = 0
-                #     elem.line_top[2] = 0
-                #     elem.line_top[3] = 0
-                #     elem.line_bottom[2] = 0
-                #     elem.line_bottom[3] = 0
-                #     cfg.trees3.remove(elem)
-                #
-                # for elem in cfg.monsterList:
-                #     classes.cfg.all_sprites.remove(elem)
-                #
-                # cfg.tree_list_x.clear()
-                # cfg.tree_list_y.clear()
-                # cfg.monster_list_x.clear()
-                # cfg.monster_list_y.clear()
-                #
-                # cfg.list_all_sprites[0].hp = 100
-                # cfg.list_all_sprites[0].stamina = 100
-                # cfg.list_all_sprites[0].armor = 25
-                # cfg.list_all_sprites[0].stamina_recovery = 0.5
-                # cfg.list_all_sprites[0].rect = cfg.list_all_sprites[0].image.get_rect()
-                # cfg.list_all_sprites[0].rect.center = (cfg.list_all_sprites[0].posx / 2, cfg.list_all_sprites[0].posy / 2)
-                # cfg.list_all_sprites[0].weapon = classes.Weapon(100, 1000)
-                #
-                # cfg.list_all_sprites[0].utilities = [3, 0, 0]
-                # cfg.list_all_sprites[0].kills = 0
 
             quit_delay_start += 1
         else:
             cfg.screen.blit(img.menu, cfg.menu_rect)
         pygame.display.flip()
-        # for obj in classes.cfg.all_sprites:
-        #     del obj
-        # classes.cfg.all_sprites.empty()
+
 
 
 def options_menu():
@@ -512,6 +482,8 @@ def options_menu():
         pygame.display.flip()
 
 
+
+
 def options_game():
     active_flag = True  # Флаг активного состояния options_game
     while active_flag:
@@ -554,6 +526,8 @@ def options_game():
         cfg.screen.blit(img.point2, cfg.point2_rect)
 
         pygame.display.flip()
+
+
 
 
 def tree_generator(n):
@@ -625,12 +599,23 @@ def monster_generator(n):
             cfg.monster_list_x.append(x)
             cfg.monster_list_y.append(y)
             count += 1
-    cfg.monsterList = [mobs.Monster(f'Минотавр{i}', 500, cfg.monster_list_x[i], cfg.monster_list_y[i], 300, 20) for i in
-                       range(n)]
+    if cfg.difficuilt_flag == 2:
+        cfg.monsterList = [mobs.Monster(f'Минотавр{i}', 500, cfg.monster_list_x[i], cfg.monster_list_y[i], 500, 20) for i in
+                        range(n)]
+    elif cfg.difficuilt_flag == 1:
+        cfg.monsterList = [mobs.Monster(f'Минотавр{i}', 250, cfg.monster_list_x[i], cfg.monster_list_y[i], 400, 15) for
+                           i in
+                           range(n//2)]
+    elif cfg.difficuilt_flag == 0:
+        cfg.monsterList = [mobs.Monster(f'Минотавр{i}', 150, cfg.monster_list_x[i], cfg.monster_list_y[i], 300, 10) for
+                           i in
+                           range(n//3)]
     cfg.monsterList.append(mobs.min1)
     classes.cfg.all_sprites.add(mobs.min1)
     for elem in cfg.monsterList:
         classes.cfg.all_sprites.add(elem)
+
+
 
 def workshop():
     while cfg.workshop_active_flag:
