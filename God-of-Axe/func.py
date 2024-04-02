@@ -114,7 +114,7 @@ def play_game():
                                           cfg.my_font_p, (224, 153, 9))
         cfg.list_all_sprites[0].draw_text(cfg.screen, 'seconds left', 30, 960, 50, cfg.my_font_p, (224, 153, 9))
 
-        if pressed_keys[pygame.K_TAB]:  # Реализация показа инвентаря при удержанном Tab
+        if pressed_keys[pygame.K_LALT]:  # Реализация показа инвентаря при удержанном Alt
             cfg.screen.blit(img.inventory_tablet, cfg.inventory_tablet_rect)
             cfg.list_all_sprites[0].draw_text(cfg.screen, f'{(cfg.list_all_sprites[0].utilities[0])}', 30, 935, 440,
                                               cfg.font_interface_p,
@@ -368,15 +368,10 @@ def pause():
                 cfg.menu_active_flag = True
                 cfg.play_game_active_flag = False
                 classes.del_units()
-
             quit_delay_start += 1
         else:
             cfg.screen.blit(img.menu, cfg.menu_rect)
         pygame.display.flip()
-        # for obj in classes.cfg.all_sprites:
-        #     del obj
-        # classes.cfg.all_sprites.empty()
-
 
 def options_menu():
     active_flag = True  # Флаг активного состояния options_menu
@@ -409,14 +404,7 @@ def options_menu():
                 sounds.wave.set_volume(sounds.volume_sounds)
                 sounds.hit_tree.set_volume(sounds.volume_sounds)
                 sounds.agr_monster.set_volume(sounds.volume_sounds)
-                sounds.take_dmg1.set_volume(sounds.volume_sounds)
-                sounds.take_dmg2.set_volume(sounds.volume_sounds)
-                sounds.take_dmg3.set_volume(sounds.volume_sounds)
-                sounds.last_hit.set_volume(sounds.volume_sounds)
-                sounds.eat_apple.set_volume(sounds.volume_sounds)
-                sounds.drink_coconut.set_volume(sounds.volume_sounds)
                 sounds.falling_tree.set_volume(sounds.volume_sounds)
-                sounds.take_coin.set_volume(sounds.volume_sounds)
 
         cfg.screen.blit(img.menu_bg, (0, 0))
         cfg.screen.blit(cfg.menu_title, cfg.menu_title_rect)
@@ -462,14 +450,7 @@ def options_game():
                 sounds.wave.set_volume(sounds.volume_sounds)
                 sounds.hit_tree.set_volume(sounds.volume_sounds)
                 sounds.agr_monster.set_volume(sounds.volume_sounds)
-                sounds.take_dmg1.set_volume(sounds.volume_sounds)
-                sounds.take_dmg2.set_volume(sounds.volume_sounds)
-                sounds.take_dmg3.set_volume(sounds.volume_sounds)
-                sounds.last_hit.set_volume(sounds.volume_sounds)
-                sounds.eat_apple.set_volume(sounds.volume_sounds)
-                sounds.drink_coconut.set_volume(sounds.volume_sounds)
                 sounds.falling_tree.set_volume(sounds.volume_sounds)
-                sounds.take_coin.set_volume(sounds.volume_sounds)
 
         cfg.screen.blit(cfg.tablet_transform, cfg.tablet_rect)
         cfg.screen.blit(img.music_label, cfg.music_label_rect)
@@ -485,18 +466,18 @@ def options_game():
 def tree_generator(n):
     count = 0
     while count < n:
-        cfg.monster_add_flag = True
-        x = random.randint(-1870, 3740)
-        y = random.randint(-1030, 2000)
+        cfg.add_flag = True
+        x = random.randint(-1820, 3640)
+        y = random.randint(-1030, 1900)
         if abs(x - cfg.all_sprites.sprites()[1].rect.center[0]) < cfg.delta + 100 and abs(
                 y - cfg.all_sprites.sprites()[1].rect.center[1]) < cfg.delta + 100:
-            cfg.monster_add_flag = False
-        if cfg.monster_add_flag:
+            cfg.add_flag = False
+        if cfg.add_flag:
             for i in range(count):
                 if abs(cfg.tree_list_x[i] - x) < cfg.delta and abs(cfg.tree_list_y[i] - y) < cfg.delta:
-                    cfg.monster_add_flag = False
+                    cfg.add_flag = False
 
-        if cfg.monster_add_flag:
+        if cfg.add_flag:
             cfg.tree_list_x.append(x)
             cfg.tree_list_y.append(y)
             count += 1
@@ -508,21 +489,21 @@ def tree_generator(n):
                   range(2, n - 3, 3)]
 
     for elem in cfg.trees1:
-        cfg.all_sprites.add(elem)
+        classes.cfg.all_sprites.add(elem)
         cfg.trees_rects_left.append(elem.line_left)
         cfg.trees_rects_right.append(elem.line_right)
         cfg.trees_rects_top.append(elem.line_top)
         cfg.trees_rects_bottom.append(elem.line_bottom)
 
     for elem in cfg.trees2:
-        cfg.all_sprites.add(elem)
+        classes.cfg.all_sprites.add(elem)
         cfg.trees_rects_left.append(elem.line_left)
         cfg.trees_rects_right.append(elem.line_right)
         cfg.trees_rects_top.append(elem.line_top)
         cfg.trees_rects_bottom.append(elem.line_bottom)
 
     for elem in cfg.trees3:
-        cfg.all_sprites.add(elem)
+        classes.cfg.all_sprites.add(elem)
         cfg.trees_rects_left.append(elem.line_left)
         cfg.trees_rects_right.append(elem.line_right)
         cfg.trees_rects_top.append(elem.line_top)
@@ -532,27 +513,27 @@ def tree_generator(n):
 def monster_generator(n):
     count = 0
     while count < n:
-        cfg.monster_add_flag = True
+        cfg.add_flag = True
         x = random.randint(-1870, 3740)
         y = random.randint(-1030, 2000)
         if abs(x - cfg.all_sprites.sprites()[1].rect.center[0]) < cfg.delta and abs(
                 y - cfg.all_sprites.sprites()[1].rect.center[1]) < cfg.delta:
-            cfg.monster_add_flag = False
-        if cfg.monster_add_flag:
+            cfg.add_flag = False
+        if cfg.add_flag:
             for i in range(count):
-                if (abs(cfg.monster_list_x[i] - x) < cfg.delta_monsters and
-                    abs(cfg.monster_list_y[i] - y) < cfg.delta_monsters) and \
-                        (abs(cfg.monster_list_x[i] - cfg.list_all_sprites[0].rect.x) < cfg.delta_hero and
-                         abs(cfg.monster_list_y[i] - cfg.list_all_sprites[0].rect.y) < cfg.delta_hero):
-                    cfg.monster_add_flag = False
-        if cfg.monster_add_flag:
+                if (abs(cfg.monster_list_x[i] - x) < cfg.delta_monsters and abs(
+                        cfg.monster_list_y[i] - y) < cfg.delta_monsters) and (abs(
+                    cfg.monster_list_x[i] - cfg.list_all_sprites[0].rect.x) < cfg.delta_hero and abs(
+                    cfg.monster_list_y[i] - cfg.list_all_sprites[0].rect.y) < cfg.delta_hero):
+                    cfg.add_flag = False
+        if cfg.add_flag:
             cfg.monster_list_x.append(x)
             cfg.monster_list_y.append(y)
             count += 1
     cfg.monsterList = [mobs.Monster(f'Минотавр{i}', 500, cfg.monster_list_x[i], cfg.monster_list_y[i], 300, 20) for i in
                        range(n)]
     for elem in cfg.monsterList:
-        cfg.all_sprites.add(elem)
+        classes.cfg.all_sprites.add(elem)
 
 
 def workshop():
@@ -565,3 +546,5 @@ def workshop():
                 if event.key == pygame.K_ESCAPE:
                     cfg.workshop_active_flag = False
         pygame.display.flip()
+
+
