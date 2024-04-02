@@ -201,9 +201,11 @@ class Monster(cl.Unit, pygame.sprite.Sprite):
         if self.hp > 0:
             self.hp -= dmg
             sounds.hit_monster.play()
+            # sounds.hit_monster.stop()
         if self.hp <= 0:
             cfg.list_all_sprites[0].kills += 1
             cfg.list_all_sprites[0].coins += random.randint(3, 10)
+            sounds.take_coin.play()
             cfg.all_sprites.remove(self)
             cfg.monsterList.remove(self)
 

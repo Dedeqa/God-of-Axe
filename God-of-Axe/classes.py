@@ -142,9 +142,9 @@ class Player(Unit, pygame.sprite.Sprite):
                                 self.move_anim_delay = 0
 
                             sx = 2
-                        if self.rect.x >= 100:
+                        if self.rect.x >= 500:
                             self.speed_x = -sx
-                        elif self.bg_x < 1820:
+                        elif self.bg_x < 2220:
                             self.bg_x += sx
                             func.update_monsters_x(cfg.monsterList, sx, flag_direction=True)
                 if keystate[pygame.K_d]:
@@ -178,9 +178,9 @@ class Player(Unit, pygame.sprite.Sprite):
                                 self.move_anim_delay = 0
 
                             sx = 2
-                        if self.rect.x <= 1820:
+                        if self.rect.x <= 1320:
                             self.speed_x = sx
-                        elif self.bg_x > -1820:
+                        elif self.bg_x > -2460:
                             self.bg_x -= sx
                             func.update_monsters_x(cfg.monsterList, sx, flag_direction=False)
             if not (keystate[pygame.K_w] and keystate[pygame.K_s]):
@@ -220,9 +220,9 @@ class Player(Unit, pygame.sprite.Sprite):
                                 self.move_anim_delay = 0
 
                             sy = 2
-                        if self.rect.y >= 100:
+                        if self.rect.y >= 300:
                             self.speed_y = -sy
-                        elif self.bg_y < 1080:
+                        elif self.bg_y < 1380:
                             self.bg_y += sy
                             func.update_monsters_y(cfg.monsterList, sy, flag_direction=True)
                 if keystate[pygame.K_s]:
@@ -261,9 +261,9 @@ class Player(Unit, pygame.sprite.Sprite):
                                 self.move_anim_delay = 0
 
                             sy = 2
-                        if self.rect.y <= 980:
+                        if self.rect.y <= 680:
                             self.speed_y = sy
-                        elif self.bg_y > -1080:
+                        elif self.bg_y > -1350:
                             self.bg_y -= sy
                             func.update_monsters_y(cfg.monsterList, sy, flag_direction=False)
             if keystate[pygame.K_c]:

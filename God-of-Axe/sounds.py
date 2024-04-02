@@ -1,5 +1,6 @@
 import pygame
 import path_func as f
+
 pygame.init()
 
 # Фоновая музыка для меню ----------------------------------------------------------------------------------------------
@@ -31,7 +32,6 @@ take_dmg2_p = f.resource_path(r'Music/take_dmg2.mp3')
 take_dmg3_p = f.resource_path(r'Music/take_dmg3.mp3')
 last_hit_p = f.resource_path(r'Music/last_hit.mp3')
 
-
 take_dmg1 = pygame.mixer.Sound(take_dmg1_p)
 take_dmg2 = pygame.mixer.Sound(take_dmg2_p)
 take_dmg3 = pygame.mixer.Sound(take_dmg3_p)
@@ -40,7 +40,7 @@ index = 0
 
 take_dmg_sounds_list = [take_dmg1, take_dmg2, take_dmg3]
 
-last_hit = pygame.mixer.Sound(last_hit_p)
+last_hit = pygame.mixer.Sound(last_hit_p)  # предсмертный звук героя
 
 # Звук удара по монстру ------------------------------------------------------------------------------------------------
 hit_monster_p = f.resource_path(r'Music/rassechenie-ploti-boevym-toporom-48.mp3')
@@ -62,10 +62,11 @@ eat_apple = pygame.mixer.Sound(eat_apple_p)
 drink_coconut_p = f.resource_path(r'Music/eat_coconut.mp3')
 drink_coconut = pygame.mixer.Sound(drink_coconut_p)
 
+# Звук подбора монет с монстра
+take_coin_p = f.resource_path(r'Music/coin.wav')
+take_coin = pygame.mixer.Sound(take_coin_p)
+
 # Громкость звуков -----------------------------------------------------------------------------------------------------
 volume_music = 1.0
 volume_sounds = 1.0
-volume_wave = 1.0
-volume_hit_tree = 1.0
-volume_agr_monster = 1.0
-volume_falling_tree = 1.0
+

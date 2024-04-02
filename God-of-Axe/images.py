@@ -402,5 +402,5 @@ die_bg = pygame.transform.scale(pygame.image.load(die_bg_p).convert_alpha(), (19
 vic_bg_p = f.resource_path('Images/backgrounds/blue_vic_bg.jpg')
 vic_bg = pygame.transform.scale(pygame.image.load(vic_bg_p).convert_alpha(), (1920, 1080))
 
-# Ионка дома
-house_icon = pygame.image.load('Images/other_objects/house.png')
+# Иконка дома
+house_icon = pygame.image.load('Images/other_objects/house.png').convert_alpha()
