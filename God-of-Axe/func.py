@@ -279,9 +279,7 @@ def menu():
                 time.sleep(0.2)
                 cfg.in_game_time = 0
                 # play_game()
-                cfg.play_game_active_flag = True
-                cfg.menu_active_flag = False
-
+                difficult_menu()
             play_delay_start += 1
         else:
             cfg.screen.blit(cfg.play_transform, cfg.play_rect)
@@ -312,6 +310,72 @@ def menu():
             cfg.screen.blit(img.quite, cfg.quit_rect)
         pygame.display.flip()
 
+def difficult_menu():
+    active_flag_diff = True
+
+    easy_delay_start, medium_delay_start, hard_delay_start = 0, 0, 0
+
+    while active_flag_diff:
+        cfg.screen.blit(img.vic_bg, (0, 0))
+        cfg.screen.blit(cfg.menu_title, cfg.menu_title_rect)
+        mouse = pygame.mouse.get_pos()
+        click = pygame.mouse.get_pressed()
+        cfg.clock.tick(100)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                quit()
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    active_flag_diff = False
+        if (cfg.play_rect.left <= mouse[0] <= cfg.play_rect.right) and (
+                cfg.play_rect.top <= mouse[1] <= cfg.play_rect.bottom) and \
+                click[0]:
+            cfg.screen.blit(cfg.active_play_transform, cfg.active_play_rect)
+            if easy_delay_start > 2:
+                sounds.click.play()
+                easy_delay_start = 0
+                time.sleep(0.2)
+                cfg.in_game_time = 0
+                cfg.difficuilt_flag = 0
+                cfg.play_game_active_flag = True
+                active_flag_diff = False
+                cfg.menu_active_flag = False
+            easy_delay_start += 1
+        else:
+            cfg.screen.blit(cfg.play_transform, cfg.play_rect)
+
+        if (cfg.options_rect.left <= mouse[0] <= cfg.options_rect.right) and (
+                cfg.options_rect.top <= mouse[1] <= cfg.options_rect.bottom) and click[0]:
+            cfg.screen.blit(img.active_options, cfg.active_options_rect)
+            if medium_delay_start > 2:
+                sounds.click.play()
+                medium_delay_start = 0
+                time.sleep(0.2)
+                cfg.in_game_time = 0
+                cfg.difficuilt_flag = 1
+                cfg.play_game_active_flag = True
+                active_flag_diff = False
+                cfg.menu_active_flag = False
+            medium_delay_start += 1
+        else:
+            cfg.screen.blit(img.options, cfg.options_rect)
+
+        if (cfg.quit_rect.left <= mouse[0] <= cfg.quit_rect.right) and (
+                cfg.quit_rect.top <= mouse[1] <= cfg.quit_rect.bottom) and \
+                click[0]:
+            cfg.screen.blit(img.active_quite, cfg.active_quite_rect)
+            if hard_delay_start > 2:
+                sounds.click.play()
+                hard_delay_start = 0
+                cfg.in_game_time = 0
+                cfg.difficuilt_flag = 2
+                cfg.play_game_active_flag = True
+                active_flag_diff = False
+                cfg.menu_active_flag = False
+            hard_delay_start += 1
+        else:
+            cfg.screen.blit(img.quite, cfg.quit_rect)
+        pygame.display.flip()
 
 def pause():
     play_delay_start, options_delay_start, quit_delay_start = 0, 0, 0
@@ -531,8 +595,18 @@ def monster_generator(n):
             cfg.monster_list_x.append(x)
             cfg.monster_list_y.append(y)
             count += 1
-    cfg.monsterList = [mobs.Monster(f'Минотавр{i}', 500, cfg.monster_list_x[i], cfg.monster_list_y[i], 300, 20) for i in
-                       range(n)]
+
+    if cfg.difficuilt_flag == 2:
+        cfg.monsterList = [mobs.Monster(f'Минотавр{i}', 500, cfg.monster_list_x[i], cfg.monster_list_y[i], 500, 20)
+                           for i in range(n)]
+    elif cfg.difficuilt_flag == 1:
+        cfg.monsterList = [mobs.Monster(f'Минотавр{i}', 400, cfg.monster_list_x[i], cfg.monster_list_y[i], 400, 15)
+                           for i in range(n//2)]
+    elif cfg.difficuilt_flag == 0:
+        cfg.monsterList = [mobs.Monster(f'Минотавр{i}', 300, cfg.monster_list_x[i], cfg.monster_list_y[i], 300, 10)
+                           for i in range(n//3)]
+
+
     for elem in cfg.monsterList:
         cfg.all_sprites.add(elem)
 
