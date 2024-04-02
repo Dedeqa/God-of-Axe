@@ -48,9 +48,10 @@ def play_game():
     #     cfg.start_game_sound_flag = False     больше не воспроизводится музыка в игре
     classes.initit_units()
     cfg.list_all_sprites = cfg.all_sprites.sprites()
-    monster_generator(100)
+    monster_generator(50)
     tree_generator(400)
     while cfg.play_game_active_flag:
+        pressed_keys = pygame.key.get_pressed()
         cfg.clock.tick(cfg.FPS)
         cfg.in_game_time = pygame.time.get_ticks()
         # print(cfg.clock.get_fps())
@@ -61,18 +62,26 @@ def play_game():
                 if event.key == pygame.K_ESCAPE:
                     cfg.pause_active_flag = True
                     pause()
+                # elif event.key == pygame.K_LALT:
+                #     cfg.inventory_active_flag = True
+                #     inventory()
 
         cfg.screen.blit(img.game_bg,
                         (-1920 + cfg.list_all_sprites[0].bg_x, -1080 + cfg.list_all_sprites[0].bg_y))  # 1 зона
-        cfg.screen.blit(img.game_bg, (0 + cfg.list_all_sprites[0].bg_x, -1080 + cfg.list_all_sprites[0].bg_y))  # 2 зона
+        cfg.screen.blit(img.game_bg,
+                        (0 + cfg.list_all_sprites[0].bg_x, -1080 + cfg.list_all_sprites[0].bg_y))  # 2 зона
         cfg.screen.blit(img.game_bg,
                         (1920 + cfg.list_all_sprites[0].bg_x, -1080 + cfg.list_all_sprites[0].bg_y))  # 3 зона
-        cfg.screen.blit(img.game_bg, (-1920 + cfg.list_all_sprites[0].bg_x, 0 + cfg.list_all_sprites[0].bg_y))  # 4 зона
-        cfg.screen.blit(img.game_bg, (0 + cfg.list_all_sprites[0].bg_x, 0 + cfg.list_all_sprites[0].bg_y))  # 5 зона
-        cfg.screen.blit(img.game_bg, (1920 + cfg.list_all_sprites[0].bg_x, 0 + cfg.list_all_sprites[0].bg_y))  # 6 зона
+        cfg.screen.blit(img.game_bg,
+                        (-1920 + cfg.list_all_sprites[0].bg_x, 0 + cfg.list_all_sprites[0].bg_y))  # 4 зона
+        cfg.screen.blit(img.game_bg,
+                        (0 + cfg.list_all_sprites[0].bg_x, 0 + cfg.list_all_sprites[0].bg_y))  # 5 зона
+        cfg.screen.blit(img.game_bg,
+                        (1920 + cfg.list_all_sprites[0].bg_x, 0 + cfg.list_all_sprites[0].bg_y))  # 6 зона
         cfg.screen.blit(img.game_bg,
                         (-1920 + cfg.list_all_sprites[0].bg_x, 1080 + cfg.list_all_sprites[0].bg_y))  # 7 зона
-        cfg.screen.blit(img.game_bg, (0 + cfg.list_all_sprites[0].bg_x, 1080 + cfg.list_all_sprites[0].bg_y))  # 8 зона
+        cfg.screen.blit(img.game_bg,
+                        (0 + cfg.list_all_sprites[0].bg_x, 1080 + cfg.list_all_sprites[0].bg_y))  # 8 зона
         cfg.screen.blit(img.game_bg,
                         (1920 + cfg.list_all_sprites[0].bg_x, 1080 + cfg.list_all_sprites[0].bg_y))  # 9 зона
 
@@ -86,50 +95,47 @@ def play_game():
                                           cfg.font_interface_p,
                                           "red")
 
-        cfg.list_all_sprites[0].draw_text(cfg.screen, f'{(cfg.list_all_sprites[0].utilities[0])}', 16, 145, 50,
-                                          cfg.font_interface_p,
-                                          "white")
-        cfg.list_all_sprites[0].draw_text(cfg.screen, f'{(cfg.list_all_sprites[0].utilities[1])}', 16, 225, 50,
-                                          cfg.font_interface_p,
-                                          "white")
-        cfg.list_all_sprites[0].draw_text(cfg.screen, f'{(cfg.list_all_sprites[0].utilities[2])}', 16, 305, 50,
-                                          cfg.font_interface_p,
-                                          "white")
-        cfg.list_all_sprites[0].draw_text(cfg.screen, f'{(cfg.list_all_sprites[0].wood_amount)}', 16, 65, 50,
-                                          cfg.font_interface_p,
-                                          "white")
-
-        cfg.list_all_sprites[0].draw_info_bar(cfg.screen, 0, 14, cfg.list_all_sprites[0].hp, 'DarkRed', 'red', 'black',
-                                              100, 350, 13)
-        cfg.list_all_sprites[0].draw_info_bar(cfg.screen, 0, 28, cfg.list_all_sprites[0].stamina, (24, 84, 26),
+        cfg.list_all_sprites[0].draw_info_bar(cfg.screen, 0, 18, cfg.list_all_sprites[0].hp, 'DarkRed', 'red', 'black',
+                                              100, 450, 17)
+        cfg.list_all_sprites[0].draw_info_bar(cfg.screen, 0, 36, cfg.list_all_sprites[0].stamina, (24, 84, 26),
                                               (255, 255, 0), 'black',
-                                              100, 350, 13)
+                                              100, 450, 17)
         cfg.list_all_sprites[0].draw_info_bar(cfg.screen, 0, 0, cfg.list_all_sprites[0].armor, (16, 72, 105),
                                               (27, 123, 179), 'black',
-                                              100, 350, 13)
+                                              100, 450, 17)
 
         # cfg.screen.blit(img.timer_tablet, (1663, 10))
         pygame.draw.rect(cfg.screen, 'black', (920, 10, 80, 40))
         pygame.draw.rect(cfg.screen, 'black', (830, 47, 260, 40))
 
-        cfg.list_all_sprites[0].draw_text(cfg.screen, f'{600 - int(cfg.in_game_time / 1000)}', 37, 960, 13,
-                                          cfg.my_font_p,
-                                          "black")
-        # cfg.list_all_sprites[0].draw_text(cfg.screen, 'seconds left', 32, 915, 50, cfg.my_font_p,
-        #                          "black")
-
-        # pygame.draw.circle(cfg.screen, (224, 153, 9), (960, 30), 30)
+        # cfg.list_all_sprites[0].draw_text(cfg.screen, 'seconds left', 32, 915, 50, cfg.my_font_p, "black")
 
         cfg.list_all_sprites[0].draw_text(cfg.screen, f'{600 - int(cfg.in_game_time / 1000)}', 35, 960, 13,
-                                          cfg.my_font_p,
-                                          (224, 153, 9))
-        cfg.list_all_sprites[0].draw_text(cfg.screen, 'seconds left', 30, 960, 50, cfg.my_font_p,
-                                          (224, 153, 9))
+                                          cfg.my_font_p, (224, 153, 9))
+        cfg.list_all_sprites[0].draw_text(cfg.screen, 'seconds left', 30, 960, 50, cfg.my_font_p, (224, 153, 9))
 
-        cfg.screen.blit(img.apple_icon, (85, 47))
-        cfg.screen.blit(img.shishka_icon, (165, 47))
-        cfg.screen.blit(img.coconut_icon, (245, 47))
-        cfg.screen.blit(img.wood_icon, (5, 47))
+        if pressed_keys[pygame.K_TAB]:  # Реализация показа инвентаря при удержанном Alt
+            cfg.screen.blit(img.inventory_tablet, cfg.inventory_tablet_rect)
+            cfg.list_all_sprites[0].draw_text(cfg.screen, f'{(cfg.list_all_sprites[0].utilities[0])}', 30, 935, 440,
+                                              cfg.font_interface_p,
+                                              "white")
+            cfg.list_all_sprites[0].draw_text(cfg.screen, f'{(cfg.list_all_sprites[0].utilities[1])}', 30, 1085, 440,
+                                              cfg.font_interface_p,
+                                              "white")
+            cfg.list_all_sprites[0].draw_text(cfg.screen, f'{(cfg.list_all_sprites[0].utilities[2])}', 30, 1235, 440,
+                                              cfg.font_interface_p,
+                                              "white")
+            cfg.list_all_sprites[0].draw_text(cfg.screen, f'{(cfg.list_all_sprites[0].wood_amount)}', 30, 635, 440,
+                                              cfg.font_interface_p,
+                                              "white")
+            cfg.list_all_sprites[0].draw_text(cfg.screen, f'{(cfg.list_all_sprites[0].coins)}', 30, 785, 440,
+                                              cfg.font_interface_p,
+                                              "white")
+            cfg.screen.blit(img.apple_icon, (900, 370))
+            cfg.screen.blit(img.shishka_icon, (1050, 370))
+            cfg.screen.blit(img.coconut_icon, (1200, 370))
+            cfg.screen.blit(img.wood_icon, (600, 370))
+            cfg.screen.blit(img.coin_icon, (750, 370))
 
         if cfg.workshop_active_flag:
             workshop()
@@ -265,7 +271,7 @@ def menu():
                 click[0]:
             # помещаем иконку active_play_transform в область active_play_rect
             cfg.screen.blit(cfg.active_play_transform, cfg.active_play_rect)
-            #cfg.play_game_active_flag = True
+            cfg.play_game_active_flag = True
             # pygame.mixer.music.stop() # фоновая музыка не отключается при нажатии на play
             if play_delay_start > 2:
                 sounds.click.play()
@@ -273,10 +279,8 @@ def menu():
                 time.sleep(0.2)
                 cfg.in_game_time = 0
                 # play_game()
-                #cfg.play_game_active_flag = True
-
-                difficult_menu()
-
+                cfg.play_game_active_flag = True
+                cfg.menu_active_flag = False
 
             play_delay_start += 1
         else:
@@ -307,72 +311,6 @@ def menu():
         else:
             cfg.screen.blit(img.quite, cfg.quit_rect)
         pygame.display.flip()
-def difficult_menu():
-    active_flag_diff = True
-
-    easy_delay_start, medium_delay_start, hard_delay_start = 0, 0, 0
-
-    while active_flag_diff:
-        cfg.screen.blit(img.vic_bg, (0, 0))
-        cfg.screen.blit(cfg.menu_title, cfg.menu_title_rect)
-        mouse = pygame.mouse.get_pos()
-        click = pygame.mouse.get_pressed()
-        cfg.clock.tick(100)
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                quit()
-            elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_ESCAPE:
-                    active_flag_diff = False
-        if (cfg.play_rect.left <= mouse[0] <= cfg.play_rect.right) and (
-                cfg.play_rect.top <= mouse[1] <= cfg.play_rect.bottom) and \
-                click[0]:
-            cfg.screen.blit(cfg.active_play_transform, cfg.active_play_rect)
-            if easy_delay_start > 2:
-                sounds.click.play()
-                easy_delay_start = 0
-                time.sleep(0.2)
-                cfg.in_game_time = 0
-                cfg.difficuilt_flag = 0
-                cfg.play_game_active_flag = True
-                active_flag_diff = False
-                cfg.menu_active_flag = False
-            easy_delay_start += 1
-        else:
-            cfg.screen.blit(cfg.play_transform, cfg.play_rect)
-
-        if (cfg.options_rect.left <= mouse[0] <= cfg.options_rect.right) and (
-                cfg.options_rect.top <= mouse[1] <= cfg.options_rect.bottom) and click[0]:
-            cfg.screen.blit(img.active_options, cfg.active_options_rect)
-            if medium_delay_start > 2:
-                sounds.click.play()
-                medium_delay_start = 0
-                time.sleep(0.2)
-                cfg.in_game_time = 0
-                cfg.difficuilt_flag = 1
-                cfg.play_game_active_flag = True
-                active_flag_diff = False
-                cfg.menu_active_flag = False
-            medium_delay_start += 1
-        else:
-            cfg.screen.blit(img.options, cfg.options_rect)
-
-        if (cfg.quit_rect.left <= mouse[0] <= cfg.quit_rect.right) and (
-                cfg.quit_rect.top <= mouse[1] <= cfg.quit_rect.bottom) and \
-                click[0]:
-            cfg.screen.blit(img.active_quite, cfg.active_quite_rect)
-            if hard_delay_start > 2:
-                sounds.click.play()
-                hard_delay_start = 0
-                cfg.in_game_time = 0
-                cfg.difficuilt_flag = 2
-                cfg.play_game_active_flag = True
-                active_flag_diff = False
-                cfg.menu_active_flag = False
-            hard_delay_start += 1
-        else:
-            cfg.screen.blit(img.quite, cfg.quit_rect)
-        pygame.display.flip()
 
 
 def pause():
@@ -382,6 +320,7 @@ def pause():
         cfg.screen.blit(cfg.pause_label_transform, cfg.pause_label_rect)
         mouse = pygame.mouse.get_pos()
         click = pygame.mouse.get_pressed()
+
         cfg.clock.tick(100)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -423,18 +362,16 @@ def pause():
                 sounds.click.play()
                 quit_delay_start = 0
                 time.sleep(0.2)
+
                 cfg.start_game_sound_flag = True
                 cfg.pause_active_flag = False
                 cfg.menu_active_flag = True
                 cfg.play_game_active_flag = False
                 classes.del_units()
-
             quit_delay_start += 1
         else:
             cfg.screen.blit(img.menu, cfg.menu_rect)
         pygame.display.flip()
-
-
 
 def options_menu():
     active_flag = True  # Флаг активного состояния options_menu
@@ -482,8 +419,6 @@ def options_menu():
         pygame.display.flip()
 
 
-
-
 def options_game():
     active_flag = True  # Флаг активного состояния options_game
     while active_flag:
@@ -528,14 +463,12 @@ def options_game():
         pygame.display.flip()
 
 
-
-
 def tree_generator(n):
     count = 0
     while count < n:
         cfg.add_flag = True
-        x = random.randint(-1870, 3740)
-        y = random.randint(-1030, 2000)
+        x = random.randint(-1820, 3640)
+        y = random.randint(-1030, 1900)
         if abs(x - cfg.all_sprites.sprites()[1].rect.center[0]) < cfg.delta + 100 and abs(
                 y - cfg.all_sprites.sprites()[1].rect.center[1]) < cfg.delta + 100:
             cfg.add_flag = False
@@ -563,7 +496,6 @@ def tree_generator(n):
         cfg.trees_rects_bottom.append(elem.line_bottom)
 
     for elem in cfg.trees2:
-        elem.image = pygame.image.load('Images/Trees/Tree2.png')
         classes.cfg.all_sprites.add(elem)
         cfg.trees_rects_left.append(elem.line_left)
         cfg.trees_rects_right.append(elem.line_right)
@@ -571,7 +503,6 @@ def tree_generator(n):
         cfg.trees_rects_bottom.append(elem.line_bottom)
 
     for elem in cfg.trees3:
-        elem.image = pygame.image.load('Images/Trees/Tree3.png')
         classes.cfg.all_sprites.add(elem)
         cfg.trees_rects_left.append(elem.line_left)
         cfg.trees_rects_right.append(elem.line_right)
@@ -588,38 +519,26 @@ def monster_generator(n):
         if abs(x - cfg.all_sprites.sprites()[1].rect.center[0]) < cfg.delta and abs(
                 y - cfg.all_sprites.sprites()[1].rect.center[1]) < cfg.delta:
             cfg.add_flag = False
-        if cfg.add_flag:
+        if cfg.monster_add_flag:
             for i in range(count):
-                if (abs(cfg.monster_list_x[i] - x) < cfg.delta_monsters or abs(
+                if (abs(cfg.monster_list_x[i] - x) < cfg.delta_monsters and abs(
                         cfg.monster_list_y[i] - y) < cfg.delta_monsters) and (abs(
-                    cfg.monster_list_x[i] - cfg.list_all_sprites[0].rect.x) < cfg.delta_hero or abs(
+                    cfg.monster_list_x[i] - cfg.list_all_sprites[0].rect.x) < cfg.delta_hero and abs(
                     cfg.monster_list_y[i] - cfg.list_all_sprites[0].rect.y) < cfg.delta_hero):
                     cfg.add_flag = False
-        if cfg.add_flag:
+        if cfg.monster_add_flag:
             cfg.monster_list_x.append(x)
             cfg.monster_list_y.append(y)
             count += 1
-    if cfg.difficuilt_flag == 2:
-        cfg.monsterList = [mobs.Monster(f'Минотавр{i}', 500, cfg.monster_list_x[i], cfg.monster_list_y[i], 500, 20) for i in
-                        range(n)]
-    elif cfg.difficuilt_flag == 1:
-        cfg.monsterList = [mobs.Monster(f'Минотавр{i}', 250, cfg.monster_list_x[i], cfg.monster_list_y[i], 400, 15) for
-                           i in
-                           range(n//2)]
-    elif cfg.difficuilt_flag == 0:
-        cfg.monsterList = [mobs.Monster(f'Минотавр{i}', 150, cfg.monster_list_x[i], cfg.monster_list_y[i], 300, 10) for
-                           i in
-                           range(n//3)]
-    cfg.monsterList.append(mobs.min1)
-    classes.cfg.all_sprites.add(mobs.min1)
+    cfg.monsterList = [mobs.Monster(f'Минотавр{i}', 500, cfg.monster_list_x[i], cfg.monster_list_y[i], 300, 20) for i in
+                       range(n)]
     for elem in cfg.monsterList:
         classes.cfg.all_sprites.add(elem)
 
 
-
 def workshop():
     while cfg.workshop_active_flag:
-        cfg.screen.blit(pygame.transform.scale(img.tablet, (800, 400)), (560, 200))
+        cfg.screen.blit(img.workshop_tablet, cfg.workshop_tablet_rect)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 quit()
@@ -627,3 +546,5 @@ def workshop():
                 if event.key == pygame.K_ESCAPE:
                     cfg.workshop_active_flag = False
         pygame.display.flip()
+
+

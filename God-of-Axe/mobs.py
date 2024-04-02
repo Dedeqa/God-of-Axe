@@ -201,9 +201,11 @@ class Monster(cl.Unit, pygame.sprite.Sprite):
         if self.hp > 0:
             self.hp -= dmg
             sounds.hit_monster.play()
+            # sounds.hit_monster.stop()
         if self.hp <= 0:
             cfg.list_all_sprites[0].kills += 1
             cfg.list_all_sprites[0].coins += random.randint(3, 10)
+            sounds.take_coin.play()
             cfg.all_sprites.remove(self)
             cfg.monsterList.remove(self)
 
@@ -228,6 +230,3 @@ class Monster(cl.Unit, pygame.sprite.Sprite):
             if self.attack_timer == 15:
                 cfg.list_all_sprites[0].image = img.woodcutter_hurt_left[2]
         self.attack_timer += 1
-
-
-min1 = Monster("Jaba", 1000, 1, 1, 200, 20)

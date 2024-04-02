@@ -97,6 +97,7 @@ class Player(Unit, pygame.sprite.Sprite):
                                   self.rect[3] / 6 * 5)
 
     def update(self):
+        self.stamina = 100
         if self.coconut_boost_time < cfg.in_game_time:
             self.stamina_recovery = 0.5
         self.progress = self.wood_amount * 100 / cfg.goal
@@ -126,7 +127,7 @@ class Player(Unit, pygame.sprite.Sprite):
                             if self.move_anim_delay == 5:
                                 self.anim_counter_x += 1
                                 self.move_anim_delay = 0
-                            sx = 4
+                            sx = 10
                             self.stamina -= 0.5
 
                         else:
@@ -142,9 +143,14 @@ class Player(Unit, pygame.sprite.Sprite):
                                 self.move_anim_delay = 0
 
                             sx = 2
-                        if self.rect.x >= 100:
+                        if self.bg_x < 1920:
+                            cfg.value_map_shift_x = 500
+                        else:
+                            cfg.value_map_shift_x = 100
+                        if self.rect.x >= cfg.value_map_shift_x:
                             self.speed_x = -sx
-                        elif self.bg_x < 1820:
+
+                        elif self.bg_x < 1920:
                             self.bg_x += sx
                             func.update_monsters_x(cfg.monsterList, sx, flag_direction=True)
                 if keystate[pygame.K_d]:
@@ -163,7 +169,7 @@ class Player(Unit, pygame.sprite.Sprite):
                                 self.anim_counter_x += 1
                                 self.move_anim_delay = 0
 
-                            sx = 4
+                            sx = 10
                             self.stamina -= 0.5
                         else:
 
@@ -178,10 +184,15 @@ class Player(Unit, pygame.sprite.Sprite):
                                 self.move_anim_delay = 0
 
                             sx = 2
-                        if self.rect.x <= 1820:
+                        if self.bg_x < -1820:
+                            cfg.value_map_shift_x = 1820
+                        else:
+                            cfg.value_map_shift_x = 1420
+                        if self.rect.x <= cfg.value_map_shift_x:
                             self.speed_x = sx
-                        elif self.bg_x > -1820:
+                        elif self.bg_x > -1920:
                             self.bg_x -= sx
+
                             func.update_monsters_x(cfg.monsterList, sx, flag_direction=False)
             if not (keystate[pygame.K_w] and keystate[pygame.K_s]):
                 if keystate[pygame.K_w]:
@@ -202,7 +213,7 @@ class Player(Unit, pygame.sprite.Sprite):
                                 self.anim_counter_y += 1
                                 self.move_anim_delay = 0
 
-                            sy = 4
+                            sy = 10
                             self.stamina -= 0.5
                         else:
 
@@ -220,7 +231,11 @@ class Player(Unit, pygame.sprite.Sprite):
                                 self.move_anim_delay = 0
 
                             sy = 2
-                        if self.rect.y >= 100:
+                        if self.bg_y < 1080:
+                            cfg.value_map_shift_y = 500
+                        else:
+                            cfg.value_map_shift_y = 100
+                        if self.rect.y >= cfg.value_map_shift_y:
                             self.speed_y = -sy
                         elif self.bg_y < 1080:
                             self.bg_y += sy
@@ -243,7 +258,7 @@ class Player(Unit, pygame.sprite.Sprite):
                                 self.anim_counter_y += 1
                                 self.move_anim_delay = 0
 
-                            sy = 4
+                            sy = 10
                             self.stamina -= 0.5
                         else:
 
@@ -261,10 +276,18 @@ class Player(Unit, pygame.sprite.Sprite):
                                 self.move_anim_delay = 0
 
                             sy = 2
-                        if self.rect.y <= 980:
+
+                        if self.bg_y > -1080:
+                            cfg.value_map_shift_y = 680
+                        else:
+                            cfg.value_map_shift_y = 980
+                        if self.rect.y <= cfg.value_map_shift_y:
                             self.speed_y = sy
                         elif self.bg_y > -1080:
                             self.bg_y -= sy
+
+
+
                             func.update_monsters_y(cfg.monsterList, sy, flag_direction=False)
             if keystate[pygame.K_c]:
                 self.eat_apple()
@@ -276,11 +299,15 @@ class Player(Unit, pygame.sprite.Sprite):
                 self.eat_shishka()
 
             if keystate[pygame.K_e] and (
-                    self.hitbox.colliderect(cfg.all_sprites.sprites()[1].line_left) or self.hitbox.colliderect(cfg.all_sprites.sprites()[1].line_right) or
-                    self.hitbox.colliderect(cfg.all_sprites.sprites()[1].line_bottom) or self.hitbox.colliderect(cfg.all_sprites.sprites()[1].line_top)):
+                    self.hitbox.colliderect(cfg.all_sprites.sprites()[1].line_left) or self.hitbox.colliderect(
+                cfg.all_sprites.sprites()[1].line_right) or
+                    self.hitbox.colliderect(cfg.all_sprites.sprites()[1].line_bottom) or self.hitbox.colliderect(
+                cfg.all_sprites.sprites()[1].line_top)):
                 cfg.workshop_active_flag = True
-            elif not (self.hitbox.colliderect(cfg.all_sprites.sprites()[1].line_left) or self.hitbox.colliderect(cfg.all_sprites.sprites()[1].line_right) or
-                      self.hitbox.colliderect(cfg.all_sprites.sprites()[1].line_bottom) or self.hitbox.colliderect(cfg.all_sprites.sprites()[1].line_top)):
+            elif not (self.hitbox.colliderect(cfg.all_sprites.sprites()[1].line_left) or self.hitbox.colliderect(
+                    cfg.all_sprites.sprites()[1].line_right) or
+                      self.hitbox.colliderect(cfg.all_sprites.sprites()[1].line_bottom) or self.hitbox.colliderect(
+                        cfg.all_sprites.sprites()[1].line_top)):
                 cfg.workshop_active_flag = False
 
             if not (keystate[pygame.K_w] or keystate[pygame.K_s] or keystate[pygame.K_a] or keystate[pygame.K_d] or
@@ -475,10 +502,7 @@ class Weapon:
         self.attack_speed = attack_speed
 
     def dmg_up(self):
-        self.damage += 5
-
-
-
+        self.damage += 1000
 
 
 class Tree(Unit, pygame.sprite.Sprite):
@@ -633,9 +657,6 @@ class House(pygame.sprite.Sprite):
         # # self.line_right.y = cfg.bg_y + self.posy
         # # self.line_left.x = cfg.bg_x + self.posx
         # # self.line_left.y = cfg.bg_y +self.posy
-
-
-
 
 
 def initit_units():

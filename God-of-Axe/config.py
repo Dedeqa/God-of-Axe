@@ -33,10 +33,11 @@ pause_active_flag = False
 play_game_active_flag = False
 lose_game_active_flag = False
 win_game_active_flag = False
-add_flag = True
+monster_add_flag = True
 first_elem_flag = True
 lose_flag = False  # флаг поражения
 workshop_active_flag = False  # флаг нахождения в мастерской
+inventory_active_flag = False # флаг вызова инвентаря
 main_active_flag = False # флаг для main
 delta = 125  # "радиус" спавна деревьев
 delta_monsters = 200  # "радиус" спавна монстров
@@ -73,7 +74,7 @@ bg_y = 0
 # Направление персонажа ------------------------------------------------------------------------------------------------
 vector = 'right'
 
-# Все кнопки меню ------------------------------------------------------------------------------------------------------
+# ----------------------------------------- Все кнопки меню ------------------------------------------------------------
 # Кнопка Play ----------------------------------------------------------------------------------------------------------
 play_transform = pygame.transform.scale(img.play, (270, 126))
 play_rect = play_transform.get_rect()
@@ -131,7 +132,7 @@ point2_rect = img.point2.get_rect()
 point2_rect.center = (scale2_rect.right, scale2_rect.centery)
 
 # Надпись God of Axe в Меню --------------------------------------------------------------------------------------------
-menu_title = pygame.font.Font(f'{my_font_p}', 100).render("BIG PENIS", True, (224, 153, 9))
+menu_title = pygame.font.Font(f'{my_font_p}', 100).render("God of Axe", True, (224, 153, 9))
 menu_title_rect = menu_title.get_rect()
 menu_title_rect.bottomleft = (0, size[1])
 
@@ -165,7 +166,25 @@ menu_rect.center = (size[0] // 2, 552)
 menu_active_rect = img.menu_active.get_rect()
 menu_active_rect.center = (size[0] // 2, 558)
 
+# Кнопка Upgrade в Workshop --------------------------------------------------------------------------------------------
+# btn_upgrade_rect = img.btn_upgrade.get_rect()
+# btn_upgrade_rect.center = (size[0] // 2, 100)
+
+
 # Условие победы -------------------------------------------------------------------------------------------------------
 goal = 5
 # Время игровой сессии -------------------------------------------------------------------------------------------------
 in_game_time = 0
+
+# ----------------------------------------------- Интерфейс ------------------------------------------------------------
+# Workshop -------------------------------------------------------------------------------------------------------------
+workshop_tablet_rect = img.workshop_tablet.get_rect()
+workshop_tablet_rect.center = (950, 400)
+
+# Инвентарь ------------------------------------------------------------------------------------------------------------
+inventory_tablet_rect = img.inventory_tablet.get_rect()
+inventory_tablet_rect.center = (950, 400)
+# Переменные сдвига карты ----------------------------------------------------------------------------------------------------------
+value_map_shift_x = 0
+value_map_shift_y = 0
+

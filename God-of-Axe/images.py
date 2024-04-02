@@ -366,25 +366,33 @@ woodcutter_hurt_left = [
 ]
 # --------------------------------------------- Интерфейс --------------------------------------------------------------
 
+# Workshop -------------------------------------------------------------------------------------------------------------
+workshop_tablet_p = f.resource_path('Images/workshop/workshop_tablet.png')
+workshop_tablet = pygame.transform.scale(pygame.image.load(workshop_tablet_p).convert_alpha(), (800, 400))
+
 # Иконка яблока --------------------------------------------------------------------------------------------------------
 apple_icon_p = f.resource_path('Images/Interface/apple_icon.png')
-apple_icon = pygame.transform.scale(pygame.image.load(apple_icon_p).convert_alpha(), (30, 30))
+apple_icon = pygame.transform.scale(pygame.image.load(apple_icon_p).convert_alpha(), (70, 70))
 
 # Иконка древесины -----------------------------------------------------------------------------------------------------
 wood_icon_p = f.resource_path('Images/Interface/drevesina_icon.png')
-wood_icon = pygame.transform.scale(pygame.image.load(wood_icon_p).convert_alpha(), (30, 30))
+wood_icon = pygame.transform.scale(pygame.image.load(wood_icon_p).convert_alpha(), (70, 70))
 
 # Иконка кокоса --------------------------------------------------------------------------------------------------------
 coconut_icon_p = f.resource_path('Images/Interface/coconut_icon.png')
-coconut_icon = pygame.transform.scale(pygame.image.load(coconut_icon_p).convert_alpha(), (30, 30))
+coconut_icon = pygame.transform.scale(pygame.image.load(coconut_icon_p).convert_alpha(), (70, 70))
 
 # Иконка шишки ---------------------------------------------------------------------------------------------------------
 shishka_icon_p = f.resource_path('Images/Interface/shishka_icon.png')
-shishka_icon = pygame.transform.scale(pygame.image.load(shishka_icon_p).convert_alpha(), (30, 30))
+shishka_icon = pygame.transform.scale(pygame.image.load(shishka_icon_p).convert_alpha(), (70, 70))
 
 # Иконка монетки -------------------------------------------------------------------------------------------------------
 coin_icon_p = f.resource_path('Images/Interface/coin.png')
-coin_icon = pygame.transform.scale(pygame.image.load(coin_icon_p).convert_alpha(), (30, 30))
+coin_icon = pygame.transform.scale(pygame.image.load(coin_icon_p).convert_alpha(), (70, 70))
+
+# Окно инвентаря -------------------------------------------------------------------------------------------------------
+inventory_tablet_p = f.resource_path('Images/Interface/inventory_tablet.png')
+inventory_tablet = pygame.transform.scale(pygame.image.load(inventory_tablet_p).convert_alpha(), (800, 400))
 
 # Окно You Died --------------------------------------------------------------------------------------------------------
 die_bg_p = f.resource_path("Images/backgrounds/Vic.jpg")
@@ -394,5 +402,5 @@ die_bg = pygame.transform.scale(pygame.image.load(die_bg_p).convert_alpha(), (19
 vic_bg_p = f.resource_path('Images/backgrounds/blue_vic_bg.jpg')
 vic_bg = pygame.transform.scale(pygame.image.load(vic_bg_p).convert_alpha(), (1920, 1080))
 
-# Ионка дома
-house_icon = pygame.image.load('Images/other_objects/house.png')
+# Иконка дома
+house_icon = pygame.image.load('Images/other_objects/house.png').convert_alpha()
