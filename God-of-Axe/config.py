@@ -165,8 +165,8 @@ menu_active_rect = img.menu_active.get_rect()
 menu_active_rect.center = (size[0] // 2, 558)
 
 # Кнопка Upgrade в Workshop --------------------------------------------------------------------------------------------
-btn_upgrade_rect = img.btn_upgrade.get_rect()
-btn_upgrade_rect.center = (size[0] // 2, 100)
+# btn_upgrade_rect = img.btn_upgrade.get_rect()
+# btn_upgrade_rect.center = (size[0] // 2, 100)
 
 
 # Условие победы -------------------------------------------------------------------------------------------------------

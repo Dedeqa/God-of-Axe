@@ -114,7 +114,7 @@ def play_game():
                                           cfg.my_font_p, (224, 153, 9))
         cfg.list_all_sprites[0].draw_text(cfg.screen, 'seconds left', 30, 960, 50, cfg.my_font_p, (224, 153, 9))
 
-        if pressed_keys[pygame.K_LALT]:  # Реализация показа инвентаря при удержанном Alt
+        if pressed_keys[pygame.K_TAB]:  # Реализация показа инвентаря при удержанном Alt
             cfg.screen.blit(img.inventory_tablet, cfg.inventory_tablet_rect)
             cfg.list_all_sprites[0].draw_text(cfg.screen, f'{(cfg.list_all_sprites[0].utilities[0])}', 30, 935, 440,
                                               cfg.font_interface_p,
@@ -519,14 +519,14 @@ def monster_generator(n):
         if abs(x - cfg.all_sprites.sprites()[1].rect.center[0]) < cfg.delta and abs(
                 y - cfg.all_sprites.sprites()[1].rect.center[1]) < cfg.delta:
             cfg.add_flag = False
-        if cfg.add_flag:
+        if cfg.monster_add_flag:
             for i in range(count):
                 if (abs(cfg.monster_list_x[i] - x) < cfg.delta_monsters and abs(
                         cfg.monster_list_y[i] - y) < cfg.delta_monsters) and (abs(
                     cfg.monster_list_x[i] - cfg.list_all_sprites[0].rect.x) < cfg.delta_hero and abs(
                     cfg.monster_list_y[i] - cfg.list_all_sprites[0].rect.y) < cfg.delta_hero):
                     cfg.add_flag = False
-        if cfg.add_flag:
+        if cfg.monster_add_flag:
             cfg.monster_list_x.append(x)
             cfg.monster_list_y.append(y)
             count += 1
