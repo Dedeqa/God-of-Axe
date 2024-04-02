@@ -466,18 +466,18 @@ def options_game():
 def tree_generator(n):
     count = 0
     while count < n:
-        cfg.add_flag = True
+        cfg.tree_add_flag = True
         x = random.randint(-1820, 3640)
         y = random.randint(-1030, 1900)
         if abs(x - cfg.all_sprites.sprites()[1].rect.center[0]) < cfg.delta + 100 and abs(
                 y - cfg.all_sprites.sprites()[1].rect.center[1]) < cfg.delta + 100:
-            cfg.add_flag = False
-        if cfg.add_flag:
+            cfg.tree_add_flag = False
+        if cfg.tree_add_flag:
             for i in range(count):
                 if abs(cfg.tree_list_x[i] - x) < cfg.delta and abs(cfg.tree_list_y[i] - y) < cfg.delta:
-                    cfg.add_flag = False
+                    cfg.tree_add_flag = False
 
-        if cfg.add_flag:
+        if cfg.tree_add_flag:
             cfg.tree_list_x.append(x)
             cfg.tree_list_y.append(y)
             count += 1
