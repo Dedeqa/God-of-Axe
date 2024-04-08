@@ -818,7 +818,8 @@ def trade():
         if cfg.list_all_sprites[0].coins >= 10:
             cfg.screen.blit(img.trade_arrow_green, (935, 390))
             if (cfg.trade_arrow_rect_apple.left <= mouse[0] <= cfg.trade_arrow_rect_apple.right) and (
-                    cfg.trade_arrow_rect_apple.top <= mouse[1] <= cfg.trade_arrow_rect_apple.bottom) and click[0] and mouse_up_flag:
+                    cfg.trade_arrow_rect_apple.top <= mouse[1] <= cfg.trade_arrow_rect_apple.bottom) and click[
+                0] and mouse_up_flag:
                 sounds.click.play()
                 time.sleep(0.2)
                 cfg.list_all_sprites[0].utilities[0] += 1
@@ -836,7 +837,8 @@ def trade():
         if cfg.list_all_sprites[0].coins >= 10:
             cfg.screen.blit(img.trade_arrow_green, (935, 490))
             if (cfg.trade_arrow_rect_shishka.left <= mouse[0] <= cfg.trade_arrow_rect_shishka.right) and (
-                    cfg.trade_arrow_rect_shishka.top <= mouse[1] <= cfg.trade_arrow_rect_shishka.bottom) and not mouse_up_flag:
+                    cfg.trade_arrow_rect_shishka.top <= mouse[
+                1] <= cfg.trade_arrow_rect_shishka.bottom) and not mouse_up_flag:
                 sounds.click.play()
                 time.sleep(0.2)
                 cfg.list_all_sprites[0].utilities[1] += 1
@@ -855,7 +857,8 @@ def trade():
         if cfg.list_all_sprites[0].coins >= 10:
             cfg.screen.blit(img.trade_arrow_green, (935, 590))
             if (cfg.trade_arrow_rect_coconut.left <= mouse[0] <= cfg.trade_arrow_rect_coconut.right) and (
-                    cfg.trade_arrow_rect_coconut.top <= mouse[1] <= cfg.trade_arrow_rect_coconut.bottom) and not mouse_up_flag:
+                    cfg.trade_arrow_rect_coconut.top <= mouse[
+                1] <= cfg.trade_arrow_rect_coconut.bottom) and not mouse_up_flag:
                 sounds.click.play()
                 time.sleep(0.2)
                 cfg.list_all_sprites[0].utilities[2] += 1
@@ -864,7 +867,7 @@ def trade():
         else:
             cfg.screen.blit(img.trade_arrow_red, (935, 590))
         cfg.list_all_sprites[0].draw_text(cfg.screen, "1", 50, 1080, 605,
-                                              cfg.upgrade_font_p, "black")
+                                          cfg.upgrade_font_p, "black")
         cfg.screen.blit(img.coconut_icon, (1125, 610))
 
 
@@ -874,7 +877,8 @@ def trade():
         if cfg.list_all_sprites[0].coins >= 10:
             cfg.screen.blit(img.trade_arrow_green, (935, 690))
             if (cfg.trade_arrow_rect_wood.left <= mouse[0] <= cfg.trade_arrow_rect_wood.right) and (
-                    cfg.trade_arrow_rect_wood.top <= mouse[1] <= cfg.trade_arrow_rect_wood.bottom) and not mouse_up_flag:
+                    cfg.trade_arrow_rect_wood.top <= mouse[
+                1] <= cfg.trade_arrow_rect_wood.bottom) and not mouse_up_flag:
                 sounds.click.play()
                 time.sleep(0.2)
                 cfg.list_all_sprites[0].wood_amount += 25
@@ -891,9 +895,8 @@ def trade():
 
         else:
             cfg.screen.blit(img.trade_arrow_red, (935, 690))
-
-
-
-
+        cfg.list_all_sprites[0].draw_text(cfg.screen, "25", 50, 1080, 705,
+                                          cfg.upgrade_font_p, "black")
+        cfg.screen.blit(img.wood_icon, (1125, 710))
         pygame.display.flip()
 
