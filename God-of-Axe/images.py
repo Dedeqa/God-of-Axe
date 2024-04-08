@@ -513,4 +513,4 @@ trade_arrow_red_p = f.resource_path('Images/workshop/Trade/exchange_arrow_red.pn
 trade_arrow_red = pygame.transform.scale(pygame.image.load(trade_arrow_red_p).convert_alpha(), (95, 105))
 trade_arrow_green_p = f.resource_path('Images/workshop/Trade/exchange_arrow_green.png')
 trade_arrow_green = pygame.transform.scale(pygame.image.load(trade_arrow_green_p).convert_alpha(), (95, 105))
-trade_patch = pygame.transform.scale(pygame.image.load(game_bg_p).convert_alpha(), (50, 50))
+trade_patch = pygame.transform.scale(pygame.image.load(game_bg_p).convert_alpha(), (80, 20))

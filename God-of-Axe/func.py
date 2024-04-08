@@ -96,7 +96,7 @@ def play_game():
                                           "red")
 
         cfg.list_all_sprites[0].draw_info_bar(cfg.screen, 0, 18, cfg.list_all_sprites[0].hp, 'DarkRed', 'red', 'black',
-                                              100, 450, 17)
+                                              cfg.list_all_sprites[0].max_hp, 450, 17)
         cfg.list_all_sprites[0].draw_info_bar(cfg.screen, 0, 36, cfg.list_all_sprites[0].stamina, (24, 84, 26),
                                               (255, 255, 0), 'black',
                                               100, 450, 17)
@@ -903,7 +903,9 @@ def trade():
                                                       "yellow", "black", 500,
                                                       1920, 15)
                 cfg.list_all_sprites[0].progress = cfg.list_all_sprites[0].wood_amount * 100 / cfg.goal
-                cfg.screen.blit(img.trade_patch, (900, 965))
+                cfg.screen.fill("black", pygame.Rect(918, 1043, 87, 24))
+                cfg.screen.fill("yellow", pygame.Rect(920, 1045, 83, 20))
+                # cfg.screen.blit(img.trade_patch, (923, 1045))
                 cfg.list_all_sprites[0].draw_text(cfg.screen, f'{int(cfg.list_all_sprites[0].progress)} %', 18, 960,
                                                   1040,
                                                   cfg.font_interface_p,

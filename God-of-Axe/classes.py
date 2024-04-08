@@ -635,7 +635,6 @@ class House(pygame.sprite.Sprite):
         self.line_right = pygame.Rect(posx + self.rect[2] + 50, posy + 60, 1, self.rect[3] - 60)
         self.line_top = pygame.Rect(self.posx + 30, self.posy + 60, self.rect[2], 1)
         self.line_bottom = pygame.Rect(self.posx + 30, self.posy + self.rect[3], self.rect[2], 1)
-        print(self.rect)
 
     def update(self):
         self.rect.x = self.posx + cfg.list_all_sprites[0].bg_x
