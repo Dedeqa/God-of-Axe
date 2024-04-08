@@ -440,6 +440,8 @@ leveling_scale_power4_p = f.resource_path('Images/workshop/leveling_scale_4.png'
 leveling_scale_power4 = pygame.transform.scale(pygame.image.load(leveling_scale_power4_p).convert_alpha(), (280, 25))
 leveling_scale_power5_p = f.resource_path('Images/workshop/leveling_scale_5.png')
 leveling_scale_power5 = pygame.transform.scale(pygame.image.load(leveling_scale_power5_p).convert_alpha(), (280, 25))
+list_levels_scale_power = [leveling_scale_power0, leveling_scale_power1, leveling_scale_power2, leveling_scale_power3,
+                           leveling_scale_power4, leveling_scale_power5]
 
 leveling_scale_health0_p = f.resource_path('Images/workshop/leveling_scale.png')
 leveling_scale_health0 = pygame.transform.scale(pygame.image.load(leveling_scale_health0_p).convert_alpha(), (280, 25))
@@ -453,19 +455,34 @@ leveling_scale_health4_p = f.resource_path('Images/workshop/leveling_scale_4.png
 leveling_scale_health4 = pygame.transform.scale(pygame.image.load(leveling_scale_health4_p).convert_alpha(), (280, 25))
 leveling_scale_health5_p = f.resource_path('Images/workshop/leveling_scale_5.png')
 leveling_scale_health5 = pygame.transform.scale(pygame.image.load(leveling_scale_health5_p).convert_alpha(), (280, 25))
+list_levels_scale_health = [leveling_scale_health0, leveling_scale_health1, leveling_scale_health2,
+                            leveling_scale_health3, leveling_scale_health4, leveling_scale_health5]
 
 leveling_scale_stamina0_p = f.resource_path('Images/workshop/leveling_scale.png')
-leveling_scale_stamina0 = pygame.transform.scale(pygame.image.load(leveling_scale_stamina0_p).convert_alpha(), (280, 25))
+leveling_scale_stamina0 = pygame.transform.scale(pygame.image.load(leveling_scale_stamina0_p).convert_alpha(),
+                                                 (280, 25))
 leveling_scale_stamina1_p = f.resource_path('Images/workshop/leveling_scale_1.png')
-leveling_scale_stamina1 = pygame.transform.scale(pygame.image.load(leveling_scale_stamina1_p).convert_alpha(), (280, 25))
+leveling_scale_stamina1 = pygame.transform.scale(pygame.image.load(leveling_scale_stamina1_p).convert_alpha(),
+                                                 (280, 25))
 leveling_scale_stamina2_p = f.resource_path('Images/workshop/leveling_scale_2.png')
-leveling_scale_stamina2 = pygame.transform.scale(pygame.image.load(leveling_scale_stamina2_p).convert_alpha(), (280, 25))
+leveling_scale_stamina2 = pygame.transform.scale(pygame.image.load(leveling_scale_stamina2_p).convert_alpha(),
+                                                 (280, 25))
 leveling_scale_stamina3_p = f.resource_path('Images/workshop/leveling_scale_3.png')
-leveling_scale_stamina3 = pygame.transform.scale(pygame.image.load(leveling_scale_stamina3_p).convert_alpha(), (280, 25))
+leveling_scale_stamina3 = pygame.transform.scale(pygame.image.load(leveling_scale_stamina3_p).convert_alpha(),
+                                                 (280, 25))
 leveling_scale_stamina4_p = f.resource_path('Images/workshop/leveling_scale_4.png')
-leveling_scale_stamina4 = pygame.transform.scale(pygame.image.load(leveling_scale_stamina4_p).convert_alpha(), (280, 25))
+leveling_scale_stamina4 = pygame.transform.scale(pygame.image.load(leveling_scale_stamina4_p).convert_alpha(),
+                                                 (280, 25))
 leveling_scale_stamina5_p = f.resource_path('Images/workshop/leveling_scale_5.png')
-leveling_scale_stamina5 = pygame.transform.scale(pygame.image.load(leveling_scale_stamina5_p).convert_alpha(), (280, 25))
+leveling_scale_stamina5 = pygame.transform.scale(pygame.image.load(leveling_scale_stamina5_p).convert_alpha(),
+                                                 (280, 25))
+list_levels_scale_stamina = [leveling_scale_stamina0, leveling_scale_stamina1, leveling_scale_stamina2,
+                             leveling_scale_stamina3, leveling_scale_stamina4, leveling_scale_stamina5]
+# Кнопка Buy -----------------------------------------------------------------------------------------------------------
+buy_p = f.resource_path('Images/workshop/buy.png')
+buy = pygame.transform.scale(pygame.image.load(buy_p).convert_alpha(), (114, 55))
+buy_active_p = f.resource_path('Images/workshop/buy_active.png')
+buy_active = pygame.transform.scale(pygame.image.load(buy_active_p).convert_alpha(), (114, 55))
 
 # Trade ----------------------------------------------------------------------------------------------------------------
 trade_label_p = f.resource_path('Images/workshop/trade_label.png')

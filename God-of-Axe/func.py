@@ -43,6 +43,9 @@ def start_game():
 
 
 def play_game():
+    # if cfg.start_game_sound_flag:
+    #     sounds.play_music.play(-1)
+    #     cfg.start_game_sound_flag = False     больше не воспроизводится музыка в игре
     classes.initit_units()
     cfg.list_all_sprites = cfg.all_sprites.sprites()
     monster_generator(50)
@@ -51,6 +54,7 @@ def play_game():
         pressed_keys = pygame.key.get_pressed()
         cfg.clock.tick(cfg.FPS)
         cfg.in_game_time = pygame.time.get_ticks()
+        # print(cfg.clock.get_fps())
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 quit()
@@ -58,6 +62,9 @@ def play_game():
                 if event.key == pygame.K_ESCAPE:
                     cfg.pause_active_flag = True
                     pause()
+                # elif event.key == pygame.K_LALT:
+                #     cfg.inventory_active_flag = True
+                #     inventory()
 
         cfg.screen.blit(img.game_bg,
                         (-1920 + cfg.list_all_sprites[0].bg_x, -1080 + cfg.list_all_sprites[0].bg_y))  # 1 зона
@@ -659,32 +666,97 @@ def workshop():
 
 
 def upgrade():
+    mouse_up_flag = False
     while cfg.upgrade_active_flag:
         mouse = pygame.mouse.get_pos()
         click = pygame.mouse.get_pressed()
 
-        cfg.screen.blit(cfg.upgrade_description_1, cfg.upgrade_description_1_rect)
-        cfg.screen.blit(cfg.upgrade_description_2, cfg.upgrade_description_2_rect)
-        cfg.screen.blit(cfg.upgrade_description_3, cfg.upgrade_description_3_rect)
-        cfg.list_all_sprites[0].draw_text(cfg.screen, f"Balance: {(cfg.list_all_sprites[0].coins)} coins", 30, 980, 330,
-                                          cfg.upgrade_font_p, "black")
-        cfg.screen.blit(img.power, cfg.power_rect)
-        cfg.screen.blit(cfg.power_description, cfg.power_description_rect)
-        cfg.screen.blit(img.leveling_scale_power1, cfg.leveling_scale_power_rect)
-
-        cfg.screen.blit(img.health, cfg.health_rect)
-        cfg.screen.blit(cfg.health_description, cfg.health_description_rect)
-        cfg.screen.blit(img.leveling_scale_health0, cfg.leveling_scale_health_rect)
-
-        cfg.screen.blit(img.stamina, cfg.stamina_rect)
-        cfg.screen.blit(cfg.stamina_description, cfg.stamina_description_rect)
-        cfg.screen.blit(img.leveling_scale_stamina0, cfg.leveling_scale_stamina_rect)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 quit()
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     cfg.upgrade_active_flag = False
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    mouse_up_flag = False
+            elif event.type == pygame.MOUSEBUTTONUP:
+                if event.button == 1:
+                    mouse_up_flag = True
+
+        cfg.screen.blit(cfg.upgrade_description_1, cfg.upgrade_description_1_rect)
+        cfg.screen.blit(cfg.upgrade_description_2, cfg.upgrade_description_2_rect)
+        cfg.screen.blit(cfg.upgrade_description_3, cfg.upgrade_description_3_rect)
+        cfg.list_all_sprites[0].draw_text(cfg.screen, f"Balance: {(cfg.list_all_sprites[0].coins)} coins", 30, 980, 330,
+                                          cfg.upgrade_font_p, "green")
+        cfg.screen.blit(img.power, cfg.power_rect)
+        cfg.screen.blit(cfg.power_description, cfg.power_description_rect)
+        cfg.screen.blit(img.list_levels_scale_power[cfg.current_power_level], cfg.leveling_scale_power_rect)
+        cfg.screen.blit(cfg.cost_power, cfg.cost_power_rect)
+
+        cfg.screen.blit(img.health, cfg.health_rect)
+        cfg.screen.blit(cfg.health_description, cfg.health_description_rect)
+        cfg.screen.blit(img.list_levels_scale_health[cfg.current_health_level], cfg.leveling_scale_health_rect)
+        cfg.screen.blit(cfg.cost_health, cfg.cost_health_rect)
+
+        cfg.screen.blit(img.stamina, cfg.stamina_rect)
+        cfg.screen.blit(cfg.stamina_description, cfg.stamina_description_rect)
+        cfg.screen.blit(img.list_levels_scale_stamina[cfg.current_stamina_level], cfg.leveling_scale_stamina_rect)
+        cfg.screen.blit(cfg.cost_stamina, cfg.cost_stamina_rect)
+
+        if cfg.list_all_sprites[0].coins >= cfg.level_cost_list[cfg.current_power_level]:
+            cfg.screen.blit(img.buy_active, cfg.buy_power_rect)
+
+            if (cfg.buy_power_rect.left <= mouse[0] <= cfg.buy_power_rect.right) and (
+                    cfg.buy_power_rect.top <= mouse[1] <= cfg.buy_power_rect.bottom) and click[0]:
+                if mouse_up_flag and cfg.current_power_level < 5:
+                    sounds.click.play()
+                    time.sleep(0.2)
+                    cfg.screen.blit(img.workshop_tablet, cfg.workshop_tablet_rect)
+                    cfg.screen.blit(img.market_label, cfg.market_label_rect)
+                    cfg.screen.blit(img.upgrade_label_active, cfg.upgrade_label_rect)
+                    cfg.screen.blit(img.trade_label, cfg.trade_label_rect)
+                    cfg.current_power_level += 1
+                    cfg.list_all_sprites[0].coins -= cfg.level_cost_list[cfg.current_power_level]
+
+        else:
+            cfg.screen.blit(img.buy, cfg.buy_power_rect)
+
+        if cfg.list_all_sprites[0].coins >= cfg.level_cost_list[cfg.current_health_level]:
+            cfg.screen.blit(img.buy_active, cfg.buy_health_rect)
+
+            if (cfg.buy_health_rect.left <= mouse[0] <= cfg.buy_health_rect.right) and (
+                    cfg.buy_health_rect.top <= mouse[1] <= cfg.buy_health_rect.bottom) and click[0]:
+                if mouse_up_flag and cfg.current_health_level < 5:
+                    sounds.click.play()
+                    time.sleep(0.2)
+                    cfg.screen.blit(img.workshop_tablet, cfg.workshop_tablet_rect)
+                    cfg.screen.blit(img.market_label, cfg.market_label_rect)
+                    cfg.screen.blit(img.upgrade_label_active, cfg.upgrade_label_rect)
+                    cfg.screen.blit(img.trade_label, cfg.trade_label_rect)
+                    cfg.current_health_level += 1
+                    cfg.list_all_sprites[0].coins -= cfg.level_cost_list[cfg.current_health_level]
+
+        else:
+            cfg.screen.blit(img.buy, cfg.buy_health_rect)
+
+        if cfg.list_all_sprites[0].coins >= cfg.level_cost_list[cfg.current_stamina_level]:
+            cfg.screen.blit(img.buy_active, cfg.buy_stamina_rect)
+
+            if (cfg.buy_stamina_rect.left <= mouse[0] <= cfg.buy_stamina_rect.right) and (
+                    cfg.buy_stamina_rect.top <= mouse[1] <= cfg.buy_stamina_rect.bottom) and click[0]:
+                if mouse_up_flag and cfg.current_stamina_level < 5:
+                    sounds.click.play()
+                    time.sleep(0.2)
+                    cfg.screen.blit(img.workshop_tablet, cfg.workshop_tablet_rect)
+                    cfg.screen.blit(img.market_label, cfg.market_label_rect)
+                    cfg.screen.blit(img.upgrade_label_active, cfg.upgrade_label_rect)
+                    cfg.screen.blit(img.trade_label, cfg.trade_label_rect)
+                    cfg.current_stamina_level += 1
+                    cfg.list_all_sprites[0].coins -= cfg.level_cost_list[cfg.current_stamina_level]
+        else:
+            cfg.screen.blit(img.buy, cfg.buy_stamina_rect)
+
         pygame.display.flip()
 
 

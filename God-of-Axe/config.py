@@ -207,10 +207,10 @@ upgrade_description_3 = pygame.font.Font(f'{upgrade_font_p}', 30).render(
 upgrade_description_3_rect = upgrade_description_3.get_rect()
 upgrade_description_3_rect.center = (960, 500)
 
-level_cost_list = ['10', '20', '40', '70', '110', '160']
-current_power_level = '0'
-current_health_level = '0'
-current_stamina_level = '0'
+level_cost_list = [10, 20, 40, 70, 110, 160]
+current_power_level = 0
+current_health_level = 0
+current_stamina_level = 0
 
 power_rect = img.power.get_rect()
 power_rect.center = (600, 620)
@@ -238,6 +238,29 @@ stamina_description_rect.center = (1320, 710)
 leveling_scale_stamina_rect = img.leveling_scale_stamina0.get_rect()
 leveling_scale_stamina_rect.center = (1320, 750)
 
+buy_power_rect = img.buy.get_rect()
+buy_power_rect.center = (570, 860)
+
+buy_health_rect = img.buy.get_rect()
+buy_health_rect.center = (960, 860)
+
+buy_stamina_rect = img.buy.get_rect()
+buy_stamina_rect.center = (1320, 860)
+
+cost_power = pygame.font.Font(f'{upgrade_font_p}', 30).render(f"Cost: {level_cost_list[current_power_level]} coins",
+                                                              True, "green")
+cost_power_rect = cost_power.get_rect()
+cost_power_rect.center = (570, 800)
+
+cost_health = pygame.font.Font(f'{upgrade_font_p}', 30).render(f"Cost: {level_cost_list[current_health_level]} coins",
+                                                               True, "green")
+cost_health_rect = cost_health.get_rect()
+cost_health_rect.center = (960, 800)
+
+cost_stamina = pygame.font.Font(f'{upgrade_font_p}', 30).render(f"Cost: {level_cost_list[current_stamina_level]} coins",
+                                                                True, "green")
+cost_stamina_rect = cost_stamina.get_rect()
+cost_stamina_rect.center = (1320, 800)
 
 # Trade ----------------------------------------------------------------------------------------------------------------
 trade_label_rect = img.trade_label.get_rect()
