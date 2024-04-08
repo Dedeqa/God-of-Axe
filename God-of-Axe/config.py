@@ -231,7 +231,7 @@ upgrade_description_3 = pygame.font.Font(f'{upgrade_font_p}', 30).render(
 upgrade_description_3_rect = upgrade_description_3.get_rect()
 upgrade_description_3_rect.center = (960, 500)
 
-level_cost_list = [10, 20, 40, 70, 110, 160]
+level_cost_list = [20, 40, 70, 110, 160, 0]
 current_power_level = 0
 current_health_level = 0
 current_stamina_level = 0

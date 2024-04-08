@@ -267,7 +267,6 @@ def menu():
         cfg.screen.blit(cfg.menu_title, cfg.menu_title_rect)
         # условие нажатия ЛКМ в области кнопки play
 
-
         if (cfg.options_rect.left <= mouse[0] <= cfg.options_rect.right) and (
                 cfg.options_rect.top <= mouse[1] <= cfg.options_rect.bottom) and click[0]:
             cfg.screen.blit(img.active_options, cfg.active_options_rect)
@@ -311,7 +310,6 @@ def menu():
         else:
             cfg.screen.blit(cfg.play_transform, cfg.play_rect)
         pygame.display.flip()
-
 
 
 def difficult_menu():
@@ -695,17 +693,32 @@ def upgrade():
         cfg.screen.blit(img.power, cfg.power_rect)
         cfg.screen.blit(cfg.power_description, cfg.power_description_rect)
         cfg.screen.blit(img.list_levels_scale_power[cfg.current_power_level], cfg.leveling_scale_power_rect)
-        cfg.screen.blit(cfg.cost_power, cfg.cost_power_rect)
+        if cfg.current_power_level < 5:
+            cfg.screen.blit(pygame.font.Font(f'{cfg.upgrade_font_p}', 30).render(
+                f"Cost: {cfg.level_cost_list[cfg.current_power_level]} coins", True, "green"), cfg.cost_power_rect)
+        else:
+            cfg.screen.blit(pygame.font.Font(f'{cfg.upgrade_font_p}', 30).render("Maximum level", True, "green"),
+                            cfg.cost_power_rect)
 
         cfg.screen.blit(img.health, cfg.health_rect)
         cfg.screen.blit(cfg.health_description, cfg.health_description_rect)
         cfg.screen.blit(img.list_levels_scale_health[cfg.current_health_level], cfg.leveling_scale_health_rect)
-        cfg.screen.blit(cfg.cost_health, cfg.cost_health_rect)
+        if cfg.current_health_level < 5:
+            cfg.screen.blit(pygame.font.Font(f'{cfg.upgrade_font_p}', 30).render(
+                f"Cost: {cfg.level_cost_list[cfg.current_health_level]} coins", True, "green"), cfg.cost_health_rect)
+        else:
+            cfg.screen.blit(pygame.font.Font(f'{cfg.upgrade_font_p}', 30).render("Maximum level", True, "green"),
+                            cfg.cost_health_rect)
 
         cfg.screen.blit(img.stamina, cfg.stamina_rect)
         cfg.screen.blit(cfg.stamina_description, cfg.stamina_description_rect)
         cfg.screen.blit(img.list_levels_scale_stamina[cfg.current_stamina_level], cfg.leveling_scale_stamina_rect)
-        cfg.screen.blit(cfg.cost_stamina, cfg.cost_stamina_rect)
+        if cfg.current_stamina_level < 5:
+            cfg.screen.blit(pygame.font.Font(f'{cfg.upgrade_font_p}', 30).render(
+                f"Cost: {cfg.level_cost_list[cfg.current_stamina_level]} coins", True, "green"), cfg.cost_stamina_rect)
+        else:
+            cfg.screen.blit(pygame.font.Font(f'{cfg.upgrade_font_p}', 30).render("Maximum level", True, "green"),
+                            cfg.cost_stamina_rect)
 
         if cfg.list_all_sprites[0].coins >= cfg.level_cost_list[cfg.current_power_level]:
             cfg.screen.blit(img.buy_active, cfg.buy_power_rect)
@@ -719,9 +732,8 @@ def upgrade():
                     cfg.screen.blit(img.market_label, cfg.market_label_rect)
                     cfg.screen.blit(img.upgrade_label_active, cfg.upgrade_label_rect)
                     cfg.screen.blit(img.trade_label, cfg.trade_label_rect)
-                    cfg.current_power_level += 1
                     cfg.list_all_sprites[0].coins -= cfg.level_cost_list[cfg.current_power_level]
-
+                    cfg.current_power_level += 1
         else:
             cfg.screen.blit(img.buy, cfg.buy_power_rect)
 
@@ -737,9 +749,8 @@ def upgrade():
                     cfg.screen.blit(img.market_label, cfg.market_label_rect)
                     cfg.screen.blit(img.upgrade_label_active, cfg.upgrade_label_rect)
                     cfg.screen.blit(img.trade_label, cfg.trade_label_rect)
-                    cfg.current_health_level += 1
                     cfg.list_all_sprites[0].coins -= cfg.level_cost_list[cfg.current_health_level]
-
+                    cfg.current_health_level += 1
         else:
             cfg.screen.blit(img.buy, cfg.buy_health_rect)
 
@@ -755,8 +766,8 @@ def upgrade():
                     cfg.screen.blit(img.market_label, cfg.market_label_rect)
                     cfg.screen.blit(img.upgrade_label_active, cfg.upgrade_label_rect)
                     cfg.screen.blit(img.trade_label, cfg.trade_label_rect)
-                    cfg.current_stamina_level += 1
                     cfg.list_all_sprites[0].coins -= cfg.level_cost_list[cfg.current_stamina_level]
+                    cfg.current_stamina_level += 1
         else:
             cfg.screen.blit(img.buy, cfg.buy_stamina_rect)
 
@@ -781,16 +792,14 @@ def trade():
                 if event.button == 1:
                     mouse_up_flag = True
 
-
-
-
         cfg.list_all_sprites[0].draw_text(cfg.screen, "75", 50, 790, 405,
                                           cfg.upgrade_font_p, "black")
         cfg.screen.blit(img.coin_icon, (835, 410))
         if cfg.list_all_sprites[0].coins >= 10:
             cfg.screen.blit(img.trade_arrow_green, (935, 390))
             if (cfg.trade_arrow_rect_apple.left <= mouse[0] <= cfg.trade_arrow_rect_apple.right) and (
-                    cfg.trade_arrow_rect_apple.top <= mouse[1] <= cfg.trade_arrow_rect_apple.bottom) and click[0] and mouse_up_flag:
+                    cfg.trade_arrow_rect_apple.top <= mouse[1] <= cfg.trade_arrow_rect_apple.bottom) and click[
+                0] and mouse_up_flag:
                 sounds.click.play()
                 time.sleep(0.2)
                 cfg.list_all_sprites[0].utilities[0] += 1
@@ -801,14 +810,14 @@ def trade():
                                           cfg.upgrade_font_p, "black")
         cfg.screen.blit(img.apple_icon, (1125, 410))
 
-
         cfg.list_all_sprites[0].draw_text(cfg.screen, "175", 50, 790, 505,
                                           cfg.upgrade_font_p, "black")
         cfg.screen.blit(img.coin_icon, (835, 510))
         if cfg.list_all_sprites[0].coins >= 10:
             cfg.screen.blit(img.trade_arrow_green, (935, 490))
             if (cfg.trade_arrow_rect_shishka.left <= mouse[0] <= cfg.trade_arrow_rect_shishka.right) and (
-                    cfg.trade_arrow_rect_shishka.top <= mouse[1] <= cfg.trade_arrow_rect_shishka.bottom) and not mouse_up_flag:
+                    cfg.trade_arrow_rect_shishka.top <= mouse[
+                1] <= cfg.trade_arrow_rect_shishka.bottom) and not mouse_up_flag:
                 sounds.click.play()
                 time.sleep(0.2)
                 cfg.list_all_sprites[0].utilities[1] += 1
@@ -820,14 +829,14 @@ def trade():
                                           cfg.upgrade_font_p, "black")
         cfg.screen.blit(img.shishka_icon, (1125, 510))
 
-
         cfg.list_all_sprites[0].draw_text(cfg.screen, "275", 50, 790, 605,
                                           cfg.upgrade_font_p, "black")
         cfg.screen.blit(img.coin_icon, (835, 610))
         if cfg.list_all_sprites[0].coins >= 10:
             cfg.screen.blit(img.trade_arrow_green, (935, 590))
             if (cfg.trade_arrow_rect_coconut.left <= mouse[0] <= cfg.trade_arrow_rect_coconut.right) and (
-                    cfg.trade_arrow_rect_coconut.top <= mouse[1] <= cfg.trade_arrow_rect_coconut.bottom) and not mouse_up_flag:
+                    cfg.trade_arrow_rect_coconut.top <= mouse[
+                1] <= cfg.trade_arrow_rect_coconut.bottom) and not mouse_up_flag:
                 sounds.click.play()
                 time.sleep(0.2)
                 cfg.list_all_sprites[0].utilities[2] += 1
@@ -836,9 +845,8 @@ def trade():
         else:
             cfg.screen.blit(img.trade_arrow_red, (935, 590))
         cfg.list_all_sprites[0].draw_text(cfg.screen, "1", 50, 1080, 605,
-                                              cfg.upgrade_font_p, "black")
+                                          cfg.upgrade_font_p, "black")
         cfg.screen.blit(img.coconut_icon, (1125, 610))
-
 
         cfg.list_all_sprites[0].draw_text(cfg.screen, "100", 50, 790, 705,
                                           cfg.upgrade_font_p, "black")
@@ -846,7 +854,8 @@ def trade():
         if cfg.list_all_sprites[0].coins >= 10:
             cfg.screen.blit(img.trade_arrow_green, (935, 690))
             if (cfg.trade_arrow_rect_wood.left <= mouse[0] <= cfg.trade_arrow_rect_wood.right) and (
-                    cfg.trade_arrow_rect_wood.top <= mouse[1] <= cfg.trade_arrow_rect_wood.bottom) and not mouse_up_flag:
+                    cfg.trade_arrow_rect_wood.top <= mouse[
+                1] <= cfg.trade_arrow_rect_wood.bottom) and not mouse_up_flag:
                 sounds.click.play()
                 time.sleep(0.2)
                 cfg.list_all_sprites[0].wood_amount += 25
@@ -867,4 +876,3 @@ def trade():
                                           cfg.upgrade_font_p, "black")
         cfg.screen.blit(img.wood_icon, (1125, 710))
         pygame.display.flip()
-
