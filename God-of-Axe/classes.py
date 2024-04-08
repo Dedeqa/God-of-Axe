@@ -78,7 +78,7 @@ class Player(Unit, pygame.sprite.Sprite):
 
         self.progress = 0
 
-        self.coins = 0
+        self.coins = 1000
 
         self.apple_eat_time = cfg.in_game_time + 1000
         self.shishka_eat_time = cfg.in_game_time + 1000  # время приема пищи

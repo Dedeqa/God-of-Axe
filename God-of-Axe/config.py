@@ -39,6 +39,7 @@ first_elem_flag = True
 lose_flag = False  # флаг поражения
 workshop_active_flag = False  # флаг нахождения в мастерской
 upgrade_active_flag = False  # флаг нахождения в Upgrade мастерской
+trade_active_flag = False
 inventory_active_flag = False  # флаг вызова инвентаря
 main_active_flag = False  # флаг для main
 delta = 125  # "радиус" спавна деревьев
@@ -175,7 +176,7 @@ menu_active_rect.center = (size[0] // 2, 558)
 
 
 # Условие победы -------------------------------------------------------------------------------------------------------
-goal = 5
+goal = 500
 # Время игровой сессии -------------------------------------------------------------------------------------------------
 in_game_time = 0
 
@@ -241,6 +242,14 @@ leveling_scale_stamina_rect.center = (1320, 750)
 # Trade ----------------------------------------------------------------------------------------------------------------
 trade_label_rect = img.trade_label.get_rect()
 trade_label_rect.center = (1345, 330)
+trade_arrow_rect_apple = img.trade_arrow_green.get_rect()
+trade_arrow_rect_apple.center = (983, 443)
+trade_arrow_rect_shishka = img.trade_arrow_green.get_rect()
+trade_arrow_rect_shishka.center = (983, 543)
+trade_arrow_rect_coconut = img.trade_arrow_green.get_rect()
+trade_arrow_rect_coconut.center = (983, 643)
+trade_arrow_rect_wood = img.trade_arrow_green.get_rect()
+trade_arrow_rect_wood.center = (983, 743)
 
 # Инвентарь ------------------------------------------------------------------------------------------------------------
 inventory_tablet_rect = img.inventory_tablet.get_rect()
