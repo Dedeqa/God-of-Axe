@@ -381,7 +381,7 @@ class Player(Unit, pygame.sprite.Sprite):
 
     def attack(self):
         if self.flag_attack:
-            self.stamina -= 1
+            self.stamina -= 1.7
             if self.anim_counter_attack == 0:
                 sounds.wave.stop()
                 sounds.wave.play()
