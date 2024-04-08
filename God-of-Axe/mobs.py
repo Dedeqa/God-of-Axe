@@ -74,8 +74,8 @@ class Monster(cl.Unit, pygame.sprite.Sprite):
                     self.side = "top"
             elif self.follower_vector.x > cfg.list_all_sprites[0].rect.x and self.follower_vector.y < \
                     cfg.list_all_sprites[0].rect.y:
-                if self.follower_vector.x - cfg.list_all_sprites[0].rect.x > cfg.list_all_sprites[
-                    0].rect.y - self.follower_vector.y:
+                if self.follower_vector.x - cfg.list_all_sprites[0].rect.x > cfg.list_all_sprites[0].rect.y - \
+                        self.follower_vector.y:
                     self.side = "left"
                 else:
                     self.side = "bottom"

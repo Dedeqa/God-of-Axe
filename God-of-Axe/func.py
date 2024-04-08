@@ -310,6 +310,7 @@ def menu():
             cfg.screen.blit(img.quite, cfg.quit_rect)
         pygame.display.flip()
 
+
 def difficult_menu():
     active_flag_diff = True
 
@@ -376,6 +377,7 @@ def difficult_menu():
         else:
             cfg.screen.blit(img.quite, cfg.quit_rect)
         pygame.display.flip()
+
 
 def pause():
     play_delay_start, options_delay_start, quit_delay_start = 0, 0, 0
@@ -468,8 +470,16 @@ def options_menu():
                 sounds.click.set_volume(sounds.volume_sounds)
                 sounds.wave.set_volume(sounds.volume_sounds)
                 sounds.hit_tree.set_volume(sounds.volume_sounds)
+                sounds.hit_monster.set_volume(sounds.volume_sounds)
                 sounds.agr_monster.set_volume(sounds.volume_sounds)
                 sounds.falling_tree.set_volume(sounds.volume_sounds)
+                sounds.eat_apple.set_volume(sounds.volume_sounds)
+                sounds.drink_coconut.set_volume(sounds.volume_sounds)
+                sounds.take_coin.set_volume(sounds.volume_sounds)
+                sounds.take_dmg1.set_volume(sounds.volume_sounds)
+                sounds.take_dmg2.set_volume(sounds.volume_sounds)
+                sounds.take_dmg3.set_volume(sounds.volume_sounds)
+                sounds.last_hit.set_volume(sounds.volume_sounds)
 
         cfg.screen.blit(img.menu_bg, (0, 0))
         cfg.screen.blit(cfg.menu_title, cfg.menu_title_rect)
@@ -514,8 +524,16 @@ def options_game():
                 sounds.click.set_volume(sounds.volume_sounds)
                 sounds.wave.set_volume(sounds.volume_sounds)
                 sounds.hit_tree.set_volume(sounds.volume_sounds)
+                sounds.hit_monster.set_volume(sounds.volume_sounds)
                 sounds.agr_monster.set_volume(sounds.volume_sounds)
                 sounds.falling_tree.set_volume(sounds.volume_sounds)
+                sounds.eat_apple.set_volume(sounds.volume_sounds)
+                sounds.drink_coconut.set_volume(sounds.volume_sounds)
+                sounds.take_coin.set_volume(sounds.volume_sounds)
+                sounds.take_dmg1.set_volume(sounds.volume_sounds)
+                sounds.take_dmg2.set_volume(sounds.volume_sounds)
+                sounds.take_dmg3.set_volume(sounds.volume_sounds)
+                sounds.last_hit.set_volume(sounds.volume_sounds)
 
         cfg.screen.blit(cfg.tablet_transform, cfg.tablet_rect)
         cfg.screen.blit(img.music_label, cfg.music_label_rect)
@@ -578,7 +596,7 @@ def tree_generator(n):
 def monster_generator(n):
     count = 0
     while count < n:
-        cfg.add_flag = True
+        cfg.monster_add_flag = True
         x = random.randint(-1870, 3740)
         y = random.randint(-1030, 2000)
         if abs(x - cfg.all_sprites.sprites()[1].rect.center[0]) < cfg.delta and abs(
@@ -601,11 +619,10 @@ def monster_generator(n):
                            for i in range(n)]
     elif cfg.difficuilt_flag == 1:
         cfg.monsterList = [mobs.Monster(f'Минотавр{i}', 400, cfg.monster_list_x[i], cfg.monster_list_y[i], 400, 15)
-                           for i in range(n//2)]
+                           for i in range(n // 2)]
     elif cfg.difficuilt_flag == 0:
         cfg.monsterList = [mobs.Monster(f'Минотавр{i}', 300, cfg.monster_list_x[i], cfg.monster_list_y[i], 300, 10)
-                           for i in range(n//3)]
-
+                           for i in range(n // 3)]
 
     for elem in cfg.monsterList:
         cfg.all_sprites.add(elem)
@@ -613,11 +630,64 @@ def monster_generator(n):
 
 def workshop():
     while cfg.workshop_active_flag:
+        mouse = pygame.mouse.get_pos()
+        click = pygame.mouse.get_pressed()
+
         cfg.screen.blit(img.workshop_tablet, cfg.workshop_tablet_rect)
+        cfg.screen.blit(img.market_label, cfg.market_label_rect)
+        cfg.screen.blit(img.upgrade_label, cfg.upgrade_label_rect)
+        cfg.screen.blit(img.trade_label, cfg.trade_label_rect)
+
+        if (cfg.upgrade_label_rect.left <= mouse[0] <= cfg.upgrade_label_rect.right) and (
+                cfg.upgrade_label_rect.top <= mouse[1] <= cfg.upgrade_label_rect.bottom):
+            cfg.screen.blit(img.upgrade_label_active, cfg.upgrade_label_rect)
+            if click[0]:
+                sounds.click.play()
+                time.sleep(0.2)
+                cfg.upgrade_active_flag = True
+                upgrade()
+
+        if (cfg.trade_label_rect.left <= mouse[0] <= cfg.trade_label_rect.right) and (
+                cfg.trade_label_rect.top <= mouse[1] <= cfg.trade_label_rect.bottom):
+            cfg.screen.blit(img.trade_label_active, cfg.trade_label_rect)
+            if click[0]:
+                sounds.click.play()
+                time.sleep(0.2)
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 quit()
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     cfg.workshop_active_flag = False
+        pygame.display.flip()
+
+
+def upgrade():
+    while cfg.upgrade_active_flag:
+        mouse = pygame.mouse.get_pos()
+        click = pygame.mouse.get_pressed()
+
+        cfg.screen.blit(cfg.upgrade_description_1, cfg.upgrade_description_1_rect)
+        cfg.screen.blit(cfg.upgrade_description_2, cfg.upgrade_description_2_rect)
+        cfg.screen.blit(cfg.upgrade_description_3, cfg.upgrade_description_3_rect)
+        cfg.list_all_sprites[0].draw_text(cfg.screen, f"Balance: {(cfg.list_all_sprites[0].coins)} coins", 30, 980, 330,
+                                          cfg.upgrade_font_p, "green")
+        cfg.screen.blit(img.power, cfg.power_rect)
+        cfg.screen.blit(cfg.power_description, cfg.power_description_rect)
+        cfg.screen.blit(img.leveling_scale_power1, cfg.leveling_scale_power_rect)
+
+        cfg.screen.blit(img.health, cfg.health_rect)
+        cfg.screen.blit(cfg.health_description, cfg.health_description_rect)
+        cfg.screen.blit(img.leveling_scale_health0, cfg.leveling_scale_health_rect)
+
+        cfg.screen.blit(img.stamina, cfg.stamina_rect)
+        cfg.screen.blit(cfg.stamina_description, cfg.stamina_description_rect)
+        cfg.screen.blit(img.leveling_scale_stamina0, cfg.leveling_scale_stamina_rect)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                quit()
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    cfg.upgrade_active_flag = False
         pygame.display.flip()

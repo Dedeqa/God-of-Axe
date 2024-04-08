@@ -14,7 +14,7 @@ FPS = 60  # Количество FPS
 
 clock = pygame.time.Clock()
 
-#Лист со всеми объектами
+# Лист со всеми объектами
 all_sprites = pygame.sprite.Group()
 list_all_sprites = []
 
@@ -38,8 +38,9 @@ tree_add_flag = True
 first_elem_flag = True
 lose_flag = False  # флаг поражения
 workshop_active_flag = False  # флаг нахождения в мастерской
-inventory_active_flag = False # флаг вызова инвентаря
-main_active_flag = False # флаг для main
+upgrade_active_flag = False  # флаг нахождения в Upgrade мастерской
+inventory_active_flag = False  # флаг вызова инвентаря
+main_active_flag = False  # флаг для main
 delta = 125  # "радиус" спавна деревьев
 delta_monsters = 200  # "радиус" спавна монстров
 delta_hero = 600
@@ -67,6 +68,7 @@ monster_list_y = []
 # Шрифты ---------------------------------------------------------------------------------------------------------------
 my_font_p = f.resource_path('Fonts/Jfwildwood-ldYZ.ttf')
 font_interface_p = f.resource_path('Fonts/HoltwoodOneSC-Regular.ttf')
+upgrade_font_p = f.resource_path('Fonts/MclarenRegular.ttf')
 
 # Координаты для перемещения фона---------------------------------------------------------------------------------------
 bg_x = 0
@@ -180,12 +182,69 @@ in_game_time = 0
 # ----------------------------------------------- Интерфейс ------------------------------------------------------------
 # Workshop -------------------------------------------------------------------------------------------------------------
 workshop_tablet_rect = img.workshop_tablet.get_rect()
-workshop_tablet_rect.center = (950, 400)
+workshop_tablet_rect.center = (960, 550)
+market_label_rect = img.market_label.get_rect()
+market_label_rect.center = (980, 200)
+
+upgrade_label_rect = img.upgrade_label.get_rect()
+upgrade_label_rect.center = (610, 330)
+
+# Upgrade --------------------------------------------------------------------------------------------------------------
+upgrade_description_1 = pygame.font.Font(f'{upgrade_font_p}', 30).render(
+    "Here you will help to upgrade some of your skills for a certain amount of coins.",
+    True, (255, 255, 255))
+upgrade_description_1_rect = upgrade_description_1.get_rect()
+upgrade_description_1_rect.center = (960, 420)
+
+upgrade_description_2 = pygame.font.Font(f'{upgrade_font_p}', 30).render(
+    "Defeat your enemies and become a real God of Axe!", True, (255, 255, 255))
+upgrade_description_2_rect = upgrade_description_2.get_rect()
+upgrade_description_2_rect.center = (960, 460)
+
+upgrade_description_3 = pygame.font.Font(f'{upgrade_font_p}', 30).render(
+    "(Press ESC to exit from here)", True, (255, 255, 255))
+upgrade_description_3_rect = upgrade_description_3.get_rect()
+upgrade_description_3_rect.center = (960, 500)
+
+level_cost_list = ['10', '20', '40', '70', '110', '160']
+current_power_level = '0'
+current_health_level = '0'
+current_stamina_level = '0'
+
+power_rect = img.power.get_rect()
+power_rect.center = (600, 620)
+power_description = pygame.font.Font(f'{upgrade_font_p}', 30).render("Axe damage", True, (255, 255, 255))
+power_description_rect = power_description.get_rect()
+power_description_rect.center = (570, 710)
+leveling_scale_power_rect = img.leveling_scale_power0.get_rect()
+leveling_scale_power_rect.center = (570, 750)
+leveling_scale_power_rect = img.leveling_scale_power1.get_rect()
+leveling_scale_power_rect.center = (570, 750)
+
+health_rect = img.health.get_rect()
+health_rect.center = (960, 620)
+health_description = pygame.font.Font(f'{upgrade_font_p}', 30).render("Max Health", True, (255, 255, 255))
+health_description_rect = power_description.get_rect()
+health_description_rect.center = (960, 710)
+leveling_scale_health_rect = img.leveling_scale_health0.get_rect()
+leveling_scale_health_rect.center = (960, 750)
+
+stamina_rect = img.stamina.get_rect()
+stamina_rect.center = (1320, 620)
+stamina_description = pygame.font.Font(f'{upgrade_font_p}', 30).render("Stamina Recovery Rate", True, (255, 255, 255))
+stamina_description_rect = stamina_description.get_rect()
+stamina_description_rect.center = (1320, 710)
+leveling_scale_stamina_rect = img.leveling_scale_stamina0.get_rect()
+leveling_scale_stamina_rect.center = (1320, 750)
+
+
+# Trade ----------------------------------------------------------------------------------------------------------------
+trade_label_rect = img.trade_label.get_rect()
+trade_label_rect.center = (1345, 330)
 
 # Инвентарь ------------------------------------------------------------------------------------------------------------
 inventory_tablet_rect = img.inventory_tablet.get_rect()
 inventory_tablet_rect.center = (950, 400)
-# Переменные сдвига карты ----------------------------------------------------------------------------------------------------------
+# Переменные сдвига карты ----------------------------------------------------------------------------------------------
 value_map_shift_x = 0
 value_map_shift_y = 0
-

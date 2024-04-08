@@ -625,14 +625,14 @@ class House(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         self.posx = posx
         self.posy = posy
-        self.image = img.house_icon
+        self.image = img.market_icon
         self.rect = self.image.get_rect()
         self.rect.center = (posx, posy)
 
-        self.line_left = pygame.Rect(self.posx - 10, self.posy + 60, 1, self.rect[3] - 60)
-        self.line_right = pygame.Rect(posx + self.rect[2] - 30, posy + 60, 1, self.rect[3] - 60)
-        self.line_top = pygame.Rect(self.posx - 10, self.posy + 60, self.rect[2] - 20, 1)
-        self.line_bottom = pygame.Rect(self.posx - 10, self.posy + self.rect[3], self.rect[2] - 20, 1)
+        self.line_left = pygame.Rect(self.posx + 30, self.posy + 60, 1, self.rect[3] - 60)
+        self.line_right = pygame.Rect(posx + self.rect[2] + 50, posy + 60, 1, self.rect[3] - 60)
+        self.line_top = pygame.Rect(self.posx + 30, self.posy + 60, self.rect[2], 1)
+        self.line_bottom = pygame.Rect(self.posx + 30, self.posy + self.rect[3], self.rect[2], 1)
         print(self.rect)
 
     def update(self):
@@ -646,13 +646,13 @@ class House(pygame.sprite.Sprite):
         # self.line_left.y = self.line_left_y + cfg.bg_y
         # self.line_right.x = self.line_right_x + cfg.bg_x
         # self.line_right.y = self.line_right_y + cfg.bg_y
-        self.line_right.x = self.posx + self.rect[2] - 30 + cfg.list_all_sprites[0].bg_x
+        self.line_right.x = self.posx + self.rect[2] + cfg.list_all_sprites[0].bg_x
         self.line_right.y = self.posy + 60 + cfg.list_all_sprites[0].bg_y
-        self.line_left.x = self.posx - 10 + cfg.list_all_sprites[0].bg_x
+        self.line_left.x = self.posx + cfg.list_all_sprites[0].bg_x
         self.line_left.y = self.posy + 60 + cfg.list_all_sprites[0].bg_y
-        self.line_top.x = self.posx - 10 + cfg.list_all_sprites[0].bg_x
+        self.line_top.x = self.posx + cfg.list_all_sprites[0].bg_x
         self.line_top.y = self.posy + 60 + cfg.list_all_sprites[0].bg_y
-        self.line_bottom.x = self.posx - 10 + cfg.list_all_sprites[0].bg_x
+        self.line_bottom.x = self.posx + cfg.list_all_sprites[0].bg_x
         self.line_bottom.y = self.posy + self.rect[3] + cfg.list_all_sprites[0].bg_y
         # # self.line_right.y = cfg.bg_y + self.posy
         # # self.line_left.x = cfg.bg_x + self.posx
