@@ -266,23 +266,7 @@ def menu():
         cfg.screen.blit(img.menu_bg, (0, 0))
         cfg.screen.blit(cfg.menu_title, cfg.menu_title_rect)
         # условие нажатия ЛКМ в области кнопки play
-        if (cfg.play_rect.left <= mouse[0] <= cfg.play_rect.right) and (
-                cfg.play_rect.top <= mouse[1] <= cfg.play_rect.bottom) and \
-                click[0]:
-            # помещаем иконку active_play_transform в область active_play_rect
-            cfg.screen.blit(cfg.active_play_transform, cfg.active_play_rect)
-            cfg.play_game_active_flag = True
-            # pygame.mixer.music.stop() # фоновая музыка не отключается при нажатии на play
-            if play_delay_start > 2:
-                sounds.click.play()
-                play_delay_start = 0
-                time.sleep(0.2)
-                cfg.in_game_time = 0
-                # play_game()
-                difficult_menu()
-            play_delay_start += 1
-        else:
-            cfg.screen.blit(cfg.play_transform, cfg.play_rect)
+
 
         if (cfg.options_rect.left <= mouse[0] <= cfg.options_rect.right) and (
                 cfg.options_rect.top <= mouse[1] <= cfg.options_rect.bottom) and click[0]:
@@ -308,7 +292,26 @@ def menu():
             quit_delay_start += 1
         else:
             cfg.screen.blit(img.quite, cfg.quit_rect)
+
+        if (cfg.play_rect.left <= mouse[0] <= cfg.play_rect.right) and (
+                cfg.play_rect.top <= mouse[1] <= cfg.play_rect.bottom) and \
+                click[0]:
+            # помещаем иконку active_play_transform в область active_play_rect
+            cfg.screen.blit(cfg.active_play_transform, cfg.active_play_rect)
+            cfg.play_game_active_flag = True
+            # pygame.mixer.music.stop() # фоновая музыка не отключается при нажатии на play
+            if play_delay_start > 2:
+                sounds.click.play()
+                play_delay_start = 0
+                time.sleep(0.2)
+                cfg.in_game_time = 0
+                # play_game()
+                difficult_menu()
+            play_delay_start += 1
+        else:
+            cfg.screen.blit(cfg.play_transform, cfg.play_rect)
         pygame.display.flip()
+
 
 
 def difficult_menu():
@@ -331,7 +334,7 @@ def difficult_menu():
         if (cfg.play_rect.left <= mouse[0] <= cfg.play_rect.right) and (
                 cfg.play_rect.top <= mouse[1] <= cfg.play_rect.bottom) and \
                 click[0]:
-            cfg.screen.blit(cfg.active_play_transform, cfg.active_play_rect)
+            cfg.screen.blit(img.easy_active, cfg.active_easy_rect)
             if easy_delay_start > 2:
                 sounds.click.play()
                 easy_delay_start = 0
@@ -343,11 +346,11 @@ def difficult_menu():
                 cfg.menu_active_flag = False
             easy_delay_start += 1
         else:
-            cfg.screen.blit(cfg.play_transform, cfg.play_rect)
+            cfg.screen.blit(img.easy, cfg.easy_rect)
 
         if (cfg.options_rect.left <= mouse[0] <= cfg.options_rect.right) and (
                 cfg.options_rect.top <= mouse[1] <= cfg.options_rect.bottom) and click[0]:
-            cfg.screen.blit(img.active_options, cfg.active_options_rect)
+            cfg.screen.blit(cfg.medium_active_transform, cfg.active_medium_rect)
             if medium_delay_start > 2:
                 sounds.click.play()
                 medium_delay_start = 0
@@ -359,12 +362,12 @@ def difficult_menu():
                 cfg.menu_active_flag = False
             medium_delay_start += 1
         else:
-            cfg.screen.blit(img.options, cfg.options_rect)
+            cfg.screen.blit(cfg.medium_transform, cfg.medium_rect)
 
         if (cfg.quit_rect.left <= mouse[0] <= cfg.quit_rect.right) and (
                 cfg.quit_rect.top <= mouse[1] <= cfg.quit_rect.bottom) and \
                 click[0]:
-            cfg.screen.blit(img.active_quite, cfg.active_quite_rect)
+            cfg.screen.blit(img.hard_active, cfg.active_hard_rect)
             if hard_delay_start > 2:
                 sounds.click.play()
                 hard_delay_start = 0
@@ -375,7 +378,7 @@ def difficult_menu():
                 cfg.menu_active_flag = False
             hard_delay_start += 1
         else:
-            cfg.screen.blit(img.quite, cfg.quit_rect)
+            cfg.screen.blit(img.hard, cfg.hard_rect)
         pygame.display.flip()
 
 

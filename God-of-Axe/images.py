@@ -91,6 +91,26 @@ menu_active = pygame.image.load(menu_active_p).convert_alpha()
 # Серый фон для паузы --------------------------------------------------------------------------------------------------
 bg_pause_new_p = f.resource_path('Images/backgrounds/pause_bg_new.jpeg')
 bg_pause_new = pygame.image.load(bg_pause_new_p).convert_alpha()
+
+
+easy_p = f.resource_path('Images/menu/buttons/easy.png')
+easy = pygame.image.load(easy_p).convert_alpha()
+
+easy_active_p = f.resource_path('Images/menu/buttons/easy_active.png')
+easy_active = pygame.image.load(easy_active_p).convert_alpha()
+
+medium_p = f.resource_path('Images/menu/buttons/medium.png')
+medium = pygame.image.load(medium_p).convert_alpha()
+
+medium_active_p = f.resource_path('Images/menu/buttons/medium_active.png')
+medium_active = pygame.image.load(medium_active_p).convert_alpha()
+
+hard_p = f.resource_path('Images/menu/buttons/hard.png')
+hard = pygame.image.load(hard_p).convert_alpha()
+
+hard_active_p = f.resource_path('Images/menu/buttons/hard_active.png')
+hard_active = pygame.image.load(hard_active_p).convert_alpha()
+
 # --------------------------------------------- Спрайты персонажа ------------------------------------------------------
 # Персонаж в бездействии -----------------------------------------------------------------------------------------------
 woodcutter_stay_right_p = f.resource_path('Images/Player/Woodcutter_right.png')

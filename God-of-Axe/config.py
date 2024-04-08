@@ -89,6 +89,30 @@ active_play_transform = pygame.transform.scale(img.active_play, (270, 114))
 active_play_rect = active_play_transform.get_rect()
 active_play_rect.center = (size[0] // 2, 221)
 
+
+
+easy_rect = img.easy.get_rect()
+easy_rect.center = (size[0] // 2, 215)
+
+
+active_easy_rect = img.easy_active.get_rect()
+active_easy_rect.center = (size[0] // 2, 221)
+
+medium_transform = pygame.transform.scale(img.medium,(222,108))
+medium_rect = medium_transform.get_rect()
+medium_rect.center = (size[0] // 2, 350)
+
+medium_active_transform = pygame.transform.scale(img.medium_active,(222,108))
+active_medium_rect = medium_active_transform.get_rect()
+active_medium_rect.center = (size[0] // 2, 356)
+
+hard_rect = img.hard.get_rect()
+hard_rect.center = (size[0] // 2, 476)
+
+active_hard_rect = img.hard.get_rect()
+active_hard_rect.center = (size[0] // 2, 482)
+
+
 # Кнопка Options -------------------------------------------------------------------------------------------------------
 options_rect = img.options.get_rect()
 options_rect.center = (size[0] // 2, 350)
