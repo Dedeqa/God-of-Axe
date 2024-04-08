@@ -267,7 +267,6 @@ def menu():
         cfg.screen.blit(cfg.menu_title, cfg.menu_title_rect)
         # условие нажатия ЛКМ в области кнопки play
 
-
         if (cfg.options_rect.left <= mouse[0] <= cfg.options_rect.right) and (
                 cfg.options_rect.top <= mouse[1] <= cfg.options_rect.bottom) and click[0]:
             cfg.screen.blit(img.active_options, cfg.active_options_rect)
@@ -311,7 +310,6 @@ def menu():
         else:
             cfg.screen.blit(cfg.play_transform, cfg.play_rect)
         pygame.display.flip()
-
 
 
 def difficult_menu():
@@ -695,17 +693,32 @@ def upgrade():
         cfg.screen.blit(img.power, cfg.power_rect)
         cfg.screen.blit(cfg.power_description, cfg.power_description_rect)
         cfg.screen.blit(img.list_levels_scale_power[cfg.current_power_level], cfg.leveling_scale_power_rect)
-        cfg.screen.blit(cfg.cost_power, cfg.cost_power_rect)
+        if cfg.current_power_level < 5:
+            cfg.screen.blit(pygame.font.Font(f'{cfg.upgrade_font_p}', 30).render(
+                f"Cost: {cfg.level_cost_list[cfg.current_power_level]} coins", True, "green"), cfg.cost_power_rect)
+        else:
+            cfg.screen.blit(pygame.font.Font(f'{cfg.upgrade_font_p}', 30).render("Maximum level", True, "green"),
+                            cfg.cost_power_rect)
 
         cfg.screen.blit(img.health, cfg.health_rect)
         cfg.screen.blit(cfg.health_description, cfg.health_description_rect)
         cfg.screen.blit(img.list_levels_scale_health[cfg.current_health_level], cfg.leveling_scale_health_rect)
-        cfg.screen.blit(cfg.cost_health, cfg.cost_health_rect)
+        if cfg.current_health_level < 5:
+            cfg.screen.blit(pygame.font.Font(f'{cfg.upgrade_font_p}', 30).render(
+                f"Cost: {cfg.level_cost_list[cfg.current_health_level]} coins", True, "green"), cfg.cost_health_rect)
+        else:
+            cfg.screen.blit(pygame.font.Font(f'{cfg.upgrade_font_p}', 30).render("Maximum level", True, "green"),
+                            cfg.cost_health_rect)
 
         cfg.screen.blit(img.stamina, cfg.stamina_rect)
         cfg.screen.blit(cfg.stamina_description, cfg.stamina_description_rect)
         cfg.screen.blit(img.list_levels_scale_stamina[cfg.current_stamina_level], cfg.leveling_scale_stamina_rect)
-        cfg.screen.blit(cfg.cost_stamina, cfg.cost_stamina_rect)
+        if cfg.current_stamina_level < 5:
+            cfg.screen.blit(pygame.font.Font(f'{cfg.upgrade_font_p}', 30).render(
+                f"Cost: {cfg.level_cost_list[cfg.current_stamina_level]} coins", True, "green"), cfg.cost_stamina_rect)
+        else:
+            cfg.screen.blit(pygame.font.Font(f'{cfg.upgrade_font_p}', 30).render("Maximum level", True, "green"),
+                            cfg.cost_stamina_rect)
 
         if cfg.list_all_sprites[0].coins >= cfg.level_cost_list[cfg.current_power_level]:
             cfg.screen.blit(img.buy_active, cfg.buy_power_rect)
@@ -719,9 +732,9 @@ def upgrade():
                     cfg.screen.blit(img.market_label, cfg.market_label_rect)
                     cfg.screen.blit(img.upgrade_label_active, cfg.upgrade_label_rect)
                     cfg.screen.blit(img.trade_label, cfg.trade_label_rect)
-                    cfg.current_power_level += 1
                     cfg.list_all_sprites[0].coins -= cfg.level_cost_list[cfg.current_power_level]
-
+                    cfg.list_all_sprites[0].weapon.dmg_up(round((cfg.current_power_level + 1) * 3.34))
+                    cfg.current_power_level += 1
         else:
             cfg.screen.blit(img.buy, cfg.buy_power_rect)
 
@@ -737,9 +750,10 @@ def upgrade():
                     cfg.screen.blit(img.market_label, cfg.market_label_rect)
                     cfg.screen.blit(img.upgrade_label_active, cfg.upgrade_label_rect)
                     cfg.screen.blit(img.trade_label, cfg.trade_label_rect)
-                    cfg.current_health_level += 1
                     cfg.list_all_sprites[0].coins -= cfg.level_cost_list[cfg.current_health_level]
-
+                    cfg.list_all_sprites[0].max_hp += round((cfg.current_health_level + 1) * 6.67)
+                    cfg.list_all_sprites[0].hp += round((cfg.current_health_level + 1) * 6.67)
+                    cfg.current_health_level += 1
         else:
             cfg.screen.blit(img.buy, cfg.buy_health_rect)
 
@@ -755,8 +769,10 @@ def upgrade():
                     cfg.screen.blit(img.market_label, cfg.market_label_rect)
                     cfg.screen.blit(img.upgrade_label_active, cfg.upgrade_label_rect)
                     cfg.screen.blit(img.trade_label, cfg.trade_label_rect)
-                    cfg.current_stamina_level += 1
                     cfg.list_all_sprites[0].coins -= cfg.level_cost_list[cfg.current_stamina_level]
+                    cfg.list_all_sprites[0].standard_stamina_recovery += (cfg.current_stamina_level + 1) * 0.07
+                    cfg.list_all_sprites[0].stamina_recovery += (cfg.current_stamina_level + 1) * 0.07
+                    cfg.current_stamina_level += 1
         else:
             cfg.screen.blit(img.buy, cfg.buy_stamina_rect)
 

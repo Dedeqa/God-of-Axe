@@ -49,11 +49,14 @@ class Player(Unit, pygame.sprite.Sprite):
         self.stamina = 100
         self.armor = 25
         self.stamina_recovery = 0.5
+        self.standard_stamina_recovery = 0.5
         self.rect = self.image.get_rect()
         self.rect.center = (posx / 2, posy / 2)  # место спавна героя
-        self.weapon = Weapon(100, 1000)
+        self.weapon = Weapon(50, 1000)
         self.speed_x = 0
         self.speed_y = 0
+
+        self.max_hp = 100
 
         self.bg_x = cfg.bg_x
         self.bg_y = cfg.bg_y
@@ -97,9 +100,9 @@ class Player(Unit, pygame.sprite.Sprite):
                                   self.rect[3] / 6 * 5)
 
     def update(self):
-        self.stamina = 100
+
         if self.coconut_boost_time < cfg.in_game_time:
-            self.stamina_recovery = 0.5
+            self.stamina_recovery = self.standard_stamina_recovery
         self.progress = self.wood_amount * 100 / cfg.goal
         self.speed_x = 0
         self.speed_y = 0
@@ -444,7 +447,6 @@ class Player(Unit, pygame.sprite.Sprite):
     def take_dmg(self, dmg):
 
         self.flag_take_dmg = True
-
         if self.armor > 0:
             self.hp -= dmg - (self.armor / 100) * dmg
             self.armor -= dmg // 2
@@ -489,7 +491,7 @@ class Player(Unit, pygame.sprite.Sprite):
         if self.coconut_eat_time < cfg.in_game_time:
             if self.utilities[2] > 0:
                 self.utilities[2] -= 1
-                self.stamina_recovery = 1.5
+                self.stamina_recovery = 2
                 sounds.drink_coconut.play()
                 self.coconut_eat_time = cfg.in_game_time + 5100
                 self.coconut_boost_time = self.coconut_eat_time
@@ -501,8 +503,8 @@ class Weapon:
         self.damage = dmg
         self.attack_speed = attack_speed
 
-    def dmg_up(self):
-        self.damage += 1000
+    def dmg_up(self, dmg_plus):
+        self.damage += dmg_plus
 
 
 class Tree(Unit, pygame.sprite.Sprite):
