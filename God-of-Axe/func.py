@@ -781,12 +781,40 @@ def trade():
                 if event.button == 1:
                     mouse_up_flag = True
 
-
+        cfg.screen.blit(img.workshop_tablet, cfg.workshop_tablet_rect)
+        cfg.screen.blit(img.trade_label_active, cfg.trade_label_rect)
+        cfg.screen.blit(img.upgrade_label, cfg.upgrade_label_rect)
+        cfg.screen.blit(img.market_label, cfg.market_label_rect)
 
 
         cfg.list_all_sprites[0].draw_text(cfg.screen, "75", 50, 790, 405,
                                           cfg.upgrade_font_p, "black")
+        cfg.list_all_sprites[0].draw_text(cfg.screen, "25", 50, 1080, 705,
+                                          cfg.upgrade_font_p, "black")
+        cfg.screen.blit(img.wood_icon, (1125, 710))
+        cfg.list_all_sprites[0].draw_text(cfg.screen, f'{(cfg.list_all_sprites[0].utilities[0])}', 30, 500, 750,
+                                          cfg.font_interface_p,
+                                          "white")
+        cfg.list_all_sprites[0].draw_text(cfg.screen, f'{(cfg.list_all_sprites[0].utilities[1])}', 30, 500, 660,
+                                          cfg.font_interface_p,
+                                          "white")
+        cfg.list_all_sprites[0].draw_text(cfg.screen, f'{(cfg.list_all_sprites[0].utilities[2])}', 30, 500, 580,
+                                          cfg.font_interface_p,
+                                          "white")
+        cfg.list_all_sprites[0].draw_text(cfg.screen, f'{(cfg.list_all_sprites[0].wood_amount)}', 30, 500, 500,
+                                          cfg.font_interface_p,
+                                          "white")
+        cfg.list_all_sprites[0].draw_text(cfg.screen, f'{(cfg.list_all_sprites[0].coins)}', 30, 500, 420,
+                                          cfg.font_interface_p,
+                                          "white")
+        cfg.screen.blit(img.apple_icon, (370, 740))
+        cfg.screen.blit(img.shishka_icon, (370, 650))
+        cfg.screen.blit(img.coconut_icon, (370, 570))
+        cfg.screen.blit(img.wood_icon, (370, 490))
+        cfg.screen.blit(img.coin_icon, (370, 410))
         cfg.screen.blit(img.coin_icon, (835, 410))
+
+
         if cfg.list_all_sprites[0].coins >= 10:
             cfg.screen.blit(img.trade_arrow_green, (935, 390))
             if (cfg.trade_arrow_rect_apple.left <= mouse[0] <= cfg.trade_arrow_rect_apple.right) and (
@@ -863,8 +891,9 @@ def trade():
 
         else:
             cfg.screen.blit(img.trade_arrow_red, (935, 690))
-        cfg.list_all_sprites[0].draw_text(cfg.screen, "25", 50, 1080, 705,
-                                          cfg.upgrade_font_p, "black")
-        cfg.screen.blit(img.wood_icon, (1125, 710))
+
+
+
+
         pygame.display.flip()
 
