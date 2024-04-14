@@ -219,29 +219,22 @@ def win_game():
             cfg.screen.fill("grey")
             cfg.list_all_sprites[0].draw_text(cfg.screen,
                                               f'You have mastered only {cfg.list_all_sprites[0].progress}%',
-                                              30,
-                                              960, 200, cfg.font_interface_p, "red")
+                                              30, 960, 200, cfg.font_interface_p, "red")
             cfg.list_all_sprites[0].draw_text(cfg.screen,
                                               f'You have wasted {int(cfg.in_game_time / 1000)} seconds your life',
-                                              24,
-                                              960, 300, cfg.font_interface_p, "orange")
+                                              24, 960, 300, cfg.font_interface_p, "orange")
             cfg.list_all_sprites[0].draw_text(cfg.screen,
                                               f'You have cut down {cfg.list_all_sprites[0].oak_amount} DUBOV and {cfg.list_all_sprites[0].fir_amount}  IOLOK',
-                                              24,
-                                              960, 370, cfg.font_interface_p, "yellow")
+                                              24, 960, 370, cfg.font_interface_p, "yellow")
             cfg.list_all_sprites[0].draw_text(cfg.screen,
                                               f'You have {cfg.list_all_sprites[0].utilities[0]} apples, {cfg.list_all_sprites[0].utilities[1]} shishkas, {cfg.list_all_sprites[0].utilities[2]} coconuts left',
-                                              24,
-                                              960, 440, cfg.font_interface_p, "green")
+                                              24, 960, 440, cfg.font_interface_p, "green")
 
             cfg.list_all_sprites[0].draw_text(cfg.screen,
                                               f'You have destroyed {cfg.list_all_sprites[0].kills} monsters',
-                                              30,
-                                              960, 510, cfg.font_interface_p, "blue")
-            cfg.list_all_sprites[0].draw_text(cfg.screen,
-                                              'Press Esc to exit the menu',
-                                              20,
-                                              960, 680, cfg.font_interface_p, "purple")
+                                              30, 960, 510, cfg.font_interface_p, "blue")
+            cfg.list_all_sprites[0].draw_text(cfg.screen, 'Press Esc to exit the menu', 20, 960, 680,
+                                              cfg.font_interface_p, "purple")
         pygame.display.flip()
 
 
@@ -434,6 +427,9 @@ def pause():
                 cfg.pause_active_flag = False
                 cfg.menu_active_flag = True
                 cfg.play_game_active_flag = False
+                cfg.current_power_level = 0
+                cfg.current_health_level = 0
+                cfg.current_stamina_level = 0
                 classes.del_units()
             quit_delay_start += 1
         else:
@@ -802,26 +798,19 @@ def trade():
         cfg.screen.blit(img.upgrade_label, cfg.upgrade_label_rect)
         cfg.screen.blit(img.market_label, cfg.market_label_rect)
 
-        cfg.list_all_sprites[0].draw_text(cfg.screen, "75", 50, 790, 405,
-                                          cfg.upgrade_font_p, "black")
-        cfg.list_all_sprites[0].draw_text(cfg.screen, "25", 50, 1080, 705,
-                                          cfg.upgrade_font_p, "black")
+        cfg.list_all_sprites[0].draw_text(cfg.screen, "75", 50, 790, 405, cfg.upgrade_font_p, "black")
+        cfg.list_all_sprites[0].draw_text(cfg.screen, "25", 50, 1080, 705, cfg.upgrade_font_p, "black")
         cfg.screen.blit(img.wood_icon, (1125, 710))
         cfg.list_all_sprites[0].draw_text(cfg.screen, f'{(cfg.list_all_sprites[0].utilities[0])}', 30, 500, 750,
-                                          cfg.font_interface_p,
-                                          "white")
+                                          cfg.font_interface_p, "white")
         cfg.list_all_sprites[0].draw_text(cfg.screen, f'{(cfg.list_all_sprites[0].utilities[1])}', 30, 500, 660,
-                                          cfg.font_interface_p,
-                                          "white")
+                                          cfg.font_interface_p, "white")
         cfg.list_all_sprites[0].draw_text(cfg.screen, f'{(cfg.list_all_sprites[0].utilities[2])}', 30, 500, 580,
-                                          cfg.font_interface_p,
-                                          "white")
+                                          cfg.font_interface_p, "white")
         cfg.list_all_sprites[0].draw_text(cfg.screen, f'{(cfg.list_all_sprites[0].wood_amount)}', 30, 500, 500,
-                                          cfg.font_interface_p,
-                                          "white")
+                                          cfg.font_interface_p, "white")
         cfg.list_all_sprites[0].draw_text(cfg.screen, f'{(cfg.list_all_sprites[0].coins)}', 30, 500, 420,
-                                          cfg.font_interface_p,
-                                          "white")
+                                          cfg.font_interface_p, "white")
         cfg.screen.blit(img.apple_icon, (370, 740))
         cfg.screen.blit(img.shishka_icon, (370, 650))
         cfg.screen.blit(img.coconut_icon, (370, 570))
@@ -832,27 +821,24 @@ def trade():
         if cfg.list_all_sprites[0].coins >= 10:
             cfg.screen.blit(img.trade_arrow_green, (935, 390))
             if (cfg.trade_arrow_rect_apple.left <= mouse[0] <= cfg.trade_arrow_rect_apple.right) and (
-                    cfg.trade_arrow_rect_apple.top <= mouse[1] <= cfg.trade_arrow_rect_apple.bottom) and click[
-                0] and mouse_up_flag:
+                    cfg.trade_arrow_rect_apple.top <= mouse[1] <= cfg.trade_arrow_rect_apple.bottom) and click[0] \
+                    and mouse_up_flag:
                 sounds.click.play()
                 time.sleep(0.2)
                 cfg.list_all_sprites[0].utilities[0] += 1
                 cfg.list_all_sprites[0].coins -= 10
         else:
             cfg.screen.blit(img.trade_arrow_red, (935, 390))
-        cfg.list_all_sprites[0].draw_text(cfg.screen, "1", 50, 1080, 405,
-                                          cfg.upgrade_font_p, "black")
+        cfg.list_all_sprites[0].draw_text(cfg.screen, "1", 50, 1080, 405, cfg.upgrade_font_p, "black")
         cfg.screen.blit(img.apple_icon, (1125, 410))
 
-        cfg.list_all_sprites[0].draw_text(cfg.screen, "175", 50, 790, 505,
-                                          cfg.upgrade_font_p, "black")
+        cfg.list_all_sprites[0].draw_text(cfg.screen, "175", 50, 790, 505, cfg.upgrade_font_p, "black")
         cfg.screen.blit(img.coin_icon, (835, 510))
         if cfg.list_all_sprites[0].coins >= 10:
             cfg.screen.blit(img.trade_arrow_green, (935, 490))
             if (cfg.trade_arrow_rect_shishka.left <= mouse[0] <= cfg.trade_arrow_rect_shishka.right) and (
                     cfg.trade_arrow_rect_shishka.top <= mouse[
-                1] <= cfg.trade_arrow_rect_shishka.bottom) and click[
-                0] and mouse_up_flag:
+                1] <= cfg.trade_arrow_rect_shishka.bottom) and not mouse_up_flag:
                 sounds.click.play()
                 time.sleep(0.2)
                 cfg.list_all_sprites[0].utilities[1] += 1
@@ -860,19 +846,16 @@ def trade():
 
         else:
             cfg.screen.blit(img.trade_arrow_red, (935, 490))
-        cfg.list_all_sprites[0].draw_text(cfg.screen, "1", 50, 1080, 505,
-                                          cfg.upgrade_font_p, "black")
+        cfg.list_all_sprites[0].draw_text(cfg.screen, "1", 50, 1080, 505, cfg.upgrade_font_p, "black")
         cfg.screen.blit(img.shishka_icon, (1125, 510))
 
-        cfg.list_all_sprites[0].draw_text(cfg.screen, "275", 50, 790, 605,
-                                          cfg.upgrade_font_p, "black")
+        cfg.list_all_sprites[0].draw_text(cfg.screen, "275", 50, 790, 605, cfg.upgrade_font_p, "black")
         cfg.screen.blit(img.coin_icon, (835, 610))
         if cfg.list_all_sprites[0].coins >= 10:
             cfg.screen.blit(img.trade_arrow_green, (935, 590))
             if (cfg.trade_arrow_rect_coconut.left <= mouse[0] <= cfg.trade_arrow_rect_coconut.right) and (
                     cfg.trade_arrow_rect_coconut.top <= mouse[
-                1] <= cfg.trade_arrow_rect_coconut.bottom) and click[
-                0] and mouse_up_flag:
+                1] <= cfg.trade_arrow_rect_coconut.bottom) and not mouse_up_flag:
                 sounds.click.play()
                 time.sleep(0.2)
                 cfg.list_all_sprites[0].utilities[2] += 1
@@ -880,38 +863,30 @@ def trade():
 
         else:
             cfg.screen.blit(img.trade_arrow_red, (935, 590))
-        cfg.list_all_sprites[0].draw_text(cfg.screen, "1", 50, 1080, 605,
-                                          cfg.upgrade_font_p, "black")
+        cfg.list_all_sprites[0].draw_text(cfg.screen, "1", 50, 1080, 605, cfg.upgrade_font_p, "black")
         cfg.screen.blit(img.coconut_icon, (1125, 610))
 
-        cfg.list_all_sprites[0].draw_text(cfg.screen, "100", 50, 790, 705,
-                                          cfg.upgrade_font_p, "black")
+        cfg.list_all_sprites[0].draw_text(cfg.screen, "100", 50, 790, 705, cfg.upgrade_font_p, "black")
         cfg.screen.blit(img.coin_icon, (835, 710))
-        if cfg.list_all_sprites[0].coins >= 10 and cfg.list_all_sprites[0].wood_amount + 25 < cfg.goal:
+        if cfg.list_all_sprites[0].coins >= 10:
             cfg.screen.blit(img.trade_arrow_green, (935, 690))
             if (cfg.trade_arrow_rect_wood.left <= mouse[0] <= cfg.trade_arrow_rect_wood.right) and (
                     cfg.trade_arrow_rect_wood.top <= mouse[
-                1] <= cfg.trade_arrow_rect_wood.bottom) and click[
-                0] and mouse_up_flag:
+                1] <= cfg.trade_arrow_rect_wood.bottom) and not mouse_up_flag:
                 sounds.click.play()
                 time.sleep(0.2)
                 cfg.list_all_sprites[0].wood_amount += 25
                 cfg.list_all_sprites[0].coins -= 10
                 cfg.list_all_sprites[0].draw_info_bar(cfg.screen, 0, 1065, cfg.list_all_sprites[0].wood_amount, "brown",
-                                                      "yellow", "black", 500,
-                                                      1920, 15)
+                                                      "yellow", "black", 500, 1920, 15)
                 cfg.list_all_sprites[0].progress = cfg.list_all_sprites[0].wood_amount * 100 / cfg.goal
                 cfg.screen.fill("black", pygame.Rect(918, 1043, 87, 24))
                 cfg.screen.fill("yellow", pygame.Rect(920, 1045, 83, 20))
                 # cfg.screen.blit(img.trade_patch, (923, 1045))
                 cfg.list_all_sprites[0].draw_text(cfg.screen, f'{int(cfg.list_all_sprites[0].progress)} %', 18, 960,
-                                                  1040,
-                                                  cfg.font_interface_p,
-                                                  "red")
-
+                                                  1040, cfg.font_interface_p, "red")
         else:
             cfg.screen.blit(img.trade_arrow_red, (935, 690))
-        cfg.list_all_sprites[0].draw_text(cfg.screen, "25", 50, 1080, 705,
-                                          cfg.upgrade_font_p, "black")
+        cfg.list_all_sprites[0].draw_text(cfg.screen, "25", 50, 1080, 705, cfg.upgrade_font_p, "black")
         cfg.screen.blit(img.wood_icon, (1125, 710))
         pygame.display.flip()

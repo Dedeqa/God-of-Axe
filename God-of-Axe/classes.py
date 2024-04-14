@@ -289,8 +289,6 @@ class Player(Unit, pygame.sprite.Sprite):
                         elif self.bg_y > -1080:
                             self.bg_y -= sy
 
-
-
                             func.update_monsters_y(cfg.monsterList, sy, flag_direction=False)
             if keystate[pygame.K_c]:
                 self.eat_apple()
@@ -632,7 +630,7 @@ class House(pygame.sprite.Sprite):
         self.rect.center = (posx, posy)
 
         self.line_left = pygame.Rect(self.posx + 30, self.posy + 60, 1, self.rect[3] - 60)
-        self.line_right = pygame.Rect(posx + self.rect[2] + 50, posy + 60, 1, self.rect[3] - 60)
+        self.line_right = pygame.Rect(posx + self.rect[2] + 50, posy + 60, 1, self.rect[3] - 59)
         self.line_top = pygame.Rect(self.posx + 30, self.posy + 60, self.rect[2], 1)
         self.line_bottom = pygame.Rect(self.posx + 30, self.posy + self.rect[3], self.rect[2], 1)
 
@@ -643,7 +641,7 @@ class House(pygame.sprite.Sprite):
         cfg.screen.fill("red", self.line_right)
         cfg.screen.fill("red", self.line_top)
         cfg.screen.fill("red", self.line_bottom)
-        # self.line_left.x = self.line_left_x + cfg.bg_x````````````````````````````````````````````````````````````````````````
+        # self.line_left.x = self.line_left_x + cfg.bg_x````````````````````````````````````````````````````````````````
         # self.line_left.y = self.line_left_y + cfg.bg_y
         # self.line_right.x = self.line_right_x + cfg.bg_x
         # self.line_right.y = self.line_right_y + cfg.bg_y

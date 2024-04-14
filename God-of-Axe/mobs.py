@@ -34,9 +34,10 @@ class Monster(cl.Unit, pygame.sprite.Sprite):
         self.sound_flag = True
         self.attack_flag = False
         self.distance = 0
-
         self.attack_timer = 0
         self.attack_wait_timer = 0
+        self.flag_move = True
+        self.flag_dir = True
 
     def update(self):
 
@@ -48,7 +49,6 @@ class Monster(cl.Unit, pygame.sprite.Sprite):
         min_step = max(0, int(self.distance - self.maximum_distance))
         max_step = self.distance - self.minimum_distance
         VELOCITY = 2
-
         if self.distance != 0:
             direction_vector /= self.distance
 
@@ -111,8 +111,57 @@ class Monster(cl.Unit, pygame.sprite.Sprite):
 
             self.draw_info_bar(cfg.screen, self.rect.x, self.rect.y - 10, self.hp, (107, 34, 34), "red", "black",
                                self.start_hp, 50, 10)
-            self.rect.x = round(self.follower_vector.x)
-            self.rect.y = round(self.follower_vector.y)
+
+            # 1 и 2 и 3 зоны
+            if self.rect.right > cfg.list_all_sprites[1].line_left.x and \
+                    self.rect.left < cfg.list_all_sprites[1].line_right.x and \
+                    self.rect.y < cfg.list_all_sprites[1].line_top.y:
+                if self.follower_vector.y + 50 < cfg.list_all_sprites[1].line_top.y:
+                    self.rect.y = round(self.follower_vector.y)
+                    self.rect.x = round(self.follower_vector.x)
+                else:
+                    if direction_vector.x != 0 and self.flag_move:
+                        if direction_vector.x > 0:
+                            self.rect.x += 1
+                            self.flag_dir = True
+                        elif direction_vector.x < 0:
+                            self.rect.x -= 1
+                            self.flag_dir = False
+                        elif direction_vector.x == 0:
+                            self.flag_move = False
+                    else:
+                        if self.flag_dir:
+                            self.rect.x += 1
+                        else:
+                            self.rect.x -= 1
+
+            # 1 и 4 и 6 зоны
+            elif self.rect.bottom > cfg.list_all_sprites[1].line_top.y and \
+                    self.rect.top < cfg.list_all_sprites[1].line_bottom.y and \
+                    self.rect.x < cfg.list_all_sprites[1].line_left.x:
+                if self.follower_vector.x + 50 < cfg.list_all_sprites[1].line_left.x:
+                    self.rect.y = round(self.follower_vector.y)
+                    self.rect.x = round(self.follower_vector.x)
+                else:
+                    if self.rect.y > cfg.list_all_sprites[1].rect.center[1]:
+                        self.rect.y += 1
+                    else:
+                        self.rect.y -= 1
+            # 3 и 5 и 8 зона
+            elif cfg.list_all_sprites[1].line_top.y < self.rect.y < cfg.list_all_sprites[1].line_bottom.y and \
+                    self.rect.x > cfg.list_all_sprites[1].line_right.x:
+                if self.follower_vector.x > cfg.list_all_sprites[1].line_right.x:
+                    self.rect.x = round(self.follower_vector.x)
+                self.rect.y = round(self.follower_vector.y)
+            # 7 зона
+            elif cfg.list_all_sprites[1].line_left.x < self.rect.x < cfg.list_all_sprites[1].line_right.x and \
+                    self.rect.y > cfg.list_all_sprites[1].line_bottom.y:
+                if self.follower_vector.y > cfg.list_all_sprites[1].line_bottom.y:
+                    self.rect.y = round(self.follower_vector.y)
+                self.rect.x = round(self.follower_vector.x)
+            else:
+                self.rect.x = round(self.follower_vector.x)
+                self.rect.y = round(self.follower_vector.y)
 
             if self.attack_wait_timer == 100:
                 self.attack_wait_timer = 0
