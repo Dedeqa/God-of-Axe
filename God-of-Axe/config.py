@@ -67,9 +67,9 @@ monster_list_x = []
 monster_list_y = []
 
 # Шрифты ---------------------------------------------------------------------------------------------------------------
-my_font_p = f.resource_path('Fonts/Jfwildwood-ldYZ.ttf')
-font_interface_p = f.resource_path('Fonts/HoltwoodOneSC-Regular.ttf')
-upgrade_font_p = f.resource_path('Fonts/MclarenRegular.ttf')
+my_font_p = f.resource_path('Fonts\\Jfwildwood-ldYZ.ttf')
+font_interface_p = f.resource_path('Fonts\\HoltwoodOneSC-Regular.ttf')
+upgrade_font_p = f.resource_path('Fonts\\MclarenRegular.ttf')
 
 # Координаты для перемещения фона---------------------------------------------------------------------------------------
 bg_x = 0
@@ -200,7 +200,7 @@ menu_active_rect.center = (size[0] // 2, 558)
 
 
 # Условие победы -------------------------------------------------------------------------------------------------------
-goal = 500
+goal = 100
 # Время игровой сессии -------------------------------------------------------------------------------------------------
 in_game_time = 0
 

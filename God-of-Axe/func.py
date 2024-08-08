@@ -6,6 +6,7 @@ import time
 import classes
 import random
 import mobs
+import sys
 
 
 # pygame.mixer.pre_init(44100, -16, 1, 512)   # пока непонятно, нужно или нет
@@ -37,7 +38,7 @@ def start_game():
     pygame.init()  # запускает pygame
     # cfg.screen = pygame.display.set_mode(cfg.size) пока непонятно, нужно или нет
     pygame.display.set_caption("God of Axe")
-    pygame.display.set_icon(img.icon)
+    # pygame.display.set_icon(img.icon)
     cfg.main_active_flag = True
     cfg.menu_active_flag = True
 
@@ -280,7 +281,8 @@ def menu():
                 sounds.click.play()
                 quit_delay_start = 0
                 time.sleep(0.2)
-                quit()
+                pygame.quit()
+                sys.exit()
             quit_delay_start += 1
         else:
             cfg.screen.blit(img.quite, cfg.quit_rect)

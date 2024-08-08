@@ -81,7 +81,7 @@ class Player(Unit, pygame.sprite.Sprite):
 
         self.progress = 0
 
-        self.coins = 1000
+        self.coins = 0
 
         self.apple_eat_time = cfg.in_game_time + 1000
         self.shishka_eat_time = cfg.in_game_time + 1000  # время приема пищи
@@ -130,7 +130,7 @@ class Player(Unit, pygame.sprite.Sprite):
                             if self.move_anim_delay == 5:
                                 self.anim_counter_x += 1
                                 self.move_anim_delay = 0
-                            sx = 10
+                            sx = 5
                             self.stamina -= 0.5
 
                         else:
@@ -172,7 +172,7 @@ class Player(Unit, pygame.sprite.Sprite):
                                 self.anim_counter_x += 1
                                 self.move_anim_delay = 0
 
-                            sx = 10
+                            sx = 5
                             self.stamina -= 0.5
                         else:
 
@@ -216,7 +216,7 @@ class Player(Unit, pygame.sprite.Sprite):
                                 self.anim_counter_y += 1
                                 self.move_anim_delay = 0
 
-                            sy = 10
+                            sy = 5
                             self.stamina -= 0.5
                         else:
 
@@ -261,7 +261,7 @@ class Player(Unit, pygame.sprite.Sprite):
                                 self.anim_counter_y += 1
                                 self.move_anim_delay = 0
 
-                            sy = 10
+                            sy = 5
                             self.stamina -= 0.5
                         else:
 
